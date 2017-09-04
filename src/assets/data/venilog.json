@@ -1,0 +1,10 @@
+{
+  "home": {
+    "pageId": "000001",
+    "btn_chat": "btn_chat"
+  },
+  "find": {
+    "pageId": "000001",
+    "btn_find": "btn_find"
+  }
+}
