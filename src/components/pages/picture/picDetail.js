@@ -17,13 +17,8 @@ export default class PicDetail extends Component {
   }
 
   componentDidMount() {
-    console.log(this.props.data)
-    // 绑定没有帮上，不知道为啥？？？
-    // this.props.picDetail(this.props.id).then((data) => {
-    //   console.log(data)
-    // })
-    Action.picDetail(this.props.id).then((response) => {
-      this.setState({data: response.data})
+    this.props.getPicDetail(this.props.id).then((response) => {
+      this.setState({data: response.value.data})
     })
   }
 

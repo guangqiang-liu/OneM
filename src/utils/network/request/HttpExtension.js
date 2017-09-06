@@ -18,7 +18,7 @@ import {API_URL} from '../../../constants/urlConfig'
  */
 const getFetch = (url, params, callback) => {
 
-  // url = `${API_URL}${url}`
+  url = `${API_URL}${url}`
   let promise = HttpUtils.getRequest(url, params)
 
   if (callback && typeof callback === 'function') {

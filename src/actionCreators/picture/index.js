@@ -5,7 +5,7 @@
 import {getFetch, postFetch} from '../../utils/network/request/HttpExtension'
 import {PATH} from '../../constants/urls'
 
-const picList = (params) => getFetch('/hp/idlist/0', params)
+const picList = (params) => getFetch(PATH.PICTURE_LIST, params)
 
 const picDetail = params =>  getFetch(`${PATH.PICTURE_DETAIL}${params}`, params)
 

@@ -1,8 +1,6 @@
 /**
  * Created by guangqiang on 2017/9/5.
  */
-
-// 过往列表
 import React, {Component}from 'react'
 import {View, Text, StyleSheet, ListView, Image, TouchableOpacity} from 'react-native'
 import Action from '../../../actionCreators/picture'
@@ -15,7 +13,7 @@ export default class PastList extends Component {
     super(props)
     this.renderRow = this.renderRow.bind(this)
     this.state = {
-      dataSource:  new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2})
+      dataSource: new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2})
     }
   }
 
@@ -43,7 +41,7 @@ export default class PastList extends Component {
 
   _renderSeparator() {
     return (
-      <View style={styles.spStyle}></View>
+      <View style={styles.spStyle}/>
     )
   }
   render() {

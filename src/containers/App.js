@@ -70,10 +70,10 @@ const scenes = Actions.create(
       {/* 在Lightbox容器中的儿子scene都属于蒙板scene */}
       <Lightbox key="lightbox" hideNavBar={true}>
         <Stack key="init" back>
-          <Scene key="launch" initial component={Launch}
+          <Scene key="launch" component={Launch}
                  hideNavBar />
           {/* 首页TabBar 上的四个组件没有办法绑定，只能单独写 */}
-          <Scene key="main" back={false} hideNavBar component={TabBar}/>
+          <Scene key="main" initial back={false} hideNavBar component={TabBar}/>
 
           <Scene key="picDetail" component={connect(
             (state) => state.picture.picList,

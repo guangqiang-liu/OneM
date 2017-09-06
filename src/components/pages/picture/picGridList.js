@@ -1,11 +1,8 @@
 /**
  * Created by guangqiang on 2017/9/5.
  */
-
-// 栅格列表
 import React, {Component} from 'react'
 import {View, TouchableOpacity, Text, StyleSheet, Image, ListView} from 'react-native'
-import Action from '../../../actionCreators/picture'
 import deviceInfo from '../../../utils/deviceInfo'
 import {monthList} from '../../../constants/beginTime'
 import {parseDate} from '../../../utils/dataUtil'
@@ -22,9 +19,9 @@ export default class PicGridList extends Component {
   }
 
   componentDidMount() {
-    Action.picGridList(this.props.year, this.props.month).then((response) => {
+    this.props.getGridList(this.props.year, this.props.month).then(response => {
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(response.data)
+        dataSource: this.state.dataSource.cloneWithRows(response.value.data)
       })
     })
   }

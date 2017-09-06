@@ -1,21 +1,14 @@
 /**
  * Created by guangqiang on 2017/9/4.
  */
-
 import React, {Component} from 'react'
 import {View, StyleSheet, Text} from 'react-native'
 import {BaseComponent} from '../../base/baseComponent'
 import {connect} from 'react-redux'
 import Action from '../../../actions'
-
 import ViewPager from 'react-native-viewpager'
-
 import PicDetail from './picDetail'
-
-import {path} from '../../../constants/urls'
-import action from '../../../actionCreators/picture'
-
-import xxx from '../../../actions/picture'
+import actions from '../../../actionCreators/picture'
 import {Actions} from 'react-native-router-flux'
 import {beginTime} from '../../../constants/beginTime'
 class Home extends BaseComponent {
@@ -30,46 +23,43 @@ class Home extends BaseComponent {
   }
 
   componentDidMount() {
-    // 这里的  this.props.getPicList() 取到的值为undefined，不知道为啥？？？
-    // let temp = this.props.getPicList()
-    // console.log(temp)
-    // temp.then((data) => {
-    //   console.log(data)
-    // })
-    // getFetch('/hp/idlist/0', {}).then((data) => {
-    //   console.log(data)
+    // 使用这种方式发送网络请求，程序就崩溃，
+    // this.props.getPicList().then(response => {
+    //   let dataArr = response.value.data
+    //   let length = dataArr.length
+    //   let newArr = dataArr.concat(dataArr[length-1])
     //   this.setState({
-    //     dataSource: this.state.dataSource.cloneWithPages(data)
+    //     dataSource: this.state.dataSource.cloneWithPages(newArr),
+    //     dataCount: length
     //   })
-    // })cc
-
-    action.picList().then((response) => {
-      let lenth = response.data.length
-      let newArr = response.data.concat(response.data[lenth-1])
+    // })
+    actions.picList().then((response) => {
+      let dataArr = response.data
+      let length = dataArr.length
+      let newArr = dataArr.concat(dataArr[length-1])
       this.setState({
         dataSource: this.state.dataSource.cloneWithPages(newArr),
-        dataCount: lenth
+        dataCount: length
       })
     })
   }
 
   navigationBarProps() {
     return {
-      title: 'xxx',
+      title: '图文',
       hiddenLeftItem: true
     }
   }
 
   _onChangePage(index) {
     if (index === this.state.dataCount) {
-      // 这里是滑动最后一个，这时需要跳转界面到
       Actions.pastList({beginTime: beginTime.picture})
     }
   }
 
   renderPage(data, pageID) {
     return (
-      <PicDetail key={data} id={parseInt(data)} />
+      <PicDetail {...this.props} key={data} id={parseInt(data)} />
     )
   }
 
