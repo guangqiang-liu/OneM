@@ -47,7 +47,7 @@ import Mask from '../components/Mask'
 import PicDetail from '../components/pages/picture/picDetail'
 import PastList from '../components/pages/picture/pastList'
 import PicGridList from '../components/pages/picture/picGridList'
-
+import MovieDetail from '../components/pages/movie/movieDetail'
 
 // 创建一个reducer
 const reducerCreate = params => {
@@ -77,18 +77,23 @@ const scenes = Actions.create(
 
           <Scene key="picDetail" component={connect(
             (state) => state.picture.picList,
-            Action.dispatch('picList')
+            Action.dispatch('picture')
           )(PicDetail)}/>
 
           <Scene key="pastList" component={connect(
             (state) => state.picture.picList,
-            Action.dispatch('picList')
+            Action.dispatch('picture')
           )(PastList)}/>
 
           <Scene key="picGridList" component={connect(
             (state) => state.picture.picList,
-            Action.dispatch('picList')
+            Action.dispatch('picture')
           )(PicGridList)}/>
+
+          <Scene key="movieDetail" title="电影详情" component={connect(
+            (state) => state.movie.movieList,
+            Action.dispatch('movie')
+          )(MovieDetail)}/>
 
           {/* 当helloWord组件放到和main组件同级的scene层级中，这时就可以继承同级中的导航栏 */}
           <Scene key="helloWord" component={

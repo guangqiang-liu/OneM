@@ -12,6 +12,8 @@ const PATH = {
   PICTURE_DETAIL: '/hp/detail/',
   PICTURE_GRID_LIST: '/hp/bymonth/',
   MOVIE_LIST: '/movie/list/',
+  MOVIE_DETAIL: '/movie/detail/',
+  MOVIE_STORY: '/movie/${id}/story/1/0',
   // 获取find模块数据
   FIND: '/xxx/xxx',
   // 首页H5

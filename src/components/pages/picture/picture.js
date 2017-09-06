@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
 
 const _Home = connect(
   (state) => state.picture.picList,
-  Action.dispatch('picList')
+  Action.dispatch('picture')
 )(Home)
 
 export default _Home

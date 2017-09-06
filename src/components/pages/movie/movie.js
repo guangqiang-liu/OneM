@@ -2,11 +2,14 @@
  * Created by guangqiang on 2017/9/4.
  */
 
-import React, {Component} from 'react'
-import {View, StyleSheet, Text, ListView, Image} from 'react-native'
+import React from 'react'
+import {StyleSheet, Text, ListView, TouchableOpacity} from 'react-native'
 import {BaseComponent} from '../../base/baseComponent'
-import Action from '../../../actionCreators/movie'
-export default class Movie extends BaseComponent {
+import {connect} from 'react-redux'
+import Action from '../../../actions'
+import {commonStyle} from '../../../utils/commonStyle'
+import {Actions} from 'react-native-router-flux'
+class MovieList extends BaseComponent {
 
   constructor() {
     super()
@@ -17,10 +20,9 @@ export default class Movie extends BaseComponent {
   }
 
   componentDidMount() {
-    Action.movieList(0).then((response) => {
-      console.log(response.data)
+    this.props.getMovieList(0).then((response) => {
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(response.data)
+        dataSource: this.state.dataSource.cloneWithRows(response.value.data)
       })
     })
   }
@@ -34,9 +36,12 @@ export default class Movie extends BaseComponent {
 
   renderRow(rowData, sectionId, rowId) {
     return (
-      <View>
+      <TouchableOpacity
+        style={styles.cellStyle}
+        onPress={() => Actions.movieDetail({id: rowData.id})}
+      >
         <Text>{rowData.title}</Text>
-      </View>
+      </TouchableOpacity>
     )
   }
 
@@ -56,6 +61,19 @@ const styles = StyleSheet.create({
   listViewStyle: {
     flex: 1
   },
-  pic: {
+  cellStyle: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    height: 44,
+    backgroundColor: commonStyle.white,
+    borderBottomWidth: 1,
+    borderBottomColor: commonStyle.lineColor
   }
 })
+
+const _MovieList = connect(
+  (state) => state.movie.movieList,
+  Action.dispatch('movie')
+)(MovieList)
+
+export default _MovieList

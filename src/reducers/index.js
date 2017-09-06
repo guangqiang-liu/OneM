@@ -7,11 +7,14 @@ import home from './home'
 import find from './find'
 
 import picture from './picture'
+import movie from './movie'
+
 const rootReducer = combineReducers({
   launch,
   home,
   find,
-  picture
+  picture,
+  movie
 })
 
 export default rootReducer
