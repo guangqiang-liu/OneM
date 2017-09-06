@@ -6,11 +6,12 @@ import launch from './init'
 import home from './home'
 import find from './find'
 
-// 所有模块的reducer集合
+import picture from './picture'
 const rootReducer = combineReducers({
   launch,
   home,
-  find
+  find,
+  picture
 })
 
 export default rootReducer

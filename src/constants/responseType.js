@@ -3,7 +3,7 @@
  */
 
 const responseType = {
-  RESPONSE_SUCCESS: 200,
+  RESPONSE_SUCCESS: 0,
   USER_NOTLOGIN: -117,
 }
 

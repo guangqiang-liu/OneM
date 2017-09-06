@@ -29,7 +29,7 @@ const handleUrl = (url, params) => {
     let paramsArray = []
     Object.keys(params).forEach(key => paramsArray.push(key + '=' + encodeURIComponent(params[key])))
     if (url.search(/\?/) === -1) {
-      url += '?' + paramsArray.join('&')
+      typeof (params) !== 'object' ? url += '?' + paramsArray.join('&') : url
     } else {
       url += '&' + paramsArray.join('&')
     }
@@ -88,7 +88,7 @@ export default class HttpUtils extends Component {
       })
       .then((response) => {
         // response.code：是与服务器端约定code：200表示请求成功，非200表示请求失败，message：请求失败内容
-        if (response && response.code === responseType.RESPONSE_SUCCESS) {
+        if (response && response.res === responseType.RESPONSE_SUCCESS) {
           return response
         } else {
           // 非 200，错误处理

@@ -28,12 +28,14 @@ export const commonStyle = {
 
   // 主题色
   themeColor: '#e74c3c',
-  // 默认文字颜色
-  textColor: '#333',
+  // 默认灰色字体颜色
+  textGrayColor: '#656269',
+  // 默认黑色字体颜色
+  textBlockColor: '#332336',
   // 默认背景颜色
   bgColor: '#e3e3e3',
   // 默认分割线颜色
-  lineColor: '#eee',
+  lineColor: '#D2D2D2',
   // 默认placeholder颜色
   placeholderColor: '#eee',
   // borderColor

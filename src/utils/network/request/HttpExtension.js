@@ -7,6 +7,7 @@
  */
 
 import HttpUtils from './HttpUtils'
+import {API_URL} from '../../../constants/urlConfig'
 
 /**
  * GET 请求
@@ -17,6 +18,7 @@ import HttpUtils from './HttpUtils'
  */
 const getFetch = (url, params, callback) => {
 
+  // url = `${API_URL}${url}`
   let promise = HttpUtils.getRequest(url, params)
 
   if (callback && typeof callback === 'function') {
@@ -24,6 +26,7 @@ const getFetch = (url, params, callback) => {
       return callback(response)
     })
   }
+
   return promise
 }
 

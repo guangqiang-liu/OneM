@@ -36,13 +36,18 @@ import EchoView from "../components/EchoView"
 // 消息通知栏组件
 import MessageBar from "../components/MessageBar"
 
-import MainPage from '../components/TabBar'
+import TabBar from './TabBarContainer'
 
 import Error from '../components/Error'
 
 import ModalView from '../components/ModalView'
 
 import Mask from '../components/Mask'
+
+import PicDetail from '../components/pages/picture/picDetail'
+import PastList from '../components/pages/picture/pastList'
+import PicGridList from '../components/pages/picture/picGridList'
+
 
 // 创建一个reducer
 const reducerCreate = params => {
@@ -65,9 +70,25 @@ const scenes = Actions.create(
       {/* 在Lightbox容器中的儿子scene都属于蒙板scene */}
       <Lightbox key="lightbox" hideNavBar={true}>
         <Stack key="init" back>
-          <Scene key="launch" component={Launch}
-                 hideNavBar initial/>
-          <Scene key="main" component={MainPage}/>
+          <Scene key="launch" initial component={Launch}
+                 hideNavBar />
+          {/* 首页TabBar 上的四个组件没有办法绑定，只能单独写 */}
+          <Scene key="main" back={false} hideNavBar component={TabBar}/>
+
+          <Scene key="picDetail" component={connect(
+            (state) => state.picture.picList,
+            Action.dispatch('picList')
+          )(PicDetail)}/>
+
+          <Scene key="pastList" component={connect(
+            (state) => state.picture.picList,
+            Action.dispatch('picList')
+          )(PastList)}/>
+
+          <Scene key="picGridList" component={connect(
+            (state) => state.picture.picList,
+            Action.dispatch('picList')
+          )(PicGridList)}/>
 
           {/* 当helloWord组件放到和main组件同级的scene层级中，这时就可以继承同级中的导航栏 */}
           <Scene key="helloWord" component={
@@ -92,6 +113,7 @@ const scenes = Actions.create(
           <Scene key="register2" component={Register}
                  title="Register2"/>
         </Stack>
+
         {/* Error 蒙板 */}
         <Scene key="error" component={Error}/>
         <Scene key="mask" component={Mask}/>

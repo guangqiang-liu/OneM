@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
     marginTop: commonStyle.navStatusBarHeight,
     height: commonStyle.navContentHeight,
     borderBottomWidth: commonStyle.spLineWidth,
-    borderBottomColor: commonStyle.purple
+    borderBottomColor: commonStyle.lineColor
   },
   leftImageStyle: {
     width: commonStyle.navImageWidth,

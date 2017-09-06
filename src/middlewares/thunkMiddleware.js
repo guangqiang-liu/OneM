@@ -7,6 +7,6 @@ export default thunkMiddleware = extraArgument => {
     if (typeof action === 'function') {
       return action(getState, dispatch, extraArgument)
     }
-    next(action)
+    return next(action)
   }
 }

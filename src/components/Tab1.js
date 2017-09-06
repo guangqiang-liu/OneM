@@ -5,6 +5,7 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
 import TabView from './TabView'
+
 export default class Tab1 extends Component {
 
   render() {

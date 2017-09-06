@@ -12,7 +12,7 @@ import NavigationBar from '../common/navigationBar'
 import {commonStyle} from '../../utils/commonStyle'
 import {Actions} from "react-native-router-flux"
 
-export default class BaseComponent extends Component {
+class BaseComponent extends Component {
 
   constructor(props) {
     super(props)
@@ -87,3 +87,5 @@ const styles = StyleSheet.create({
     backgroundColor: commonStyle.bgColor
   }
 })
+
+export {BaseComponent}

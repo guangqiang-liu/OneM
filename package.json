@@ -13,6 +13,7 @@
     "react-native-message-bar": "^2.0.4",
     "react-native-router-flux": "^4.0.0-beta.21",
     "react-native-tab-navigator": "^0.3.4",
+    "react-native-viewpager": "^0.2.13",
     "react-navigation": "^1.0.0-beta.11",
     "react-redux": "^5.0.6",
     "redux": "^3.7.2",
