@@ -16,7 +16,6 @@ import Picture from '../components/pages/picture/picture'
 import Reading from '../components/pages/reading/reading'
 import Music from '../components/pages/music/music'
 import Movie from '../components/pages/movie/movie'
-import TabBar1 from '../components/Tab1'
 export default class MainPage extends Component {
 
   constructor(props) {
@@ -58,7 +57,7 @@ export default class MainPage extends Component {
             renderIcon={() => <Image style={styles.icon} source={require("../assets/images/music.png")} />}
             renderSelectedIcon={() => <Image style={[styles.icon,{tintColor:'red'}]} source={require("../assets/images/music_active.png")} />}
             onPress={() => this.setState({ selectedTab: 'Device' })}>
-            <TabBar1/>
+            <Music/>
           </TabNavigator.Item>
           <TabNavigator.Item
             selected={this.state.selectedTab === 'User'}

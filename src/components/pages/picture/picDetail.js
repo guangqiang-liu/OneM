@@ -1,12 +1,11 @@
 /**
  * Created by guangqiang on 2017/9/4.
  */
-
 import React, {Component} from 'react'
-import {View, StyleSheet, Text, ScrollView, Image} from 'react-native'
+import {View, StyleSheet, Text, ScrollView, Image, TouchableOpacity} from 'react-native'
 import Action from '../../../actionCreators/picture'
 import {commonStyle} from '../../../utils/commonStyle'
-
+import {Actions} from 'react-native-router-flux'
 export default class PicDetail extends Component {
 
   constructor(props) {
@@ -46,7 +45,11 @@ export default class PicDetail extends Component {
             <Image style={styles.smallIcon} resizeMode="contain" source={require('../../../assets/images/laud.png')}/>
             <Text style={{lineHeight: 40, color: commonStyle.textGrayColor}}>{data.praisenum}</Text>
           </View>
-          <Image style={styles.smallIcon} resizeMode="contain" source={require('../../../assets/images/share_image.png')}/>
+          <TouchableOpacity
+            onPress={() => Actions.webView()}
+          >
+            <Image style={styles.smallIcon} resizeMode="contain" source={require('../../../assets/images/share_image.png')}/>
+          </TouchableOpacity>
         </View>
       </ScrollView>
     )

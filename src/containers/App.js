@@ -50,6 +50,8 @@ import PastList from '../components/pages/picture/pastList'
 import PicGridList from '../components/pages/picture/picGridList'
 import MovieDetail from '../components/pages/movie/movieDetail'
 import MoviePlayer from '../components/pages/movie/moviePlayer'
+import WebView from '../components/common/webView'
+import MusicDetail from '../components/pages/music/musicDetail'
 
 // 创建一个reducer
 const reducerCreate = params => {
@@ -101,6 +103,14 @@ const scenes = Actions.create(
             (state) => state.movie.movieList,
             Action.dispatch('movie')
           )(MoviePlayer)}/>
+
+          <Scene key="webView" component={WebView}/>
+
+          <Scene key='musicDetail' hideNavBar component={connect(
+            (state) => state.music.music,
+            Action.dispatch('music')
+          )(MusicDetail)}/>
+
 
           {/* 当helloWord组件放到和main组件同级的scene层级中，这时就可以继承同级中的导航栏 */}
           <Scene key="helloWord" component={

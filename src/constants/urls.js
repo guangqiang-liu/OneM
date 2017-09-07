@@ -11,9 +11,14 @@ const PATH = {
   // 获取图文详情数据
   PICTURE_DETAIL: '/hp/detail/',
   PICTURE_GRID_LIST: '/hp/bymonth/',
+
   MOVIE_LIST: '/movie/list/',
   MOVIE_DETAIL: '/movie/detail/',
   MOVIE_STORY: '/movie/${id}/story/1/0',
+
+  MUSIC_ID_LIST: '/music/idlist/0',
+  MUSIC_DETAIL: '/music/detail/',
+
   // 获取find模块数据
   FIND: '/xxx/xxx',
   // 首页H5

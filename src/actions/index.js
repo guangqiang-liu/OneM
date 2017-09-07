@@ -6,12 +6,13 @@ import openChat from './find/chat'
 import launch from './init/launchAction'
 import picture from './picture'
 import movie from './movie'
-
+import music from './music'
 const action = {
   openChat,
   launch,
   picture,
-  movie
+  movie,
+  music
 }
 
 const dispatch = name => dispatch => {
