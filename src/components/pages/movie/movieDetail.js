@@ -3,6 +3,9 @@
  */
 import React, {Component} from 'react'
 import Swiper from 'react-native-swiper'
+
+import ImageViewer from 'react-native-image-zoom-viewer'
+
 import {
   View,
   TouchableOpacity,
@@ -10,10 +13,12 @@ import {
   StyleSheet,
   ScrollView,
   ListView,
-  Image
+  Image,
+  Modal
 } from 'react-native'
 import Action from '../../../actionCreators/movie'
 import {commonStyle} from '../../../utils/commonStyle'
+import {Actions} from 'react-native-router-flux'
 export default class MovieDetail extends Component {
 
   constructor(props) {
@@ -22,7 +27,8 @@ export default class MovieDetail extends Component {
     this.renderHeader = this.renderHeader.bind(this)
     this.state = {
       movieDetail: {},
-      movieStory: {}
+      movieStory: {},
+      modalVisible: false
     }
   }
 
@@ -67,7 +73,11 @@ export default class MovieDetail extends Component {
     if (picArr.length) {
       for (var i = 0; i < picArr.length; i++) {
         imgArr.push(
-          <Image style={styles.swipe} source={{uri: picArr[i]}} key={i}/>
+          <TouchableOpacity
+            onPress={() => Actions.moviePlayer()}
+          >
+            <Image style={styles.swipe} source={{uri: picArr[i]}} key={i}/>
+          </TouchableOpacity>
         )
       }
       return imgArr
@@ -88,6 +98,27 @@ export default class MovieDetail extends Component {
           loop={true}
           index={0}
           autoplay={true}
+          autoplayTimeout={3}
+          dot={<View style={{
+            backgroundColor: commonStyle.red,
+            width: 12,
+            height: 12,
+            borderRadius: 6,
+            marginLeft: 10,
+            marginRight: 9,
+            marginTop: 9,
+            marginBottom: 9,
+          }}/>}
+          activeDot={<View style={{
+            backgroundColor: commonStyle.yellow,
+            width: 12,
+            height: 12,
+            borderRadius: 6,
+            marginLeft: 10,
+            marginRight: 9,
+            marginTop: 9,
+            marginBottom: 9,
+          }}/>}
         >
           {this.renderImg()}
         </Swiper>
@@ -118,15 +149,32 @@ export default class MovieDetail extends Component {
     )
   }
 
-  render() {
-    let dataSource = new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2}).cloneWithRows(this.state.movieStory)
+  _renderModal() {
     return (
-      <ListView
-        style={styles.listViewStyle}
-        dataSource={dataSource}
-        renderRow={this.renderRow}
-        renderHeader={this.renderHeader}
-      />
+      <Modal
+        style={{width: 400, height: 400, backgroundColor: 'red'}}
+        visible={this.state.modalVisible}
+        transparent={true}
+      >
+        <View style={{flex: 1}}>
+          <ImageViewer imageUrls={this.state.movieDetail.photo}/>
+        </View>
+      </Modal>
+    )
+  }
+
+  render() {
+    let dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).cloneWithRows(this.state.movieStory)
+    return (
+      <View style={{flex: 1}}>
+        <ListView
+          style={styles.listViewStyle}
+          dataSource={dataSource}
+          renderRow={this.renderRow}
+          renderHeader={this.renderHeader}
+        />
+        {this._renderModal()}
+      </View>
     )
   }
 }

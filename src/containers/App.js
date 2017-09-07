@@ -44,10 +44,12 @@ import ModalView from '../components/ModalView'
 
 import Mask from '../components/Mask'
 
+// PAGES
 import PicDetail from '../components/pages/picture/picDetail'
 import PastList from '../components/pages/picture/pastList'
 import PicGridList from '../components/pages/picture/picGridList'
 import MovieDetail from '../components/pages/movie/movieDetail'
+import MoviePlayer from '../components/pages/movie/moviePlayer'
 
 // 创建一个reducer
 const reducerCreate = params => {
@@ -94,6 +96,11 @@ const scenes = Actions.create(
             (state) => state.movie.movieList,
             Action.dispatch('movie')
           )(MovieDetail)}/>
+
+          <Scene key="moviePlayer" hideNavBar component={connect(
+            (state) => state.movie.movieList,
+            Action.dispatch('movie')
+          )(MoviePlayer)}/>
 
           {/* 当helloWord组件放到和main组件同级的scene层级中，这时就可以继承同级中的导航栏 */}
           <Scene key="helloWord" component={
