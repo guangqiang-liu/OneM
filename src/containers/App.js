@@ -52,6 +52,7 @@ import MovieDetail from '../components/pages/movie/movieDetail'
 import MoviePlayer from '../components/pages/movie/moviePlayer'
 import WebView from '../components/common/webView'
 import MusicDetail from '../components/pages/music/musicDetail'
+import MusicPlayer from '../components/pages/music/musicPlayer'
 
 // 创建一个reducer
 const reducerCreate = params => {
@@ -111,6 +112,10 @@ const scenes = Actions.create(
             Action.dispatch('music')
           )(MusicDetail)}/>
 
+          <Scene key='musicPlayer' component={connect(
+            (state) => state.music.music,
+            Action.dispatch('music')
+          )(MusicPlayer)}/>
 
           {/* 当helloWord组件放到和main组件同级的scene层级中，这时就可以继承同级中的导航栏 */}
           <Scene key="helloWord" component={

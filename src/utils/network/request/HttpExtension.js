@@ -7,7 +7,7 @@
  */
 
 import HttpUtils from './HttpUtils'
-import {API_URL} from '../../../constants/urlConfig'
+import {API_URL, MIAMI_URL} from '../../../constants/urlConfig'
 
 /**
  * GET 请求
@@ -18,7 +18,7 @@ import {API_URL} from '../../../constants/urlConfig'
  */
 const getFetch = (url, params, callback) => {
 
-  url = `${API_URL}${url}`
+  url = params === 0 ? `${MIAMI_URL}${url}` : `${API_URL}${url}`
   let promise = HttpUtils.getRequest(url, params)
 
   if (callback && typeof callback === 'function') {

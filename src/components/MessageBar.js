@@ -13,10 +13,10 @@ export default class extends React.Component {
 
   componentWillUnmount() {
     // Remove the alert located on this master page from the manager
-    MessageBarManager.unregisterMessageBar();
+    MessageBarManager.unregisterMessageBar()
   }
 
   render() {
-    return <MessageBar ref="alert" />;
+    return <MessageBar ref="alert" style={{marginTop: 20}}/>
   }
 }

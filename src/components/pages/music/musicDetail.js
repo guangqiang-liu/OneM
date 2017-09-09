@@ -4,14 +4,16 @@
 import React, {Component} from 'react'
 import {View, TouchableOpacity, Text, StyleSheet, ListView, Image} from 'react-native'
 import {commonStyle} from '../../../utils/commonStyle'
+import {Actions} from 'react-native-router-flux'
 export default class MusicDetail extends Component {
 
   constructor(props) {
     super(props)
+    this.player
     this.renderRow = this.renderRow.bind(this)
     this.renderHeader = this.renderHeader.bind(this)
     this.state = {
-      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
     }
   }
 
@@ -29,6 +31,10 @@ export default class MusicDetail extends Component {
     )
   }
 
+  playing() {
+    Actions.musicPlayer({music_id: this.props.musicDetail.music_id})
+  }
+
   renderHeader() {
     let data = this.props.musicDetail
     return (
@@ -38,7 +44,7 @@ export default class MusicDetail extends Component {
           <View style={styles.playPanel}>
             <View>
               <View style={{flexDirection: 'row', alignItems: 'center', flex: 1}}>
-                <Image style={{width: 40, height: 40, borderRadius: 20, backgroundColor: commonStyle.yellow, marginRight: 10}} source={{uri: data.cover}}/>
+                <Image style={{width: 40, height: 40, borderRadius: 20, marginRight: 10}} source={{uri: data.cover}}/>
                 <View>
                   <Text style={{fontSize: 12, color: '#4D9DE2'}}>{data.title}</Text>
                   <Text style={{fontSize: 12, color: '#72715C'}}>{data.title}</Text>
@@ -47,8 +53,12 @@ export default class MusicDetail extends Component {
               <Text style={{color: commonStyle.textBlockColor, fontSize: 16}}>{data.title}</Text>
             </View>
             <View style={{alignItems: 'flex-end'}}>
-              <Image style={{width: 60, height: 15, backgroundColor: commonStyle.yellow}} source={require('../../../assets/images/xiami_right.png')}/>
-              <Image style={{width: 35, height:35}} source={require('../../../assets/images/music_play.png')}/>
+              <Image style={{width: 60, height: 15}} source={require('../../../assets/images/xiami_right.png')}/>
+              <TouchableOpacity
+                onPress={() => this.playing()}
+              >
+                <Image style={{width: 35, height:35}} source={require('../../../assets/images/music_play.png')}/>
+              </TouchableOpacity>
               <Text style={{color: commonStyle.textGrayColor, fontSize: 12}}>{data.last_update_date}</Text>
             </View>
           </View>
@@ -74,9 +84,21 @@ export default class MusicDetail extends Component {
           <Text style={{marginBottom: 10}}>{data.charge_edt}</Text>
         </View>
         <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', borderTopWidth: 1, borderTopColor: commonStyle.lineColor}}>
-          <Image style={{width: 40, height: 40}} source={require('../../../assets/images/laud.png')}/>
-          <Image style={{width: 40, height: 40}} source={require('../../../assets/images/comment_image.png')}/>
-          <Image style={{width: 40, height: 40}} source={require('../../../assets/images/share_image.png')}/>
+          <TouchableOpacity
+            style={{flexDirection: 'row', alignItems: 'center'}}
+            onPress={() => this.playing()}
+          >
+            <Image style={{width: 40, height: 40}} source={require('../../../assets/images/laud.png')}/>
+            <Text>{data.praisenum}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Image style={{width: 40, height: 40}} source={require('../../../assets/images/comment_image.png')}/>
+            <Text>{data.read_num}</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}}>
+            <Image style={{width: 40, height: 40}} source={require('../../../assets/images/share_image.png')}/>
+            <Text>{data.sharenum}</Text>
+          </TouchableOpacity>
         </View>
         <View style={{height: 40, backgroundColor: commonStyle.bgColor, alignItems: 'center', flexDirection: 'row', marginBottom: 10}}>
           <Text style={{marginLeft: 10, color: commonStyle.textGrayColor}}>评论列表</Text>
@@ -86,14 +108,20 @@ export default class MusicDetail extends Component {
   }
 
   render() {
-    return (
-      <ListView
-        style={styles.container}
-        renderRow={this.renderRow}
-        renderHeader={this.renderHeader}
-        dataSource={this.state.dataSource}
-      />
-    )
+     if (!this.props.musicDetail.music_id) {
+       return (
+         <Text>加载中</Text>
+       )
+     } else {
+       return (
+         <ListView
+           style={styles.container}
+           renderRow={this.renderRow}
+           renderHeader={this.renderHeader}
+           dataSource={this.state.dataSource}
+         />
+       )
+     }
   }
 }
 

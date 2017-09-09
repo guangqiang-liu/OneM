@@ -18,6 +18,10 @@ const PATH = {
 
   MUSIC_ID_LIST: '/music/idlist/0',
   MUSIC_DETAIL: '/music/detail/',
+  MUSIC_XIAMI_MUSIC: '/run?song=http://www.xiami.com/song/',
+  MUSIC_LIST: '/music/bymonth/',
+
+
 
   // 获取find模块数据
   FIND: '/xxx/xxx',
