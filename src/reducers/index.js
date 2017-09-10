@@ -10,6 +10,7 @@ import picture from './picture'
 import movie from './movie'
 import music from './music'
 import reading from './reading'
+import loading from './common'
 const rootReducer = combineReducers({
   launch,
   home,
@@ -17,7 +18,8 @@ const rootReducer = combineReducers({
   picture,
   movie,
   music,
-  reading
+  reading,
+  loading
 })
 
 export default rootReducer

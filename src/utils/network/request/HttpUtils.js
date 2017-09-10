@@ -8,7 +8,11 @@
 
 import {Component} from 'react'
 import responseType from '../../../constants/responseType'
-
+import RootToast from '../../toast'
+import ShowProgress from '../../progressHUD'
+let showProgress = new ShowProgress
+import store from '../../../store'
+import type from '../../../constants/actionType'
 /**
  * fetch 网络请求的header，可自定义header 内容
  * @type {{Accept: string, Content-Type: string, accessToken: *}}
@@ -24,7 +28,7 @@ let header = {
  * @param params 请求参数
  * @returns {*}
  */
-const handleUrl = (url, params) => {
+const handleUrl = url => params => {
   if (params) {
     let paramsArray = []
     Object.keys(params).forEach(key => paramsArray.push(key + '=' + encodeURIComponent(params[key])))
@@ -75,15 +79,31 @@ export default class HttpUtils extends Component {
    * @returns {Promise}
    */
   static getRequest = (url, params = {}) => {
-    return timeoutFetch(fetch(handleUrl(url, params), {
+    // 加载 Loading
+    // showProgress.show()
+    store.dispatch({
+      type: type.FETCH_SHOW_HUD,
+      payload: {
+        isShow: true
+      }
+    })
+    return timeoutFetch(fetch(handleUrl(url)(params), {
       method: 'GET',
       headers: header
     }))
       .then((response) => {
+        // 隐藏 HUD
+        // showProgress.hidden()
+        store.dispatch({
+          type: type.FETCH_SHOW_HUD,
+          payload: {
+            isShow: false
+          }
+        })
         if (response.ok) {
           return response.json()
         } else {
-          alert('服务器繁忙，请稍后再试；\r\nCode:' + response.status)
+          RootToast.show('服务器繁忙，请稍后再试；\r\nCode:' + response.status)
         }
       })
       .then((response) => {
@@ -97,7 +117,8 @@ export default class HttpUtils extends Component {
         }
       })
       .catch((error) => {
-        alert(error)
+        showProgress.hidden()
+        RootToast.show(error)
       })
   }
 
