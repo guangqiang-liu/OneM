@@ -7,12 +7,14 @@ import launch from './init/launchAction'
 import picture from './picture'
 import movie from './movie'
 import music from './music'
+import reading from './reading'
 const action = {
   openChat,
   launch,
   picture,
   movie,
-  music
+  music,
+  reading
 }
 
 const dispatch = name => dispatch => {

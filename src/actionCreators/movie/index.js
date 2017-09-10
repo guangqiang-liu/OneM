@@ -4,9 +4,9 @@
 import {getFetch, postFetch} from '../../utils/network/request/HttpExtension'
 import {PATH} from '../../constants/urls'
 
-movieList = (id, params) => getFetch(`${PATH.MOVIE_LIST}${id}`, params)
-movieDetail = params => getFetch(`${PATH.MOVIE_DETAIL}${params}`, params)
-movieStory = params => getFetch(`/movie/${params}/story/1/0`, params)
+const movieList = (id, params) => getFetch(`${PATH.MOVIE_LIST}${id}`, params)
+const movieDetail = params => getFetch(`${PATH.MOVIE_DETAIL}${params}`, params)
+const movieStory = params => getFetch(`/movie/${params}/story/1/0`, params)
 
 export default {
   movieList,

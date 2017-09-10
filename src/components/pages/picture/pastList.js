@@ -4,9 +4,9 @@
 import React, {Component}from 'react'
 import {View, Text, StyleSheet, ListView, Image, TouchableOpacity} from 'react-native'
 import Action from '../../../actionCreators/picture'
-import {monthList} from '../../../constants/beginTime'
 import {commonStyle} from '../../../utils/commonStyle'
 import {Actions} from 'react-native-router-flux'
+import {commonType, monthList} from '../../../constants/commonType'
 export default class PastList extends Component {
 
   constructor(props) {
@@ -24,12 +24,25 @@ export default class PastList extends Component {
     })
   }
 
+  nextPage(year, month) {
+    switch (this.props.pageType) {
+      case commonType.PICTURE:
+        Actions.picGridList({year: year, month: month})
+        break
+      case commonType.MUSIC:
+        Actions.musicList({year: year, month: month})
+        break
+      default:
+        break
+    }
+  }
+
   renderRow(rowData, sectionId, rowID) {
     var dateStr = rowID == 0 ? '本月' : `${monthList[rowData[1]]}.${rowData[0]}`
     return (
       <TouchableOpacity
         style={styles.cellStyle}
-        onPress={() => Actions.picGridList({year: rowData[0], month: rowData[1]})}
+        onPress={() => this.nextPage(rowData[0], rowData[1])}
       >
         <Text
           style={{color: commonStyle.textBlockColor}}>{dateStr}</Text>

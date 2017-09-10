@@ -21,7 +21,9 @@ const PATH = {
   MUSIC_XIAMI_MUSIC: '/run?song=http://www.xiami.com/song/',
   MUSIC_LIST: '/music/bymonth/',
 
-
+  READING_BANNER: '/reading/carousel',
+  READING_BANNER_CONTENT: '/reading/carousel/id',
+  READING_ARTICLE_LIST: '/reading/index',
 
   // 获取find模块数据
   FIND: '/xxx/xxx',

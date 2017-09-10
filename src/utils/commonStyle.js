@@ -70,7 +70,7 @@ export const commonStyle = {
   // 边框线宽度
   borderWidth: 1,
   // 分割线高度
-  spLineWidth: 0.8,
+  lineWidth: 0.8,
 
   /** height **/
   // 导航栏的高度

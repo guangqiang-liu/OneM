@@ -1,6 +1,12 @@
 /**
- * Created by guangqiang on 2017/9/5.
+ * Created by guangqiang on 2017/9/10.
  */
+const commonType = {
+  PICTURE: 'PICTURE',
+  READING: 'READING',
+  MUSIC: 'MUSIC',
+  MOVIE: 'MOVIE'
+}
 
 const beginTime = {
   picture: {
@@ -40,4 +46,4 @@ const monthList = [
   'Dec'
 ]
 
-export {beginTime, monthList}
+export {commonType, beginTime, monthList}

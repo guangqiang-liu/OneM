@@ -9,13 +9,15 @@ import find from './find'
 import picture from './picture'
 import movie from './movie'
 import music from './music'
+import reading from './reading'
 const rootReducer = combineReducers({
   launch,
   home,
   find,
   picture,
   movie,
-  music
+  music,
+  reading
 })
 
 export default rootReducer

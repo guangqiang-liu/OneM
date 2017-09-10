@@ -7,8 +7,10 @@ import ViewPager from 'react-native-viewpager'
 import {BaseComponent} from '../../../components/base/baseComponent'
 import {connect} from 'react-redux'
 import MusicDetail from './musicDetail'
-import Actions from '../../../actions'
+import Action from '../../../actions'
 import action from '../../../actionCreators/music'
+import {Actions} from 'react-native-router-flux'
+import {commonType, beginTime} from '../../../constants/commonType'
 class Music extends BaseComponent {
 
   constructor(props) {
@@ -16,7 +18,8 @@ class Music extends BaseComponent {
     this.renderPage = this.renderPage.bind(this)
     this.onChangePage = this.onChangePage.bind(this)
     this.state = {
-      dataSource: new ViewPager.DataSource({pageHasChanged: (p1, p2) => p1 !== p2})
+      dataSource: new ViewPager.DataSource({pageHasChanged: (p1, p2) => p1 !== p2}),
+      pageNum: 0
     }
   }
 
@@ -30,7 +33,8 @@ class Music extends BaseComponent {
   componentDidMount() {
     action.musicIdList().then(response => {
       this.setState({
-        dataSource: this.state.dataSource.cloneWithPages(response.data)
+        dataSource: this.state.dataSource.cloneWithPages(response.data),
+        pageNum: response.data.length -1
       })
     })
     // 这种写法，renderPage函数函数拿到不到值，不解？？？
@@ -47,7 +51,8 @@ class Music extends BaseComponent {
     )
   }
 
-  onChangePage() {
+  onChangePage(index) {
+    index === this.state.pageNum ? Actions.pastList({beginTime: beginTime.music, pageType: commonType.MUSIC}) : null
   }
 
   _render() {
@@ -71,7 +76,7 @@ const styles = StyleSheet.create({
 
 const _Music = connect(
   (state) => state.music.music,
-  Actions.dispatch('music')
+  Action.dispatch('music')
 )(Music)
 
 export default _Music

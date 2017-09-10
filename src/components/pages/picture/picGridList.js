@@ -4,7 +4,7 @@
 import React, {Component} from 'react'
 import {View, TouchableOpacity, Text, StyleSheet, Image, ListView} from 'react-native'
 import deviceInfo from '../../../utils/deviceInfo'
-import {monthList} from '../../../constants/beginTime'
+import {monthList} from '../../../constants/commonType'
 import {parseDate} from '../../../utils/dataUtil'
 import {commonStyle} from '../../../utils/commonStyle'
 import {Actions} from 'react-native-router-flux'
