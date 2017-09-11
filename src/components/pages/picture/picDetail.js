@@ -41,10 +41,13 @@ export default class PicDetail extends Component {
             <Image style={styles.smallIcon} resizeMode="contain" source={require('../../../assets/images/diary.png')}/>
             <Text style={{lineHeight: 40, color: commonStyle.textGrayColor}}>小记</Text>
           </View>
-          <View style={{flexDirection: 'row'}}>
+          <TouchableOpacity
+            style={{flexDirection: 'row'}}
+            onPress={() => Actions.helloWord()}
+          >
             <Image style={styles.smallIcon} resizeMode="contain" source={require('../../../assets/images/laud.png')}/>
             <Text style={{lineHeight: 40, color: commonStyle.textGrayColor}}>{data.praisenum}</Text>
-          </View>
+          </TouchableOpacity>
           <TouchableOpacity
             onPress={() => Actions.webView()}
           >

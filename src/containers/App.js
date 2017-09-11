@@ -58,15 +58,17 @@ import WebView from '../components/common/webView'
 import MusicDetail from '../components/pages/music/musicDetail'
 import MusicPlayer from '../components/pages/music/musicPlayer'
 import MusicList from '../components/pages/music/musicList'
-// 创建一个reducer
+
 const reducerCreate = params => {
   const defaultReducer = new Reducer(params)
   return (state, action) => {
+    // console.log('State->: ', state)
+    // TODO 这个地方处理Router系统事件
+    console.log('Action->: ',action)
     return defaultReducer(state, action)
   }
 }
 
-// sceen 全局样式
 const getSceneStyle = () => ({
   backgroundColor: "white",
   shadowOpacity: 1,
