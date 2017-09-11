@@ -18,7 +18,15 @@ const action = {
 }
 
 const dispatch = name => dispatch => {
-  return bindActionCreators(action[name].actionCreators, dispatch)
+  if (Array.isArray(name)) {
+    let tempActionCreators = {}
+    for (let i = 0; i < name.length; i++) {
+      Object.assign(tempActionCreators, action[name[i]].actionCreators)
+    }
+    return bindActionCreators(tempActionCreators, dispatch)
+  } else {
+    return bindActionCreators(action[name].actionCreators, dispatch)
+  }
 }
 
 export default {dispatch}
