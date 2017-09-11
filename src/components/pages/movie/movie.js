@@ -1,17 +1,13 @@
 /**
  * Created by guangqiang on 2017/9/4.
  */
-
 import React from 'react'
-import {StyleSheet, Text, ListView, TouchableOpacity, View} from 'react-native'
+import {StyleSheet, Text, ListView, TouchableOpacity} from 'react-native'
 import {BaseComponent} from '../../base/baseComponent'
 import {connect} from 'react-redux'
 import Action from '../../../actions'
 import {commonStyle} from '../../../utils/commonStyle'
 import {Actions} from 'react-native-router-flux'
-import ShowProgress from '../../../utils/progressHUD/progressHUD'
-let showProgress = new ShowProgress
-import ProgressHUD from '../../../utils/progressHUD'
 class MovieList extends BaseComponent {
 
   constructor() {
@@ -51,14 +47,11 @@ class MovieList extends BaseComponent {
   _render() {
     const {dataSource} = this.state
     return (
-      <View style={{flex: 1}}>
-        <ListView
-          style={styles.listViewStyle}
-          dataSource={dataSource}
-          renderRow={this.renderRow}
-        />
-        {this.props.showHUD ? <Text>加载中。。。。。。</Text> : null }
-      </View>
+      <ListView
+        style={styles.listViewStyle}
+        dataSource={dataSource}
+        renderRow={this.renderRow}
+      />
     )
   }
 }

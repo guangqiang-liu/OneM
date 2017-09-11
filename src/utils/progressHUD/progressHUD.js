@@ -2,10 +2,19 @@
  * Created by guangqiang on 2017/9/10.
  */
 import React, {Component} from 'react'
-import {View, StyleSheet, Platform} from 'react-native'
+import {View, StyleSheet} from 'react-native'
 import * as Progress from 'react-native-progress'
 import deviceInfo from '../deviceInfo'
+import {Actions} from 'react-native-router-flux'
 export default class ProgressHUD extends Component {
+
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps.showHUD) {
+      // HUD scene 出栈
+      Actions.pop()
+    }
+  }
+
   render() {
     return (
       <View style={styles.baseViewStyle}>
@@ -20,8 +29,8 @@ export default class ProgressHUD extends Component {
 const styles = StyleSheet.create({
     baseViewStyle: {
       position: 'absolute',
-      top: (Platform.OS === 'ios') ? 64 : 44,
-      height: (Platform.OS === 'ios') ? deviceInfo.deviceHeight - 64 : deviceInfo.deviceHeight - 44,
+      top: 0,
+      height:deviceInfo.deviceHeight,
       width: deviceInfo.deviceWidth,
       alignItems: 'center',
       backgroundColor: 'rgba(0,0,0,0.2)'

@@ -3,19 +3,25 @@
  */
 import {handleActions} from 'redux-actions'
 import type from '../../constants/actionType'
-const initState = {
+const initialState = {
   showHUD: false
 }
 
-const originalReducer = {}
+const Actions = {}
 
-originalReducer[type.FETCH_SHOW_HUD] = (state, action) => {
-  return {
-    ...state,
-    showHUD: action.payload.isShow
+Actions[type.FETCH_SHOW_HUD] = (state, action) => {
+  if (state.showHUD !== action.payload) {
+    return {
+      ...state,
+      showHUD: action.payload
+    }
+  } else {
+    return {
+      ...state
+    }
   }
 }
 
-const reducer = handleActions(originalReducer, initState)
+const reducer = handleActions(Actions, initialState)
 
 export default reducer

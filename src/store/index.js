@@ -3,7 +3,6 @@
  */
 import {createStore, applyMiddleware} from 'redux'
 import AppReducers from '../reducers'
-
 import thunkMiddleware from 'redux-thunk'
 import promiseMiddleware from 'redux-promise-middleware'
 import customThunk from '../middlewares/thunkMiddleware'
@@ -21,7 +20,6 @@ const middlewares = [
 const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore)
 const store = createStoreWithMiddleware(AppReducers)
 
-console.log(store)
 /**
  * 创建store 需要注意点：
  * 1、这里的reducer 不能再使用 combineReducers() 函数处理

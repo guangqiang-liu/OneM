@@ -44,6 +44,9 @@ import ModalView from '../components/ModalView'
 
 import Mask from '../components/Mask'
 
+// COMMON
+import Loading from '../utils/progressHUD/progressHUD'
+
 // PAGES
 import PicDetail from '../components/pages/picture/picDetail'
 import PastList from '../components/pages/picture/pastList'
@@ -73,8 +76,9 @@ const getSceneStyle = () => ({
 const scenes = Actions.create(
   <Scene key="root">
     <Modal key="modal" hideNavBar>
-      {/* 在Lightbox容器中的儿子scene都属于蒙板scene */}
+      {/* 在Lightbox栈中的子scene都可以显示mask */}
       <Lightbox key="lightbox" hideNavBar={true}>
+        {/* PAGES */}
         <Stack key="init" back>
           <Scene key="launch" component={Launch}
                  hideNavBar />
@@ -150,12 +154,15 @@ const scenes = Actions.create(
                  title="Register2"/>
         </Stack>
 
-        {/* Error 蒙板 */}
+        {/* MASK */}
+        <Scene key='loading' component={connect(
+          (state) => state.common.loading
+        )(Loading)}/>
         <Scene key="error" component={Error}/>
         <Scene key="mask" component={Mask}/>
       </Lightbox>
 
-      {/* 在Modal容器中的儿子scene都属于模态scene */}
+      {/* 在Modal栈中的子scene都属于模态scene */}
       <Stack key="modalRoot" back>
         <Scene key="modalView" component={ModalView}/>
       </Stack>

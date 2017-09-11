@@ -9,10 +9,8 @@
 import {Component} from 'react'
 import responseType from '../../../constants/responseType'
 import RootToast from '../../toast'
-import ShowProgress from '../../progressHUD'
-let showProgress = new ShowProgress
-import store from '../../../store'
-import type from '../../../constants/actionType'
+import showHUD from '../../progressHUD'
+
 /**
  * fetch 网络请求的header，可自定义header 内容
  * @type {{Accept: string, Content-Type: string, accessToken: *}}
@@ -79,27 +77,12 @@ export default class HttpUtils extends Component {
    * @returns {Promise}
    */
   static getRequest = (url, params = {}) => {
-    // 加载 Loading
-    // showProgress.show()
-    store.dispatch({
-      type: type.FETCH_SHOW_HUD,
-      payload: {
-        isShow: true
-      }
-    })
+    showHUD(true)
     return timeoutFetch(fetch(handleUrl(url)(params), {
       method: 'GET',
       headers: header
     }))
       .then((response) => {
-        // 隐藏 HUD
-        // showProgress.hidden()
-        store.dispatch({
-          type: type.FETCH_SHOW_HUD,
-          payload: {
-            isShow: false
-          }
-        })
         if (response.ok) {
           return response.json()
         } else {
@@ -107,6 +90,7 @@ export default class HttpUtils extends Component {
         }
       })
       .then((response) => {
+        showHUD(false)
         // response.code：是与服务器端约定code：200表示请求成功，非200表示请求失败，message：请求失败内容
         if (response && response.res === responseType.RESPONSE_SUCCESS) {
           return response
@@ -117,7 +101,7 @@ export default class HttpUtils extends Component {
         }
       })
       .catch((error) => {
-        showProgress.hidden()
+        showHUD(false)
         RootToast.show(error)
       })
   }
