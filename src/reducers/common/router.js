@@ -33,7 +33,7 @@ Actions[type.REACT_NATIVE_ROUTER_FLUX_BACK] = (state, action) => { // POP
 
 Actions[type.REACT_NATIVE_ROUTER_FLUX_EVENT] = (state, action) => {
   if (action.payload.type) {
-    state.eventUnit.push({type: action.payload.type, routeName: action.payload.routeName ? action.payload.routeName : 'back', params: action.payload.params})
+    state.eventUnit.unshift({type: action.payload.type, routeName: action.payload.routeName ? action.payload.routeName : 'back', params: action.payload.params})
     return {
       ...state,
       eventUnit: state.eventUnit

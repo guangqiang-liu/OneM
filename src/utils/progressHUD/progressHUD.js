@@ -5,6 +5,7 @@ import React, {Component} from 'react'
 import {View, StyleSheet} from 'react-native'
 import * as Progress from 'react-native-progress'
 import deviceInfo from '../deviceInfo'
+import {commonStyle} from '../commonStyle'
 import {Actions} from 'react-native-router-flux'
 export default class ProgressHUD extends Component {
 
@@ -16,7 +17,7 @@ export default class ProgressHUD extends Component {
 
   render() {
     return (
-      <View style={styles.baseViewStyle}>
+      <View style={styles.maskStyle}>
         <View style={styles.backViewStyle}>
           <Progress.Circle size={deviceInfo.deviceWidth / 8} indeterminate={true} />
         </View>
@@ -26,22 +27,21 @@ export default class ProgressHUD extends Component {
 }
 
 const styles = StyleSheet.create({
-    baseViewStyle: {
+    maskStyle: {
       position: 'absolute',
-      top: 0,
-      height:deviceInfo.deviceHeight,
+      backgroundColor: 'rgba(0,0,0,0.2)',
       width: deviceInfo.deviceWidth,
+      height: deviceInfo.deviceHeight,
       alignItems: 'center',
-      backgroundColor: 'rgba(0,0,0,0.2)'
+      justifyContent: 'center'
     },
     backViewStyle: {
-      backgroundColor: 'white',
+      backgroundColor: commonStyle.white,
       width: deviceInfo.deviceWidth / 4,
       height: deviceInfo.deviceWidth / 4,
-      borderRadius: 10,
       justifyContent: 'center',
       alignItems: 'center',
-      marginTop: deviceInfo.deviceHeight / 4
+      borderRadius: 10,
     }
   }
 )

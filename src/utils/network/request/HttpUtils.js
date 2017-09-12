@@ -9,7 +9,7 @@
 import {Component} from 'react'
 import responseType from '../../../constants/responseType'
 import {RootToast} from '../../toast'
-import showHUD from '../../progressHUD'
+import {RootHUD} from '../../progressHUD'
 
 /**
  * fetch 网络请求的header，可自定义header 内容
@@ -77,7 +77,7 @@ export default class HttpUtils extends Component {
    * @returns {Promise}
    */
   static getRequest = (url, params = {}) => {
-    showHUD(true)
+    RootHUD.show()
     return timeoutFetch(fetch(handleUrl(url)(params), {
       method: 'GET',
       headers: header
@@ -90,7 +90,7 @@ export default class HttpUtils extends Component {
         }
       })
       .then((response) => {
-        showHUD(false)
+        RootHUD.hidden()
         // response.code：是与服务器端约定code：200表示请求成功，非200表示请求失败，message：请求失败内容
         if (response && response.res === responseType.RESPONSE_SUCCESS) {
           return response
@@ -101,7 +101,7 @@ export default class HttpUtils extends Component {
         }
       })
       .catch((error) => {
-        showHUD(false)
+        RootHUD.hidden()
         RootToast.show(error)
       })
   }

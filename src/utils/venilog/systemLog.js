@@ -36,8 +36,8 @@ const sendSystemLog = action => {
     // 点击pageOne页面后的导航栈："helloWord", "helloWord", "home", "pageOne"
     // 这时reducer中还没有做栈pop操作
     let stackArr = store.getState().common.router.routerStack
-    // 取出最后一个
-    let pageName = stackArr.splice(stackArr.length - 1, 1)
+    // 取出待pop的页面
+    let pageName = stackArr[0]
     pageId = pageName ? pageIdData[pageName].pageId : ''
     if (!pageId) {
       Toast.show(`${'dada'}: 没有找到对应的pageId`)

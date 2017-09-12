@@ -1,7 +1,7 @@
 /**
  * Created by guangqiang on 2017/9/10.
  */
-import React, {Component} from 'react'
+import React from 'react'
 import RootSiblings from 'react-native-root-siblings'
 import ProgressHUD from './progressHUD'
 import store from '../../store'
@@ -15,23 +15,28 @@ let sibling = null
 /**
  * 借助三方库，在 app 最顶层添加视图，但是有bug
  */
-export class ShowProgress {
-  show() {
+const ShowProgress = {
+  show: () => {
     sibling = new RootSiblings(<ProgressHUD />)
-  }
-  hidden() {
+  },
+  hidden: ()=> {
     if (sibling instanceof RootSiblings) {
       sibling.destroy()
     }
   }
 }
 
-export default showHUD = params => {
-  let currentStatus = store.getState().common.loading.showHUD
-  if (params && !currentStatus) { // 需要显示
-    Actions.loading()
-    store.dispatch(loadingAction(params))
-  } else { // 不需要显示
-    store.dispatch(loadingAction(params))
+const RootHUD = {
+  show: () => {
+    let currentStatus = store.getState().common.loading.showHUD
+    if (!currentStatus) {
+      Actions.loading()
+      store.dispatch(loadingAction(true))
+    }
+  },
+  hidden: () => {
+    store.dispatch(loadingAction(false))
   }
 }
+
+export {RootHUD}
