@@ -1,11 +1,7 @@
 /**
  * Created by guangqiang on 2017/8/30.
  */
-
-/** 全局的 URL PATH **/
-
 const PATH = {
-
   // 获取首页的图文列表
   PICTURE_LIST: '/hp/idlist/0',
   // 获取图文详情数据

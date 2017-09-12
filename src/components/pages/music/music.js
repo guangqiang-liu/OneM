@@ -10,7 +10,7 @@ import MusicDetail from './musicDetail'
 import Action from '../../../actions'
 import action from '../../../actionCreators/music'
 import {Actions} from 'react-native-router-flux'
-import {commonType, beginTime} from '../../../constants/commonType'
+import {articleType, beginTime} from '../../../constants/commonType'
 class Music extends BaseComponent {
 
   constructor(props) {
@@ -52,7 +52,7 @@ class Music extends BaseComponent {
   }
 
   onChangePage(index) {
-    index === this.state.pageNum ? Actions.pastList({beginTime: beginTime.music, pageType: commonType.MUSIC}) : null
+    index === this.state.pageNum ? Actions.pastList({beginTime: beginTime.music, pageType: articleType.MUSIC}) : null
   }
 
   _render() {

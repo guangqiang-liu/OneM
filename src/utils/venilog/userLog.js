@@ -1,15 +1,11 @@
 /**
  * Created by guangqiang on 2017/8/31.
  */
-
-/** 发送用户点击事件日志 **/
 import {LogRequest} from '../network/venilog'
 import {PATH} from '../../constants/urls'
-import {defaultVal} from './defaultLogParams'
+import {defaultValue} from './logParams'
 import {VENILOG_URL} from '../../constants/urlConfig'
-// 发送打点日志
 const sendUserLog = (id, eventId, params) => {
-
   // 打点日志信息
   // let currentPage = store.getState().route.scene
   // let message = venilogJson[currentPage] && venilogJson[currentPage][id]

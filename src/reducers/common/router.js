@@ -7,16 +7,45 @@ import {handleActions} from 'redux-actions'
 
 const initialState = {
   scene: 'init',
-  sceneStack: 'init'
+  // 自定义导航栈
+  routerStack: [],
+  eventUnit: []
 }
 
 const Actions= {}
 
-initialState[ActionConst.PUSH] = (state, action) => {
-  if (action.key !== 'loading') {
+Actions[ActionConst.FOCUS] = (state, action) => { // PUSH
+  return {
+    ...state,
+    routerStack: [...state.routerStack, action.payload.routeName],
+    eventUnit: []
+  }
+}
+
+Actions[type.REACT_NATIVE_ROUTER_FLUX_BACK] = (state, action) => { // POP
+  state.routerStack.pop()
+  return {
+    ...state,
+    routerStack: [...state.routerStack],
+    eventUnit: []
+  }
+}
+
+Actions[type.REACT_NATIVE_ROUTER_FLUX_EVENT] = (state, action) => {
+  if (action.payload.type) {
+    state.eventUnit.push({type: action.payload.type, routeName: action.payload.routeName ? action.payload.routeName : 'back', params: action.payload.params})
     return {
       ...state,
-      sceneStack: [...state.sceneStack, action.key]
+      eventUnit: state.eventUnit
+    }
+  }
+}
+
+Actions[type.REACT_NATIVE_ROUTER_FLUX_EVENT_CLEAR] = (state, action) => {
+  if (state.eventUnit.length === 3) {
+    return {
+      ...state,
+      eventUnit: []
     }
   } else {
     return state

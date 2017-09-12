@@ -16,7 +16,7 @@ export default class PageTwo extends Component {
   render() {
     return (
       <View style={{margin: 128}}>
-        <Text onPress={Actions.pageTwo}>This is PageTwo!
+        <Text onPress={Actions.loginModal}>This is PageTwo!
         </Text>
         <Button
           vID='btn'

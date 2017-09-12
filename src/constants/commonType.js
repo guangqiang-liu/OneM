@@ -1,7 +1,7 @@
 /**
  * Created by guangqiang on 2017/9/10.
  */
-const commonType = {
+const articleType = {
   PICTURE: 'PICTURE',
   READING: 'READING',
   MUSIC: 'MUSIC',
@@ -46,4 +46,12 @@ const monthList = [
   'Dec'
 ]
 
-export {commonType, beginTime, monthList}
+const logEventType = {
+  enterPage: 3001,
+  exitPage: 3002,
+  click: 3003,
+  slide: 3004,
+  gesture: 3005
+}
+
+export {articleType, beginTime, monthList, logEventType}

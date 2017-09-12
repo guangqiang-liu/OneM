@@ -25,6 +25,7 @@ class Home extends React.Component {
         <Text style={{fontSize: 30}}>{value}</Text>
         <Button onPress={()=> this.addxxx(add)}>add</Button>
         <Button onPress={()=> this.reducerxxx(reduce)}>reduce</Button>
+        <Button onPress={()=> Actions.pageOne()}>pageOne</Button>
       </View>
     )
   }

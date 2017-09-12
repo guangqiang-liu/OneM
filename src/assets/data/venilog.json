@@ -1,10 +1,29 @@
 {
   "home": {
-    "pageId": "000001",
-    "btn_chat": "btn_chat"
+    "pageId": "000001"
   },
-  "find": {
-    "pageId": "000001",
-    "btn_find": "btn_find"
+  "main": {
+    "pageId": "000002"
+  },
+  "helloWord": {
+    "pageId": "000003"
+  },
+  "movieDetail": {
+    "pageId": "000004"
+  },
+  "pageOne": {
+    "pageId": "000005"
+  },
+  "pageTwo": {
+    "pageId": "000006"
+  },
+  "login": {
+    "pageId": "000007"
+  },
+  "loginTwo": {
+    "pageId": "000008"
+  },
+  "loginThree": {
+    "pageId": "000009"
   }
 }

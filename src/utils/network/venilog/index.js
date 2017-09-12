@@ -2,8 +2,6 @@
  * Created by guangqiang on 2017/8/31.
  */
 
-/** 打点日志网络请求 **/
-
 let header = {
   'Accept': 'application/json',
   'Content-Type': 'application/json',

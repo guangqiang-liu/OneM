@@ -1,11 +1,8 @@
 /**
  * Created by guangqiang on 2017/9/1.
  */
-
-/** 打点初始化公共参数 **/
 import {Platform} from 'react-native'
 // import DeviceInfo from 'react-native-device-info'
-
 const defaultValue = {
   sourceId: Platform.OS === 'ios' ? 0 : 1,
   channelID: 0,

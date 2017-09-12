@@ -10,8 +10,7 @@ export default class ProgressHUD extends Component {
 
   componentWillReceiveProps(nextProps) {
     if (!nextProps.showHUD) {
-      // HUD scene 出栈
-      Actions.pop()
+      Actions.pop({ loading: true })
     }
   }
 

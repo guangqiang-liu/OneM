@@ -2,10 +2,9 @@ import React, {Component} from "react"
 import store from '../store'
 import { Provider, connect } from 'react-redux'
 import {Scene, Router, Actions, Reducer, ActionConst, Modal, Stack, Lightbox} from "react-native-router-flux"
-
 import { View } from "react-native"
 import Action from '../actions'
-
+import {dispatch} from '../utils/venilog/dispatchLog'
 // 启动页面
 import Launch from '../components/Launch'
 
@@ -62,9 +61,8 @@ import MusicList from '../components/pages/music/musicList'
 const reducerCreate = params => {
   const defaultReducer = new Reducer(params)
   return (state, action) => {
-    // console.log('State->: ', state)
-    // TODO 这个地方处理Router系统事件
-    console.log('Action->: ',action)
+    // TODO 这个地方处理Router系统事件, 触发dispatch
+    dispatch(state)(action)
     return defaultReducer(state, action)
   }
 }

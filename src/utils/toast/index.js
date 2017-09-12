@@ -13,4 +13,4 @@ const RootToast = {
   }
 }
 
-export default RootToast
+export {RootToast}

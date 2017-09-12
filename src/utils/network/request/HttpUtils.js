@@ -8,7 +8,7 @@
 
 import {Component} from 'react'
 import responseType from '../../../constants/responseType'
-import RootToast from '../../toast'
+import {RootToast} from '../../toast'
 import showHUD from '../../progressHUD'
 
 /**

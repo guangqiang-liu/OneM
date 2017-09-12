@@ -5,7 +5,6 @@ import { combineReducers } from 'redux'
 import launch from './init'
 import home from './home'
 import find from './find'
-
 import picture from './picture'
 import movie from './movie'
 import music from './music'

@@ -1,9 +1,6 @@
 /**
  * Created by guangqiang on 2017/8/30.
  */
-
-/** 全局URL DOMAIN 环境配置 **/
-
 const host = {
   dev: {
     API_URL: 'https://api.douban.com',

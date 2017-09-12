@@ -6,7 +6,7 @@ import {View, Text, StyleSheet, ListView, Image, TouchableOpacity} from 'react-n
 import Action from '../../../actionCreators/picture'
 import {commonStyle} from '../../../utils/commonStyle'
 import {Actions} from 'react-native-router-flux'
-import {commonType, monthList} from '../../../constants/commonType'
+import {articleType, monthList} from '../../../constants/commonType'
 export default class PastList extends Component {
 
   constructor(props) {
@@ -26,10 +26,10 @@ export default class PastList extends Component {
 
   nextPage(year, month) {
     switch (this.props.pageType) {
-      case commonType.PICTURE:
+      case articleType.PICTURE:
         Actions.picGridList({year: year, month: month})
         break
-      case commonType.MUSIC:
+      case articleType.MUSIC:
         Actions.musicList({year: year, month: month})
         break
       default:

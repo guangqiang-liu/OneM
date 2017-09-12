@@ -10,7 +10,7 @@ import ViewPager from 'react-native-viewpager'
 import PicDetail from './picDetail'
 import actions from '../../../actionCreators/picture'
 import {Actions} from 'react-native-router-flux'
-import {commonType, beginTime} from '../../../constants/commonType'
+import {articleType, beginTime} from '../../../constants/commonType'
 class Home extends BaseComponent {
 
   constructor(props) {
@@ -53,7 +53,7 @@ class Home extends BaseComponent {
 
   _onChangePage(index) {
     if (index === this.state.dataCount) {
-      Actions.pastList({beginTime: beginTime.picture, pageType: commonType.PICTURE})
+      Actions.pastList({beginTime: beginTime.picture, pageType: articleType.PICTURE})
     }
   }
 

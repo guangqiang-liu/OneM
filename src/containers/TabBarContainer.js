@@ -1,17 +1,9 @@
 /**
  * Created by guangqiang on 2017/9/4.
  */
-
 import React, {Component} from 'react'
-
-import {
-  StyleSheet,
-  View,
-  Image
-} from 'react-native'
-
+import {StyleSheet, View, Image} from 'react-native'
 import TabNavigator from 'react-native-tab-navigator'
-
 import Picture from '../components/pages/picture/picture'
 import Reading from '../components/pages/reading/reading'
 import Music from '../components/pages/music/music'
