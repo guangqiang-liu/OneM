@@ -36,7 +36,7 @@ export default class PicDetail extends Component {
             <Text style={styles.creactTime}>{data.hp_makettime}</Text>
           </View>
         </View>
-        <View style={styles.toolBar}>
+        <TouchableOpacity style={styles.toolBar} onPress={() => Actions.customComp()}>
           <View style={{flexDirection: 'row'}}>
             <Image style={styles.smallIcon} resizeMode="contain" source={require('../../../assets/images/diary.png')}/>
             <Text style={{lineHeight: 40, color: commonStyle.textGrayColor}}>小记</Text>
@@ -56,7 +56,7 @@ export default class PicDetail extends Component {
           <Icon name='fontAwesome|rocket' size={30} color='#900'/>
           <Icon name='oneIcon|tb_Movie' size={30} color='#900'/>
           <Icon name='oneIcon|tb_Music' size={30} color='#900'/>
-        </View>
+        </TouchableOpacity>
       </ScrollView>
     )
   }

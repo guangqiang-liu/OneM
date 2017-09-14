@@ -1,7 +1,6 @@
 /**
  * Created by guangqiang on 2017/9/1.
  */
-
 import React, {Component} from 'react'
 import {StyleSheet, TouchableOpacity, View, Text} from 'react-native'
 
@@ -17,16 +16,15 @@ const _onPress = (props, ...args) => {
 class _TouchableOpacity extends Component {
 
   render() {
-    console.log(this.props)
     return (
       <TouchableOpacity
+        {...this.props}
         style={[this.props.style]}
-        onPress={(...args) => _onPress(this.props, ...args)}
-      >
+        onPress={(...args) => _onPress(this.props, ...args)}>
         <View>
           {this.props.children}
           {
-            mode === 'debug' ? <Text style={styles.msgStyle}>dsad</Text> : null
+            mode === 'debug' ? <Text style={styles.logMsg}>VID</Text> : null
           }
         </View>
       </TouchableOpacity>
@@ -35,11 +33,12 @@ class _TouchableOpacity extends Component {
 }
 
 const styles = StyleSheet.create({
-  // 打点信息样式
-  msgStyle: {
+  logMsg: {
     position: 'absolute',
     fontSize: 8,
-    backgroundColor: 'green'
+    backgroundColor: 'green',
+    top: 5,
+    left: 5
   }
 })
 

@@ -14,5 +14,7 @@ export default deviceInfo = {
   // 设备高度
   deviceHeight: Platform.OS === 'ios' ? Dimensions.get('window').height : Dimensions.get('window').height - 24,
   // 设备系统
-  deviceOS: Platform.OS
+  deviceOS: Platform.OS,
+  // 当前config: debug \ release
+  mode: ''
 }

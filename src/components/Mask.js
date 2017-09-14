@@ -19,4 +19,4 @@ class Mask extends Component {
   }
 }
 
-module.exports = Mask
+export default Mask

@@ -44,6 +44,8 @@ import ModalView from '../components/ModalView'
 
 import Mask from '../components/Mask'
 
+import CustomComp from '../components/TestCustomUIComponent'
+
 // COMMON
 import Loading from '../utils/progressHUD/progressHUD'
 
@@ -153,6 +155,7 @@ const scenes = Actions.create(
                  title="Register"/>
           <Scene key="register2" component={Register}
                  title="Register2"/>
+          <Scene key="customComp" title ='测试自定义组件' component={CustomComp}/>
         </Stack>
 
         {/* MASK */}
