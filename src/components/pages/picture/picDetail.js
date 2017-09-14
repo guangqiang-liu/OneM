@@ -3,9 +3,9 @@
  */
 import React, {Component} from 'react'
 import {View, StyleSheet, Text, ScrollView, Image, TouchableOpacity} from 'react-native'
-import Action from '../../../actionCreators/picture'
 import {commonStyle} from '../../../utils/commonStyle'
 import {Actions} from 'react-native-router-flux'
+import {Icon} from '../../../utils/icon'
 export default class PicDetail extends Component {
 
   constructor(props) {
@@ -53,6 +53,9 @@ export default class PicDetail extends Component {
           >
             <Image style={styles.smallIcon} resizeMode="contain" source={require('../../../assets/images/share_image.png')}/>
           </TouchableOpacity>
+          <Icon name='fontAwesome|rocket' size={30} color='#900'/>
+          <Icon name='oneIcon|tb_Movie' size={30} color='#900'/>
+          <Icon name='oneIcon|tb_Music' size={30} color='#900'/>
         </View>
       </ScrollView>
     )
