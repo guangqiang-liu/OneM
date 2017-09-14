@@ -8,7 +8,7 @@
 
 import {Component} from 'react'
 import responseType from '../../../constants/responseType'
-import {RootToast} from '../../toast'
+import {Toast} from '../../toast'
 import {RootHUD} from '../../progressHUD'
 
 /**
@@ -86,7 +86,7 @@ export default class HttpUtils extends Component {
         if (response.ok) {
           return response.json()
         } else {
-          RootToast.show('服务器繁忙，请稍后再试；\r\nCode:' + response.status)
+          Toast.show('服务器繁忙，请稍后再试；\r\nCode:' + response.status)
         }
       })
       .then((response) => {
@@ -102,7 +102,7 @@ export default class HttpUtils extends Component {
       })
       .catch((error) => {
         RootHUD.hidden()
-        RootToast.show(error)
+        Toast.show(error)
       })
   }
 

@@ -5,32 +5,33 @@ import store from '../../store'
 import type from '../../constants/actionType'
 import {createAction} from 'redux-actions'
 const dispatch = state => action => {
+  console.log('Action: ', action)
   let state = store.getState()
-  let eventAdd = createAction(type.REACT_NATIVE_ROUTER_FLUX_EVENT)
-  let eventClear = createAction(type.REACT_NATIVE_ROUTER_FLUX_EVENT_CLEAR)
-  let eventPop = createAction(type.REACT_NATIVE_ROUTER_FLUX_BACK)
-  let eventPush = createAction(type.REACT_NATIVE_ROUTER_FLUX_FOCUS)
-  store.dispatch(eventAdd(action))
-  // console.log('Action: ',action)
-  let eventArr = state.common.router.eventUnit
-  if (eventArr.length <= 3) {
-    if (eventArr.length === 3) { // 当eventUtil数组数量满足三个，才是一个完整的event
-      let firstType = eventArr[0].type
-      let blurName = eventArr[1].routeName
-      let focusType = eventArr[2].type
-      let focusName = eventArr[2].routeName // focusName
-      if (focusName !== 'loading') { // 忽略 HUD
-        if (firstType === type.REACT_NATIVE_ROUTER_FLUX_BACK && blurName !== 'loading') { // POP
-          store.dispatch(eventPop(action))
-        } else if (focusType === type.REACT_NATIVE_ROUTER_FLUX_FOCUS && blurName !== 'loading') { // PUSH
-          store.dispatch(eventPush(action))
+  let dispatchAction = createAction(type.REACT_NATIVE_ROUTER_FLUX_EVENT)
+  let clearAction = createAction(type.REACT_NATIVE_ROUTER_FLUX_EVENT_CLEAR)
+  let popAction = createAction(type.REACT_NATIVE_ROUTER_FLUX_BACK)
+  let pushAction = createAction(type.REACT_NATIVE_ROUTER_FLUX_FOCUS)
+  store.dispatch(dispatchAction(action))
+  // eventUnit:一个完整event单元
+  let eventUnit = state.common.router.eventUnit
+  if (eventUnit.length <= 3) {
+    if (eventUnit.length === 3) {
+      let firstType = eventUnit[0].type // 用来区分是不是 pop
+      let blurRouterName = eventUnit[1].routeName
+      let focusType = eventUnit[2].type
+      let focusRouterName = eventUnit[2].routeName // focusName
+      if (focusRouterName !== 'loading') { // 忽略 HUD
+        if (firstType === type.REACT_NATIVE_ROUTER_FLUX_BACK && blurRouterName !== 'loading') { // POP
+          store.dispatch(popAction(action))
+        } else if (focusType === type.REACT_NATIVE_ROUTER_FLUX_FOCUS && blurRouterName !== 'loading') { // PUSH
+          store.dispatch(pushAction(action))
         }
       }
-      store.dispatch(eventClear(action))
+      store.dispatch(clearAction(action))
     }
   } else {
-    // 清空event数组的对象
-    store.dispatch(eventClear(action))
+    // 清空eventUnit数组的对象
+    store.dispatch(clearAction(action))
   }
 }
 

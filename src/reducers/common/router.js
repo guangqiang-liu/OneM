@@ -4,7 +4,7 @@
 import type from '../../constants/actionType'
 import {ActionConst} from 'react-native-router-flux'
 import {handleActions} from 'redux-actions'
-
+import {ArrayTool} from '../../utils/arrayExtension'
 const initialState = {
   scene: 'init',
   // 自定义导航栈
@@ -14,30 +14,28 @@ const initialState = {
 
 const Actions= {}
 
+Actions[type.REACT_NATIVE_ROUTER_FLUX_EVENT] = (state, action) => {
+  if (action.payload.type) {
+    return {
+      ...state,
+      eventUnit: ArrayTool.push(state.eventUnit, {type: action.payload.type, routeName: action.payload.routeName ? action.payload.routeName : 'back', params: action.payload.params})
+    }
+  }
+}
+
 Actions[ActionConst.FOCUS] = (state, action) => { // PUSH
   return {
     ...state,
-    routerStack: [...state.routerStack, action.payload.routeName],
+    routerStack: [action.payload.routeName, ...state.routerStack], // 入栈
     eventUnit: []
   }
 }
 
 Actions[type.REACT_NATIVE_ROUTER_FLUX_BACK] = (state, action) => { // POP
-  state.routerStack.pop()
   return {
     ...state,
-    routerStack: [...state.routerStack],
+    routerStack: [...ArrayTool.shift(state.routerStack)],
     eventUnit: []
-  }
-}
-
-Actions[type.REACT_NATIVE_ROUTER_FLUX_EVENT] = (state, action) => {
-  if (action.payload.type) {
-    state.eventUnit.unshift({type: action.payload.type, routeName: action.payload.routeName ? action.payload.routeName : 'back', params: action.payload.params})
-    return {
-      ...state,
-      eventUnit: state.eventUnit
-    }
   }
 }
 

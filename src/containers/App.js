@@ -5,6 +5,7 @@ import {Scene, Router, Actions, Reducer, ActionConst, Modal, Stack, Lightbox} fr
 import { View } from "react-native"
 import Action from '../actions'
 import {dispatch} from '../utils/venilog/dispatchLog'
+import type from '../constants/actionType'
 // 启动页面
 import Launch from '../components/Launch'
 
@@ -62,7 +63,7 @@ const reducerCreate = params => {
   const defaultReducer = new Reducer(params)
   return (state, action) => {
     // TODO 这个地方处理Router系统事件, 触发dispatch
-    dispatch(state)(action)
+    action.type !== type.REACT_NATIVE_ROUTER_FLUX_SET_PARAMS ? dispatch(state)(action) : null
     return defaultReducer(state, action)
   }
 }

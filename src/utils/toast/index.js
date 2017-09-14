@@ -1,16 +1,16 @@
 /**
  * Created by guangqiang on 2017/9/10.
  */
-import Toast from 'react-native-root-toast'
+import RootToast from 'react-native-root-toast'
 
-const RootToast = {
+const Toast = {
   toast: null,
   show: (msg) => {
-    this.toast = Toast.show(msg, {
+    this.toast = RootToast.show(msg, {
       position: 0,
       duration: 1500
     })
   }
 }
 
-export {RootToast}
+export {Toast}
