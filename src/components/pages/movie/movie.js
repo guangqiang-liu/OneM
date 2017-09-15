@@ -2,28 +2,27 @@
  * Created by guangqiang on 2017/9/4.
  */
 import React from 'react'
-import {StyleSheet, Text, ListView, TouchableOpacity} from 'react-native'
+import {StyleSheet, Text, ListView, TouchableOpacity, RefreshControl, InteractionManager} from 'react-native'
 import {BaseComponent} from '../../base/baseComponent'
 import {connect} from 'react-redux'
 import Action from '../../../actions'
 import {commonStyle} from '../../../utils/commonStyle'
 import {Actions} from 'react-native-router-flux'
+import {LoadMoreFooter} from '../../loadMoreFooter'
+import {ArrayTool} from '../../../utils/arrayExtension'
+import {GiftedListView} from '../../common/listView'
 class MovieList extends BaseComponent {
 
   constructor() {
     super()
     this.renderRow = this.renderRow.bind(this)
+    this.fetchMoreData = this.fetchMoreData.bind(this)
+    this.fetchLatestData = this.fetchLatestData.bind(this)
     this.state = {
-      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+      refreshing: false,
+      hasMore: true,
+      movieList: [],
     }
-  }
-
-  componentDidMount() {
-    this.props.getMovieList(0).then((response) => {
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(response.value.data)
-      })
-    })
   }
 
   navigationBarProps() {
@@ -33,22 +32,55 @@ class MovieList extends BaseComponent {
     }
   }
 
+  fetchLatestData() {
+    this.setState({
+      refreshing: true
+    })
+    this.props.getMovieList(0).then((response) => {
+      this.setState({
+        refreshing: false,
+        hasMore: response.value.data.length !== 0,
+        movieList: ArrayTool.splice_D(response.value.data, 0, 10)
+      })
+    })
+  }
+
+  fetchMoreData() {
+    this.setState({
+      refreshing: true
+    })
+    this.props.getMovieList(0).then((response) => {
+      let tempArr = this.state.movieList.concat([0, 1, 2, 3, 4, 5, 6, 7, 8 ,9])
+      this.setState({
+        refreshing: false,
+        hasMore: tempArr.length <= 60 ,
+        movieList: tempArr
+      })
+    })
+  }
+
   renderRow(rowData, sectionId, rowId) {
     return (
       <TouchableOpacity
         style={styles.cellStyle}
         onPress={() => Actions.movieDetail({id: rowData.id})}
       >
-        <Text>{rowData.title}</Text>
+        <Text>{rowId}</Text>
       </TouchableOpacity>
     )
   }
 
+
   _render() {
-    const {dataSource} = this.state
+    let dataSource = new ListView.DataSource({rowHasChanged:(r1, r2) => r1 !== r2}).cloneWithRows(this.state.movieList)
     return (
-      <ListView
-        style={styles.listViewStyle}
+      <GiftedListView
+        initialListSize={20}
+        pageSize={20}
+        refreshing={this.state.refreshing}
+        hasMore={this.state.hasMore}
+        fetchLatestData={this.fetchLatestData}
+        fetchMoreData={this.fetchMoreData}
         dataSource={dataSource}
         renderRow={this.renderRow}
       />
@@ -63,7 +95,7 @@ const styles = StyleSheet.create({
   cellStyle: {
     justifyContent: 'center',
     alignItems: 'center',
-    height: 44,
+    height: 100,
     backgroundColor: commonStyle.white,
     borderBottomWidth: 1,
     borderBottomColor: commonStyle.lineColor
