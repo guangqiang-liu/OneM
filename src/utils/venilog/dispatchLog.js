@@ -5,7 +5,7 @@ import store from '../../store'
 import type from '../../constants/actionType'
 import {createAction} from 'redux-actions'
 const dispatch = state => action => {
-  console.log('Action: ', action)
+  // console.log('Action: ', action)
   let state = store.getState()
   let dispatchAction = createAction(type.REACT_NATIVE_ROUTER_FLUX_EVENT)
   let clearAction = createAction(type.REACT_NATIVE_ROUTER_FLUX_EVENT_CLEAR)

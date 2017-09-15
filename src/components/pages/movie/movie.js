@@ -2,13 +2,12 @@
  * Created by guangqiang on 2017/9/4.
  */
 import React from 'react'
-import {StyleSheet, Text, ListView, TouchableOpacity, RefreshControl, InteractionManager} from 'react-native'
+import {StyleSheet, Text, ListView, TouchableOpacity} from 'react-native'
 import {BaseComponent} from '../../base/baseComponent'
 import {connect} from 'react-redux'
 import Action from '../../../actions'
 import {commonStyle} from '../../../utils/commonStyle'
 import {Actions} from 'react-native-router-flux'
-import {LoadMoreFooter} from '../../loadMoreFooter'
 import {ArrayTool} from '../../../utils/arrayExtension'
 import {GiftedListView} from '../../common/listView'
 class MovieList extends BaseComponent {
@@ -34,7 +33,7 @@ class MovieList extends BaseComponent {
 
   fetchLatestData() {
     this.setState({
-      refreshing: true
+      refreshing: true,
     })
     this.props.getMovieList(0).then((response) => {
       this.setState({
@@ -47,10 +46,10 @@ class MovieList extends BaseComponent {
 
   fetchMoreData() {
     this.setState({
-      refreshing: true
+      refreshing: true,
     })
     this.props.getMovieList(0).then((response) => {
-      let tempArr = this.state.movieList.concat([0, 1, 2, 3, 4, 5, 6, 7, 8 ,9])
+      let tempArr = this.state.movieList.concat(ArrayTool.splice_D(response.value.data, 0, 10))
       this.setState({
         refreshing: false,
         hasMore: tempArr.length <= 60 ,
@@ -65,18 +64,15 @@ class MovieList extends BaseComponent {
         style={styles.cellStyle}
         onPress={() => Actions.movieDetail({id: rowData.id})}
       >
-        <Text>{rowId}</Text>
+        <Text>{rowData.title}</Text>
       </TouchableOpacity>
     )
   }
-
 
   _render() {
     let dataSource = new ListView.DataSource({rowHasChanged:(r1, r2) => r1 !== r2}).cloneWithRows(this.state.movieList)
     return (
       <GiftedListView
-        initialListSize={20}
-        pageSize={20}
         refreshing={this.state.refreshing}
         hasMore={this.state.hasMore}
         fetchLatestData={this.fetchLatestData}

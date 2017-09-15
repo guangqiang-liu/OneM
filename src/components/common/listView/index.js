@@ -9,7 +9,6 @@ class GiftedListView extends Component {
 
   constructor(props) {
     super(props)
-    this.getRefreshControl = this.getRefreshControl.bind(this)
     this.onRefresh = this.onRefresh.bind(this)
     this.onEndReached = this.onEndReached.bind(this)
     this.renderFooter = this.renderFooter.bind(this)
@@ -29,22 +28,12 @@ class GiftedListView extends Component {
     !this.props.refreshing && this.props.hasMore && this.props.fetchMoreData && this.props.fetchMoreData()
   }
 
-  getRefreshControl() {
-    return (
-      <RefreshControl
-        refreshing={this.props.refreshing}
-        onRefresh={this.onRefresh}/>
-    );
-  }
-
   renderFooter() {
     if (this.props.refreshing) {
       return null
     }
     if (this.props.hasMore) {
-      return (
-        <ActivityIndicator color={'red'}/>
-      )
+      return (<ActivityIndicator color={'red'}/>)
     } else if (this.props.renderHasNoMoreView) {
       return this.props.renderHasNoMoreView()
     } else {
@@ -52,10 +41,11 @@ class GiftedListView extends Component {
         <View style={styles.hasNoMoreView}>
           <Text style={styles.hasNoMoreText}>没有更多数据了</Text>
         </View>
-      );
+      )
     }
   }
 
+  // 另一种实现上拉加载函数
   _onScroll(event) {
     if(this.props.refreshing || !this.props.hasMore){
       return
@@ -68,15 +58,27 @@ class GiftedListView extends Component {
     }
   }
 
+  _onRefresh() {
+    this.onRefresh()
+  }
+
   render() {
     return (
       <ListView
         {...this.props}
         enableEmptySections
-        // onEndReached={this.onEndReached}
-        onScroll={this._onScroll.bind(this)}
+        onEndReached={this.onEndReached}
+        // onScroll={this._onScroll.bind(this)}
         renderFooter={this.renderFooter}
-        OnEndReachedThreshold={44}
+        onEndReachedThreshold={20}
+        refreshControl={
+          <RefreshControl
+            refreshing={false}
+            onRefresh={this._onRefresh.bind(this)}
+            tintColor='red'
+            colors={['#ff0000', '#00ff00', '#0000ff']}
+            progressBackgroundColor="gray"/>
+        }
       />
     )
   }
@@ -89,7 +91,7 @@ GiftedListView.propTypes = {
   fetchLatestData: PropTypes.func.isRequired,
   fetchMoreData: PropTypes.func.isRequired,
   renderHasNoMoreView: PropTypes.func
-};
+}
 
 const styles = StyleSheet.create({
   hasNoMoreView: {
