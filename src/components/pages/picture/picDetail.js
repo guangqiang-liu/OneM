@@ -53,7 +53,11 @@ export default class PicDetail extends Component {
           >
             <Image style={styles.smallIcon} resizeMode="contain" source={require('../../../assets/images/share_image.png')}/>
           </TouchableOpacity>
-          <Icon name='fontAwesome|rocket' size={30} color='#900'/>
+          <TouchableOpacity
+            onPress={() => Actions.enhancedListView()}
+          >
+            <Icon name='fontAwesome|rocket' size={30} color='#900'/>
+          </TouchableOpacity>
           <Icon name='oneIcon|tb_Movie' size={30} color='#900'/>
           <Icon name='oneIcon|tb_Music' size={30} color='#900'/>
         </TouchableOpacity>

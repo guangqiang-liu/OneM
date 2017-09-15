@@ -48,7 +48,7 @@ import CustomComp from '../components/TestCustomUIComponent'
 
 // COMMON
 import Loading from '../utils/progressHUD/progressHUD'
-
+import {EnhancedListViewTest} from '../components/EnhancedListViewDemo'
 // PAGES
 import PicDetail from '../components/pages/picture/picDetail'
 import PastList from '../components/pages/picture/pastList'
@@ -156,6 +156,10 @@ const scenes = Actions.create(
           <Scene key="register2" component={Register}
                  title="Register2"/>
           <Scene key="customComp" title ='测试自定义组件' component={CustomComp}/>
+          <Scene key="enhancedListView" title ='测试ListView' component={connect(
+            (state) => state.movie.movieList,
+            Action.dispatch('movie')
+          )(EnhancedListViewTest)}/>
         </Stack>
 
         {/* MASK */}

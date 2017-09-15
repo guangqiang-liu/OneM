@@ -6,13 +6,15 @@ import type from '../../constants/actionType'
 import actions from '../../actionCreators/movie'
 
 const getMovieList = createAction(type.MOVIE_LIST, actions.movieList)
+const getMovieListForDemo = createAction(type.MOVIE_LIST, actions.movieListForDemo)
 const getMovieDetail = createAction(type.MOVIE_DETAIL, actions.movieDetail)
 const getMovieStory = createAction(type.MOVIE_STORY, actions.movieStory)
 
 const actionCreators = {
   getMovieList,
   getMovieDetail,
-  getMovieStory
+  getMovieStory,
+  getMovieListForDemo
 }
 
 export default {actionCreators}

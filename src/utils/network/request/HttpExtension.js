@@ -22,9 +22,7 @@ const getFetch = (url, params, callback) => {
   let promise = HttpUtils.getRequest(url, params)
 
   if (callback && typeof callback === 'function') {
-    promise.then((response) => {
-      return callback(response)
-    })
+    promise.then(response => callback(response))
   }
 
   return promise

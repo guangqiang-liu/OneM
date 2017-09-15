@@ -9,14 +9,14 @@ import {Venilog} from './venilog'
 // export {_TouchableOpacity as TouchableOpacity}
 // export {_Button as Button}
 
-import {View, StyleSheet, ScrollView, ListView, RefreshControl, ViewPropTypes, ActivityIndicator} from 'react-native'
+import {View, StyleSheet, ScrollView, ListView, RefreshControl, ViewPropTypes, ActivityIndicator, InteractionManager} from 'react-native'
 import {Button} from './button'
 import {Text} from './text'
 import {TouchableOpacity} from './touchable/touchableOpacity'
 import NavigationBar from './navigationBar'
 import WebView from './webView'
 import BaseComponent from '../base/baseComponent'
-
+import {EnhancedListView} from './listView/EnhancedListView'
 /**
  * 统一将 react-native库中的组件 + 自定义组件 统一收口管理
  */
@@ -28,10 +28,12 @@ export {
   RefreshControl,
   ViewPropTypes,
   ActivityIndicator,
+  InteractionManager,
   Button,
   Text,
   TouchableOpacity,
   NavigationBar,
   WebView,
-  BaseComponent
+  BaseComponent,
+  EnhancedListView
 }

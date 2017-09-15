@@ -5,13 +5,10 @@ import React from 'react'
 import { StyleSheet, Text, View, Platform, TouchableHighlight, InteractionManager } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import {GiftedListView} from './CrazyListView'
-import { commonStyle } from '../../../utils/commonStyle'
+import {commonStyle} from '../../../utils/commonStyle'
 
 class EnhancedListView extends React.Component {
 
-  constructor(props) {
-    super(props);
-  }
   /**
    * Render the refreshable view when the pull to refresh has been activated
    * @platform ios
@@ -24,7 +21,7 @@ class EnhancedListView extends React.Component {
           松开即可刷新
         </Text>
       </View>
-    );
+    )
   }
 
   /**
@@ -41,7 +38,7 @@ class EnhancedListView extends React.Component {
             下拉刷新
           </Text>
         </View>
-      );
+      )
     } else {
       return (
         <TouchableHighlight
@@ -54,7 +51,7 @@ class EnhancedListView extends React.Component {
             松开即可刷新
           </Text>
         </TouchableHighlight>
-      );
+      )
     }
   }
 
@@ -82,20 +79,20 @@ class EnhancedListView extends React.Component {
           点击加载更多
         </Text>
       </TouchableHighlight>
-    );
+    )
   }
 
   refresh() {
-    this.refs.listView._refresh();
+    this.refs.listView._refresh()
   }
 
   updateRows(rows, options, isRefresh) {
     if(this.props.lazyLoade){
       InteractionManager.runAfterInteractions(() => {
-        this.refs.listView && this.refs.listView._updateRows(rows, options, isRefresh);
+        this.refs.listView && this.refs.listView._updateRows(rows, options, isRefresh)
       })
     }else{
-      this.refs.listView._updateRows(rows, options, isRefresh);
+      this.refs.listView._updateRows(rows, options, isRefresh)
     }
   }
 
@@ -111,16 +108,12 @@ class EnhancedListView extends React.Component {
   render() {
     return (
       <GiftedListView
+        {...this.props}
         initialListSize={18}
         ref={'listView'}
         firstLoader={true}
         pagination={true}
         refreshable={true}
-        customStyles={{
-          refreshableView: {
-            backgroundColor: 'rgba(0,0,0,0)',
-          },
-        }}
         autoPaginate={true}
         lazyLoade={false}
         emptyView={this._renderEmptyView}
@@ -129,7 +122,11 @@ class EnhancedListView extends React.Component {
         paginationAllLoadedView={this._renderPaginationAllLoadedView}
         paginationWaitingView={this._renderPaginationWaitingView}
         enableEmptySections={true}
-        {...this.props}
+        customStyles={{
+          refreshableView: {
+            backgroundColor: 'rgba(0,0,0,0)'
+          }
+        }}
       />
     )
   }
@@ -161,7 +158,7 @@ var customStyles = StyleSheet.create({
   emptyText: {
     color: '#ddd',
     marginTop: 10,
-  },
-});
+  }
+})
 
 export {EnhancedListView}
