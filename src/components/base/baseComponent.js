@@ -39,7 +39,7 @@ class BaseComponent extends Component {
    * @param data
    */
   superFunc(data) {
-    alert('在子类中调用了父类的函数，', data)
+    alert(`在子类中调用了父类的函数，${data}`)
   }
 
   /**
@@ -60,6 +60,8 @@ class BaseComponent extends Component {
    * @returns {XML}
    */
   renderNavigationBar() {
+    // 父类调用子类中的函数，获取数据
+    // 这里的this指针指向的是调用父类的子类
     let navigationBarProps = this.navigationBarProps()
     Object.assign(navigationBarProps, this.props)
     return (
