@@ -6,6 +6,7 @@ import {View, StyleSheet, Text, ScrollView, Image, TouchableOpacity} from 'react
 import {commonStyle} from '../../../utils/commonStyle'
 import {Actions} from 'react-native-router-flux'
 import {Icon} from '../../../utils/icon'
+import {Toast} from '../../../utils/toast'
 export default class PicDetail extends Component {
 
   constructor(props) {
@@ -19,6 +20,15 @@ export default class PicDetail extends Component {
     this.props.getPicDetail(this.props.id).then((response) => {
       this.setState({data: response.value.data})
     })
+  }
+
+  toast() {
+    // Toast.show('show')
+    // Toast.showLong('show')
+    Toast.showSuccess('success')
+    // Toast.showLongSuccess('success')
+    // Toast.showWarning('warning')
+    // Toast.showError('error')
   }
 
   render() {
@@ -56,10 +66,14 @@ export default class PicDetail extends Component {
           <TouchableOpacity
             onPress={() => Actions.enhancedListView()}
           >
-            <Icon name='fontAwesome|rocket' size={30} color='#900'/>
+            <Icon name={'fontAwesome|rocket'} size={30} color='#900'/>
           </TouchableOpacity>
-          <Icon name='oneIcon|tb_Movie' size={30} color='#900'/>
-          <Icon name='oneIcon|tb_Music' size={30} color='#900'/>
+          <TouchableOpacity
+            onPress={() => this.toast()}
+          >
+            <Icon name={'oneIcon|tb_Movie'} size={30} color='#900'/>
+          </TouchableOpacity>
+          <Icon name={'oneIcon|tb_Music'} size={30} color='#900'/>
         </TouchableOpacity>
       </ScrollView>
     )

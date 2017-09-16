@@ -9,7 +9,7 @@ import Action from '../../../actions'
 import {commonStyle} from '../../../utils/commonStyle'
 import {Actions} from 'react-native-router-flux'
 import {ArrayTool} from '../../../utils/arrayExtension'
-import {GiftedListView} from '../../common/listView'
+import {SimpleListView} from '../../common/listView'
 class MovieList extends BaseComponent {
 
   constructor() {
@@ -72,7 +72,7 @@ class MovieList extends BaseComponent {
   _render() {
     let dataSource = new ListView.DataSource({rowHasChanged:(r1, r2) => r1 !== r2}).cloneWithRows(this.state.movieList)
     return (
-      <GiftedListView
+      <SimpleListView
         refreshing={this.state.refreshing}
         hasMore={this.state.hasMore}
         fetchLatestData={this.fetchLatestData}

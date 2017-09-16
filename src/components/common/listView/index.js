@@ -4,8 +4,7 @@
 import React, {Component, PropTypes} from 'react'
 import {View, Text, StyleSheet, RefreshControl, ListView, ActivityIndicator} from '../index'
 import {commonStyle} from '../../../utils/commonStyle'
-
-class GiftedListView extends Component {
+class SimpleListView extends Component {
 
   constructor(props) {
     super(props)
@@ -18,12 +17,10 @@ class GiftedListView extends Component {
     this.onRefresh()
   }
 
-  // 回调下拉刷新数据
   onRefresh() {
     this.props.fetchLatestData && this.props.fetchLatestData()
   }
 
-  // 回调上拉加载更多
   onEndReached() {
     !this.props.refreshing && this.props.hasMore && this.props.fetchMoreData && this.props.fetchMoreData()
   }
@@ -53,13 +50,9 @@ class GiftedListView extends Component {
     let y = event.nativeEvent.contentOffset.y
     let height = event.nativeEvent.layoutMeasurement.height
     let contentHeight = event.nativeEvent.contentSize.height
-    if(y + height >= contentHeight){
+    if(y >= contentHeight - height){ // 满足触达屏幕底部
       this.props.fetchMoreData && this.props.fetchMoreData()
     }
-  }
-
-  _onRefresh() {
-    this.onRefresh()
   }
 
   render() {
@@ -67,14 +60,14 @@ class GiftedListView extends Component {
       <ListView
         {...this.props}
         enableEmptySections
-        onEndReached={this.onEndReached}
-        // onScroll={this._onScroll.bind(this)}
+        // onEndReached={this.onEndReached}
+        onScroll={this._onScroll.bind(this)}
         renderFooter={this.renderFooter}
         onEndReachedThreshold={20}
         refreshControl={
           <RefreshControl
             refreshing={false}
-            onRefresh={this._onRefresh.bind(this)}
+            onRefresh={this.onRefresh.bind(this)}
             tintColor='red'
             colors={['#ff0000', '#00ff00', '#0000ff']}
             progressBackgroundColor="gray"/>
@@ -84,7 +77,7 @@ class GiftedListView extends Component {
   }
 }
 
-GiftedListView.propTypes = {
+SimpleListView.propTypes = {
   emptyView: PropTypes.func,
   hasMore: PropTypes.bool.isRequired,
   refreshing: PropTypes.bool.isRequired,
@@ -105,4 +98,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export {GiftedListView}
+export {SimpleListView}
