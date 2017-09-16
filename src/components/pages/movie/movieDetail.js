@@ -73,9 +73,7 @@ export default class MovieDetail extends Component {
     if (picArr.length) {
       for (var i = 0; i < picArr.length; i++) {
         imgArr.push(
-          <TouchableOpacity
-            onPress={() => Actions.moviePlayer()}
-          >
+          <TouchableOpacity onPress={() => Actions.moviePlayer()}>
             <Image style={styles.swipe} source={{uri: picArr[i]}} key={i}/>
           </TouchableOpacity>
         )
@@ -95,30 +93,7 @@ export default class MovieDetail extends Component {
       <View>
         <Swiper
           height={200}
-          loop={true}
-          index={0}
-          autoplay={true}
-          autoplayTimeout={3}
-          dot={<View style={{
-            backgroundColor: commonStyle.red,
-            width: 12,
-            height: 12,
-            borderRadius: 6,
-            marginLeft: 10,
-            marginRight: 9,
-            marginTop: 9,
-            marginBottom: 9,
-          }}/>}
-          activeDot={<View style={{
-            backgroundColor: commonStyle.yellow,
-            width: 12,
-            height: 12,
-            borderRadius: 6,
-            marginLeft: 10,
-            marginRight: 9,
-            marginTop: 9,
-            marginBottom: 9,
-          }}/>}
+          autoplay
         >
           {this.renderImg()}
         </Swiper>

@@ -46,11 +46,11 @@ export default class PicDetail extends Component {
             <Text style={styles.creactTime}>{data.hp_makettime}</Text>
           </View>
         </View>
-        <TouchableOpacity style={styles.toolBar} onPress={() => Actions.customComp()}>
-          <View style={{flexDirection: 'row'}}>
+        <TouchableOpacity style={styles.toolBar}>
+          <TouchableOpacity style={{flexDirection: 'row'}} onPress={() => Actions.customComp()}>
             <Image style={styles.smallIcon} resizeMode="contain" source={require('../../../assets/images/diary.png')}/>
             <Text style={{lineHeight: 40, color: commonStyle.textGrayColor}}>小记</Text>
-          </View>
+          </TouchableOpacity>
           <TouchableOpacity
             style={{flexDirection: 'row'}}
             onPress={() => Actions.helloWord()}
@@ -73,7 +73,11 @@ export default class PicDetail extends Component {
           >
             <Icon name={'oneIcon|tb_Movie'} size={30} color='#900'/>
           </TouchableOpacity>
-          <Icon name={'oneIcon|tb_Music'} size={30} color='#900'/>
+          <TouchableOpacity
+            onPress={() => Actions.SwiperComp()}
+          >
+            <Icon name={'oneIcon|tb_Music'} size={30} color='#900'/>
+          </TouchableOpacity>
         </TouchableOpacity>
       </ScrollView>
     )

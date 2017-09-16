@@ -49,6 +49,8 @@ import CustomComp from '../components/TestCustomUIComponent'
 // COMMON
 import Loading from '../utils/progressHUD/progressHUD'
 import {EnhancedListViewTest} from '../components/EnhancedListViewDemo'
+import SwiperComp from '../components/TestSwiperComponent'
+
 // PAGES
 import PicDetail from '../components/pages/picture/picDetail'
 import PastList from '../components/pages/picture/pastList'
@@ -160,6 +162,12 @@ const scenes = Actions.create(
             (state) => state.movie.movieList,
             Action.dispatch('movie')
           )(EnhancedListViewTest)}/>
+          <Scene
+            key='SwiperComp'
+            title='Swiper'
+            component={SwiperComp}
+          />
+
         </Stack>
 
         {/* MASK */}

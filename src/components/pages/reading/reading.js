@@ -71,7 +71,7 @@ class Reading extends BaseComponent {
       return imgArr
     } else {
       return (
-        <Text>dada</Text>
+        <View/>
       )
     }
   }
@@ -79,10 +79,11 @@ class Reading extends BaseComponent {
   renderBanner() {
     return (
       <Swiper
-        height={150}
-        loop={true}
-        index={0}
-        autoplay={true}
+        height={200}
+        autoplay
+        loop
+        dot={<View style={styles.dotStyle}/>}
+        activeDot={<View style={styles.activeDot}/>}
       >
         {this.renderImg()}
       </Swiper>
@@ -111,6 +112,26 @@ const styles = StyleSheet.create({
   cellStyle: {
     flexDirection: 'row',
     backgroundColor: commonStyle.green
+  },
+  dotStyle: {
+    backgroundColor: 'rgba(0,0,0,.2)',
+    width: 5,
+    height: 5,
+    borderRadius: 4,
+    marginLeft: 3,
+    marginRight: 3,
+    marginTop: 3,
+    marginBottom: 3
+  },
+  activeDot: {
+    backgroundColor: '#000',
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginLeft: 3,
+    marginRight: 3,
+    marginTop: 3,
+    marginBottom: 3
   }
 })
 
