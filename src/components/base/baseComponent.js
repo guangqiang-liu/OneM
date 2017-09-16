@@ -33,6 +33,15 @@ class BaseComponent extends Component {
     return null
   }
 
+
+  /**
+   * 父类函数，提供给子类调用，测试当子类调用父类的函数时，是否可以做到hook功能
+   * @param data
+   */
+  superFunc(data) {
+    alert('在子类中调用了父类的函数，', data)
+  }
+
   /**
    * 导航返回左按钮点击事件，子类可以overload，当子类没有重载，默认pop当前vc
    */

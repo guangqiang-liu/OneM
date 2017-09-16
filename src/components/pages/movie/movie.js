@@ -58,6 +58,11 @@ class MovieList extends BaseComponent {
     })
   }
 
+  superFunc(data) {
+    super.superFunc(data)
+    alert('子类中函数的逻辑处理')
+  }
+
   renderRow(rowData, sectionId, rowId) {
     return (
       <TouchableOpacity
