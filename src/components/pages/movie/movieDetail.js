@@ -28,7 +28,8 @@ export default class MovieDetail extends Component {
     this.state = {
       movieDetail: {},
       movieStory: {},
-      modalVisible: false
+      modalVisible: false,
+      swiperShow: false,
     }
   }
 
@@ -36,10 +37,13 @@ export default class MovieDetail extends Component {
     let detailPromise = Action.movieDetail(this.props.id)
     let storyPromise = Action.movieStory(this.props.id)
     Promise.all([detailPromise, storyPromise]).then(response => {
-      this.setState({
-        movieDetail: response[0].data,
-        movieStory: response[1].data.data
-      })
+      setTimeout(() => {
+        this.setState({
+          movieDetail: response[0].data,
+          movieStory: response[1].data.data,
+          swiperShow: true
+        })
+      }, (10))
     })
   }
 
@@ -70,20 +74,14 @@ export default class MovieDetail extends Component {
   renderImg() {
     let picArr = this.state.movieDetail.photo || []
     let imgArr = []
-    if (picArr.length) {
-      for (var i = 0; i < picArr.length; i++) {
-        imgArr.push(
-          <TouchableOpacity onPress={() => Actions.moviePlayer()}>
-            <Image style={styles.swipe} source={{uri: picArr[i]}} key={i}/>
-          </TouchableOpacity>
-        )
-      }
-      return imgArr
-    } else {
-      return (
-        <Text>dada</Text>
+    for (var i = 0; i < picArr.length; i++) {
+      imgArr.push(
+        <TouchableOpacity key={i} onPress={() => Actions.moviePlayer()}>
+          <Image style={styles.swipe} source={{uri: picArr[i]}} key={i}/>
+        </TouchableOpacity>
       )
     }
+    return imgArr
   }
 
   renderHeader() {
@@ -91,12 +89,12 @@ export default class MovieDetail extends Component {
     let story = this.state.movieStory[0] || {}
     return (
       <View>
-        <Swiper
-          height={200}
-          autoplay
-        >
-          {this.renderImg()}
-        </Swiper>
+        {
+          this.state.swiperShow ?
+            <Swiper height={200} autoplay loop>
+            {this.renderImg()}
+            </Swiper> : <View/>
+        }
         <View style={{flexDirection: 'row', justifyContent: 'space-between', height: 40, alignItems: 'center', backgroundColor: commonStyle.bgColor}}>
           <Text style={{marginLeft: 10}}>{`电影故事: ${data.title}`}</Text>
           <Image style={{width: 40, height: 40}} source={require('../../../assets/images/share_image.png')}/>
@@ -147,6 +145,7 @@ export default class MovieDetail extends Component {
           dataSource={dataSource}
           renderRow={this.renderRow}
           renderHeader={this.renderHeader}
+          enableEmptySections
         />
         {this._renderModal()}
       </View>

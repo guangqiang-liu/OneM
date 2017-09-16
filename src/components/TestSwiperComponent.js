@@ -6,25 +6,40 @@ import {
   Text,
   View,
   Image,
-  Dimensions
+  Dimensions,
+  ScrollView,
+  TouchableOpacity
 } from 'react-native'
 import Swiper from 'react-native-swiper'
 const { width } = Dimensions.get('window')
 
+const imgArr = ['../assets/images/img/1.jpg', '../assets/images/img/2.jpg', '../assets/images/img/3.jpg']
+
 export default class extends Component {
+
+  renderImg() {
+    tempArr = []
+    if (imgArr.length) {
+      for (var i = 0; i < imgArr.length; i++) {
+        tempArr.push(
+          <TouchableOpacity key={i}>
+            <Image style={{height: 150}} source={require('../assets/images/img/1.jpg')} key={i}/>
+          </TouchableOpacity>
+        )
+      }
+      return tempArr
+    } else {
+      return (
+        <View/>
+      )
+    }
+  }
+
   render () {
     return (
-      <View style={styles.container}>
+      <ScrollView style={styles.container}>
         <Swiper style={styles.wrapper} height={200} horizontal={false} autoplay>
-          <View style={styles.slide1}>
-            <Text style={styles.text}>Hello Swiper</Text>
-          </View>
-          <View style={styles.slide2}>
-            <Text style={styles.text}>Beautiful</Text>
-          </View>
-          <View style={styles.slide3}>
-            <Text style={styles.text}>And simple</Text>
-          </View>
+          {this.renderImg()}
         </Swiper>
         <Swiper style={styles.wrapper}
                 loop
@@ -47,7 +62,7 @@ export default class extends Component {
             <Image resizeMode='stretch' style={styles.image} source={require('../assets/images/img/4.jpg')} />
           </View>
         </Swiper>
-      </View>
+      </ScrollView>
     )
   }
 }

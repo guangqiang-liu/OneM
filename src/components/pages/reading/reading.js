@@ -21,15 +21,19 @@ class Reading extends BaseComponent {
     this.state = {
       dataSource: new ViewPager.DataSource({pageHasChanged: (p1, p2) => p1 !== p2}),
       bannerList: [],
+      swiperShow: false,
     }
   }
 
   componentDidMount() {
     Promise.all([action.readingBannerList(), action.readingArticleList()]).then(response => {
-      this.setState({
-        bannerList: response[0].data,
-        dataSource: this.state.dataSource.cloneWithPages(this.packData(response[1].data))
-      })
+      setTimeout(() => {
+        this.setState({
+          bannerList: response[0].data,
+          dataSource: this.state.dataSource.cloneWithPages(this.packData(response[1].data)),
+          swiperShow: true
+        })
+      }, (10))
     })
   }
 
@@ -56,44 +60,29 @@ class Reading extends BaseComponent {
   }
 
   renderImg() {
+    tempArr = []
     let picArr = this.state.bannerList || []
-    let imgArr = []
-    if (picArr.length) {
-      for (var i = 0; i < picArr.length; i++) {
-        imgArr.push(
-          <TouchableOpacity
-            key={i}
-          >
-            <Image style={{height: 150}} source={{uri: picArr[i].cover}} key={i}/>
-          </TouchableOpacity>
-        )
-      }
-      return imgArr
-    } else {
-      return (
-        <View/>
+    for (var i = 0; i < picArr.length; i++) {
+      tempArr.push(
+        <TouchableOpacity key={i}>
+          <Image style={{height: 150}} source={{uri: picArr[i].cover}} key={i}/>
+        </TouchableOpacity>
       )
     }
-  }
-
-  renderBanner() {
-    return (
-      <Swiper
-        height={200}
-        autoplay
-        loop
-        dot={<View style={styles.dotStyle}/>}
-        activeDot={<View style={styles.activeDot}/>}
-      >
-        {this.renderImg()}
-      </Swiper>
-    )
+    return tempArr
   }
 
   _render() {
     return (
-      <ScrollView style={styles.container}>
-        {this.renderBanner()}
+      <ScrollView
+        style={styles.container}
+        removeClippedSubviews={false}
+      >
+        {
+          this.state.swiperShow ? <Swiper style={styles.wrapper} height={200} autoplay loop>
+            {this.renderImg()}
+          </Swiper> : <View/>
+        }
         <ViewPager
           dataSource={this.state.dataSource}
           renderPage={this.renderPage}
@@ -103,6 +92,7 @@ class Reading extends BaseComponent {
     )
   }
 }
+
 
 const styles = StyleSheet.create({
   container: {
