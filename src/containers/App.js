@@ -50,7 +50,7 @@ import CustomComp from '../components/TestCustomUIComponent'
 import Loading from '../utils/progressHUD/progressHUD'
 import {EnhancedListViewTest} from '../components/EnhancedListViewDemo'
 import SwiperComp from '../components/TestSwiperComponent'
-
+import {ImgZoom} from '../components/TestImgZoomComponent'
 // PAGES
 import PicDetail from '../components/pages/picture/picDetail'
 import PastList from '../components/pages/picture/pastList'
@@ -166,6 +166,12 @@ const scenes = Actions.create(
             key='SwiperComp'
             title='Swiper'
             component={SwiperComp}
+          />
+
+          <Scene
+            key='imgZoom'
+            title='ImgZoom'
+            component={ImgZoom}
           />
 
         </Stack>

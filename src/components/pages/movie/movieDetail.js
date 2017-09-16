@@ -3,9 +3,6 @@
  */
 import React, {Component} from 'react'
 import Swiper from 'react-native-swiper'
-
-import ImageViewer from 'react-native-image-zoom-viewer'
-
 import {
   View,
   TouchableOpacity,
@@ -19,6 +16,7 @@ import {
 import Action from '../../../actionCreators/movie'
 import {commonStyle} from '../../../utils/commonStyle'
 import {Actions} from 'react-native-router-flux'
+
 export default class MovieDetail extends Component {
 
   constructor(props) {
@@ -28,7 +26,6 @@ export default class MovieDetail extends Component {
     this.state = {
       movieDetail: {},
       movieStory: {},
-      modalVisible: false,
       swiperShow: false,
     }
   }
@@ -70,6 +67,7 @@ export default class MovieDetail extends Component {
       </View>
     )
   }
+
 
   renderImg() {
     let picArr = this.state.movieDetail.photo || []
@@ -122,20 +120,6 @@ export default class MovieDetail extends Component {
     )
   }
 
-  _renderModal() {
-    return (
-      <Modal
-        style={{width: 400, height: 400, backgroundColor: 'red'}}
-        visible={this.state.modalVisible}
-        transparent={true}
-      >
-        <View style={{flex: 1}}>
-          <ImageViewer imageUrls={this.state.movieDetail.photo}/>
-        </View>
-      </Modal>
-    )
-  }
-
   render() {
     let dataSource = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}).cloneWithRows(this.state.movieStory)
     return (
@@ -147,7 +131,6 @@ export default class MovieDetail extends Component {
           renderHeader={this.renderHeader}
           enableEmptySections
         />
-        {this._renderModal()}
       </View>
     )
   }

@@ -78,6 +78,11 @@ export default class PicDetail extends Component {
           >
             <Icon name={'oneIcon|tb_Music'} size={30} color='#900'/>
           </TouchableOpacity>
+          <TouchableOpacity
+            onPress={() => Actions.imgZoom()}
+          >
+            <Icon name={'oneIcon|tb_Music'} size={30} color='#900'/>
+          </TouchableOpacity>
         </TouchableOpacity>
       </ScrollView>
     )
