@@ -35,6 +35,11 @@ class MovieList extends BaseComponent {
     this.setState({
       refreshing: true,
     })
+    // Vadidator 表单参数校验器
+    // let actions = this.props.getMovieList({mobile: '15214313256', code: null})
+    // actions.then(response => {
+    //   console.log('dadadaada')
+    // })
     this.props.getMovieList(0).then((response) => {
       this.setState({
         refreshing: false,

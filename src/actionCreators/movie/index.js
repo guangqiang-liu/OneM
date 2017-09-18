@@ -3,10 +3,25 @@
  */
 import {getFetch, postFetch} from '../../utils/network/request/HttpExtension'
 import {PATH} from '../../constants/urls'
-
+import {Required, ValidateUtil} from '../../utils/validatorUtil'
 const movieDetail = params => getFetch(`${PATH.MOVIE_DETAIL}${params}`, params)
 const movieStory = params => getFetch(`/movie/${params}/story/1/0`, params)
 const movieList = params =>  getFetch(`${PATH.MOVIE_LIST}${params}`, {})
+
+const testValidator = () => ({
+  validator: {
+    data: ValidateUtil([
+      {
+      func: (data, state, payload) => {
+        return Required(data.mobile)
+      }, msg: '请输入手机号'
+      },
+      {
+      func: (data, state, payload) => Required(data.code), msg: '请输入验证码',
+      },
+    ])
+  }
+})
 
 // 加载List列表的Action写法
 const movieListForDemo = (pageId = 1, callback, options, params) =>  {
@@ -32,5 +47,6 @@ export default {
   movieList,
   movieDetail,
   movieStory,
-  movieListForDemo
+  movieListForDemo,
+  testValidator
 }
