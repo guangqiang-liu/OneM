@@ -5,6 +5,7 @@ import React, {Component} from 'react'
 import {View, StyleSheet, Text, TouchableOpacity} from 'react-native'
 import {commonStyle} from '../../../utils/commonStyle'
 import deviceInfo from '../../../utils/deviceInfo'
+import {Actions} from 'react-native-router-flux'
 export default class ArticleListCell extends Component {
 
   handleData() {
@@ -28,10 +29,25 @@ export default class ArticleListCell extends Component {
     }
     return obj
   }
+
+  pushDetail() {
+    let data = this.props.rowData
+    if (data.content_id) {
+      Actions.essayDetail({id: data.content_id})
+    } else if (data.serial_id) {
+      Actions.serialDetail({id: data.id})
+    } else if (data.question_id) {
+      Actions.questionDetail({id: data.question_id})
+    }
+  }
+
   render() {
     let data = this.handleData()
     return (
-      <View style={styles.container}>
+      <TouchableOpacity
+        style={styles.container}
+        onPress={() => this.pushDetail()}
+      >
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <Text style={{flex: 1, fontSize: 15, marginBottom: 5, color: commonStyle.textBlockColor}}>{data.title}</Text>
           <View style={{borderRadius: 5, borderColor: commonStyle.themeColor, borderWidth: 1, paddingHorizontal: 10, paddingVertical: 5}}>
@@ -40,7 +56,7 @@ export default class ArticleListCell extends Component {
         </View>
         <Text style={{fontSize: 13, marginBottom: 5}}>{data.content}</Text>
         <Text style={{fontSize: 13}}>{data.authorName}</Text>
-      </View>
+      </TouchableOpacity>
     )
   }
 }

@@ -7,7 +7,7 @@ import {commonStyle} from '../../../utils/commonStyle'
 
 const _onPress = (props, ...args) => {
   // HOOK 事件
-  alert('Text: HOOK 成功')
+  // alert('Text: HOOK 成功')
   // HOOK 后
   props.onPress && props.onPress(...args)
 }

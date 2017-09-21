@@ -3,7 +3,7 @@
  */
 import React, {Component} from 'react'
 import {View, StyleSheet, ListView, TouchableOpacity, Text} from 'react-native'
-import Cell from './articleListCell'
+import ArticleCell from './articleListCell'
 export default class ArticleList extends Component {
 
   constructor(props) {
@@ -13,7 +13,7 @@ export default class ArticleList extends Component {
 
   renderRow(rowData, rowId) {
     return (
-      <Cell key={rowId} rowData={rowData}/>
+      <ArticleCell key={rowId} rowData={rowData}/>
     )
   }
 

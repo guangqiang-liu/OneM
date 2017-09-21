@@ -14,13 +14,7 @@ import Swiper from 'react-native-swiper'
 import {commonStyle} from '../../../utils/commonStyle'
 import ArticleList from './articleList'
 import ImageViewer from 'react-native-image-zoom-viewer'
-const images = [{
-  url: 'https://avatars2.githubusercontent.com/u/7970947?v=3&s=460'
-}, {
-  url: 'https://avatars2.githubusercontent.com/u/7970947?v=3&s=460'
-}, {
-  url: 'https://avatars2.githubusercontent.com/u/7970947?v=3&s=460'
-}]
+import {Actions} from 'react-native-router-flux'
 class Reading extends BaseComponent {
 
   constructor(props) {
@@ -32,7 +26,8 @@ class Reading extends BaseComponent {
       bannerList: [],
       swiperShow: false,
       modalVisible: false,
-      imageIndex: 0
+      imageIndex: 0,
+      articleLength: 0
     }
   }
 
@@ -42,7 +37,8 @@ class Reading extends BaseComponent {
         this.setState({
           bannerList: response[0].data,
           dataSource: this.state.dataSource.cloneWithPages(this.packData(response[1].data)),
-          swiperShow: true
+          swiperShow: true,
+          articleLength:this.packData(response[1].data).length
         })
       }, (10))
     })
@@ -71,7 +67,9 @@ class Reading extends BaseComponent {
   }
 
   imgClick(i, e) {
-    this.setState({imageIndex: i, modalVisible: true})
+    // this.setState({imageIndex: i, modalVisible: true})
+    let data  = this.state.bannerList[i]
+    Actions.bannerDetail({data: data})
   }
 
   renderImg() {
@@ -111,6 +109,12 @@ class Reading extends BaseComponent {
     )
   }
 
+  _onChangePage(index) {
+    if (index === this.state.articleLength -1) {
+      Actions.readingTab()
+    }
+  }
+
   _render() {
     return (
       <View style={styles.container}>
@@ -123,6 +127,7 @@ class Reading extends BaseComponent {
             </Swiper> : <View/>
           }
           <ViewPager
+            onChangePage={(index) => this._onChangePage(index)}
             dataSource={this.state.dataSource}
             renderPage={this.renderPage}
             renderPageIndicator={false}

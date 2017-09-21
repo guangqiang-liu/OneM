@@ -2,7 +2,8 @@
  * Created by guangqiang on 2017/9/15.
  */
 import React, {Component, PropTypes} from 'react'
-import {View, Text, StyleSheet, RefreshControl, ListView, ActivityIndicator} from '../index'
+import {View, Text, RefreshControl, ListView, ActivityIndicator} from '../index'
+import {StyleSheet} from 'react-native'
 import {commonStyle} from '../../../utils/commonStyle'
 class SimpleListView extends Component {
 
@@ -60,8 +61,8 @@ class SimpleListView extends Component {
       <ListView
         {...this.props}
         enableEmptySections
-        // onEndReached={this.onEndReached}
-        onScroll={this._onScroll.bind(this)}
+        onEndReached={this.onEndReached}
+        // onScroll={this._onScroll.bind(this)}
         renderFooter={this.renderFooter}
         onEndReachedThreshold={20}
         refreshControl={

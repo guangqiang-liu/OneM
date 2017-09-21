@@ -32,6 +32,11 @@ export default class PastList extends Component {
       case articleType.MUSIC:
         Actions.musicList({year: year, month: month})
         break
+      case articleType.ESSAY:
+      case articleType.SERIAL:
+      case articleType.QUESTIONS:
+        Actions.articleList({year: year, month: month + 1, articleType: this.props.pageType})
+        break
       default:
         break
     }

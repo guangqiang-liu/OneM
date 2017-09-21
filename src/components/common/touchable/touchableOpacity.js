@@ -4,11 +4,11 @@
 import React, {Component} from 'react'
 import {StyleSheet, TouchableOpacity, View, Text} from 'react-native'
 
-let mode = 'debug'
+let mode = 'xdebug'
 
 const _onPress = (props, ...args) => {
   // HOOK 事件
-  alert('HOOK 成功')
+  // alert('HOOK 成功')
   // HOOK 后
   props.onPress && props.onPress(...args)
 }

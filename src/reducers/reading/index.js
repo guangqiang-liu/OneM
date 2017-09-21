@@ -3,8 +3,14 @@
  */
 import {combineReducers} from 'redux'
 import reading from './reading'
+import essay from './essay'
+import serial from './serial'
+import question from './question'
 const reducers = combineReducers({
-  reading
+  reading,
+  essay,
+  serial,
+  question
 })
 
 export default reducers

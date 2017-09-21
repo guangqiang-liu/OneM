@@ -9,11 +9,11 @@ import Action from '../../../actions'
 import {commonStyle} from '../../../utils/commonStyle'
 import {Actions} from 'react-native-router-flux'
 import {ArrayTool} from '../../../utils/arrayExtension'
-import {SimpleListView} from '../../common/listView'
+import {SimpleListView} from '../../common'
 class MovieList extends BaseComponent {
 
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.renderRow = this.renderRow.bind(this)
     this.fetchMoreData = this.fetchMoreData.bind(this)
     this.fetchLatestData = this.fetchLatestData.bind(this)

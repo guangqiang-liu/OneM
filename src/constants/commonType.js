@@ -5,7 +5,10 @@ const articleType = {
   PICTURE: 'PICTURE',
   READING: 'READING',
   MUSIC: 'MUSIC',
-  MOVIE: 'MOVIE'
+  MOVIE: 'MOVIE',
+  SERIAL: 'serial',
+  ESSAY: 'essay',
+  QUESTIONS: 'question'
 }
 
 const beginTime = {

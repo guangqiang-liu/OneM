@@ -62,7 +62,13 @@ import WebView from '../components/common/webView'
 import MusicDetail from '../components/pages/music/musicDetail'
 import MusicPlayer from '../components/pages/music/musicPlayer'
 import MusicList from '../components/pages/music/musicList'
-
+import BannerDetail from '../components/pages/reading/bannerDetail'
+import ReadingTab from '../components/pages/reading/readingTabList'
+import EssayDetail from '../components/pages/reading/essay/essayDetail'
+import SerialDetail from '../components/pages/reading/serial/serialDetail'
+import QuestionDetail from '../components/pages/reading/question/questionDetail'
+import ReadingCommentList from '../components/pages/reading/commentList'
+import ArticleList from '../components/pages/reading/readingArticleList'
 const reducerCreate = params => {
   const defaultReducer = new Reducer(params)
   return (state, action) => {
@@ -134,6 +140,31 @@ const scenes = Actions.create(
             Action.dispatch('music')
           )(MusicPlayer)}/>
 
+          <Scene key='bannerDetail' hideNavBar component={connect(
+            (state) => state.reading.reading,
+            Action.dispatch('reading')
+          )(BannerDetail)}/>
+          <Scene key='readingTab' component={ReadingTab}/>
+
+          <Scene key='essayDetail' component={connect(
+            (state) => state.reading.essay,
+            Action.dispatch('reading')
+          )(EssayDetail)}/>
+
+          <Scene key='serialDetail' component={connect(
+            (state) => state.reading.serial,
+            Action.dispatch('reading')
+          )(SerialDetail)}/>
+
+          <Scene key='questionDetail' component={connect(
+            (state) => state.reading.question,
+            Action.dispatch('reading')
+          )(QuestionDetail)}/>
+
+          <Scene key='articleList' component={connect(
+            (state) => state.reading.reading,
+            Action.dispatch('reading')
+          )(ArticleList)}/>
 
           {/* 当helloWord组件放到和main组件同级的scene层级中，这时就可以继承同级中的导航栏 */}
           <Scene key="helloWord" component={
