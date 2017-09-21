@@ -79,12 +79,12 @@ class ReadingCommentList extends Component {
         <Text style={{marginLeft: 50, marginTop: 10, lineHeight: 20, color: commonStyle.textBlockColor}}>{rowData.content}</Text>
         <View style={{flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center', marginTop: 10}}>
           <TouchableOpacity style={{marginRight: 10}} >
-            <Icon name={'oneIcon|tb_article'} size={14} color={'red'}/>
+            <Icon name={'oneIcon|comment_o'} size={14} color={commonStyle.textGrayColor}/>
           </TouchableOpacity>
-          <TouchableOpacity style={{marginRight: 10}} >
-            <Icon name={'oneIcon|tb_article'} size={14} color={'red'}/>
+          <TouchableOpacity>
+            <Icon name={'oneIcon|like_o'} size={20} color={commonStyle.textGrayColor}/>
           </TouchableOpacity>
-          <Text>{rowData.praisenum}</Text>
+          <Text style={{fontSize: 12, color: commonStyle.textGrayColor}}>{rowData.praisenum}</Text>
         </View>
       </View>
     )

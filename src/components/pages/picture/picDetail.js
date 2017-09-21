@@ -71,17 +71,17 @@ export default class PicDetail extends Component {
           <TouchableOpacity
             onPress={() => this.toast()}
           >
-            <Icon name={'oneIcon|tb_Movie'} size={30} color='#900'/>
+            <Icon name={'oneIcon|tb_Movie_o'} size={30} color='#900'/>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => Actions.SwiperComp()}
           >
-            <Icon name={'oneIcon|tb_Music'} size={30} color='#900'/>
+            <Icon name={'oneIcon|tb_Music_o'} size={30} color='#900'/>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => Actions.imgZoom()}
           >
-            <Icon name={'oneIcon|tb_Music'} size={30} color='#900'/>
+            <Icon name={'oneIcon|tb_Music_o'} size={30} color='#900'/>
           </TouchableOpacity>
         </TouchableOpacity>
       </ScrollView>

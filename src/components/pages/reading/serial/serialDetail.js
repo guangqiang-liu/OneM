@@ -6,6 +6,7 @@ import {View, StyleSheet, Text, ScrollView, Image, TouchableOpacity} from '../..
 import {commonStyle} from '../../../../utils/commonStyle'
 import CommentList from '../commentList'
 import {articleType} from '../../../../constants/commonType'
+import ToolBar from '../bottomToolBar'
 export default class SerialDetail extends Component {
 
   constructor(props) {
@@ -64,12 +65,7 @@ export default class SerialDetail extends Component {
               />
             </View>
           </ScrollView>
-
-          <View style={{flexDirection: 'row', height: 44, alignItems: 'center', borderTopColor: commonStyle.lineColor, borderTopWidth: 1}}>
-            <Text>dada</Text>
-            <Text>dada</Text>
-            <Text>dada</Text>
-          </View>
+          <ToolBar data={data}/>
         </View>
       )
     } else {

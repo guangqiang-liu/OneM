@@ -25,7 +25,7 @@ const Toast = {
     let toast = RootToast.show(
       Platform.OS === 'ios' ?
         <View style={styles.container}>
-          <Icon name={'oneIcon|toastSuccess'} size={50} color={'#fff'}/>
+          <Icon name={'oneIcon|toastSuccess_s'} size={50} color={'#fff'}/>
           <Text style={styles.message}>{msg}</Text>
         </View> : msg, {
         duration: 1500,
@@ -41,7 +41,7 @@ const Toast = {
     let toast = RootToast.show(
       Platform.OS === 'ios' ?
         <View style={styles.container}>
-          <Icon name={'oneIcon|toastSuccess'} size={50} color={'#fff'}/>
+          <Icon name={'oneIcon|toastSuccess_s'} size={50} color={'#fff'}/>
           <Text style={styles.message}>{msg}</Text>
         </View> : msg, {
         duration: 2000,
@@ -57,7 +57,7 @@ const Toast = {
     let toast = RootToast.show(
       Platform.OS === 'ios' ?
         <View style={styles.container}>
-          <Icon name={'oneIcon|toastWarning'} size={40} color={'#fff'}/>
+          <Icon name={'oneIcon|toastWarning_s'} size={40} color={'#fff'}/>
           <Text style={styles.message}>{msg}</Text>
         </View> : msg, {
         duration: RootToast.durations.SHORT,
@@ -73,7 +73,7 @@ const Toast = {
     let toast = RootToast.show(
       Platform.OS === 'ios' ?
         <View style={styles.container}>
-          <Icon name={'oneIcon|toastError'} size={40} color={'#fff'}/>
+          <Icon name={'oneIcon|toastError_s'} size={40} color={'#fff'}/>
           <Text style={styles.message}>{msg}</Text>
         </View> : msg, {
         duration: RootToast.durations.SHORT,

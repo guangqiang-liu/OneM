@@ -2,22 +2,23 @@
  * Created by guangqiang on 2017/9/18.
  */
 import React, {Component} from 'react'
-import {View, StyleSheet, EnhancedListView, ScrollView, Image, TouchableOpacity} from '../../../common'
-import {Text} from 'react-native'
+import {View, StyleSheet, EnhancedListView, ScrollView, Image, TextInput, InteractionManager} from '../../../common'
+import {Text, TouchableOpacity} from 'react-native'
 import {commonStyle} from '../../../../utils'
 import CommentList from '../commentList'
 import {articleType} from '../../../../constants/commonType'
+import ToolBar from '../bottomToolBar'
+import {Icon} from '../../../../utils/icon'
 export default class EssayDetail extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-    }
+    this.state = {}
   }
 
   componentDidMount() {
-    this.props.getEssayDetail(this.props.id).then(response => {
-      console.log(response)
+    InteractionManager.runAfterInteractions(() => {
+      this.props.getEssayDetail(this.props.id)
     })
   }
 
@@ -32,8 +33,9 @@ export default class EssayDetail extends Component {
               <Text style={{marginVertical: 30, fontSize: 25}}>{data.hp_title}</Text>
               <Text style={{color: commonStyle.textBlockColor, fontSize: 13}}>{`文 / ${author.user_name}`}</Text>
               {
-                data.anchor ? <View style={{flexDirection: 'row', borderColor: commonStyle.drakGray, borderWidth: 1, borderRadius: 5, padding: 10, marginTop: 20}}>
-                  <Text style={{color: commonStyle.textBlockColor}}>{`有声阅读 | `}</Text>
+                data.anchor ? <View style={styles.anchor}>
+                  <Icon name={'oneIcon|horn_paused_o'} size={15} color={commonStyle.iconBlack}/>
+                  <Text style={{color: commonStyle.textBlockColor, marginLeft: 5}}>{`有声阅读 | `}</Text>
                   <Text style={{color: commonStyle.textBlockColor}}>{data.anchor}</Text>
                 </View> : null
               }
@@ -41,7 +43,7 @@ export default class EssayDetail extends Component {
               <Text style={{marginVertical: 15, color: commonStyle.textGrayColor, fontSize: 12}}>{data.hp_author_introduce}</Text>
               <Text style={{marginBottom: 20, color: commonStyle.textGrayColor}}>{data.copyright}</Text>
               <View>
-                <View style={{width: 60, borderBottomColor: commonStyle.black, borderBottomWidth: 4, paddingVertical: 10, marginBottom: 10}}>
+                <View style={styles.author}>
                   <Text style={{}}>作者</Text>
                 </View>
                 <View style={{flexDirection: 'row', marginTop: 10, marginBottom: 20, alignItems: 'center'}}>
@@ -54,7 +56,7 @@ export default class EssayDetail extends Component {
                       author.summary ? <Text style={{color: commonStyle.textGrayColor, fontSize: 12}}>{author.summary}</Text> : null
                     }
                   </View>
-                  <TouchableOpacity style={{borderColor: commonStyle.drakGray, borderWidth: 1, borderRadius: 5, padding: 8, marginLeft: 10}}>
+                  <TouchableOpacity style={styles.attention}>
                     <Text style={{fontSize: 12, color: commonStyle.gray}}>关注</Text>
                   </TouchableOpacity>
                 </View>
@@ -65,14 +67,8 @@ export default class EssayDetail extends Component {
               />
             </View>
           </ScrollView>
-
-          <View style={{flexDirection: 'row', height: 44, alignItems: 'center', borderTopColor: commonStyle.lineColor, borderTopWidth: 1}}>
-            <Text>dada</Text>
-            <Text>dada</Text>
-            <Text>dada</Text>
-          </View>
+          <ToolBar data={data}/>
         </View>
-
       )
     } else {
       return <View/>
@@ -81,5 +77,26 @@ export default class EssayDetail extends Component {
 }
 
 const styles = StyleSheet.create({
-
+  anchor: {
+    flexDirection: 'row',
+    borderColor: commonStyle.drakGray,
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 10,
+    marginTop: 20
+  },
+  author: {
+    width: 60,
+    borderBottomColor: commonStyle.black,
+    borderBottomWidth: 4,
+    paddingVertical: 10,
+    marginBottom: 10
+  },
+  attention: {
+    borderColor: commonStyle.drakGray,
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 8,
+    marginLeft: 10
+  }
 })

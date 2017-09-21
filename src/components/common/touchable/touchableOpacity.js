@@ -13,6 +13,7 @@ const _onPress = (props, ...args) => {
   props.onPress && props.onPress(...args)
 }
 
+// 有bug
 class _TouchableOpacity extends Component {
 
   render() {

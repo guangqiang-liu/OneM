@@ -122,8 +122,7 @@ export default class NavigationBar extends Component {
 const styles = StyleSheet.create({
   navBarStyle: {
     height: commonStyle.navHeight,
-    backgroundColor: commonStyle.navThemeColor,
-
+    backgroundColor: commonStyle.navThemeColor
   },
   navContentStyle: {
     flexDirection: 'row',
@@ -131,7 +130,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: commonStyle.navStatusBarHeight,
     height: commonStyle.navContentHeight,
-    borderBottomWidth: commonStyle.spLineWidth,
+    borderBottomWidth: 0.5,
     borderBottomColor: commonStyle.lineColor
   },
   leftImageStyle: {

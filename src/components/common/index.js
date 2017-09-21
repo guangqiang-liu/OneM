@@ -9,7 +9,20 @@ import {Venilog} from './venilog'
 // export {_TouchableOpacity as TouchableOpacity}
 // export {_Button as Button}
 
-import {View, StyleSheet, ScrollView, ListView, RefreshControl, ViewPropTypes, ActivityIndicator, InteractionManager, Image, Text} from 'react-native'
+import {
+  View,
+  StyleSheet,
+  ScrollView,
+  ListView,
+  RefreshControl,
+  ViewPropTypes,
+  ActivityIndicator,
+  InteractionManager,
+  Image,
+  Text,
+  TextInput
+} from 'react-native'
+
 import {Button} from './button'
 // import {Text} from './text'
 import {TouchableOpacity} from './touchable/touchableOpacity'
@@ -32,6 +45,7 @@ export {
   InteractionManager,
   Image,
   Text,
+  TextInput,
   Button,
   TouchableOpacity,
   NavigationBar,

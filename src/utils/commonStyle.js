@@ -26,27 +26,29 @@ export const commonStyle = {
   tomato: '#FF6347',
   PeachPuff: '#FFDAB9',
 
-  // 主题色
+  /** 主题色 **/
   themeColor: '#e74c3c',
   // 默认灰色字体颜色
-  textGrayColor: '#656269',
+  textGrayColor: '#989898',
   // 默认黑色字体颜色
-  textBlockColor: '#332336',
+  textBlockColor: '#262626',
   // 默认背景颜色
-  bgColor: '#e3e3e3',
+  bgColor: '#EAEAEA',
   // 默认分割线颜色
-  lineColor: '#D2D2D2',
+  lineColor: '#AAAAAA',
   // 默认placeholder颜色
   placeholderColor: '#eee',
   // borderColor
   borderColor: '#808080',
   // 导航title 颜色
-  navTitleColor: '#333',
+  navTitleColor: '#262626',
   // 导航左item title color
   navLeftTitleColor: '#333',
   // 导航右item title color
   navRightTitleColor: '#333',
-  navThemeColor: '#eee',
+  navThemeColor: '#FEFEFE',
+  iconGray: '#989898',
+  iconBlack: '#262626',
 
   /** space **/
   // 上边距
