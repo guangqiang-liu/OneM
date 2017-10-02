@@ -94,7 +94,7 @@ class BaseComponent extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: commonStyle.bgColor
+    backgroundColor: commonStyle.white
   }
 })
 

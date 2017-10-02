@@ -7,7 +7,8 @@ import {commonStyle} from '../../../../utils/commonStyle'
 import CommentList from '../commentList'
 import {articleType} from '../../../../constants/commonType'
 import ToolBar from '../bottomToolBar'
-export default class SerialDetail extends Component {
+import {BaseComponent} from '../../../base/baseComponent'
+export default class SerialDetail extends BaseComponent {
 
   constructor(props) {
     super(props)
@@ -15,13 +16,17 @@ export default class SerialDetail extends Component {
     }
   }
 
-  componentDidMount() {
-    this.props.getSearilDetail(this.props.id).then(response => {
-      console.log(response)
-    })
+  navigationBarProps() {
+    return {
+      title: this.props.serialDetail.title
+    }
   }
 
-  render() {
+  componentDidMount() {
+    this.props.getSearilDetail(this.props.id)
+  }
+
+  _render() {
     let data = this.props.serialDetail
     if (Object.keys(data).length) {
       let author = data.author

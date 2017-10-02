@@ -6,6 +6,7 @@ import { View } from "react-native"
 import Action from '../actions'
 import {dispatch} from '../utils/venilog/dispatchLog'
 import type from '../constants/actionType'
+import {commonStyle} from '../utils/commonStyle'
 // 启动页面
 import Launch from '../components/Launch'
 
@@ -32,6 +33,7 @@ import PageTwo from '../components/PageTwo'
 import Home from "../components/Home"
 
 import EchoView from "../components/EchoView"
+import Blur from '../components/TestBlurComponent'
 
 // 消息通知栏组件
 import MessageBar from "../components/MessageBar"
@@ -89,6 +91,7 @@ const scenes = Actions.create(
     <Modal key="modal" hideNavBar>
       {/* 在Lightbox栈中的子scene都可以显示mask */}
       <Lightbox key="lightbox" hideNavBar={true}>
+
         {/* PAGES */}
         <Stack key="init" back>
           <Scene key="launch" component={Launch}
@@ -96,17 +99,19 @@ const scenes = Actions.create(
           {/* 首页TabBar 上的四个组件没有办法绑定，只能单独写 */}
           <Scene key="main" initial back={false} hideNavBar component={TabBar}/>
 
-          <Scene key="picDetail" component={connect(
+          <Scene key="picDetail" hideNavBar component={connect(
             (state) => state.picture.picList,
             Action.dispatch('picture')
           )(PicDetail)}/>
 
-          <Scene key="pastList" component={connect(
+          <Scene key="pastList"
+                 navigationBarStyle={{backgroundColor: commonStyle.white}}
+                 component={connect(
             (state) => state.picture.picList,
             Action.dispatch('picture')
           )(PastList)}/>
 
-          <Scene key="picGridList" component={connect(
+          <Scene key="picGridList" hideNavBar component={connect(
             (state) => state.picture.picList,
             Action.dispatch('picture')
           )(PicGridList)}/>
@@ -129,13 +134,13 @@ const scenes = Actions.create(
           )(MusicDetail)}
           />
 
-          <Scene key='musicList' component={connect(
+          <Scene key='musicList' hideNavBar component={connect(
             (state) => state.music.music,
             Action.dispatch('music')
           )(MusicList)}
           />
 
-          <Scene key='musicPlayer' component={connect(
+          <Scene key='musicPlayer' hideNavBar component={connect(
             (state) => state.music.music,
             Action.dispatch('music')
           )(MusicPlayer)}/>
@@ -144,24 +149,25 @@ const scenes = Actions.create(
             (state) => state.reading.reading,
             Action.dispatch('reading')
           )(BannerDetail)}/>
-          <Scene key='readingTab' component={ReadingTab}/>
 
-          <Scene key='essayDetail' component={connect(
+          <Scene key='readingTab' hideNavBar component={ReadingTab}/>
+
+          <Scene key='essayDetail' hideNavBar component={connect(
             (state) => state.reading.essay,
             Action.dispatch('reading')
           )(EssayDetail)}/>
 
-          <Scene key='serialDetail' component={connect(
+          <Scene key='serialDetail' hideNavBar component={connect(
             (state) => state.reading.serial,
             Action.dispatch('reading')
           )(SerialDetail)}/>
 
-          <Scene key='questionDetail' component={connect(
+          <Scene key='questionDetail' hideNavBar component={connect(
             (state) => state.reading.question,
             Action.dispatch('reading')
           )(QuestionDetail)}/>
 
-          <Scene key='articleList' component={connect(
+          <Scene key='articleList' hideNavBar component={connect(
             (state) => state.reading.reading,
             Action.dispatch('reading')
           )(ArticleList)}/>
@@ -172,6 +178,8 @@ const scenes = Actions.create(
             (state) => state.find.chat,
             Action.dispatch('openChat')
           )(HelloWold)}/>
+
+          <Scene key="blur" component={Blur}/>
 
           <Scene key="pageOne" hideNavBar component={PageOne}/>
           <Scene key="pageTwo" component={PageTwo}/>

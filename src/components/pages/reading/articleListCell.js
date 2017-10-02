@@ -50,7 +50,7 @@ export default class ArticleListCell extends Component {
       >
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <Text style={{flex: 1, fontSize: 15, marginBottom: 5, color: commonStyle.textBlockColor}}>{data.title}</Text>
-          <View style={{borderRadius: 5, borderColor: commonStyle.themeColor, borderWidth: 1, paddingHorizontal: 10, paddingVertical: 5}}>
+          <View style={{borderRadius: 5, borderColor: commonStyle.themeColor, borderWidth: 1, paddingHorizontal: 10, paddingVertical: 3, marginBottom: 5}}>
             <Text style={{color: commonStyle.themeColor}}>{data.articeType}</Text>
           </View>
         </View>

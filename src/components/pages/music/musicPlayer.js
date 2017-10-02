@@ -9,6 +9,8 @@ import Video from 'react-native-video'
 import actions from '../../../actionCreators/music'
 import {Actions} from 'react-native-router-flux'
 import {MessageBarManager} from 'react-native-message-bar'
+import {VibrancyView} from 'react-native-blur'
+import {Icon} from '../../../utils/icon'
 export default class MusicPlayer extends Component {
 
   constructor(props) {
@@ -23,8 +25,8 @@ export default class MusicPlayer extends Component {
       currentIndex: 0,
       playMode: 0,
       spinValue: new Animated.Value(0),
-      playIcon: require('../../../assets/images/musicPlayer/播放.png'),
-      playModeIcon: require('../../../assets/images/musicPlayer/列表循环.png')
+      playIcon: 'music_paused_o',
+      playModeIcon: 'music_cycle_o'
     }
     this.spinAnimated = Animated.timing(this.state.spinValue, {
       toValue: 1,
@@ -144,7 +146,7 @@ export default class MusicPlayer extends Component {
     this.spin()
     this.setState({
       paused: !this.state.paused,
-      playIcon: this.state.paused ? require('../../../assets/images/musicPlayer/播放.png') : require('../../../assets/images/musicPlayer/暂停.png')
+      playIcon: this.state.paused ? 'music_paused_o' : 'music_playing_s'
     })
   }
 
@@ -153,13 +155,13 @@ export default class MusicPlayer extends Component {
     playMode = playMode === 3 ? playMode = 0 : playMode
     switch (playMode) {
       case 0:
-        this.setState({playMode, playModeIcon: require('../../../assets/images/musicPlayer/列表循环.png')})
+        this.setState({playMode, playModeIcon: 'music_cycle_o'})
         break
       case 1:
-        this.setState({playMode, playModeIcon: require('../../../assets/images/musicPlayer/单曲循环.png')})
+        this.setState({playMode, playModeIcon: 'music_single_cycle_o'})
         break
       case 2:
-        this.setState({playMode, playModeIcon: require('../../../assets/images/musicPlayer/随机.png')})
+        this.setState({playMode, playModeIcon: 'music_random_o'})
         break
       default:
         break
@@ -192,109 +194,191 @@ export default class MusicPlayer extends Component {
     })
   }
 
+  renderPlayer() {
+    return (
+      <View style={styles.bgContainer}>
+        <View style={styles.navBarStyle}>
+          <View style={styles.navBarContent}>
+            <TouchableOpacity
+              style={{marginTop: 5}}
+              onPress={() => Actions.pop()}
+            >
+              <Icon name={'oneIcon|nav_back_o'} size={20} color={commonStyle.white}/>
+            </TouchableOpacity>
+            <View style={{alignItems: 'center'}}>
+              <Text style={styles.title}>安河桥</Text>
+              <Text style={styles.subTitle}>宋冬野</Text>
+            </View>
+            <TouchableOpacity
+              style={{marginTop: 5}}
+              onPress={() => alert('分享')}
+            >
+              <Icon name={'oneIcon|share_o'} size={20} color={commonStyle.white}/>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View
+          style={styles.djCard}>
+        </View>
+        <Image
+          style={{width: 260, height: 260, alignSelf: 'center', position: 'absolute', top: 190}}
+          source={require('../../../assets/images/musicPlayer/胶片盘.png')}
+        />
+        <Animated.Image
+          style={{
+            width: 170,
+            height: 170,
+            borderRadius: 85,
+            backgroundColor: 'orange',
+            alignSelf: 'center',
+            position: 'absolute', top: 235,
+            transform: [{rotate: this.state.spinValue.interpolate({
+              inputRange: [0, 1],
+              outputRange: ['0deg', '360deg']
+            })}]
+          }}
+          source={require('../../../assets/images/bgimage.jpeg')}
+        />
+        <View style={{flex: 1}}>
+          <View style={{flexDirection: 'row', alignItems: 'center', marginHorizontal: 50, justifyContent: 'space-around', bottom: -60}}>
+            <Icon name={'oneIcon|love_o'} size={20} color={commonStyle.white}/>
+            <Icon name={'oneIcon|downLoad_o'} size={20} color={commonStyle.white}/>
+            <Icon name={'oneIcon|comment_o'} size={20} color={commonStyle.white}/>
+            <Icon name={'oneIcon|more_v_o'} size={20} color={commonStyle.white}/>
+          </View>
+          <View style={styles.progressStyle}>
+            <Text style={{width: 35, fontSize: 11, color: commonStyle.white, marginLeft: 5}}>{actions.formatTime(Math.floor(this.state.currentTime))}</Text>
+            <Slider
+              style={styles.slider}
+              value={this.state.slideValue}
+              maximumValue={this.state.duration}
+              minimumTrackTintColor={commonStyle.themeColor}
+              maximumTrackTintColor={commonStyle.iconGray}
+              step={1}
+              onValueChange={value => this.setState({currentTime: value})}
+              onSlidingComplete={value => this.player.seek(value)}
+            />
+            <View style={{width: 35, alignItems: 'flex-end', marginRight: 5}}>
+              <Text style={{fontSize: 11, color: commonStyle.white}}>{actions.formatTime(Math.floor(this.state.duration))}</Text>
+            </View>
+          </View>
+          <View style={styles.toolBar}>
+            <TouchableOpacity
+              style={{width: 50, marginLeft: 5}}
+              onPress={() => this.playMode(this.state.playMode)}
+            >
+              <Icon name={`oneIcon|${this.state.playModeIcon}`} size={16} color={commonStyle.white}/>
+            </TouchableOpacity>
+            <View style={styles.cdStyle}>
+              <TouchableOpacity
+                onPress={() => this.pre(this.state.currentIndex - 1)}
+              >
+                <Icon name={'oneIcon|music_pre_o'} size={35} color={commonStyle.white}/>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{width: 35, height: 35, borderRadius: 20, borderWidth: 1, borderColor: commonStyle.white, justifyContent: 'center', alignItems: 'center'}}
+                onPress={() => this.play()}
+              >
+                <Icon name={`oneIcon|${this.state.playIcon}`} size={20} color={commonStyle.white}/>
+              </TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => this.nextSong(this.state.currentIndex + 1)}
+              >
+                <Icon name={'oneIcon|music_next_o'} size={25} color={commonStyle.white}/>
+              </TouchableOpacity>
+            </View>
+            <TouchableOpacity
+              style={{width: 50, alignItems: 'flex-end', marginRight: 5}}
+            >
+              <Icon name={'oneIcon|menu_h_o'} size={20} color={commonStyle.white}/>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <Video
+          ref={video => this.player = video}
+          source={{uri: this.props.musicInfo.url}}
+          volume={1.0}
+          paused={this.state.paused}
+          playInBackground={true}
+          onLoadStart={this.loadStart}
+          onLoad={data => this.setDuration(data)}
+          onProgress={(data) => this.setTime(data)}
+          onEnd={(data) => this.onEnd(data)}
+          onError={(data) => this.videoError(data)}
+          onBuffer={this.onBuffer}
+          onTimedMetadata={this.onTimedMetadata}
+        />
+      </View>
+    )
+  }
+
   render() {
     return (
       this.props.musicInfo.url ?
         <View style={styles.container}>
-          <Image style={styles.bgImg} source={require('../../../assets/images/musicPlayer/胶片盘.png')} resizeMode='contain'/>
-          <View style={styles.maskStyle}/>
-          <View style={styles.playerStyle}>
-            <Image style={{width: 220, height: 220, alignSelf: 'center'}} source={require('../../../assets/images/musicPlayer/胶片盘.png')}/>
-            <Animated.Image
-              style={{
-                width: 140,
-                height: 140,
-                borderRadius: 70,
-                backgroundColor: 'orange',
-                alignSelf: 'center',
-                marginTop: -180,
-                transform: [{rotate: this.state.spinValue.interpolate({
-                  inputRange: [0, 1],
-                  outputRange: ['0deg', '360deg']
-                })}]
-              }}
-              source={require('../../../assets/images/musicPlayer/播放.png')}
-            />
-            <View style={styles.progressStyle}>
-              <Text>{actions.formatTime(Math.floor(this.state.currentTime))}</Text>
-              <Slider
-                style={styles.slider}
-                value={this.state.slideValue}
-                maximumValue={this.state.duration}
-                onValueChange={value => {
-                  this.setState({
-                    currentTime: value
-                  })
-                }}
-                onSlidingComplete={value => {
-                  this.player.seek(value)
-                }}
-                step={1}
-              />
-              <Text>{actions.formatTime(Math.floor(this.state.duration))}</Text>
-            </View>
-            <View style={styles.toolBar}>
-              <TouchableOpacity
-                onPress={() => this.playMode(this.state.playMode)}
-              >
-                <Image style={{width: 30, height: 30}} source={this.state.playModeIcon}/>
-              </TouchableOpacity>
-              <View style={styles.cdStyle}>
-                <TouchableOpacity
-                  onPress={() => this.pre(this.state.currentIndex - 1)}
-                >
-                  <Image style={{width: 40, height: 40}} source={require('../../../assets/images/musicPlayer/上一首.png')}/>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => this.play()}
-                >
-                  <Image style={{width: 40, height: 40}} source={this.state.playIcon}/>
-                </TouchableOpacity>
-                <TouchableOpacity
-                  onPress={() => this.nextSong(this.state.currentIndex + 1)}
-                >
-                  <Image style={{width: 40, height: 40}} source={require('../../../assets/images/musicPlayer/下一首.png')}/>
-                </TouchableOpacity>
-              </View>
-              <TouchableOpacity>
-                <Image style={{width: 30, height: 30}} source={require('../../../assets/images/musicPlayer/单曲循环.png')}/>
-              </TouchableOpacity>
-            </View>
+          <Image
+            style={styles.bgContainer}
+            source={require('../../../assets/images/bgimage.jpeg')}
+            resizeMode='cover'/>
+          <View style={styles.bgContainer}>
+            <VibrancyView
+              blurType={'light'}
+              blurAmount={10}
+              style={styles.container}/>
           </View>
-          <Video
-            ref={video => this.player = video}
-            source={{uri: this.props.musicInfo.url}}
-            volume={1.0}
-            paused={this.state.paused}
-            playInBackground={true}                     // Audio continues to play when app entering background.
-            onLoadStart={this.loadStart}                // Callback when video starts to load
-            onLoad={data => this.setDuration(data)}     // Callback when video loads
-            onProgress={(data) => this.setTime(data)}   // Callback every ~250ms with currentTime
-            onEnd={(data) => this.onEnd(data)}                    // Callback when playback finishes
-            onError={(data) => this.videoError(data)}             // Callback when video cannot be loaded
-            onBuffer={this.onBuffer}              // Callback when remote video is buffering
-            onTimedMetadata={this.onTimedMetadata}      // Callback when the stream receive some metadata
-          />
-        </View> : <Text>加载中。。。</Text>
+          {this.renderPlayer()}
+        </View> : <View/>
     )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: 'transparent',
   },
-  bgImg: {
-    backgroundColor: 'red',
-    width: deviceInfo.deviceWidth,
-    height: deviceInfo.deviceHeight
-  },
-  maskStyle: {
-    backgroundColor: commonStyle.white,
-    opacity: 0.2,
-    width: deviceInfo.deviceWidth,
-    height: deviceInfo.deviceHeight,
+  bgContainer: {
     position: 'absolute',
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    height: deviceInfo.deviceHeight,
+    width: deviceInfo.deviceWidth
+  },
+  navBarStyle: {
+    position: 'absolute',
+    backgroundColor: 'rgba(0, 0, 0, 0)',
+    width: deviceInfo.deviceWidth,
+    height: 64,
+    borderWidth: 0.5,
+    borderColor: commonStyle.lineColor
+  },
+  navBarContent: {
+    marginTop: 25,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginHorizontal: 15
+  },
+  title: {
+    color: commonStyle.white,
+    fontSize: 14
+  },
+  subTitle: {
+    color: commonStyle.white,
+    fontSize: 11,
+    marginTop: 5
+  },
+  djCard: {
+    width: 270,
+    height: 270,
+    marginTop: 185,
+    borderColor: commonStyle.gray,
+    borderWidth: 10,
+    borderRadius: 190,
+    alignSelf: 'center',
+    opacity: 0.2
   },
   playerStyle: {
     position: 'absolute',
@@ -304,26 +388,25 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginHorizontal: 10,
     alignItems: 'center',
-    backgroundColor: 'yellow',
-    marginTop: 60
+    position: 'absolute',
+    bottom: 80
   },
   slider: {
-    backgroundColor: commonStyle.purple,
     flex: 1,
-    marginHorizontal: 5
+    marginHorizontal: 5,
   },
   toolBar: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginTop: 40,
-    backgroundColor: commonStyle.green,
-    marginHorizontal: 10
+    marginHorizontal: 10,
+    position: 'absolute',
+    bottom: 0,
+    marginVertical: 30
   },
   cdStyle: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: commonStyle.gray,
     justifyContent: 'space-around'
   }
 })

@@ -7,13 +7,35 @@ import {commonStyle} from '../../../utils/commonStyle'
 import {Actions} from 'react-native-router-flux'
 import {StyleSheet, TouchableOpacity} from 'react-native'
 import {articleType} from '../../../constants/commonType'
-export default class ArticleList extends Component {
+import {BaseComponent} from '../../base/baseComponent'
+
+export default class ArticleList extends BaseComponent {
 
   constructor(props) {
     super(props)
     this.renderRow = this.renderRow.bind(this)
     this.state = {
       dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+    }
+  }
+
+   switchTitle() {
+    switch (this.props.articleType) {
+      case 'essay':
+        return '短篇'
+        break;
+      case 'serial':
+        return '连载'
+        break;
+      case 'question':
+        return '问答'
+        break
+    }
+  }
+
+  navigationBarProps() {
+    return {
+      title: this.switchTitle()
     }
   }
 
@@ -71,7 +93,7 @@ export default class ArticleList extends Component {
     )
   }
 
-  render() {
+  _render() {
     return (
       <ListView
         style={{flex: 1}}

@@ -6,9 +6,9 @@
  * 通用导航栏组件
  */
 import React, { Component } from 'react'
-import {View, Text, StyleSheet, TouchableOpacity, Image, Platform} from 'react-native'
+import {View, Text, StyleSheet, TouchableOpacity, Platform} from 'react-native'
 import {commonStyle} from '../../utils/commonStyle'
-
+import {Icon} from '../../utils/icon'
 const defaultNavigationBarProps = {
   hiddenNav: false,
   hiddenLeftItem: false,
@@ -27,18 +27,15 @@ export default class NavigationBar extends Component {
   }
 
   renderLeftItem() {
+    let tempComponent
     if (this.navigationBarProps.hiddenLeftItem) {
-      return null
+      return <View style={{width: 40}}/>
     }
     const {onLeftPress} = this.props
-    let tempComponent
-    if (this.navigationBarProps.leftButtonImage) {
+    if (this.navigationBarProps.leftIcon) {
+      let icon = this.navigationBarProps.leftIcon
       tempComponent = (
-        <Image
-          style={[styles.leftImageStyle, this.navigationBarProps.leftImageStyle]}
-          resizeMode="contain"
-          source={this.navigationBarProps.leftButtonImage}
-        />
+        <Icon name={`oneIcon|${icon.name}`} size={icon.size} color={icon.color}/>
       )
     } else if (this.navigationBarProps.leftTitle && this.navigationBarProps.leftTitle !== '') {
       tempComponent = (
@@ -46,11 +43,8 @@ export default class NavigationBar extends Component {
       )
     } else {
       tempComponent = (
-        <Image
-          style={[styles.leftImageStyle, this.navigationBarProps.leftImageStyle]}
-          resizeMode="contain"
-          source={require('../../assets/images/return.png')}
-        />
+        // 需要注意，字体库名字不能写错，写错程序就会报错
+        <Icon name={'oneIcon|nav_back_o'} size={20} color={commonStyle.iconGray}/>
       )
     }
     return (
@@ -66,30 +60,32 @@ export default class NavigationBar extends Component {
     return (
       <View style={[styles.titleContainer]}>
         <Text style={[styles.titleStyle, this.navigationBarProps.titleStyle]}>{this.navigationBarProps.title}</Text>
+        {
+          this.navigationBarProps.subTitle ? <Text style={[styles.subTitleStyle, this.navigationBarProps.subTitleStyle]}>子标题</Text> : null
+        }
       </View>
     )
   }
 
   renderRightItem() {
+    let tempComponent
     if (this.navigationBarProps.hiddenRightItem) {
-      return null
+      return <View style={{width: 40}}/>
     }
     const {onRightPress} = this.props
-    let tempComponent
-    if (this.navigationBarProps.rightButtonImage) {
+    if (this.navigationBarProps.rightIcon) {
+      let icon = this.navigationBarProps.rightIcon
       tempComponent = (
-        <Image
-          style={[styles.rightImageStyle, this.navigationBarProps.rightImageStyle]}
-          resizeMode="contain"
-          source={this.navigationBarProps.rightButtonImage}
-        />
+        <Icon name={`oneIcon|${icon.name}`} size={icon.size} color={icon.color}/>
       )
     } else if (this.navigationBarProps.rightTitle && this.navigationBarProps.rightTitle !== '') {
       tempComponent = (
         <Text style={[styles.rightTitleStyle, this.navigationBarProps.rightTitleStyle]}>{this.navigationBarProps.rightTitle}</Text>
       )
     } else {
-      return null
+      tempComponent = (
+        <View style={{width: 40}}/>
+      )
     }
     return (
       <TouchableOpacity
@@ -102,17 +98,17 @@ export default class NavigationBar extends Component {
 
   render() {
     if (this.navigationBarProps.hiddenNav) {
-      return null
+      return <View/>
     }
     return (
       <View style={[styles.navBarStyle, this.navigationBarProps.navBarStyle]}>
         <View style={[styles.navContentStyle, this.navigationBarProps.navContentStyle]}>
           {/* 导航左按钮 */}
           {this.renderLeftItem()}
-          {/* 导航右按钮*/}
-          {this.renderRightItem()}
           {/* 导航title */}
           {this.renderTitle()}
+          {/* 导航右按钮*/}
+          {this.renderRightItem()}
         </View>
       </View>
     )
@@ -122,7 +118,9 @@ export default class NavigationBar extends Component {
 const styles = StyleSheet.create({
   navBarStyle: {
     height: commonStyle.navHeight,
-    backgroundColor: commonStyle.navThemeColor
+    backgroundColor: commonStyle.navThemeColor,
+    borderBottomWidth: 0.5,
+    borderBottomColor: commonStyle.lineColor,
   },
   navContentStyle: {
     flexDirection: 'row',
@@ -130,8 +128,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: commonStyle.navStatusBarHeight,
     height: commonStyle.navContentHeight,
-    borderBottomWidth: 0.5,
-    borderBottomColor: commonStyle.lineColor
+    marginHorizontal: 10,
   },
   leftImageStyle: {
     width: commonStyle.navImageWidth,
@@ -139,36 +136,35 @@ const styles = StyleSheet.create({
   },
   leftItemStyle: {
     justifyContent: 'center',
-    alignItems: 'flex-end',
-    paddingHorizontal: commonStyle.padding,
+    width: 40,
   },
   leftTitleStyle: {
     fontSize: commonStyle.navLeftTitleFont,
     color: commonStyle.navLeftTitleColor
   },
   titleContainer: {
-    position: 'absolute',
-    top: 0,
-    bottom: 0,
-    left: 80,
-    right: 80,
     alignItems: 'center',
     justifyContent: 'center',
+    flex: 1,
   },
   titleStyle: {
     fontSize: commonStyle.navTitleFont,
     color: commonStyle.navTitleColor,
     textAlign: 'center',
+    fontWeight: 'bold'
+  },
+  subTitleStyle: {
+    fontSize: 11,
+    marginTop: 5
   },
   rightImageStyle: {
     width: commonStyle.navImageWidth,
     height: commonStyle.navImageHeight
   },
   rightItemStyle: {
-    backgroundColor: commonStyle.orange,
     justifyContent: 'center',
     alignItems: 'flex-end',
-    paddingHorizontal: 8,
+    width: 40,
   },
   rightTitleStyle: {
     fontSize: commonStyle.navRightTitleFont,

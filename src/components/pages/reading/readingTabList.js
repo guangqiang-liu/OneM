@@ -7,14 +7,19 @@ import ScrollableTabView from 'react-native-scrollable-tab-view'
 import PastList from '../picture/pastList'
 import {articleType, beginTime} from '../../../constants/commonType'
 import {commonStyle} from '../../../utils/commonStyle'
-export default class ReadingTabList extends Component {
+import {BaseComponent} from '../../base/baseComponent'
+export default class ReadingTabList extends BaseComponent {
   constructor(props) {
     super(props)
-    this.state = {
+  }
+
+  navigationBarProps() {
+    return {
+      title: '阅读'
     }
   }
 
-  render() {
+  _render() {
     return (
       <View style={{flex: 1}}>
         <ScrollableTabView
@@ -41,7 +46,3 @@ export default class ReadingTabList extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-
-})

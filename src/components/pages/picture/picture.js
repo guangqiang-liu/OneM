@@ -11,7 +11,7 @@ import PicDetail from './picDetail'
 import actions from '../../../actionCreators/picture'
 import {Actions} from 'react-native-router-flux'
 import {articleType, beginTime} from '../../../constants/commonType'
-class Home extends BaseComponent {
+class Home extends Component {
 
   constructor(props) {
     super(props)
@@ -44,13 +44,6 @@ class Home extends BaseComponent {
     })
   }
 
-  navigationBarProps() {
-    return {
-      title: '图文',
-      hiddenLeftItem: true
-    }
-  }
-
   _onChangePage(index) {
     if (index === this.state.dataCount) {
       Actions.pastList({beginTime: beginTime.picture, pageType: articleType.PICTURE})
@@ -63,7 +56,7 @@ class Home extends BaseComponent {
     )
   }
 
-  _render() {
+  render() {
     let dataArr = this.state.dataSource
     return (
       <ViewPager

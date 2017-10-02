@@ -17,6 +17,14 @@ export default class PastList extends Component {
     }
   }
 
+  static onEnter = () => {
+    Actions.refresh({
+      title: '过往列表',
+      backButtonImage: require('../../../assets/images/return.png'),
+
+    })
+  }
+
   componentDidMount() {
     let dataList = Action.pastList(this.props.beginTime)
     this.setState({
@@ -43,7 +51,7 @@ export default class PastList extends Component {
   }
 
   renderRow(rowData, sectionId, rowID) {
-    var dateStr = rowID == 0 ? '本月' : `${monthList[rowData[1]]}.${rowData[0]}`
+    var dateStr = rowID === 0 ? '本月' : `${monthList[rowData[1]]}.${rowData[0]}`
     return (
       <TouchableOpacity
         style={styles.cellStyle}
@@ -78,8 +86,8 @@ export default class PastList extends Component {
 const styles = StyleSheet.create({
   listStyle: {
     flex: 1,
-    padding: 10,
-    marginBottom: 10
+    backgroundColor: commonStyle.white,
+    paddingHorizontal: 10
   },
   cellStyle: {
     flexDirection: 'row',

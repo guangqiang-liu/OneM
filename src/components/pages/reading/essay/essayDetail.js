@@ -9,11 +9,18 @@ import CommentList from '../commentList'
 import {articleType} from '../../../../constants/commonType'
 import ToolBar from '../bottomToolBar'
 import {Icon} from '../../../../utils/icon'
-export default class EssayDetail extends Component {
+import {BaseComponent} from '../../../base/baseComponent'
+export default class EssayDetail extends BaseComponent {
 
   constructor(props) {
     super(props)
     this.state = {}
+  }
+
+  navigationBarProps() {
+    return {
+      title: this.props.essayDetail.hp_title
+    }
   }
 
   componentDidMount() {
@@ -22,7 +29,7 @@ export default class EssayDetail extends Component {
     })
   }
 
-  render() {
+  _render() {
     let data = this.props.essayDetail
     if (data.hp_title) {
       let author = data.author[0] || {}

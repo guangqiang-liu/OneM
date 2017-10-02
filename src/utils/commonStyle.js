@@ -25,6 +25,7 @@ export const commonStyle = {
   lightGray: '#D3D3D3',
   tomato: '#FF6347',
   PeachPuff: '#FFDAB9',
+  clear: 'rgb(0,0,0,0)',
 
   /** 主题色 **/
   themeColor: '#e74c3c',
@@ -96,7 +97,7 @@ export const commonStyle = {
   // 默认按钮文字字体
   btnFont: 15,
   // 导航title字体
-  navTitleFont: 18,
+  navTitleFont: 17,
   // tabBar文字字体
   barBarTitleFont: 12,
   // 占位符的默认字体大小

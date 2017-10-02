@@ -5,12 +5,19 @@ import React, {Component} from 'react'
 import {View, Text, StyleSheet, ListView, Image, TouchableOpacity} from 'react-native'
 import {Actions} from 'react-native-router-flux'
 import {commonStyle} from '../../../utils/commonStyle'
-export default class MusicList extends Component  {
+import {BaseComponent} from '../../base/baseComponent'
+export default class MusicList extends BaseComponent  {
   constructor(props) {
     super(props)
     this.renderRow = this.renderRow.bind(this)
     this.state = {
       dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2})
+    }
+  }
+
+  navigationBarProps() {
+    return {
+      title: '音乐列表'
     }
   }
 
@@ -39,7 +46,7 @@ export default class MusicList extends Component  {
     )
   }
 
-  render() {
+  _render() {
     return (
       <ListView
         style={styles.container}

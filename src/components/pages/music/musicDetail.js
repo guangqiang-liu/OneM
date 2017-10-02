@@ -2,52 +2,31 @@
  * Created by guangqiang on 2017/9/7.
  */
 import React, {Component} from 'react'
-import {View, TouchableOpacity, Text, StyleSheet, ListView, Image} from 'react-native'
+import {View, TouchableOpacity, Text, StyleSheet, Image, ScrollView} from 'react-native'
 import {commonStyle} from '../../../utils/commonStyle'
 import {Actions} from 'react-native-router-flux'
+import CommentList from '../reading/commentList'
+import {articleType} from '../../../constants/commonType'
 export default class MusicDetail extends Component {
 
   constructor(props) {
     super(props)
-    this.player
-    this.renderRow = this.renderRow.bind(this)
-    this.renderHeader = this.renderHeader.bind(this)
+    this.player = null
     this.state = {
-      dataSource: new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2}),
       contentMode: 0
     }
   }
 
-  componentDidMount() {
-    this.props.getMusicDetail(this.props.id).then(response => {
-      this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(response.value.data.author_list)
-      })
+  static onEnter = () => {
+    Actions.refresh({
+      title: '过往列表',
+      backButtonImage: require('../../../assets/images/return.png'),
+      hideNavBar: false
     })
   }
 
-  renderRow(rowData, rowId) {
-    return (
-      <View key={rowId} style={{borderBottomWidth: 1, borderBottomColor: commonStyle.bgColor}}>
-        <View style={styles.authorInfo}>
-          <View style={{flexDirection: 'row', alignItems: 'center', flex: 1}}>
-            <Image source={{uri: rowData.web_url}} style={{width: 50, height: 50, borderRadius: 25, backgroundColor: commonStyle.bgColor}}/>
-            <View style={{marginLeft: 10}}>
-              <Text style={{padding: 5}}>{rowData.user_name}</Text>
-              <Text style={{padding: 5}}>{rowData.wb_name}</Text>
-            </View>
-          </View>
-          <View style={{height: 50, flexDirection: 'row', alignItems: 'center'}}>
-            <Image style={{width: 30, height: 30}} source={require('../../../assets/images/laud.png')}/>
-            <Text>{rowData.fans_total}</Text>
-          </View>
-        </View>
-        <View style={{margin: 10}}>
-          <Text style={{marginBottom: 10, backgroundColor: commonStyle.bgColor, paddingVertical: 10}}>{rowData.summary}</Text>
-          <Text style={{marginBottom: 10, backgroundColor: commonStyle.bgColor, paddingVertical: 10}}>{rowData.desc}</Text>
-        </View>
-      </View>
-    )
+  componentDidMount() {
+    this.props.getMusicDetail(this.props.id)
   }
 
   playing() {
@@ -56,6 +35,7 @@ export default class MusicDetail extends Component {
 
   renderHeader() {
     let data = this.props.musicDetail
+    let author = data.story_author
     return (
       <View>
         <Image style={{height: 200}} source={{uri: data.cover}}/>
@@ -65,78 +45,100 @@ export default class MusicDetail extends Component {
               <View style={{flexDirection: 'row', alignItems: 'center', flex: 1}}>
                 <Image style={{width: 40, height: 40, borderRadius: 20, marginRight: 10}} source={{uri: data.cover}}/>
                 <View>
-                  <Text style={{fontSize: 12, color: '#4D9DE2'}}>{data.title}</Text>
+                  <Text style={{fontSize: 12, color: '#4D9DE2', marginBottom: 5}}>{data.title}</Text>
                   <Text style={{fontSize: 12, color: '#72715C'}}>{data.title}</Text>
                 </View>
               </View>
-              <Text style={{color: commonStyle.textBlockColor, fontSize: 16}}>{data.title}</Text>
+              <Text style={{color: commonStyle.textBlockColor, fontSize: 16, marginTop: 10}}>{data.title}</Text>
             </View>
             <View style={{alignItems: 'flex-end'}}>
               <Image style={{width: 60, height: 15}} source={require('../../../assets/images/xiami_right.png')}/>
-              <TouchableOpacity
-                onPress={() => this.playing()}
-              >
+              <TouchableOpacity onPress={() => this.playing()}>
                 <Image style={{width: 35, height:35}} source={require('../../../assets/images/music_play.png')}/>
               </TouchableOpacity>
-              <Text style={{color: commonStyle.textGrayColor, fontSize: 12}}>{data.last_update_date}</Text>
+              {/*<Text numberOfLines={1} style={{color: commonStyle.textGrayColor, fontSize: 12, marginTop: 5}}>{data.last_update_date}</Text>*/}
             </View>
           </View>
           <View style={styles.toolBar}>
-            <Text style={{color: commonStyle.textGrayColor, fontSize: 14}}>音乐故事</Text>
-            <View style={{flexDirection: 'row', justifyContent: 'space-around', alignItems: 'center'}}>
-              <TouchableOpacity onPress={() => this.setState({contentMode: 0})}>
-                <Image style={{width: 50, height: 50}} source={require('../../../assets/images/music_story_default.png')}/>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => this.setState({contentMode: 1})}>
-                <Image style={{width: 50, height: 50}} source={require('../../../assets/images/music_lyric_default.png')}/>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={() => this.setState({contentMode: 2})}>
-                <Image style={{width: 50, height: 50}} source={require('../../../assets/images/music_about_default.png')}/>
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity onPress={() => this.setState({contentMode: 0})}>
+              <Image style={{width: 50, height: 50}} source={require('../../../assets/images/music_story_default.png')}/>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.setState({contentMode: 1})}>
+              <Image style={{width: 50, height: 50}} source={require('../../../assets/images/music_lyric_default.png')}/>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={() => this.setState({contentMode: 2})}>
+              <Image style={{width: 50, height: 50}} source={require('../../../assets/images/music_about_default.png')}/>
+            </TouchableOpacity>
           </View>
           {
             this.state.contentMode === 0 ?
               <View style={styles.descStyle}>
-                <Text style={{marginBottom: 10, backgroundColor: commonStyle.bgColor, fontSize: 16}}>{data.story_title}</Text>
-                <Text style={{marginBottom: 10, backgroundColor: commonStyle.bgColor, fontSize: 13}}>{data.story_summary}</Text>
-                <Text style={{backgroundColor: commonStyle.bgColor, fontSize: 14}}>{data.story}</Text>
+                <Text style={{fontSize: 20, fontWeight: 'bold', lineHeight: 30}}>{data.story_title}</Text>
+                <Text style={{color: commonStyle.textGrayColor, fontSize: 13, marginTop: 30}}>{`文 / ${author.user_name}`}</Text>
+                <Text style={{fontSize: 14, color: commonStyle.textBlockColor, lineHeight: 28}}>{data.story}</Text>
               </View> : null
           }
           {
             this.state.contentMode === 1 ?
               <View style={styles.lyricStyle}>
-                <Text>{data.lyric}</Text>
+                <Text style={{fontSize: 14, color: commonStyle.textBlockColor, lineHeight: 25}}>{data.lyric}</Text>
               </View> : null
           }
           {
             this.state.contentMode === 2 ?
               <View style={styles.singerInfo}>
-                <Text style={{fontSize: 14}}>{data.info}</Text>
+                <Text style={{fontSize: 14, color: commonStyle.textBlockColor, lineHeight: 25}}>{data.info}</Text>
               </View> : null
           }
-          <Text style={{marginBottom: 10}}>{data.charge_edt}</Text>
+          <Text style={{color: commonStyle.textGrayColor, fontSize: 11}}>{data.charge_edt}</Text>
+          <Text style={{marginVertical: 20, color: commonStyle.textGrayColor, fontSize: 11}}>{`本文支付转载至"${author.desc}"`}</Text>
         </View>
-        <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-around', borderTopWidth: 1, borderTopColor: commonStyle.lineColor}}>
+        <View style={styles.active}>
           <TouchableOpacity
             style={{flexDirection: 'row', alignItems: 'center'}}
-            onPress={() => this.playing()}
           >
             <Image style={{width: 40, height: 40}} source={require('../../../assets/images/laud.png')}/>
-            <Text>{data.praisenum}</Text>
+            <Text style={styles.textStyle}>{data.praisenum}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}}>
             <Image style={{width: 40, height: 40}} source={require('../../../assets/images/comment_image.png')}/>
-            <Text>{data.read_num}</Text>
+            <Text style={styles.textStyle}>{data.read_num}</Text>
           </TouchableOpacity>
           <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}}>
             <Image style={{width: 40, height: 40}} source={require('../../../assets/images/share_image.png')}/>
-            <Text>{data.sharenum}</Text>
+            <Text style={styles.textStyle}>{data.sharenum}</Text>
           </TouchableOpacity>
         </View>
-        <View style={{height: 40, backgroundColor: commonStyle.bgColor, alignItems: 'center', flexDirection: 'row', marginBottom: 10}}>
-          <Text style={{marginLeft: 10, color: commonStyle.textGrayColor}}>评论列表</Text>
+        <View style={{marginHorizontal: 10}}>
+          <View style={styles.author}>
+            <Text style={{}}>作者</Text>
+          </View>
+          <View style={{flexDirection: 'row', marginTop: 10, marginBottom: 20, alignItems: 'center'}}>
+            <Image style={{height: 50, width: 50, borderRadius: 25}}
+                   source={{uri: author.web_url}}
+            />
+            <View style={{marginLeft: 10, flex: 1, justifyContent: 'center'}}>
+              <Text style={{marginBottom: 5}}>{`${author.user_name}`}</Text>
+              {
+                author.summary ? <Text style={{color: commonStyle.textGrayColor, fontSize: 12}}>{author.summary}</Text> : null
+              }
+            </View>
+            <TouchableOpacity style={styles.attention}>
+              <Text style={{fontSize: 12, color: commonStyle.gray}}>关注</Text>
+            </TouchableOpacity>
+          </View>
         </View>
+      </View>
+    )
+  }
+
+  renderRow() {
+    return (
+      <View style={{marginHorizontal: 10}}>
+        <CommentList
+          type={articleType.MUSIC}
+          id={this.props.id}
+        />
       </View>
     )
   }
@@ -144,16 +146,14 @@ export default class MusicDetail extends Component {
   render() {
      if (!this.props.musicDetail.music_id) {
        return (
-         <Text>加载中</Text>
+         <View/>
        )
      } else {
        return (
-         <ListView
-           style={styles.container}
-           renderRow={this.renderRow}
-           renderHeader={this.renderHeader}
-           dataSource={this.state.dataSource}
-         />
+         <ScrollView style={styles.container}>
+           {this.renderHeader()}
+           {this.renderRow()}
+         </ScrollView>
        )
      }
   }
@@ -175,7 +175,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     height: 40,
-    backgroundColor: commonStyle.bgColor,
+    backgroundColor: commonStyle.white,
     marginVertical: 10,
     justifyContent: 'space-between'
   },
@@ -183,11 +183,11 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   lyricStyle: {
-    backgroundColor: commonStyle.bgColor,
+    backgroundColor: commonStyle.white,
     marginBottom: 10
   },
   singerInfo: {
-    backgroundColor: commonStyle.bgColor,
+    backgroundColor: commonStyle.white,
     marginBottom: 10
   },
   authorInfo: {
@@ -196,5 +196,31 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 60,
     marginHorizontal: 10
+  },
+  textStyle: {
+    color: commonStyle.textGrayColor
+  },
+  author: {
+    width: 60,
+    borderBottomColor: commonStyle.black,
+    borderBottomWidth: 4,
+    paddingVertical: 10,
+    marginBottom: 10
+  },
+  attention: {
+    borderColor: commonStyle.drakGray,
+    borderWidth: 1,
+    borderRadius: 5,
+    padding: 8,
+    marginLeft: 10,
+    marginRight: 10
+  },
+  active: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    borderTopWidth: 0.5,
+    borderTopColor: commonStyle.lineColor,
+    marginBottom: 10
   }
 })

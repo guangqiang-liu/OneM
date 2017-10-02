@@ -8,13 +8,20 @@ import {monthList} from '../../../constants/commonType'
 import {parseDate} from '../../../utils/dataUtil'
 import {commonStyle} from '../../../utils/commonStyle'
 import {Actions} from 'react-native-router-flux'
-export default class PicGridList extends Component {
+import {BaseComponent} from '../../base/baseComponent'
+export default class PicGridList extends BaseComponent {
 
   constructor(props) {
     super(props)
     this.renderRow = this.renderRow.bind(this)
     this.state = {
       dataSource:  new ListView.DataSource({rowHasChanged: (row1, row2) => row1 !== row2})
+    }
+  }
+
+  navigationBarProps() {
+    return {
+      title: '图文列表'
     }
   }
 
@@ -31,11 +38,11 @@ export default class PicGridList extends Component {
     let dateStr = `${date.getDate()} ${monthList[date.getMonth()]}.${date.getFullYear()}`
     return (
       <TouchableOpacity
-        style={{backgroundColor: 'white', width: (deviceInfo.deviceWidth - 30) / 2, borderWidth: 1, borderColor: commonStyle.purple, marginRight: 8, marginBottom: 8}}
-        onPress={() => Actions.picDetail({id: rowData.hpcontent_id})}
+        style={{backgroundColor: 'white', width: (deviceInfo.deviceWidth - 30) / 2, borderWidth: 1, borderColor: commonStyle.lineColor, marginRight: 8, marginBottom: 8}}
+        onPress={() => Actions.picDetail({id: rowData.hpcontent_id, hiddenLeftItem: false})}
       >
         <Image style={styles.picStyle} source={{uri: rowData.hp_img_url}}/>
-        <View style={{flexDirection: 'row', justifyContent: 'space-between', backgroundColor: '#C1C1C1'}}>
+        <View style={{flexDirection: 'row', justifyContent: 'space-between', backgroundColor: commonStyle.lightGray}}>
           <Text style={{color: commonStyle.textGrayColor, fontSize: 13}}>{rowData.hp_title}</Text>
           <Text style={{color: commonStyle.textGrayColor, fontSize: 13}}>{dateStr}</Text>
         </View>
@@ -46,7 +53,7 @@ export default class PicGridList extends Component {
     )
   }
 
-  render() {
+  _render() {
     const dataArr = this.state.dataSource
     return (
       <ListView
@@ -62,19 +69,17 @@ export default class PicGridList extends Component {
 const styles = StyleSheet.create({
   listStyle: {
     flex: 1,
-    backgroundColor: commonStyle.bgColor,
+    backgroundColor: commonStyle.white,
     marginLeft: 12,
-    marginTop: 10
+    marginTop: 5
   },
   listViewStyle: {
     flexDirection: 'row',
     flexWrap: 'wrap',
     alignItems: 'center',
-    backgroundColor: commonStyle.bgColor
+    backgroundColor: commonStyle.white
   },
   picStyle: {
     height: 150
-  },
-  contentStyle: {
   }
 })

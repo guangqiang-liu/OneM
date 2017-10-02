@@ -4,7 +4,7 @@
 const articleType = {
   PICTURE: 'PICTURE',
   READING: 'READING',
-  MUSIC: 'MUSIC',
+  MUSIC: 'music',
   MOVIE: 'MOVIE',
   SERIAL: 'serial',
   ESSAY: 'essay',

@@ -8,6 +8,7 @@ const movieDetail = params => getFetch(`${PATH.MOVIE_DETAIL}${params}`, params)
 const movieStory = params => getFetch(`/movie/${params}/story/1/0`, params)
 const movieList = params =>  getFetch(`${PATH.MOVIE_LIST}${params}`, {})
 
+// 参数校验器
 const testValidator = () => ({
   validator: {
     data: ValidateUtil([

@@ -2,12 +2,13 @@
  * Created by guangqiang on 2017/9/18.
  */
 import React, {Component} from 'react'
-import {View, StyleSheet, Text, EnhancedListView, TouchableOpacity, Image, ScrollView} from '../../../common'
+import {View, StyleSheet, Text, TouchableOpacity, Image, ScrollView} from '../../../common'
 import {commonStyle} from '../../../../utils/commonStyle'
 import CommentList from '../commentList'
 import {articleType} from '../../../../constants/commonType'
 import ToolBar from '../bottomToolBar'
-export default class QuestionDetail extends Component {
+import {BaseComponent} from '../../../base/baseComponent'
+export default class QuestionDetail extends BaseComponent {
 
   constructor(props) {
     super(props)
@@ -15,12 +16,17 @@ export default class QuestionDetail extends Component {
     }
   }
 
-  componentDidMount() {
-    this.props.getQuestionDetail(this.props.id).then(response => {
-    })
+  navigationBarProps() {
+    return {
+      title: this.props.questionDetail.question_title
+    }
   }
 
-  render() {
+  componentDidMount() {
+    this.props.getQuestionDetail(this.props.id)
+  }
+
+  _render() {
     let data = this.props.questionDetail
     if (Object.keys(data).length) {
       let author = data.author_list[0]

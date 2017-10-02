@@ -2,18 +2,16 @@
  * Created by guangqiang on 2017/9/4.
  */
 
-import React, {Component} from 'react'
-import {View, StyleSheet, Text, TouchableOpacity, Image, ScrollView, ListView, Modal} from 'react-native'
+import React from 'react'
+import {View, StyleSheet, Text, TouchableOpacity, Image, ScrollView} from 'react-native'
 import {BaseComponent} from '../../base/baseComponent'
 import {connect} from 'react-redux'
 import Action from '../../../actions'
 import ViewPager from 'react-native-viewpager'
 import action from '../../../actionCreators/reading'
-import deviceInfo from '../../../utils/deviceInfo'
 import Swiper from 'react-native-swiper'
 import {commonStyle} from '../../../utils/commonStyle'
 import ArticleList from './articleList'
-import ImageViewer from 'react-native-image-zoom-viewer'
 import {Actions} from 'react-native-router-flux'
 class Reading extends BaseComponent {
 
@@ -46,7 +44,7 @@ class Reading extends BaseComponent {
 
   navigationBarProps() {
     return {
-      title: 'dada',
+      title: '阅读',
       hiddenLeftItem: true
     }
   }
@@ -67,7 +65,6 @@ class Reading extends BaseComponent {
   }
 
   imgClick(i, e) {
-    // this.setState({imageIndex: i, modalVisible: true})
     let data  = this.state.bannerList[i]
     Actions.bannerDetail({data: data})
   }
@@ -84,29 +81,6 @@ class Reading extends BaseComponent {
       )
     }
     return tempArr
-  }
-
-  _renderModal() {
-    let tempArr = this.state.bannerList.map((item, index) => {
-      let obj = {}
-      obj.url = item.cover
-      return obj
-    })
-    return (
-      <Modal
-        visible={this.state.modalVisible}
-        transparent={true}
-      >
-        <View style={{flex: 1}}>
-          <ImageViewer
-            imageUrls={tempArr}
-            enableImageZoom={true}
-            index={this.state.imageIndex}
-            onClick={() => this.setState({modalVisible: false})}
-          />
-        </View>
-      </Modal>
-    )
   }
 
   _onChangePage(index) {
@@ -133,7 +107,6 @@ class Reading extends BaseComponent {
             renderPageIndicator={false}
           />
         </ScrollView>
-        {this._renderModal()}
       </View>
     )
   }

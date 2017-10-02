@@ -2,7 +2,7 @@
  * Created by guangqiang on 2017/9/18.
  */
 import React from 'react'
-import {View, StyleSheet, Text, InteractionManager, ListView, Image, TouchableOpacity} from '../../common'
+import {View, StyleSheet, Text, ListView, Image, TouchableOpacity} from '../../common'
 import {BaseComponent} from '../../base/baseComponent'
 import {Actions} from 'react-native-router-flux'
 import {commonStyle, deviceInfo} from '../../../utils'
@@ -21,13 +21,18 @@ export default class BannerDetail extends BaseComponent {
   navigationBarProps() {
     return {
       navBarStyle: {
-        backgroundColor: this.props.data.bgcolor
+        backgroundColor: this.props.data.bgcolor,
+        borderBottomColor: this.props.data.bgcolor
       },
       titleStyle:{
         color: commonStyle.white
       },
       title: this.props.data.title,
-      leftButtonImage: require('../../../assets/images/return.png')
+      leftIcon: {
+        name: 'nav_back_o',
+        color: commonStyle.white,
+        size: 18
+      }
     }
   }
 
@@ -61,9 +66,9 @@ export default class BannerDetail extends BaseComponent {
         style={{justifyContent: 'center', marginHorizontal: 20, marginVertical: 10}}
         onPress={() => this.pushDetail(rowData)}
       >
-        <Text numberOfLines={2} style={{marginBottom: 5}}>{rowData.title}</Text>
-        <Text numberOfLines={2} style={{marginBottom: 5}}>{'@'+rowData.author}</Text>
-        <Text numberOfLines={2} style={{marginBottom: 5}}>{rowData.introduction}</Text>
+        <Text numberOfLines={2} style={styles.textStyle}>{rowData.title}</Text>
+        <Text numberOfLines={2} style={styles.textStyle}>{'@'+rowData.author}</Text>
+        <Text numberOfLines={2} style={styles.textStyle}>{rowData.introduction}</Text>
       </TouchableOpacity>
     )
   }
@@ -72,7 +77,7 @@ export default class BannerDetail extends BaseComponent {
     return (
       <View style={{alignItems: 'center'}}>
         <Text style={{marginVertical: 30}}>-------------</Text>
-        <Text>{this.props.data.bottom_text}</Text>
+        <Text style={styles.textStyle}>{this.props.data.bottom_text}</Text>
         <Image
           style={{marginVertical: 30, height: 150, width: deviceInfo.deviceWidth - 40}}
           source={{uri: this.props.data.cover}}
@@ -93,5 +98,8 @@ export default class BannerDetail extends BaseComponent {
 }
 
 const styles = StyleSheet.create({
-
+  textStyle: {
+    marginBottom: 5,
+    color: commonStyle.black
+  }
 })
