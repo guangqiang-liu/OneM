@@ -109,6 +109,8 @@ export default class MusicPlayer extends Component {
     let music_id = newSong.music_id
     if (!isNaN(parseInt(music_id))) {
       this.props.getxiamiMusic(music_id)
+      // 此处音乐播放器有bug
+      // this.rotation = !this.rotation
       this.setState({currentIndex})
     } else {
       this.nextSong(currentIndex + 1)
@@ -118,7 +120,7 @@ export default class MusicPlayer extends Component {
   }
 
   // 上一首
-  pre(currentIndex) {
+  preSong(currentIndex) {
     this.reset()
     currentIndex === -1 ? currentIndex = this.props.musicList.length -1 : currentIndex
     let newSong = this.props.musicList[currentIndex]
@@ -127,7 +129,7 @@ export default class MusicPlayer extends Component {
       this.props.getxiamiMusic(music_id)
       this.setState({currentIndex})
     } else {
-      this.pre(currentIndex - 1)
+      this.preSong(currentIndex - 1)
       this.showMessageBar('抱歉')('没有找到音乐信息，已帮你切换到下一首')('error')
     }
     this.play()
@@ -195,6 +197,7 @@ export default class MusicPlayer extends Component {
   }
 
   renderPlayer() {
+    let musicInfo = this.props.musicInfo
     return (
       <View style={styles.bgContainer}>
         <View style={styles.navBarStyle}>
@@ -206,8 +209,8 @@ export default class MusicPlayer extends Component {
               <Icon name={'oneIcon|nav_back_o'} size={20} color={commonStyle.white}/>
             </TouchableOpacity>
             <View style={{alignItems: 'center'}}>
-              <Text style={styles.title}>安河桥</Text>
-              <Text style={styles.subTitle}>宋冬野</Text>
+              <Text style={styles.title}>{musicInfo.title}</Text>
+              <Text style={styles.subTitle}>{musicInfo.artist}</Text>
             </View>
             <TouchableOpacity
               style={{marginTop: 5}}
@@ -237,7 +240,7 @@ export default class MusicPlayer extends Component {
               outputRange: ['0deg', '360deg']
             })}]
           }}
-          source={require('../../../assets/images/bgimage.jpeg')}
+          source={{uri: this.props.musicInfo.cover}}
         />
         <View style={{flex: 1}}>
           <View style={{flexDirection: 'row', alignItems: 'center', marginHorizontal: 50, justifyContent: 'space-around', bottom: -60}}>
@@ -271,7 +274,7 @@ export default class MusicPlayer extends Component {
             </TouchableOpacity>
             <View style={styles.cdStyle}>
               <TouchableOpacity
-                onPress={() => this.pre(this.state.currentIndex - 1)}
+                onPress={() => this.preSong(this.state.currentIndex - 1)}
               >
                 <Icon name={'oneIcon|music_pre_o'} size={35} color={commonStyle.white}/>
               </TouchableOpacity>
@@ -318,12 +321,12 @@ export default class MusicPlayer extends Component {
         <View style={styles.container}>
           <Image
             style={styles.bgContainer}
-            source={require('../../../assets/images/bgimage.jpeg')}
+            source={{uri: this.props.musicInfo.cover}}
             resizeMode='cover'/>
           <View style={styles.bgContainer}>
             <VibrancyView
               blurType={'light'}
-              blurAmount={10}
+              blurAmount={20}
               style={styles.container}/>
           </View>
           {this.renderPlayer()}
@@ -359,7 +362,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginHorizontal: 15
+    marginHorizontal: 10
   },
   title: {
     color: commonStyle.white,
