@@ -11,6 +11,7 @@ import {Actions} from 'react-native-router-flux'
 import {MessageBarManager} from 'react-native-message-bar'
 import {VibrancyView} from 'react-native-blur'
 import {Icon} from '../../../utils/icon'
+import {formatTime} from '../../../utils/formatTime'
 export default class MusicPlayer extends Component {
 
   constructor(props) {
@@ -89,7 +90,7 @@ export default class MusicPlayer extends Component {
 
   setDuration(duration) {
     this.setState({duration: duration.duration})
-    Actions.refresh({title: this.props.musicInfo.title, data: "Changed data"})
+    // Actions.refresh({title: this.props.musicInfo.title, data: "Changed data"})
   }
 
   setTime(data) {
@@ -250,7 +251,7 @@ export default class MusicPlayer extends Component {
             <Icon name={'oneIcon|more_v_o'} size={20} color={commonStyle.white}/>
           </View>
           <View style={styles.progressStyle}>
-            <Text style={{width: 35, fontSize: 11, color: commonStyle.white, marginLeft: 5}}>{actions.formatTime(Math.floor(this.state.currentTime))}</Text>
+            <Text style={{width: 35, fontSize: 11, color: commonStyle.white, marginLeft: 5}}>{formatTime.formatMediaTime(Math.floor(this.state.currentTime))}</Text>
             <Slider
               style={styles.slider}
               value={this.state.slideValue}
@@ -262,7 +263,7 @@ export default class MusicPlayer extends Component {
               onSlidingComplete={value => this.player.seek(value)}
             />
             <View style={{width: 35, alignItems: 'flex-end', marginRight: 5}}>
-              <Text style={{fontSize: 11, color: commonStyle.white}}>{actions.formatTime(Math.floor(this.state.duration))}</Text>
+              <Text style={{fontSize: 11, color: commonStyle.white}}>{formatTime.formatMediaTime(Math.floor(this.state.duration))}</Text>
             </View>
           </View>
           <View style={styles.toolBar}>

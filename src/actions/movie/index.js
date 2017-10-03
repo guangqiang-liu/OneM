@@ -5,7 +5,9 @@ import {createAction} from 'redux-actions'
 import type from '../../constants/actionType'
 import actions from '../../actionCreators/movie'
 
-const getMovieList = createAction(type.MOVIE_LIST, actions.movieList, actions.testValidator)
+// 表单校验器
+// const getMovieList = createAction(type.MOVIE_LIST, actions.movieList, actions.testValidator)
+const getMovieList = createAction(type.MOVIE_LIST, actions.movieList)
 const getMovieListForDemo = createAction(type.MOVIE_LIST, actions.movieListForDemo)
 const getMovieDetail = createAction(type.MOVIE_DETAIL, actions.movieDetail)
 const getMovieStory = createAction(type.MOVIE_STORY, actions.movieStory)

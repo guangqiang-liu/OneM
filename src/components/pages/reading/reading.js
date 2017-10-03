@@ -23,7 +23,6 @@ class Reading extends BaseComponent {
       dataSource: new ViewPager.DataSource({pageHasChanged: (p1, p2) => p1 !== p2}),
       bannerList: [],
       swiperShow: false,
-      modalVisible: false,
       imageIndex: 0,
       articleLength: 0
     }
