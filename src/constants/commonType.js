@@ -57,4 +57,10 @@ const logEventType = {
   gesture: 3005
 }
 
-export {articleType, beginTime, monthList, logEventType}
+const ApiSource = {
+  ONE: 'ONE',
+  MIAMIMUSIC: 'MIAMIMUSIC',
+  TIMEMOVIE: 'TIMEMOVIE'
+}
+
+export {articleType, beginTime, monthList, logEventType, ApiSource}

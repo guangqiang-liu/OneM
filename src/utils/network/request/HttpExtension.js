@@ -7,18 +7,30 @@
  */
 
 import HttpUtils from './HttpUtils'
-import {API_URL, MIAMI_URL} from '../../../constants/urlConfig'
-
+import {API_URL, MIAMI_URL, TIME_MOVIE_URL} from '../../../constants/urlConfig'
+import {ApiSource} from '../../../constants/commonType'
 /**
  * GET 请求
  * @param url
  * @param params
+ * @param source
  * @param callback
  * @returns {{promise: Promise}}
  */
-const getFetch = (url, params, callback) => {
+const getFetch = (url, params, source, callback) => {
 
-  url = params === 0 ? `${MIAMI_URL}${url}` : `${API_URL}${url}`
+  switch (source) {
+    case ApiSource.MIAMIMUSIC:
+      url = `${MIAMI_URL}${url}`
+      break
+    case ApiSource.TIMEMOVIE:
+      url = `${TIME_MOVIE_URL}${url}`
+      break
+    default:
+      url = `${API_URL}${url}`
+      break
+  }
+
   let promise = HttpUtils.getRequest(url, params)
 
   if (callback && typeof callback === 'function') {

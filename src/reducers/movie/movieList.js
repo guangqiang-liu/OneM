@@ -5,15 +5,22 @@ import type from '../../constants/actionType'
 import {handleActions} from 'redux-actions'
 
 const initialState = {
-  movieList: [],
+  showTimeList: [],
+  comeingNewList: []
 }
 
 const originalReducers = {}
 
-originalReducers[type.MOVIE_LIST + type.FETCH_SUCCESS_SUFFIX] = (state, action) => ({
+originalReducers[type.MOVIE_SHOWTIME_LIST + type.FETCH_SUCCESS_SUFFIX] = (state, action) => ({
   ...state,
-  movieList: action.payload.data
+  showTimeList: []
 })
+
+originalReducers[type.MOVIE_COMEING_NEW_LIST + type.FETCH_SUCCESS_SUFFIX] = (state, action) => ({
+  ...state,
+  comeingNewList: []
+})
+
 const reducer = handleActions(originalReducers, initialState)
 
 export default reducer

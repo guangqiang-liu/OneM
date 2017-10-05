@@ -1,111 +1,84 @@
 /**
  * Created by guangqiang on 2017/9/4.
  */
-import React from 'react'
-import {StyleSheet, Text, ListView, TouchableOpacity} from 'react-native'
+import React, {Component} from 'react'
+import {StyleSheet, Text, ListView, TouchableOpacity, View} from 'react-native'
 import {BaseComponent} from '../../base/baseComponent'
 import {connect} from 'react-redux'
 import Action from '../../../actions'
 import {commonStyle} from '../../../utils/commonStyle'
-import {Actions} from 'react-native-router-flux'
-import {ArrayTool} from '../../../utils/arrayExtension'
-import {SimpleListView} from '../../common'
-class MovieList extends BaseComponent {
+import {SegmentedControl} from 'antd-mobile'
+import ShowTimeList from './showTime/showTimeList'
+import ComingNewList from './comeingNew/comeingNewList'
+class MovieList extends Component {
 
   constructor(props) {
     super(props)
-    this.renderRow = this.renderRow.bind(this)
-    this.fetchMoreData = this.fetchMoreData.bind(this)
-    this.fetchLatestData = this.fetchLatestData.bind(this)
     this.state = {
       refreshing: false,
       hasMore: true,
-      movieList: [],
+      showTimeList: [],
+      comeingNewList: [],
+      attentionList: [],
+      selectedTab: '正在热映'
     }
   }
 
-  navigationBarProps() {
-    return {
-      title: 'MOVIE',
-      hiddenLeftItem: true
-    }
-  }
-
-  fetchLatestData() {
-    this.setState({
-      refreshing: true,
-    })
-    // Vadidator 表单参数校验器
-    // let actions = this.props.getMovieList({mobile: '15214313256', code: null})
-    // actions.then(response => {
-    //   console.log('dadadaada')
-    // })
-    this.props.getMovieList(0).then((response) => {
+  componentDidMount() {
+    Promise.all([this.props.getMovieShowTimeList(), this.props.getMovieComeingNewList()]).then(response => {
       this.setState({
-        refreshing: false,
-        hasMore: response.value.data.length !== 0,
-        movieList: ArrayTool.splice_D(response.value.data, 0, 10)
+        showTimeList: response[0].value.ms,
+        comeingNewList: response[1].value.moviecomings,
+        attentionList: response[1].value.attention
       })
     })
   }
 
-  fetchMoreData() {
-    this.setState({
-      refreshing: true,
-    })
-    this.props.getMovieList(0).then((response) => {
-      let tempArr = this.state.movieList.concat(ArrayTool.splice_D(response.value.data, 0, 10))
-      this.setState({
-        refreshing: false,
-        hasMore: tempArr.length <= 60 ,
-        movieList: tempArr
-      })
-    })
+  onValueChange = (value) => {
+    this.setState({selectedTab: value})
   }
 
-  superFunc(data) {
-    super.superFunc(data)
-    alert('子类中函数的逻辑处理')
-  }
-
-  renderRow(rowData, sectionId, rowId) {
+  render() {
     return (
-      <TouchableOpacity
-        style={styles.cellStyle}
-        onPress={() => Actions.movieDetail({id: rowData.id})}
-      >
-        <Text>{rowData.title}</Text>
-      </TouchableOpacity>
-    )
-  }
-
-  _render() {
-    let dataSource = new ListView.DataSource({rowHasChanged:(r1, r2) => r1 !== r2}).cloneWithRows(this.state.movieList)
-    return (
-      <SimpleListView
-        refreshing={this.state.refreshing}
-        hasMore={this.state.hasMore}
-        fetchLatestData={this.fetchLatestData}
-        fetchMoreData={this.fetchMoreData}
-        dataSource={dataSource}
-        renderRow={this.renderRow}
-      />
+      <View style={styles.containerStyle}>
+        <View style={styles.navBarStyle}>
+          <View style={styles.segContainer}>
+            <SegmentedControl
+              style={styles.tabStyle}
+              selectedIndex={0}
+              values={['正在热映', '即将上映']}
+              onValueChange={(value)=> this.onValueChange(value)}
+            />
+          </View>
+        </View>
+        {
+          this.state.selectedTab === '正在热映' ?
+            <ShowTimeList dataArr={this.state.showTimeList}/> :
+            <ComingNewList comingNewArr={this.state.comeingNewList} attentionArr={this.state.attentionList}/>
+        }
+      </View>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  listViewStyle: {
-    flex: 1
-  },
-  cellStyle: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    height: 100,
+  containerStyle: {
+    flex: 1,
     backgroundColor: commonStyle.white,
-    borderBottomWidth: 1,
-    borderBottomColor: commonStyle.lineColor
-  }
+  },
+  navBarStyle: {
+    height: commonStyle.navHeight,
+    backgroundColor: '#151C28',
+  },
+  segContainer: {
+    marginTop: commonStyle.navStatusBarHeight,
+    height: commonStyle.navContentHeight,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  tabStyle: {
+    width: 180
+  },
 })
 
 const _MovieList = connect(

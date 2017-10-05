@@ -11,8 +11,8 @@ import {Actions} from 'react-native-router-flux'
 import {formatTime} from '../../../utils/formatTime'
 import deviceInfo from '../../../utils/deviceInfo'
 import {MessageBarManager} from 'react-native-message-bar'
-var mp4Url = 'http://download.3g.joy.cn/video/236/60236937/1451280942752_hd.mp4'
 
+var mp4Url = 'http://download.3g.joy.cn/video/236/60236937/1451280942752_hd.mp4'
 export default class MoviePlayer extends Component {
 
   constructor(props) {

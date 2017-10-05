@@ -25,6 +25,7 @@ const host = {
   prd: {
     API_URL: 'http://v3.wufazhuce.com:8000/api',
     XIAMI_URL: 'http://xiamirun.avosapps.com',
+    TIME_MOVIE_URL: 'https://api-m.mtime.cn',
     MSITE_URL: 'http://m.xxx.com',
     VENILOG_URL: 'http://venilog.xxx.com'
   }
@@ -42,5 +43,6 @@ const API_URL = currentHost.API_URL
 const MSITE_URL = currentHost.MSITE_URL
 const VENILOG_URL = currentHost.VENILOG_URL
 const MIAMI_URL = currentHost.XIAMI_URL
+const TIME_MOVIE_URL = currentHost.TIME_MOVIE_URL
 
-export {ENV, API_URL, MSITE_URL, VENILOG_URL, MIAMI_URL, setHost}
+export {ENV, API_URL, MSITE_URL, VENILOG_URL, MIAMI_URL, TIME_MOVIE_URL, setHost}

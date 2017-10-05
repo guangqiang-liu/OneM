@@ -12,6 +12,10 @@ const PATH = {
   MOVIE_DETAIL: '/movie/detail/',
   MOVIE_STORY: '/movie/${id}/story/1/0',
 
+  // 时光网数据
+  MOVIE_SHOWTIME: '/Showtime/LocationMovies.api?locationId=290',
+  MOVIE_COMEING_NEW: '/Movie/MovieComingNew.api?locationId=290',
+
   MUSIC_ID_LIST: '/music/idlist/0',
   MUSIC_DETAIL: '/music/detail/',
   MUSIC_XIAMI_MUSIC: '/run?song=http://www.xiami.com/song/',

@@ -11,12 +11,16 @@ const getMovieList = createAction(type.MOVIE_LIST, actions.movieList)
 const getMovieListForDemo = createAction(type.MOVIE_LIST, actions.movieListForDemo)
 const getMovieDetail = createAction(type.MOVIE_DETAIL, actions.movieDetail)
 const getMovieStory = createAction(type.MOVIE_STORY, actions.movieStory)
+const getMovieShowTimeList = createAction(type.MOVIE_SHOWTIME_LIST, actions.movieShowTimeList)
+const getMovieComeingNewList = createAction(type.MOVIE_COMEING_NEW_LIST, actions.movieComeingNewList)
 
 const actionCreators = {
   getMovieList: (params) => getMovieList(params),
   getMovieDetail,
   getMovieStory,
-  getMovieListForDemo
+  getMovieListForDemo,
+  getMovieShowTimeList,
+  getMovieComeingNewList
 }
 
 export default {actionCreators}

@@ -1,3 +1,4 @@
 {
+  "plugins": [["import", { "libraryName": "antd-mobile" }]],
   "presets": ["react-native"]
 }
