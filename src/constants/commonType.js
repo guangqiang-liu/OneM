@@ -60,7 +60,8 @@ const logEventType = {
 const ApiSource = {
   ONE: 'ONE',
   MIAMIMUSIC: 'MIAMIMUSIC',
-  TIMEMOVIE: 'TIMEMOVIE'
+  TIMEMOVIE: 'TIMEMOVIE',
+  TIMETICKET: 'TIMETICKET'
 }
 
 export {articleType, beginTime, monthList, logEventType, ApiSource}

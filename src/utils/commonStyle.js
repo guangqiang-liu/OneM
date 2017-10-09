@@ -25,7 +25,7 @@ export const commonStyle = {
   lightGray: '#D3D3D3',
   tomato: '#FF6347',
   PeachPuff: '#FFDAB9',
-  clear: 'rgb(0,0,0,0)',
+  clear: 'transparent',
 
   /** 主题色 **/
   themeColor: '#e74c3c',
@@ -34,9 +34,9 @@ export const commonStyle = {
   // 默认黑色字体颜色
   textBlockColor: '#262626',
   // 默认背景颜色
-  bgColor: '#EAEAEA',
+  bgColor: '#E6E6E6',
   // 默认分割线颜色
-  lineColor: '#AAAAAA',
+  lineColor: '#E6E6E6',
   // 默认placeholder颜色
   placeholderColor: '#eee',
   // borderColor

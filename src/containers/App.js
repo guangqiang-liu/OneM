@@ -116,8 +116,8 @@ const scenes = Actions.create(
             Action.dispatch('picture')
           )(PicGridList)}/>
 
-          <Scene key="movieDetail" title="电影详情" component={connect(
-            (state) => state.movie.movieList,
+          <Scene key="movieDetail" hideNavBar component={connect(
+            (state) => state.movie.movieDetail,
             Action.dispatch('movie')
           )(MovieDetail)}/>
 

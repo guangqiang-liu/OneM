@@ -6,6 +6,7 @@ import {View, Image, Text, StyleSheet, TouchableOpacity} from 'react-native'
 import {commonStyle} from '../../../../utils/commonStyle'
 import {Icon} from '../../../../utils/icon'
 import deviceInfo from '../../../../utils/deviceInfo'
+import {Actions} from 'react-native-router-flux'
 export default class ShowTimeCell extends Component {
 
   render() {
@@ -13,6 +14,7 @@ export default class ShowTimeCell extends Component {
     return (
       <TouchableOpacity
         style={styles.container}
+        onPress={() => Actions.movieDetail({id: data.id})}
       >
         <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0)'}}>
           <Image

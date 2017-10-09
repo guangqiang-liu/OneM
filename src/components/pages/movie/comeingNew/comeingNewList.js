@@ -6,6 +6,7 @@ import {View, ListView, Image, Text, StyleSheet, ScrollView, TouchableOpacity} f
 import {commonStyle} from '../../../../utils/commonStyle'
 import ComingNewCell from './comeingnewCell'
 import {Icon} from '../../../../utils/icon'
+import {Actions} from 'react-native-router-flux'
 export default class ShowTimeList extends Component {
 
   constructor(props) {
@@ -28,6 +29,7 @@ export default class ShowTimeList extends Component {
       <TouchableOpacity
         key={index}
         style={{marginLeft: 10, width: 80}}
+        onPress={() => Actions.movieDetail({id: item.id})}
       >
         <Image
           style={{width: 80, height: 120}}
@@ -54,6 +56,7 @@ export default class ShowTimeList extends Component {
       </ScrollView>
     )
   }
+
   render() {
     let dataSource = this.state.dataSource.cloneWithRows(this.props.comingNewArr)
     return (

@@ -31,7 +31,7 @@ const handleUrl = url => params => {
     let paramsArray = []
     Object.keys(params).forEach(key => paramsArray.push(key + '=' + encodeURIComponent(params[key])))
     if (url.search(/\?/) === -1) {
-      typeof (params) !== 'object' ? url += '?' + paramsArray.join('&') : url
+      typeof (params) === 'object' ? url += '?' + paramsArray.join('&') : url
     } else {
       url += '&' + paramsArray.join('&')
     }

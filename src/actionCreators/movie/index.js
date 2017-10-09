@@ -5,11 +5,14 @@ import {getFetch, postFetch} from '../../utils/network/request/HttpExtension'
 import {PATH} from '../../constants/urls'
 import {Required, ValidateUtil} from '../../utils/validatorUtil'
 import {ApiSource} from '../../constants/commonType'
-const movieDetail = params => getFetch(`${PATH.MOVIE_DETAIL}${params}`, params)
 const movieStory = params => getFetch(`/movie/${params}/story/1/0`, params)
 const movieList = params =>  getFetch(`${PATH.MOVIE_LIST}${params}`, {})
 const movieShowTimeList = params =>  getFetch(PATH.MOVIE_SHOWTIME, params, ApiSource.TIMEMOVIE)
 const movieComeingNewList = params =>  getFetch(PATH.MOVIE_COMEING_NEW, params, ApiSource.TIMEMOVIE)
+const movieDetail = params => getFetch(PATH.MOVIE_DETAIL, params, ApiSource.TIMETICKET)
+const movieCommentList = params => getFetch(PATH.MOVIE_COMMENT_LIST, params, ApiSource.TIMETICKET)
+const movieMiniCommentList = params => getFetch(PATH.MOVIE_MINI_COMMENT_LIST, params, ApiSource.TIMEMOVIE)
+const moviePlusCommentList = params => getFetch(PATH.MOVIE_PLUS_COMMENT_LIST, params, ApiSource.TIMEMOVIE)
 
 // 参数校验器
 const testValidator = () => ({
@@ -54,5 +57,8 @@ export default {
   movieListForDemo,
   testValidator,
   movieShowTimeList,
-  movieComeingNewList
+  movieComeingNewList,
+  movieCommentList,
+  movieMiniCommentList,
+  moviePlusCommentList
 }

@@ -7,7 +7,7 @@
  */
 
 import HttpUtils from './HttpUtils'
-import {API_URL, MIAMI_URL, TIME_MOVIE_URL} from '../../../constants/urlConfig'
+import {API_URL, MIAMI_URL, TIME_MOVIE_URL, TIME_TICKET_URL} from '../../../constants/urlConfig'
 import {ApiSource} from '../../../constants/commonType'
 /**
  * GET 请求
@@ -25,6 +25,9 @@ const getFetch = (url, params, source, callback) => {
       break
     case ApiSource.TIMEMOVIE:
       url = `${TIME_MOVIE_URL}${url}`
+      break
+    case ApiSource.TIMETICKET:
+      url = `${TIME_TICKET_URL}${url}`
       break
     default:
       url = `${API_URL}${url}`

@@ -9,12 +9,15 @@ const PATH = {
   PICTURE_GRID_LIST: '/hp/bymonth/',
 
   MOVIE_LIST: '/movie/list/',
-  MOVIE_DETAIL: '/movie/detail/',
   MOVIE_STORY: '/movie/${id}/story/1/0',
 
   // 时光网数据
   MOVIE_SHOWTIME: '/Showtime/LocationMovies.api?locationId=290',
   MOVIE_COMEING_NEW: '/Movie/MovieComingNew.api?locationId=290',
+  MOVIE_DETAIL: '/movie/detail.api?locationId=290',
+  MOVIE_COMMENT_LIST: '/movie/hotComment.api',
+  MOVIE_MINI_COMMENT_LIST: '/Showtime/HotMovieComments.api',
+  MOVIE_PLUS_COMMENT_LIST: '/Movie/HotLongComments.api',
 
   MUSIC_ID_LIST: '/music/idlist/0',
   MUSIC_DETAIL: '/music/detail/',

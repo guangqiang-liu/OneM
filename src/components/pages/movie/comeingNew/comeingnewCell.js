@@ -8,12 +8,14 @@ import React, {Component} from 'react'
 import {View, Image, Text, StyleSheet, TouchableOpacity} from 'react-native'
 import {commonStyle} from '../../../../utils/commonStyle'
 import {Icon} from '../../../../utils/icon'
+import {Actions} from 'react-native-router-flux'
 export default class ComeingNewCell extends Component {
   render() {
     let data = this.props.rowData
     return (
       <TouchableOpacity
         style={styles.container}
+        onPress={() => Actions.movieDetail({id: data.id})}
       >
         <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0)'}}>
           <Image
@@ -44,7 +46,6 @@ export default class ComeingNewCell extends Component {
                   <Text style={{ color: '#F9783F', fontSize: 13}}>想看</Text>
                 </TouchableOpacity>
             }
-
           </View>
         </View>
       </TouchableOpacity>
