@@ -11,8 +11,6 @@ import {Actions} from 'react-native-router-flux'
 import {formatTime} from '../../../utils/formatTime'
 import deviceInfo from '../../../utils/deviceInfo'
 import {MessageBarManager} from 'react-native-message-bar'
-
-var mp4Url = 'http://download.3g.joy.cn/video/236/60236937/1451280942752_hd.mp4'
 export default class MoviePlayer extends Component {
 
   constructor(props) {
@@ -124,13 +122,14 @@ export default class MoviePlayer extends Component {
 
   render() {
     const {orientation} = this.state
+    const {url} = this.props
     return (
       <TouchableOpacity
         style={[styles.movieContainer, {height: orientation === 'PORTRAIT' ? 250 : deviceInfo.deviceWidth, marginTop: orientation === 'PORTRAIT' ? 20 : 0}]}
         onPress={() => this.setState({isTouchedScreen: !this.state.isTouchedScreen})}
       >
-        <Video source={{uri: mp4Url}}
-               ref={(ref) => {this.player = ref}}
+        <Video source={{uri: url}}
+               ref={ref => this.player = ref}
                rate={this.state.rate}
                volume={1.0}
                muted={false}
@@ -186,6 +185,7 @@ export default class MoviePlayer extends Component {
               }
             </View> : null
         }
+
         {this.renderModal()}
       </TouchableOpacity>
     )

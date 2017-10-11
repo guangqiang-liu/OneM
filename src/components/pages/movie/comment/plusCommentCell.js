@@ -5,8 +5,20 @@ import React, {Component} from 'react'
 import {View, TouchableOpacity, Text, Image, StyleSheet} from 'react-native'
 import {commonStyle} from '../../../../utils/commonStyle'
 export default class PlusComment extends Component {
+
   render() {
-    let data = this.props.data
+    let tempData = this.props.plusData
+    let data = {}
+    if (this.props.type === 'list') {
+      data.title = tempData.title
+      data.content = tempData.content
+      data.headImg = tempData.headurl
+      data.nickname = tempData.nickname
+      data.commentDate = tempData.modifyTime
+      data.rating = tempData.rating
+    } else {
+      data = tempData
+    }
     return (
       <View style={styles.cellStyle}>
         <Text style={{color: commonStyle.black, fontSize: 15, fontWeight: 'bold'}}>{data.title}</Text>

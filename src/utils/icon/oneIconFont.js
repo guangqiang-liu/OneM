@@ -33,7 +33,12 @@ const glyphMap = {
   back_s_o: 58885,
   music_single_cycle_o: 58891,
   music_cycle_o: 58924,
-  music_random_o: 58886
+  music_random_o: 58886,
+  new_tag_o: 58974,
+  video_o: 58980,
+  star_o: 58892,
+  play_cycle_o: 58907,
+  comment_dot_o: 58887
 }
 
 const OIcon = createIconSet(glyphMap, 'iconfont', 'iconfont.ttf')

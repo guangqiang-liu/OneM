@@ -2,8 +2,7 @@
  * Created by guangqiang on 2017/9/4.
  */
 import React, {Component} from 'react'
-import {StyleSheet, Text, ListView, TouchableOpacity, View} from 'react-native'
-import {BaseComponent} from '../../base/baseComponent'
+import {StyleSheet, View} from 'react-native'
 import {connect} from 'react-redux'
 import Action from '../../../actions'
 import {commonStyle} from '../../../utils/commonStyle'

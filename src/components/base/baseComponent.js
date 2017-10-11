@@ -1,11 +1,6 @@
 /**
  * Created by guangqiang on 2017/8/27.
  */
-
-/**
- * component 基类
- */
-
 import React, {Component} from 'react'
 import {View, StyleSheet} from 'react-native'
 import NavigationBar from '../common/navigationBar'

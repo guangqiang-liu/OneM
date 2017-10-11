@@ -112,4 +112,12 @@ export const commonStyle = {
   modalOpacity: 0.3,
   // touchableOpacity
   taOpacity: 0.1,
+
+  /** 定位 **/
+  absolute: 'absolute',
+
+  /** flex **/
+  around: 'space-around',
+  between: 'space-between',
+  center: 'center'
 }

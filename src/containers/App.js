@@ -60,6 +60,12 @@ import PicGridList from '../components/pages/picture/picGridList'
 
 import MovieDetail from '../components/pages/movie/movieDetail'
 import MoviePlayer from '../components/pages/movie/moviePlayer'
+import TrailerList from '../components/pages/movie/movieTrailerList'
+import MiniCommentList from '../components/pages/movie/comment/miniCommentList'
+import PlusCommentList from '../components/pages/movie/comment/plusCommentList'
+import ActorList from '../components/pages/movie/actor/actorList'
+import PictureList from '../components/pages/movie/picture/pictureList'
+
 import WebView from '../components/common/webView'
 import MusicDetail from '../components/pages/music/musicDetail'
 import MusicPlayer from '../components/pages/music/musicPlayer'
@@ -71,6 +77,8 @@ import SerialDetail from '../components/pages/reading/serial/serialDetail'
 import QuestionDetail from '../components/pages/reading/question/questionDetail'
 import ReadingCommentList from '../components/pages/reading/commentList'
 import ArticleList from '../components/pages/reading/readingArticleList'
+
+
 const reducerCreate = params => {
   const defaultReducer = new Reducer(params)
   return (state, action) => {
@@ -126,7 +134,32 @@ const scenes = Actions.create(
             Action.dispatch('movie')
           )(MoviePlayer)}/>
 
-          <Scene key="webView" component={WebView}/>
+          <Scene key="trailerList" hideNavBar component={connect(
+            (state) => state.movie.movieList,
+            Action.dispatch('movie')
+          )(TrailerList)}/>
+
+          <Scene key="miniComment" hideNavBar component={connect(
+            (state) => state.movie.commentList,
+            Action.dispatch('movie')
+          )(MiniCommentList)}/>
+
+          <Scene key="plusComment" hideNavBar component={connect(
+            (state) => state.movie.commentList,
+            Action.dispatch('movie')
+          )(PlusCommentList)}/>
+
+          <Scene key="actorList" hideNavBar  component={connect(
+            (state) => state.movie.actor,
+            Action.dispatch('movie')
+          )(ActorList)}/>
+
+          <Scene key="pictureList" hideNavBar component={connect(
+            state => state.movie.picture,
+            Action.dispatch('movie')
+          )(PictureList)}/>
+
+          <Scene key="webView" hideNavBar component={WebView}/>
 
           <Scene key='musicDetail' hideNavBar component={connect(
             (state) => state.music.music,

@@ -1,10 +1,6 @@
 /**
  * Created by guangqiang on 2017/8/27.
  */
-
-/**
- * 通用导航栏组件
- */
 import React, { Component } from 'react'
 import {View, Text, StyleSheet, TouchableOpacity, Platform} from 'react-native'
 import {commonStyle} from '../../utils/commonStyle'
@@ -61,7 +57,7 @@ export default class NavigationBar extends Component {
       <View style={[styles.titleContainer]}>
         <Text style={[styles.titleStyle, this.navigationBarProps.titleStyle]}>{this.navigationBarProps.title}</Text>
         {
-          this.navigationBarProps.subTitle ? <Text style={[styles.subTitleStyle, this.navigationBarProps.subTitleStyle]}>子标题</Text> : null
+          this.navigationBarProps.subTitle ? <Text style={[styles.subTitleStyle, this.navigationBarProps.subTitleStyle]}>{this.navigationBarProps.subTitle}</Text> : null
         }
       </View>
     )

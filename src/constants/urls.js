@@ -18,6 +18,9 @@ const PATH = {
   MOVIE_COMMENT_LIST: '/movie/hotComment.api',
   MOVIE_MINI_COMMENT_LIST: '/Showtime/HotMovieComments.api',
   MOVIE_PLUS_COMMENT_LIST: '/Movie/HotLongComments.api',
+  MOVIE_TRAILER_LIST: '/Movie/Video.api',
+  MOVIE_ACTOR_LIST: '/Movie/MovieCreditsWithTypes.api',
+  MOVIE_PICTURE_LIST: '/Movie/ImageAll.api',
 
   MUSIC_ID_LIST: '/music/idlist/0',
   MUSIC_DETAIL: '/music/detail/',

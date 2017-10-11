@@ -8,7 +8,17 @@ import {Icon} from '../../../../utils/icon'
 export default class MiniComment extends Component {
 
   render() {
-    let data = this.props.miniData
+    let tempData = this.props.miniData
+    let data = {}
+    if (this.props.type === 'list') {
+      data.headImg = tempData.caimg
+      data.nickname = tempData.ca
+      data.rating = tempData.cr
+      data.content = tempData.ce
+      data.commentDate = tempData.cd
+    } else {
+      data = tempData
+    }
     return (
       <View style={styles.cellStyle}>
         <View>
@@ -19,16 +29,18 @@ export default class MiniComment extends Component {
             <Text style={{color: commonStyle.drakGray}}>{data.nickname}</Text>
             <Text style={{color: '#639C0C', marginRight: 10}}>{`评 ${data.rating}`}</Text>
           </View>
-          <Text style={{color: commonStyle.textBlockColor, lineHeight: 25}}>角色塑造单薄得就像纸片人一样，电影节奏杂乱得就像​菜鸟编剧写的处女剧本一样。如果这些都可以因为开心麻花团队不是专业的电影工作者而被原谅，那么这部喜剧电影至少还有一点是绝对不能原谅的--大量令人尴尬的冷场笑料充斥了这部电影</Text>
+          <Text style={{color: commonStyle.textBlockColor, lineHeight: 25}}>{data.content}</Text>
           <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginVertical: 10}}>
             <Text style={{color: commonStyle.drakGray}}>{data.commentDate}</Text>
             <View style={{flexDirection: 'row'}}>
               <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Icon name={'oneIcon|like_o'} size={14} color={commonStyle.gray}/>
-                <Text style={{fontSize: 12, color: commonStyle.drakGray}}>回复</Text>
+                <View style={{marginTop: 5}}>
+                  <Icon name={'oneIcon|comment_dot_o'} size={20} color={commonStyle.gray}/>
+                </View>
+                <Text style={{fontSize: 12, color: commonStyle.drakGray, marginLeft: 3}}>回复</Text>
               </View>
               <View style={{flexDirection: 'row', alignItems: 'center', marginHorizontal: 10}}>
-                <Icon name={'oneIcon|like_o'} size={14} color={commonStyle.gray}/>
+                <Icon name={'oneIcon|like_o'} size={25} color={commonStyle.gray}/>
                 <Text style={{fontSize: 12, color: commonStyle.drakGray}}>赞</Text>
               </View>
             </View>

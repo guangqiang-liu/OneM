@@ -3,17 +3,39 @@
  */
 import React, {Component} from 'react'
 import {StyleSheet, View, WebView} from 'react-native'
+import {commonStyle} from '../../../utils/commonStyle'
+import {BaseComponent} from '../../base/baseComponent'
+export default class CustomWebView extends BaseComponent {
 
-export default class CustomWebView extends Component {
+  navigationBarProps() {
+    return {
+      title: this.props.title,
+      subTitleStyle: {
+        color: commonStyle.white
+      },
+      titleStyle: {
+        color: commonStyle.white
+      },
+      leftIcon: {
+        name: 'nav_back_o',
+        size: 20,
+        color: commonStyle.white
+      },
+      navBarStyle: {
+        backgroundColor: '#151C28',
+      }
+    }
+  }
 
-  render() {
+  _render() {
+    const {url} = this.props
     return (
       <View style={styles.container}>
         <WebView
           ref={'webview'}
           startInLoadingState={true}
-          source={{ uri: 'http://mcms.lian-shang.cn/article/channelList?platform=4&channel=6'}}
-          userAgent={'dadad'}
+          source={{ uri: url}}
+          userAgent={'userAgent'}
         />
       </View>
     )
@@ -23,5 +45,6 @@ export default class CustomWebView extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: commonStyle.white
   }
 })

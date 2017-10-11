@@ -21,7 +21,6 @@ export default class PastList extends Component {
     Actions.refresh({
       title: '过往列表',
       backButtonImage: require('../../../assets/images/return.png'),
-
     })
   }
 

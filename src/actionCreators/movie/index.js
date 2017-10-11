@@ -13,6 +13,9 @@ const movieDetail = params => getFetch(PATH.MOVIE_DETAIL, params, ApiSource.TIME
 const movieCommentList = params => getFetch(PATH.MOVIE_COMMENT_LIST, params, ApiSource.TIMETICKET)
 const movieMiniCommentList = params => getFetch(PATH.MOVIE_MINI_COMMENT_LIST, params, ApiSource.TIMEMOVIE)
 const moviePlusCommentList = params => getFetch(PATH.MOVIE_PLUS_COMMENT_LIST, params, ApiSource.TIMEMOVIE)
+const movieTrailerList = params => getFetch(PATH.MOVIE_TRAILER_LIST, params, ApiSource.TIMEMOVIE)
+const movieActorList = params => getFetch(PATH.MOVIE_ACTOR_LIST, params, ApiSource.TIMEMOVIE)
+const moviePictureList = params => getFetch(PATH.MOVIE_PICTURE_LIST, params, ApiSource.TIMEMOVIE)
 
 // 参数校验器
 const testValidator = () => ({
@@ -60,5 +63,8 @@ export default {
   movieComeingNewList,
   movieCommentList,
   movieMiniCommentList,
-  moviePlusCommentList
+  moviePlusCommentList,
+  movieTrailerList,
+  movieActorList,
+  moviePictureList
 }

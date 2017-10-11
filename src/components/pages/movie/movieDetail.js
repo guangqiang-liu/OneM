@@ -7,22 +7,20 @@ import {commonStyle} from '../../../utils/commonStyle'
 import {VibrancyView} from 'react-native-blur'
 import deviceInfo from '../../../utils/deviceInfo'
 import {Icon} from '../../../utils/icon'
-import MiniComment from './comment/miniComment'
-import PlusComment from './comment/plusComment'
-
+import MiniComment from './comment/miniCommentCell'
+import PlusComment from './comment/plusCommentCell'
+import {Actions} from 'react-native-router-flux'
 export default class MovieDetail extends Component {
 
   constructor(props) {
     super(props)
-    this.state = {
-    }
+    this.navBar = null
+    this.state = {}
   }
 
   componentDidMount() {
     this.props.getMovieDetail({movieId: this.props.id})
-    this.props.getMovieComment({movieId: this.props.id}).then(response => {
-      console.log(response)
-    })
+    this.props.getMovieComment({movieId: this.props.id})
   }
 
   renderActorList(arr) {
@@ -47,6 +45,7 @@ export default class MovieDetail extends Component {
       <TouchableOpacity
         key={index}
         style={{marginLeft: 10, width: 102}}
+        onPress={() => Actions.webView({url: item.goodsUrl, title: item.name})}
       >
         <View style={{borderColor: commonStyle.lineColor, borderWidth: 1}}>
           <Image
@@ -69,7 +68,7 @@ export default class MovieDetail extends Component {
 
   renderPlusComment(arr) {
     return arr.map((item, index) => (
-      <PlusComment key={index} data={item}/>
+      <PlusComment key={index} plusData={item}/>
     ))
   }
 
@@ -81,9 +80,22 @@ export default class MovieDetail extends Component {
     )
   }
 
+  _onScroll(event) {
+    let y = event.nativeEvent.contentOffset.y
+    let opacityPercent = y / 64
+    if (y < 64) {
+      this.navBar.setNativeProps({
+        style: {opacity: opacityPercent}
+      })
+    } else {
+      this.navBar.setNativeProps({
+        style: {opacity: 1}
+      })
+    }
+  }
+
   renderContent() {
     let data = this.props.movieDetail
-    let advertisement = data.advertisement
     let basic = data.basic
     let boxOffice = data.boxOffice
     let live = data.live
@@ -92,229 +104,301 @@ export default class MovieDetail extends Component {
     let miniData = this.props.commentData.mini
     let plusData = this.props.commentData.plus
     return (
-      <ScrollView style={styles.container}>
-        <Image
-          style={styles.bgContainer}
-          source={{uri: basic.img}}
-          resizeMode='stretch'
-        />
-        <View style={styles.bgContainer}>
-          <VibrancyView
-            blurType={'light'}
-            blurAmount={10}
-            style={styles.container}
+      <View style={styles.container}>
+        <ScrollView
+          onScroll={this._onScroll.bind(this)}
+          scrollEventThrottle={20}
+          bounces={false}
+        >
+          <Image
+            style={styles.bgContainer}
+            source={{uri: basic.img}}
+            resizeMode='stretch'
           />
-        </View>
-        <View style={styles.contentStyle}>
-          <View style={styles.headerStyle}>
-            <Image
-              style={styles.img}
-              source={{uri: basic.img}}
-              resizeMode='contain'
+          <View style={styles.bgContainer}>
+            <VibrancyView
+              blurType={'light'}
+              blurAmount={10}
+              style={styles.container}
             />
-            <View style={styles.rightContent}>
-              <Text style={{color: commonStyle.white, fontSize: 16, marginVertical: 5}}>{basic.name}</Text>
-              <Text style={{color: commonStyle.white, fontSize: 13, marginBottom: 8}}>{basic.nameEn}</Text>
-              <View style={{flexDirection: 'row'}}>
-                {
-                  basic.isEggHunt ? <Text style={{color: '#588F03', fontSize: 12}}>有彩蛋-</Text> : null
-                }
-                <Text style={{fontSize: 12, color: commonStyle.textBlockColor}}>{basic.mins}</Text>
-              </View>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                {
-                  this.renderStory(basic.type)
-                }
-              </View>
-              <Text style={{color: commonStyle.textBlockColor, fontSize: 13, marginTop: 3}}>{`${basic.releaseDate}-${basic.releaseArea}上映`}</Text>
-              <Text numberOfLines={1} style={{fontSize: 13, color: commonStyle.textBlockColor, marginTop: 3}}>{`@${basic.commentSpecial}`}</Text>
-              <View style={{flexDirection: 'row' ,marginTop: 5}}>
-                <View style={styles.borderText}>
-                  <Text style={{paddingHorizontal: 5, paddingVertical: 2, color: commonStyle.textBlockColor, fontSize: 10}}>中国巨幕</Text>
-                </View>
-                {
-                  basic.isIMAX ? <View style={styles.borderText}>
-                    <Text style={{paddingHorizontal: 5, paddingVertical: 2, color: commonStyle.textBlockColor, fontSize: 10}}>IMAX</Text>
-                  </View> : null
-                }
-              </View>
-            </View>
-            <View style={{width: 40, marginTop: 30}}>
-              <View style={{alignItems: 'center', justifyContent: 'center', backgroundColor: '#588F03', height: 40}}>
-                <Text style={{fontSize: 15, color: commonStyle.white}}>{basic.overallRating}</Text>
-              </View>
-            </View>
           </View>
-          <View style={styles.content}>
-            <Text style={{color: commonStyle.textBlockColor, lineHeight: 20}}>{`剧情： ${basic.story}`}</Text>
-          </View>
-          <View style={{borderBottomWidth: 10, borderBottomColor: commonStyle.lineColor}}>
-            <View style={{height: 40, paddingHorizontal: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-              <Text style={{color: commonStyle.textBlockColor, fontSize: 15}}>导演</Text>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Text style={{color: commonStyle.textGrayColor, fontSize: 12}}>全部</Text>
-                <Icon name={'oneIcon|music_playing_s'} size={12} color={commonStyle.black}/>
-              </View>
-            </View>
-            <ScrollView
-              style={{height: 135, margin: 10, marginLeft: 0, marginTop: 0}}
-              horizontal={true}
-              removeClippedSubviews={true}
-              showsHorizontalScrollIndicator={false}
-            >
-              {this.renderActorList([basic.director])}
-            </ScrollView>
-          </View>
-          <View style={{borderBottomWidth: 10, borderBottomColor: commonStyle.lineColor}}>
-            <View style={{height: 40, paddingHorizontal: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-              <Text style={{color: commonStyle.textBlockColor, fontSize: 15}}>演员</Text>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Text style={{color: commonStyle.textGrayColor, fontSize: 12}}>全部</Text>
-                <Icon name={'oneIcon|music_playing_s'} size={12} color={commonStyle.black}/>
-              </View>
-            </View>
-            <ScrollView
-              style={{height: 135, margin: 10, marginLeft: 0, marginTop: 0}}
-              horizontal={true}
-              removeClippedSubviews={true}
-              showsHorizontalScrollIndicator={false}
-            >
-              {this.renderActorList(basic.actors)}
-            </ScrollView>
-          </View>
-          {
-            live.count.length ? <View>
-              <View style={{height: 40, paddingHorizontal: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-                <Text style={{color: commonStyle.textBlockColor, fontSize: 15}}>直播</Text>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <Text style={{color: commonStyle.textGrayColor, fontSize: 12}}>{live.count}</Text>
-                  <Icon name={'oneIcon|music_playing_s'} size={12} color={commonStyle.black}/>
-                </View>
-              </View>
-              <View style={styles.liveContent}>
+          <View style={styles.contentStyle}>
+            <View style={styles.headerStyle}>
+              <TouchableOpacity
+                style={{justifyContent: 'center', alignItems: 'center', backgroundColor: commonStyle.clear}}
+                onPress={() => Actions.trailerList({id: basic.movieId})}
+              >
                 <Image
-                  style={{width: 100, height: 60}}
-                  source={{uri: live.img}}
+                  style={styles.img}
+                  source={{uri: basic.img}}
                   resizeMode='contain'
                 />
-                <View style={{flex: 1, marginLeft: 10}}>
-                  <Text style={{color: commonStyle.textBlockColor, marginBottom: 5}}>{live.title}</Text>
-                  <Icon name={'oneIcon|music_playing_s'} size={12} color={commonStyle.black}/>
-                  <Text style={{color: commonStyle.textGrayColor, marginVertical: 5, fontSize: 12}}>{live.playNumTag}</Text>
+                <View style={{position: commonStyle.absolute}}>
+                  <Icon name={'oneIcon|play_cycle_o'} size={40} color={commonStyle.white}/>
                 </View>
-              </View>
-            </View> : null
-          }
-          <View style={{flexDirection: 'row', paddingBottom: 10, borderBottomColor: commonStyle.lineColor, borderBottomWidth: 10}}>
-            <View style={{flex: 1}}>
-              <View style={{height: 40, paddingHorizontal: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-                <Text style={{color: commonStyle.textBlockColor, fontSize: 15}}>视频</Text>
-                <View style={{flexDirection: 'row', alignItems: 'center', marginRight: 15}}>
-                  <Text style={{color: commonStyle.textGrayColor, fontSize: 12}}>{video.count}</Text>
-                  <Icon name={'oneIcon|music_playing_s'} size={12} color={commonStyle.black}/>
+              </TouchableOpacity>
+              <View style={styles.rightContent}>
+                <Text style={{color: commonStyle.white, fontSize: 16, marginVertical: 5}}>{basic.name}</Text>
+                <Text style={{color: commonStyle.white, fontSize: 13, marginBottom: 8}}>{basic.nameEn}</Text>
+                <View style={{flexDirection: 'row'}}>
+                  {
+                    basic.isEggHunt ? <Text style={{color: '#588F03', fontSize: 12}}>有彩蛋-</Text> : null
+                  }
+                  <Text style={{fontSize: 12, color: commonStyle.textBlockColor}}>{basic.mins}</Text>
                 </View>
-              </View>
-              <View style={{marginHorizontal: 10, borderRightColor: commonStyle.lineColor, borderRightWidth: 1, paddingRight: 10}}>
-                <Image
-                  style={{height: 120}}
-                  source={{uri: video.img}}
-                  resizeMode='cover'
-                />
-              </View>
-            </View>
-            <View style={{width: 120}}>
-              <View style={{height: 40, paddingHorizontal: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
-                <Text style={{color: commonStyle.textBlockColor, fontSize: 15}}>图片</Text>
                 <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                  <Text style={{color: commonStyle.textGrayColor, fontSize: 12}}>{basic.stageImg.count}</Text>
+                  {
+                    this.renderStory(basic.type)
+                  }
+                </View>
+                <Text style={{color: commonStyle.textBlockColor, fontSize: 13, marginTop: 3}}>{`${basic.releaseDate}-${basic.releaseArea}上映`}</Text>
+                <Text numberOfLines={1} style={{fontSize: 13, color: commonStyle.textBlockColor, marginTop: 3}}>{`@${basic.commentSpecial}`}</Text>
+                <View style={{flexDirection: 'row' ,marginTop: 5}}>
+                  <View style={styles.borderText}>
+                    <Text style={{paddingHorizontal: 5, paddingVertical: 2, color: '#64788E', fontSize: 10}}>中国巨幕</Text>
+                  </View>
+                  {
+                    basic.isIMAX ? <View style={styles.borderText}>
+                      <Text style={{paddingHorizontal: 5, paddingVertical: 2, color: '#64788E', fontSize: 10}}>IMAX</Text>
+                    </View> : null
+                  }
+                </View>
+              </View>
+              <View style={{width: 40, marginTop: 30}}>
+                <View style={{alignItems: 'center', justifyContent: 'center', backgroundColor: '#588F03', height: 40}}>
+                  <Text style={{fontSize: 15, color: commonStyle.white}}>{basic.overallRating}</Text>
+                </View>
+              </View>
+            </View>
+            <View style={styles.content}>
+              <Text style={{color: commonStyle.textBlockColor, lineHeight: 20}}>{`剧情： ${basic.story}`}</Text>
+            </View>
+            <View style={{borderBottomWidth: 10, borderBottomColor: commonStyle.lineColor}}>
+              <TouchableOpacity
+                style={{height: 40, paddingHorizontal: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}
+                onPress={() => Actions.actorList({id: basic.movieId})}
+              >
+                <Text style={{color: commonStyle.textBlockColor, fontSize: 15}}>导演</Text>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <Text style={{color: commonStyle.textGrayColor, fontSize: 12}}>全部</Text>
+                  <Icon name={'oneIcon|music_playing_s'} size={12} color={commonStyle.black}/>
+                </View>
+              </TouchableOpacity>
+              <ScrollView
+                style={{height: 120, margin: 10, marginLeft: 0, marginTop: 0}}
+                horizontal={true}
+                removeClippedSubviews={true}
+                showsHorizontalScrollIndicator={false}
+              >
+                {this.renderActorList([basic.director])}
+              </ScrollView>
+            </View>
+            <View style={{borderBottomWidth: 10, borderBottomColor: commonStyle.lineColor}}>
+              <TouchableOpacity
+                style={{height: 40, paddingHorizontal: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}
+                onPress={() => Actions.actorList({id: basic.movieId})}
+              >
+                <Text style={{color: commonStyle.textBlockColor, fontSize: 15}}>演员</Text>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <Text style={{color: commonStyle.textGrayColor, fontSize: 12}}>全部</Text>
+                  <Icon name={'oneIcon|music_playing_s'} size={12} color={commonStyle.black}/>
+                </View>
+              </TouchableOpacity>
+              <ScrollView
+                style={{height: 135, margin: 10, marginLeft: 0, marginTop: 0}}
+                horizontal={true}
+                removeClippedSubviews={true}
+                showsHorizontalScrollIndicator={false}
+              >
+                {this.renderActorList(basic.actors)}
+              </ScrollView>
+            </View>
+            {
+              live.count >= 1 ?
+                <View>
+                  <View style={{height: 40, paddingHorizontal: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                    <Text style={{color: commonStyle.textBlockColor, fontSize: 15}}>直播</Text>
+                    <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                      <Text style={{color: commonStyle.textGrayColor, fontSize: 12}}>{live.count}</Text>
+                      <Icon name={'oneIcon|music_playing_s'} size={12} color={commonStyle.black}/>
+                    </View>
+                  </View>
+                  <View style={styles.liveContent}>
+                    <Image
+                      style={{width: 100, height: 60}}
+                      source={{uri: live.img}}
+                      resizeMode='contain'
+                    />
+                    <View style={{flex: 1, marginLeft: 10}}>
+                      <Text style={{color: commonStyle.textBlockColor, marginBottom: 5}}>{live.title}</Text>
+                      <Icon name={'oneIcon|video_o'} size={15} color={commonStyle.red}/>
+                      <Text style={{color: commonStyle.textGrayColor, marginVertical: 5, fontSize: 12}}>{live.playNumTag}</Text>
+                    </View>
+                  </View>
+                </View> : null
+            }
+            <View style={{flexDirection: 'row', paddingBottom: 10, borderBottomColor: commonStyle.lineColor, borderBottomWidth: 10}}>
+              <TouchableOpacity style={{flex: 1}} onPress={() => Actions.trailerList({id: basic.movieId})}>
+                <View style={{height: 40, paddingHorizontal: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                  <Text style={{color: commonStyle.textBlockColor, fontSize: 15}}>视频</Text>
+                  <View style={{flexDirection: 'row', alignItems: 'center', marginRight: 15}}>
+                    <Text style={{color: commonStyle.textGrayColor, fontSize: 12}}>{video.count}</Text>
+                    <Icon name={'oneIcon|music_playing_s'} size={12} color={commonStyle.black}/>
+                  </View>
+                </View>
+                <View
+                  style={{marginHorizontal: 10, borderRightColor: commonStyle.lineColor, borderRightWidth: 1, paddingRight: 10, justifyContent: 'center', alignItems: 'center', backgroundColor: commonStyle.clear}}
+                >
+                  <Image
+                    style={{height: 120, width: deviceInfo.deviceWidth - 150}}
+                    source={{uri: video.img}}
+                    resizeMode='cover'
+                  />
+                  <View style={{position: commonStyle.absolute}}>
+                    <Icon name={'oneIcon|play_cycle_o'} size={40} color={commonStyle.white}/>
+                  </View>
+                </View>
+              </TouchableOpacity>
+              <TouchableOpacity style={{width: 120}} onPress={() => Actions.pictureList({id: basic.movieId, title: basic.name, subTitle: basic.nameEn})}>
+                <View style={{height: 40, paddingHorizontal: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', }}>
+                  <Text style={{color: commonStyle.textBlockColor, fontSize: 15}}>图片</Text>
+                  <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                    <Text style={{color: commonStyle.textGrayColor, fontSize: 12}}>{basic.stageImg.count}</Text>
+                    <Icon name={'oneIcon|music_playing_s'} size={12} color={commonStyle.black}/>
+                  </View>
+                </View>
+                <View style={{marginRight: 10, paddingRight: 10, backgroundColor: 'red'}}>
+                  <Image
+                    style={{width: 110, height: 120}}
+                    source={{uri: basic.stageImg.list[0].imgUrl}}
+                    resizeMode='cover'
+                  />
+                </View>
+              </TouchableOpacity>
+            </View>
+            {
+              related.goodsList.length ? <View style={{borderBottomWidth: 10, borderBottomColor: commonStyle.lineColor}}>
+                <View style={{height: 40, paddingHorizontal: 10, flexDirection: 'row', alignItems: 'center'}}>
+                  <Text style={{color: commonStyle.textBlockColor, fontSize: 15}}>{`周边商品(${related.goodsCount})`}</Text>
+                </View>
+                <View style={{padding: 0}}>
+                  <ScrollView
+                    style={{height: 155, margin: 10, marginLeft: 0, marginTop: 0}}
+                    horizontal={true}
+                    removeClippedSubviews={true}
+                    showsHorizontalScrollIndicator={false}
+                  >
+                    {this.renderGoodsList(related.goodsList)}
+                  </ScrollView>
+                </View>
+              </View> : null
+            }
+            {
+              boxOffice.ranking !== 0 ? <View style={{borderBottomWidth: 10, borderBottomColor: commonStyle.lineColor}}>
+                <View style={{height: 40, paddingHorizontal: 10, flexDirection: 'row', alignItems: 'center'}}>
+                  <Text style={{color: commonStyle.textBlockColor, fontSize: 15}}>票房</Text>
+                </View>
+                <View style={styles.boxOffice}>
+                  <View style={styles.boxOfficeItem}>
+                    <Text style={styles.boxOfficeValue}>{boxOffice.ranking}</Text>
+                    <View style={{alignItems: 'center', flexDirection: 'row'}}>
+                      <Text style={styles.boxOfficeText}>票房排名</Text>
+                      <Icon name={'oneIcon|music_playing_s'} size={12} color={commonStyle.black}/>
+                    </View>
+                  </View>
+                  <View style={styles.boxOfficeItem}>
+                    <Text style={styles.boxOfficeValue}>{boxOffice.todayBoxDes}</Text>
+                    <View style={{alignItems: 'center', flexDirection: 'row'}}>
+                      <Text style={styles.boxOfficeText}>{boxOffice.todayBoxDesUnit}</Text>
+                      <Icon name={'oneIcon|music_playing_s'} size={12} color={commonStyle.black}/>
+                    </View>
+                  </View>
+                  <View style={styles.boxOfficeItem}>
+                    <Text style={styles.boxOfficeValue}>{boxOffice.totalBoxDes}</Text>
+                    <View style={{alignItems: 'center', flexDirection: 'row'}}>
+                      <Text style={styles.boxOfficeText}>{boxOffice.totalBoxUnit}</Text>
+                      <Icon name={'oneIcon|music_playing_s'} size={12} color={commonStyle.black}/>
+                    </View>
+                  </View>
+                </View>
+              </View> : null
+            }
+            <View>
+              <View style={{height: 40, paddingHorizontal: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                <Text style={{color: commonStyle.textBlockColor, fontSize: 15}}>短评</Text>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <Text style={{color: commonStyle.textGrayColor, fontSize: 12}}>全部</Text>
                   <Icon name={'oneIcon|music_playing_s'} size={12} color={commonStyle.black}/>
                 </View>
               </View>
-              <View style={{marginRight: 10, paddingRight: 10, backgroundColor: 'red'}}>
-                <Image
-                  style={{width: 110, height: 120}}
-                  source={{uri: basic.stageImg.list[0].imgUrl}}
-                  resizeMode='cover'
-                />
+              {this.renderMiniComment(miniData.list)}
+              <TouchableOpacity
+                style={{alignItems: 'center', justifyContent: 'center', height: 50, borderBottomWidth: 10, borderBottomColor: commonStyle.lineColor}}
+                onPress={() => Actions.miniComment({id: basic.movieId})}
+              >
+                <Text style={{color: '#FD7108', fontSize: 15}}>{`查看更多${miniData.total}条短评`}</Text>
+              </TouchableOpacity>
+            </View>
+            <View>
+              <View style={{height: 40, paddingHorizontal: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                <Text style={{color: commonStyle.textBlockColor, fontSize: 15}}>影评</Text>
+                <View style={{flexDirection: 'row', alignItems: 'center'}}>
+                  <Text style={{color: commonStyle.textGrayColor, fontSize: 12}}>全部</Text>
+                  <Icon name={'oneIcon|music_playing_s'} size={12} color={commonStyle.black}/>
+                </View>
               </View>
+              {this.renderPlusComment(plusData.list)}
+              <TouchableOpacity
+                style={{alignItems: 'center', justifyContent: 'center', height: 40}}
+                onPress={() => Actions.plusComment({id: basic.movieId, title: basic.name})}
+              >
+                <Text style={{color: '#FD7108', fontSize: 15}}>{`查看更多${plusData.total}条短评`}</Text>
+              </TouchableOpacity>
             </View>
           </View>
-          {
-            related.goodsList.length ? <View style={{borderBottomWidth: 10, borderBottomColor: commonStyle.lineColor}}>
-              <View style={{height: 40, paddingHorizontal: 10, flexDirection: 'row', alignItems: 'center'}}>
-                <Text style={{color: commonStyle.textBlockColor, fontSize: 15}}>{`周边商品(${related.goodsCount})`}</Text>
-              </View>
-              <View style={{padding: 0}}>
-                <ScrollView
-                  style={{height: 155, margin: 10, marginLeft: 0, marginTop: 0}}
-                  horizontal={true}
-                  removeClippedSubviews={true}
-                  showsHorizontalScrollIndicator={false}
-                >
-                  {this.renderGoodsList(related.goodsList)}
-                </ScrollView>
-              </View>
-            </View> : null
-          }
-          {
-            boxOffice.ranking !== 0 ? <View style={{borderBottomWidth: 10, borderBottomColor: commonStyle.lineColor}}>
-              <View style={{height: 40, paddingHorizontal: 10, flexDirection: 'row', alignItems: 'center'}}>
-                <Text style={{color: commonStyle.textBlockColor, fontSize: 15}}>票房</Text>
-              </View>
-              <View style={styles.boxOffice}>
-                <View style={styles.boxOfficeItem}>
-                  <Text style={styles.boxOfficeValue}>{boxOffice.ranking}</Text>
-                  <View style={{alignItems: 'center', flexDirection: 'row'}}>
-                    <Text style={styles.boxOfficeText}>票房排名</Text>
-                    <Icon name={'oneIcon|music_playing_s'} size={12} color={commonStyle.black}/>
-                  </View>
-                </View>
-                <View style={styles.boxOfficeItem}>
-                  <Text style={styles.boxOfficeValue}>{boxOffice.todayBoxDes}</Text>
-                  <View style={{alignItems: 'center', flexDirection: 'row'}}>
-                    <Text style={styles.boxOfficeText}>{boxOffice.todayBoxDesUnit}</Text>
-                    <Icon name={'oneIcon|music_playing_s'} size={12} color={commonStyle.black}/>
-                  </View>
-                </View>
-                <View style={styles.boxOfficeItem}>
-                  <Text style={styles.boxOfficeValue}>{boxOffice.totalBoxDes}</Text>
-                  <View style={{alignItems: 'center', flexDirection: 'row'}}>
-                    <Text style={styles.boxOfficeText}>{boxOffice.totalBoxUnit}</Text>
-                    <Icon name={'oneIcon|music_playing_s'} size={12} color={commonStyle.black}/>
-                  </View>
-                </View>
-              </View>
-            </View> : null
-          }
-          <View>
-            <View style={{height: 40, paddingHorizontal: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-              <Text style={{color: commonStyle.textBlockColor, fontSize: 15}}>短评</Text>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Text style={{color: commonStyle.textGrayColor, fontSize: 12}}>全部</Text>
-                <Icon name={'oneIcon|music_playing_s'} size={12} color={commonStyle.black}/>
-              </View>
+        </ScrollView>
+        {/* 底部操作栏 */}
+        <View style={styles.bottomToolBar}>
+          <View style={{flexDirection: 'row', alignItems: 'center', width: 120, justifyContent: 'space-around', height: 49, backgroundColor: commonStyle.bgColor}}>
+            <View style={{alignItems: 'center', marginLeft: 10}}>
+              <Icon name={'oneIcon|love_o'} size={18} color={commonStyle.gray}/>
+              <Text style={{fontSize: 11, color: commonStyle.gray}}>想看</Text>
             </View>
-            {this.renderMiniComment(miniData.list)}
-            <View style={{alignItems: 'center', justifyContent: 'center', height: 50, borderBottomWidth: 10, borderBottomColor: commonStyle.lineColor}}>
-              <Text style={{color: '#FD7108', fontSize: 15}}>{`查看更多${miniData.total}条短评`}</Text>
+            <View style={{width: 0.5, height: 20, backgroundColor: commonStyle.textGrayColor}}/>
+            <View style={{alignItems: 'center', marginRight: 10}}>
+              <Icon name={'oneIcon|comment_o'} size={16} color={commonStyle.gray}/>
+              <Text style={{fontSize: 11, color: commonStyle.gray}}>评论</Text>
             </View>
           </View>
-
-          <View>
-            <View style={{height: 40, paddingHorizontal: 10, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-              <Text style={{color: commonStyle.textBlockColor, fontSize: 15}}>影评</Text>
-              <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                <Text style={{color: commonStyle.textGrayColor, fontSize: 12}}>全部</Text>
-                <Icon name={'oneIcon|music_playing_s'} size={12} color={commonStyle.black}/>
-              </View>
-            </View>
-            {this.renderPlusComment(plusData.list)}
-            <View style={{alignItems: 'center', justifyContent: 'center', height: 50, borderBottomWidth: 10, borderBottomColor: commonStyle.lineColor}}>
-              <Text style={{color: '#FD7108', fontSize: 15}}>{`查看更多${plusData.total}条短评`}</Text>
+          <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#F37207', height: 49}}>
+            <Text style={{color: commonStyle.white, fontSize: 17}}>选座购票</Text>
+          </View>
+        </View>
+        {/* 顶部渐变导航栏 */}
+        <View
+          style={[styles.navBarStyle, {backgroundColor: commonStyle.clear}]}>
+          <View style={styles.navComtentStyle}>
+            <Icon name={'oneIcon|nav_back_o'} size={20} color={commonStyle.white}/>
+            <Text style={{color: commonStyle.white, fontSize: 17}}>{``}</Text>
+            <View style={{marginRight: 5}}>
+              <Icon name={'oneIcon|share_o'} size={20} color={commonStyle.white}/>
             </View>
           </View>
         </View>
-      </ScrollView>
+        <View
+          ref={ref => this.navBar = ref}
+          style={[styles.navBarStyle, {opacity: 0}]}>
+          <View style={styles.navComtentStyle}>
+            <TouchableOpacity onPress={() => Actions.pop()}>
+              <Icon name={'oneIcon|nav_back_o'} size={20} color={commonStyle.white}/>
+            </TouchableOpacity>
+            <Text style={{color: commonStyle.white, fontSize: 17}}>{basic.name}</Text>
+            <TouchableOpacity style={{marginRight: 5}} onPress={() => alert('分享到')}>
+              <Icon name={'oneIcon|share_o'} size={20} color={commonStyle.white}/>
+            </TouchableOpacity>
+          </View>
+        </View>
+      </View>
     )
   }
 
@@ -351,7 +435,7 @@ const styles = StyleSheet.create({
   },
   img: {
     width: 100,
-    marginTop: 5
+    height: 150
   },
   rightContent: {
     flex: 1,
@@ -363,7 +447,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: 'transparent',
     borderWidth: 0.5,
-    marginRight: 10
+    marginRight: 10,
+    borderColor: '#64788E'
   },
   content: {
     padding: 10,
@@ -383,7 +468,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderBottomWidth: 1,
     borderBottomColor: commonStyle.lineColor,
-    padding: 10,
+    marginHorizontal: 10,
+    paddingVertical: 10,
     paddingTop: 0
   },
   goodsStyle: {
@@ -409,5 +495,24 @@ const styles = StyleSheet.create({
   boxOfficeValue: {
     color: '#F37407',
     fontSize: 20
+  },
+  bottomToolBar: {
+    flexDirection: 'row',
+    height: 49,
+    alignItems: 'center'
+  },
+  navBarStyle: {
+    height: 64,
+    backgroundColor: '#161C28',
+    position: 'absolute',
+    width: deviceInfo.deviceWidth,
+  },
+  navComtentStyle: {
+    height: 44,
+    marginTop: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 10,
+    justifyContent: 'space-between'
   }
 })

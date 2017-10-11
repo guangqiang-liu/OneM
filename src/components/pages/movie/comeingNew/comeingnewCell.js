@@ -17,14 +17,14 @@ export default class ComeingNewCell extends Component {
         style={styles.container}
         onPress={() => Actions.movieDetail({id: data.id})}
       >
-        <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0, 0, 0, 0)'}}>
+        <TouchableOpacity style={{justifyContent: 'center', alignItems: 'center', backgroundColor: commonStyle.clear}}>
           <Image
             style={styles.img}
             source={{uri: data.image}}
           />
-          <TouchableOpacity style={{position: 'absolute', borderColor: commonStyle.white, borderWidth: 0.5, borderRadius: 10, width: 20, height: 20, alignItems: 'center', justifyContent: 'center'}}>
-            <Icon name={'oneIcon|music_playing_s'} size={13} color={commonStyle.white}/>
-          </TouchableOpacity>
+          <View style={{position: commonStyle.absolute}}>
+            <Icon name={'oneIcon|play_cycle_o'} size={25} color={commonStyle.white}/>
+          </View>
         </TouchableOpacity>
         <View style={styles.rightContent}>
           <View style={{flex: 1}}>
