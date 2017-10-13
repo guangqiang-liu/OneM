@@ -12,7 +12,7 @@ class BaseComponent extends Component {
     super(props)
     // 获取导航栏属性
     this.navigationBarProps = this.navigationBarProps.bind(this)
-    // 绘制主体内容
+    // 绘制内容
     this._render = this._render.bind(this)
     // 导航左按钮点击事件
     this.onLeftPress = this.onLeftPress.bind(this)
@@ -27,7 +27,6 @@ class BaseComponent extends Component {
   navigationBarProps() {
     return null
   }
-
 
   /**
    * 父类函数，提供给子类调用，测试当子类调用父类的函数时，是否可以做到hook功能

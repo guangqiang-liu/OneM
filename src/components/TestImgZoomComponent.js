@@ -3,10 +3,6 @@
  */
 import React, { Component } from 'react'
 import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View,
   Modal
 } from 'react-native'
 

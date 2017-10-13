@@ -7,53 +7,40 @@ import Action from '../actions'
 import {dispatch} from '../utils/venilog/dispatchLog'
 import type from '../constants/actionType'
 import {commonStyle} from '../utils/commonStyle'
-// 启动页面
+
+// router-flux 测试page
 import Launch from '../components/Launch'
-
-// 注册界面
 import Register from "../components/Register"
-
-// 登录界面
 import Login from "../components/Login"
-
-// 登录界面2
 import Login2 from "../components/Login2"
-
-// 登录界面3
 import Login3 from "../components/Login3"
-
-// 自己定义的测试组件
-import HelloWold from '../components/HelloWord'
-
-import PageOne from '../components/PageOne'
-
-import PageTwo from '../components/PageTwo'
-
-// home
-import Home from "../components/Home"
-
 import EchoView from "../components/EchoView"
-import Blur from '../components/TestBlurComponent'
-
-// 消息通知栏组件
-import MessageBar from "../components/MessageBar"
-
-import TabBar from './TabBarContainer'
-
+import PageOne from '../components/PageOne'
+import PageTwo from '../components/PageTwo'
 import Error from '../components/Error'
-
 import ModalView from '../components/ModalView'
-
 import Mask from '../components/Mask'
 
-import CustomComp from '../components/TestCustomUIComponent'
-
-// COMMON
 import Loading from '../utils/progressHUD/progressHUD'
 import {EnhancedListViewTest} from '../components/EnhancedListViewDemo'
 import SwiperComp from '../components/TestSwiperComponent'
 import {ImgZoom} from '../components/TestImgZoomComponent'
+import TestMessageBar from '../components/TestMessageBar'
+import TestAntdMobile from '../components/TestAntdMobile'
+import TestOrientation from '../components/TestOrientation'
+import TestIcon from '../components/TestIcon'
+import TestScrollableTabView from '../components/TestScrollable-tab-view'
+import TestViewPager from '../components/TestViewPager'
+
+import TestRedux from "../components/TestRedux"
+import Blur from '../components/TestBlurComponent'
+import MessageBar from "../utils/messageBar/MessageBar"
+import CustomComp from '../components/TestCustomUIComponent'
+import Network from '../components/TestNetwork'
+import TestLogDot from '../components/TestLogDot'
+
 // PAGES
+import TabBar from './TabBarContainer'
 import PicDetail from '../components/pages/picture/picDetail'
 import PastList from '../components/pages/picture/pastList'
 import PicGridList from '../components/pages/picture/picGridList'
@@ -77,7 +64,6 @@ import SerialDetail from '../components/pages/reading/serial/serialDetail'
 import QuestionDetail from '../components/pages/reading/question/questionDetail'
 import ReadingCommentList from '../components/pages/reading/commentList'
 import ArticleList from '../components/pages/reading/readingArticleList'
-
 
 const reducerCreate = params => {
   const defaultReducer = new Reducer(params)
@@ -104,7 +90,8 @@ const scenes = Actions.create(
         <Stack key="init" back>
           <Scene key="launch" component={Launch}
                  hideNavBar />
-          {/* 首页TabBar 上的四个组件没有办法绑定，只能单独写 */}
+
+          {/* tabBar 五个组件没有办法绑定，只能单独写 */}
           <Scene key="main" initial back={false} hideNavBar component={TabBar}/>
 
           <Scene key="picDetail" hideNavBar component={connect(
@@ -159,8 +146,6 @@ const scenes = Actions.create(
             Action.dispatch('movie')
           )(PictureList)}/>
 
-          <Scene key="webView" hideNavBar component={WebView}/>
-
           <Scene key='musicDetail' hideNavBar component={connect(
             (state) => state.music.music,
             Action.dispatch('music')
@@ -205,46 +190,58 @@ const scenes = Actions.create(
             Action.dispatch('reading')
           )(ArticleList)}/>
 
-          {/* 当helloWord组件放到和main组件同级的scene层级中，这时就可以继承同级中的导航栏 */}
-          <Scene key="helloWord" component={
-            connect(
-            (state) => state.find.chat,
-            Action.dispatch('openChat')
-          )(HelloWold)}/>
+          <Scene key="webView" hideNavBar component={WebView}/>
 
-          <Scene key="blur" component={Blur}/>
+          {/** 测试组件 **/}
+          <Scene key="register" title="Register" component={Register}/>
+
+          <Scene key="register2" title="Register2" component={Register}/>
 
           <Scene key="pageOne" hideNavBar component={PageOne}/>
+
           <Scene key="pageTwo" component={PageTwo}/>
 
           {/* clone：使用clone标识的Scenes将被作为模版处理，并克隆到当前的scene的容器中 */}
           <Scene key="echo" clone component={EchoView}
                  getTitle={({navigation}) => navigation.state.key}/>
-          {/* 这里使用了type这个属性，设置界面的跳转样式 */}
-          <Scene key="home" component={Home}
-                 title="Replace"
-                 type={ActionConst.REPLACE}/>
 
-          <Scene key="register" component={Register}
-                 title="Register"/>
-          <Scene key="register2" component={Register}
-                 title="Register2"/>
-          <Scene key="customComp" title ='测试自定义组件' component={CustomComp}/>
           <Scene key="enhancedListView" title ='测试ListView' component={connect(
             (state) => state.movie.movieList,
             Action.dispatch('movie')
           )(EnhancedListViewTest)}/>
-          <Scene
-            key='SwiperComp'
-            title='Swiper'
-            component={SwiperComp}
-          />
 
-          <Scene
-            key='imgZoom'
-            title='ImgZoom'
-            component={ImgZoom}
-          />
+          <Scene key="blur" title="blur" component={Blur}/>
+
+          <Scene key="testMessageBar" title="testMessageBar" component={TestMessageBar}/>
+
+          <Scene key="testAntdMobile" title="testAntdMobile" component={TestAntdMobile}/>
+
+          <Scene key="testOrientation" title="testOrientation" component={TestOrientation}/>
+
+          <Scene key='SwiperComp' title='Swiper' component={SwiperComp}/>
+
+          <Scene key='imgZoom' title='ImgZoom' component={ImgZoom}/>
+
+          <Scene key='testIcon' title='TestIcon' component={TestIcon}/>
+
+          <Scene key='testScrollableTabView' title='TestScrollableTabView' component={TestScrollableTabView}/>
+
+          <Scene key='testViewPager' title='TestViewPager' component={TestViewPager}/>
+
+          {/* 这里使用了type这个属性，设置界面的跳转样式 */}
+          <Scene key="testRedux" component={TestRedux}
+                 title="Replace"
+                 type={ActionConst.REPLACE}/>
+
+          <Scene key="testLogDot" title='testLogDot' component={TestLogDot}/>
+
+          <Scene key="network" title='网络请求' component={
+            connect(
+              (state) => state.find.chat,
+              Action.dispatch('openChat')
+            )(Network)}/>
+
+          <Scene key="customComp" title='包装原生组件' component={CustomComp}/>
 
         </Stack>
 

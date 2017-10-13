@@ -1,14 +1,42 @@
 /**
  * Created by guangqiang on 2017/8/27.
  */
-import React, { Component } from 'react'
-import {View, Text, StyleSheet, TouchableOpacity, Platform} from 'react-native'
+import React, { Component, PropTypes } from 'react'
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native'
 import {commonStyle} from '../../utils/commonStyle'
 import {Icon} from '../../utils/icon'
+const barBtnWidth = 40
 const defaultNavigationBarProps = {
   hiddenNav: false,
   hiddenLeftItem: false,
   hiddenRightItem: false,
+}
+
+/**
+ * NavigationBar 配置项
+ * @type {{navigationBarProps: (*), onLeftPress: *, onRightPress: *, hiddenNav: (*), navBarStyle, navContentStyle, hiddenLeftItem: (*), leftIcon, leftTitle, leftTitleStyle, leftItemStyle, titleStyle, title, subTitleStyle, subTitle, hiddenRightItem: (*), rightIcon, rightTitle, rightTitleStyle, rightItemStyle}}
+ */
+const navBarConfig = {
+  navigationBarProps: PropTypes.Object,
+  onLeftPress: PropTypes.fun,
+  onRightPress: PropTypes.fun,
+  hiddenNav: PropTypes.bool,
+  navBarStyle: PropTypes.Object,
+  navContentStyle: PropTypes.Object,
+  hiddenLeftItem: PropTypes.bool,
+  leftIcon: PropTypes.Object,
+  leftTitle: PropTypes.string,
+  leftTitleStyle: PropTypes.Object,
+  leftItemStyle: PropTypes.Object,
+  titleStyle: PropTypes.Object,
+  title: PropTypes.string,
+  subTitleStyle: PropTypes.Object,
+  subTitle: PropTypes.string,
+  hiddenRightItem: PropTypes.bool,
+  rightIcon: PropTypes.Object,
+  rightTitle: PropTypes.string,
+  rightTitleStyle: PropTypes.Object,
+  rightItemStyle: PropTypes.Object
 }
 
 export default class NavigationBar extends Component {
@@ -25,7 +53,7 @@ export default class NavigationBar extends Component {
   renderLeftItem() {
     let tempComponent
     if (this.navigationBarProps.hiddenLeftItem) {
-      return <View style={{width: 40}}/>
+      return <View style={{width: barBtnWidth}}/>
     }
     const {onLeftPress} = this.props
     if (this.navigationBarProps.leftIcon) {
@@ -66,7 +94,7 @@ export default class NavigationBar extends Component {
   renderRightItem() {
     let tempComponent
     if (this.navigationBarProps.hiddenRightItem) {
-      return <View style={{width: 40}}/>
+      return <View style={{width: barBtnWidth}}/>
     }
     const {onRightPress} = this.props
     if (this.navigationBarProps.rightIcon) {
@@ -80,7 +108,7 @@ export default class NavigationBar extends Component {
       )
     } else {
       tempComponent = (
-        <View style={{width: 40}}/>
+        <View style={{width: barBtnWidth}}/>
       )
     }
     return (
@@ -160,7 +188,7 @@ const styles = StyleSheet.create({
   rightItemStyle: {
     justifyContent: 'center',
     alignItems: 'flex-end',
-    width: 40,
+    width: barBtnWidth,
   },
   rightTitleStyle: {
     fontSize: commonStyle.navRightTitleFont,

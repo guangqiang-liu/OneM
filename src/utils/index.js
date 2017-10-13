@@ -4,5 +4,6 @@
 
 import deviceInfo from './deviceInfo'
 import {commonStyle} from './commonStyle'
-
-export {deviceInfo, commonStyle}
+import {RegExpr} from './regUtil'
+import {ArrayTool} from './arrayExtension'
+export {deviceInfo, commonStyle, RegExpr, ArrayTool}

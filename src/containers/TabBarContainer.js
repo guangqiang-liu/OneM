@@ -8,8 +8,10 @@ import Picture from '../components/pages/picture/picture'
 import Reading from '../components/pages/reading/reading'
 import Music from '../components/pages/music/music'
 import Movie from '../components/pages/movie/movie'
+import Me from '../components/pages/me/me'
 import {Icon} from '../utils/icon'
 import {commonStyle} from '../utils'
+
 export default class MainPage extends Component {
 
   constructor(props) {
@@ -62,6 +64,16 @@ export default class MainPage extends Component {
             renderSelectedIcon={() => <Icon name={'oneIcon|tb_Movie_o'} size={20} color={commonStyle.black}/>}
             onPress={() => this.setState({ selectedTab: 'Movie' })}>
             <Movie/>
+          </TabNavigator.Item>
+          <TabNavigator.Item
+            selected={this.state.selectedTab === 'Me'}
+            title="我的"
+            titleStyle={styles.tabText}
+            selectedTitleStyle={styles.selectedTabText}
+            renderIcon={() => <Icon name={'oneIcon|tb_Movie_o'} size={20} color={commonStyle.textGrayColor}/>}
+            renderSelectedIcon={() => <Icon name={'oneIcon|tb_Movie_o'} size={20} color={commonStyle.black}/>}
+            onPress={() => this.setState({ selectedTab: 'Me' })}>
+            <Me/>
           </TabNavigator.Item>
         </TabNavigator>
       </View>

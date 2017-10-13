@@ -32,15 +32,6 @@ export default class PicDetail extends BaseComponent {
     })
   }
 
-  toast() {
-    // Toast.show('show')
-    // Toast.showLong('show')
-    Toast.showSuccess('success')
-    // Toast.showLongSuccess('success')
-    // Toast.showWarning('warning')
-    // Toast.showError('error')
-  }
-
   renderHeader() {
     return (
       <TouchableOpacity
@@ -77,8 +68,7 @@ export default class PicDetail extends BaseComponent {
         <ScrollView style={styles.scrollViewStyle}>
           <View style={styles.boxStyle}>
             <TouchableOpacity
-              onPress={() => this.setState({modalVisible: true})
-              }
+              onPress={() => this.setState({modalVisible: true})}
             >
               <Image style={styles.picStyle} source={{uri: data.hp_img_url}}/>
             </TouchableOpacity>
@@ -92,41 +82,16 @@ export default class PicDetail extends BaseComponent {
             </View>
           </View>
           <TouchableOpacity style={styles.toolBar}>
-            <TouchableOpacity style={{flexDirection: 'row'}} onPress={() => Actions.customComp()}>
+            <TouchableOpacity style={{flexDirection: 'row'}}>
               <Image style={styles.smallIcon} resizeMode="contain" source={require('../../../assets/images/diary.png')}/>
               <Text style={{lineHeight: 40, color: commonStyle.textGrayColor}}>小记</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              style={{flexDirection: 'row'}}
-              onPress={() => Actions.helloWord()}
-            >
+            <TouchableOpacity style={{flexDirection: 'row'}}>
               <Image style={styles.smallIcon} resizeMode="contain" source={require('../../../assets/images/laud.png')}/>
               <Text style={{lineHeight: 40, color: commonStyle.textGrayColor}}>{data.praisenum}</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => Actions.webView()}
-            >
+            <TouchableOpacity>
               <Image style={styles.smallIcon} resizeMode="contain" source={require('../../../assets/images/share_image.png')}/>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => Actions.enhancedListView()}
-            >
-              <Icon name={'fontAwesome|rocket'} size={30} color='#900'/>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => this.toast()}
-            >
-              <Icon name={'oneIcon|tb_Movie_o'} size={30} color='#900'/>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => Actions.SwiperComp()}
-            >
-              <Icon name={'oneIcon|tb_Music_o'} size={30} color='#900'/>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => Actions.blur()}
-            >
-              <Icon name={'oneIcon|tb_Music_o'} size={30} color='#900'/>
             </TouchableOpacity>
           </TouchableOpacity>
         </ScrollView>

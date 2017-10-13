@@ -10,6 +10,7 @@ import movie from './movie'
 import music from './music'
 import reading from './reading'
 import common from './common'
+import me from './me'
 const rootReducer = combineReducers({
   launch,
   home,
@@ -18,7 +19,8 @@ const rootReducer = combineReducers({
   movie,
   music,
   reading,
-  common
+  common,
+  me
 })
 
 export default rootReducer

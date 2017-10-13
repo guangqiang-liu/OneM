@@ -7,12 +7,12 @@
 import React, {Component} from 'react'
 import {StyleSheet, Text} from 'react-native'
 const buildConfig = 'debug'
-import {sendUserLog} from '../../../utils/venilog/userLog'
+import {sendInteractiveLog} from '../../../utils/venilog/interactiveLog'
 
 const _onPress = (props, ...args) => {
   let params = {}
   // params.entry = props.vEntry !== undefined ? JSON.stringify(props.vEntry) : JSON.stringify(args)
-  sendUserLog(props.vID, 3003, params)
+  sendInteractiveLog(props.vID, 3003, params)
   props.onPress && props.onPress(...args)
 }
 

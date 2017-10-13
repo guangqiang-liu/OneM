@@ -8,13 +8,15 @@ import picture from './picture'
 import movie from './movie'
 import music from './music'
 import reading from './reading'
+import me from './me'
 const action = {
   openChat,
   launch,
   picture,
   movie,
   music,
-  reading
+  reading,
+  me
 }
 
 const dispatch = name => dispatch => {

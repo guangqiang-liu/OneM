@@ -5,6 +5,7 @@ import React, {Component} from 'react'
 import {Text, StyleSheet} from 'react-native'
 import Button from 'react-native-button'
 import {commonStyle} from '../../../utils/commonStyle'
+
 let mode = 'debug'
 
 const _onPress = (props, ...args) => {

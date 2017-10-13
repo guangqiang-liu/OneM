@@ -17,7 +17,7 @@ class Icon extends Component {
     const {name, size, color} = this.props
     if (!name.includes('|')) {
       throw new Error('name 解析错误！')
-      return (<View/>)
+      return null
     }
     let nameArr = name.split('|')
     let fontlib = nameArr[0]

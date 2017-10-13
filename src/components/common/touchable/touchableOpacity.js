@@ -3,12 +3,13 @@
  */
 import React, {Component} from 'react'
 import {StyleSheet, TouchableOpacity, View, Text} from 'react-native'
-
-let mode = 'xdebug'
+import deviceInfo from '../../../utils/deviceInfo'
+let mode = deviceInfo.mode
+import {sendInteractiveLog} from '../../../utils/venilog/interactiveLog'
 
 const _onPress = (props, ...args) => {
   // HOOK 事件
-  // alert('HOOK 成功')
+  sendInteractiveLog(props.vID, 3003, {})
   // HOOK 后
   props.onPress && props.onPress(...args)
 }

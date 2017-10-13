@@ -16,5 +16,5 @@ export default deviceInfo = {
   // 设备系统
   deviceOS: Platform.OS,
   // 当前config: debug \ release
-  mode: ''
+  mode: __DEV__ ? 'debug' : 'release'
 }

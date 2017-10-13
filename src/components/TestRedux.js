@@ -6,12 +6,12 @@ import {connect} from 'react-redux'
 
 class Home extends React.Component {
 
-  addxxx(add) {
+  addAction(add) {
     console.log('add')
     add()
   }
 
-  reducerxxx(reduce) {
+  reducerAction(reduce) {
     console.log('reduce')
     reduce()
   }
@@ -20,20 +20,16 @@ class Home extends React.Component {
     const {value, add, reduce} = this.props
     return (
       <View style={styles.container}>
-        <Text>Replace screen</Text>
+        <Text>Replace screen(新的scene将直接替换掉上一个scene，上一个scene被导航栈移除)</Text>
         <Button onPress={Actions.pop}>Back</Button>
         <Text style={{fontSize: 30}}>{value}</Text>
-        <Button onPress={()=> this.addxxx(add)}>add</Button>
-        <Button onPress={()=> this.reducerxxx(reduce)}>reduce</Button>
+        <Button onPress={()=> this.addAction(add)}>redux-Action-add</Button>
+        <Button onPress={()=> this.reducerAction(reduce)}>redux-Action-reduce</Button>
         <Button onPress={()=> Actions.pageOne()}>pageOne</Button>
       </View>
     )
   }
 }
-
-/**
- * 这里使用了最简单的redux架构来实现 Counter
- */
 
 const mapStateToProps = (state) => {
   return {
@@ -51,11 +47,6 @@ const mapDispatchToProps = (dispatch) => {
     }
   }
 }
-
-export default Home = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Home)
 
 const styles = StyleSheet.create({
   container: {
@@ -75,3 +66,8 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
 })
+
+export default Home = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home)

@@ -2,12 +2,13 @@
  * Created by guangqiang on 2017/9/14.
  */
 import React, {Component} from 'react'
-import {Actions} from "react-native-router-flux"
 import {TouchableOpacity, StyleSheet, View, Button, Text} from './common'
+
 class CustomComp extends Component {
   render() {
     return (
       <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'red'}}>
+        <Text style={{marginVertical: 20}}>这里的组件都是从common文件中引入的</Text>
         <Text
           style={styles.textStyle}
           onPress={() => alert('点击了text')}>
