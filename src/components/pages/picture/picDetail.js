@@ -2,10 +2,9 @@
  * Created by guangqiang on 2017/9/4.
  */
 import React, {Component} from 'react'
-import {View, StyleSheet, Text, ScrollView, Image, TouchableOpacity, Modal} from 'react-native'
+import {View, Text, ScrollView, Image, TouchableOpacity, Modal} from 'react-native'
+import {StyleSheet} from '../../common'
 import {commonStyle} from '../../../utils/commonStyle'
-import {Actions} from 'react-native-router-flux'
-import {Toast} from '../../../utils/toast'
 import {Icon} from '../../../utils/icon'
 import ImageViewer from 'react-native-image-zoom-viewer'
 import {BaseComponent} from '../../base/baseComponent'
@@ -84,11 +83,11 @@ export default class PicDetail extends BaseComponent {
           <TouchableOpacity style={styles.toolBar}>
             <TouchableOpacity style={{flexDirection: 'row'}}>
               <Image style={styles.smallIcon} resizeMode="contain" source={require('../../../assets/images/diary.png')}/>
-              <Text style={{lineHeight: 40, color: commonStyle.textGrayColor}}>小记</Text>
+              <Text style={styles.bottomText}>小记</Text>
             </TouchableOpacity>
             <TouchableOpacity style={{flexDirection: 'row'}}>
               <Image style={styles.smallIcon} resizeMode="contain" source={require('../../../assets/images/laud.png')}/>
-              <Text style={{lineHeight: 40, color: commonStyle.textGrayColor}}>{data.praisenum}</Text>
+              <Text style={styles.bottomText}>{data.praisenum}</Text>
             </TouchableOpacity>
             <TouchableOpacity>
               <Image style={styles.smallIcon} resizeMode="contain" source={require('../../../assets/images/share_image.png')}/>
@@ -133,7 +132,7 @@ const styles = StyleSheet.create({
   },
   smallIcon: {
     width: 40,
-    height: 40
+    height: 40,
   },
   closeStyle: {
     alignItems: 'center',
@@ -141,5 +140,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
     flexDirection: 'row',
     justifyContent: 'flex-end'
+  },
+  bottomText: {
+    lineHeight: 40,
+    color: commonStyle.textGrayColor,
+    marginTop: 10,
+    _marginTop: -10
   }
 })
