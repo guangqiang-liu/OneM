@@ -8,6 +8,8 @@ import {commonStyle} from '../../../utils/commonStyle'
 import {Icon} from '../../../utils/icon'
 import ImageViewer from 'react-native-image-zoom-viewer'
 import {BaseComponent} from '../../base/baseComponent'
+import MyIcon from 'react-native-vector-icons/FontAwesome'
+
 export default class PicDetail extends BaseComponent {
 
   constructor(props) {
@@ -80,7 +82,7 @@ export default class PicDetail extends BaseComponent {
               <Text style={styles.creactTime}>{data.hp_makettime}</Text>
             </View>
           </View>
-          <TouchableOpacity style={styles.toolBar}>
+          <View style={styles.toolBar}>
             <TouchableOpacity style={{flexDirection: 'row'}}>
               <Image style={styles.smallIcon} resizeMode="contain" source={require('../../../assets/images/diary.png')}/>
               <Text style={styles.bottomText}>小记</Text>
@@ -92,7 +94,8 @@ export default class PicDetail extends BaseComponent {
             <TouchableOpacity>
               <Image style={styles.smallIcon} resizeMode="contain" source={require('../../../assets/images/share_image.png')}/>
             </TouchableOpacity>
-          </TouchableOpacity>
+            <MyIcon name="rocket" size={30} color="#900" />
+          </View>
         </ScrollView>
         {this._renderModal()}
       </View>
