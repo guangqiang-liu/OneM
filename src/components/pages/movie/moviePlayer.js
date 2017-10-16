@@ -2,7 +2,7 @@
  * Created by guangqiang on 2017/9/7.
  */
 import React, {Component} from 'react'
-import {View, Text, StyleSheet, TouchableOpacity, Slider, ActivityIndicator, Modal} from 'react-native'
+import {View, Text, TouchableOpacity, Slider, ActivityIndicator, Modal, Platform} from 'react-native'
 import Video from 'react-native-video'
 import Orientation from 'react-native-orientation'
 import {commonStyle} from '../../../utils/commonStyle'
@@ -11,6 +11,8 @@ import {Actions} from 'react-native-router-flux'
 import {formatTime} from '../../../utils/formatTime'
 import deviceInfo from '../../../utils/deviceInfo'
 import {MessageBarManager} from 'react-native-message-bar'
+import {StyleSheet} from '../../common'
+const playerHeight = 250
 export default class MoviePlayer extends Component {
 
   constructor(props) {
@@ -107,7 +109,8 @@ export default class MoviePlayer extends Component {
         animationType={"none"}
         transparent={true}
         visible={this.state.modalVisible}
-        onRequestClose={() => {alert("Modal has been closed.")}}>
+        onRequestClose={() => alert("Modal has been closed.")}
+      >
         <View style={styles.indicator}>
           <ActivityIndicator
             animating={true}
@@ -125,7 +128,8 @@ export default class MoviePlayer extends Component {
     const {url, title} = this.props
     return (
       <TouchableOpacity
-        style={[styles.movieContainer, {height: orientation === 'PORTRAIT' ? 250 : deviceInfo.deviceWidth, marginTop: orientation === 'PORTRAIT' ? 20 : 0}]}
+        style={[styles.movieContainer, {height: this.state.orientation === 'PORTRAIT' ? playerHeight : deviceInfo.deviceWidth,
+          marginTop: this.state.orientation === 'PORTRAIT' ? Platform.OS === 'ios' ? 20 : 0 : 0, }]}
         onPress={() => this.setState({isTouchedScreen: !this.state.isTouchedScreen})}
       >
         <Video source={{uri: url}}
@@ -253,7 +257,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 10
   },
   indicator: {
-    height: 250,
+    height: playerHeight,
     width: deviceInfo.deviceWidth,
     marginTop: 20,
     alignItems: 'center',

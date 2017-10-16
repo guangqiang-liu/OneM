@@ -2,7 +2,7 @@
  * Created by guangqiang on 2017/10/9.
  */
 import React, {Component} from 'react'
-import {View, Text, TouchableOpacity, StyleSheet, Image, ScrollView, Platform, findNodeHandle} from 'react-native'
+import {View, Text, TouchableOpacity, Image, ScrollView, Platform, findNodeHandle} from 'react-native'
 import {commonStyle} from '../../../utils/commonStyle'
 import {VibrancyView, BlurView} from 'react-native-blur'
 import deviceInfo from '../../../utils/deviceInfo'
@@ -10,6 +10,7 @@ import {Icon} from '../../../utils/icon'
 import MiniComment from './comment/miniCommentCell'
 import PlusComment from './comment/plusCommentCell'
 import {Actions} from 'react-native-router-flux'
+import {StyleSheet} from '../../common'
 export default class MovieDetail extends Component {
 
   constructor(props) {
@@ -121,7 +122,7 @@ export default class MovieDetail extends Component {
             style={styles.bgContainer}
             source={{uri: basic.img}}
             resizeMode='stretch'
-            onLoadEnd={this.imageLoaded.bind(this)}
+            onLoadEnd={() => this.imageLoaded()}
           />
           <View style={styles.bgContainer}>
             {
@@ -222,7 +223,7 @@ export default class MovieDetail extends Component {
                 </View>
               </TouchableOpacity>
               <ScrollView
-                style={{height: 135, margin: 10, marginLeft: 0, marginTop: 0}}
+                style={styles.actorCell}
                 horizontal={true}
                 removeClippedSubviews={true}
                 showsHorizontalScrollIndicator={false}
@@ -446,9 +447,10 @@ const styles = StyleSheet.create({
   },
   headerStyle: {
     marginTop: -50,
+    _marginTop: 0,
     flexDirection: 'row',
     marginHorizontal: 10,
-    paddingBottom: 10
+    paddingBottom: 10,
   },
   img: {
     width: 100,
@@ -534,6 +536,16 @@ const styles = StyleSheet.create({
   },
   absolute: {
     position: "absolute",
-    top: 0, left: 0, bottom: 0, right: 0,
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
   },
+  actorCell: {
+    height: 135,
+    _height: 140,
+    margin: 10,
+    marginLeft: 0,
+    marginTop: 0
+  }
 })

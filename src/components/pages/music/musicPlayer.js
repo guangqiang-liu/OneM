@@ -2,14 +2,13 @@
  * Created by guangqiang on 2017/9/9.
  */
 import React, {Component} from 'react'
-import {View, Text, TouchableOpacity, StyleSheet, Image, Slider, Animated, Easing} from 'react-native'
+import {View, Text, TouchableOpacity, StyleSheet, Image, Slider, Animated, Easing, Platform, findNodeHandle} from 'react-native'
 import deviceInfo from '../../../utils/deviceInfo'
 import {commonStyle} from '../../../utils/commonStyle'
 import Video from 'react-native-video'
-import actions from '../../../actionCreators/music'
 import {Actions} from 'react-native-router-flux'
 import {MessageBarManager} from 'react-native-message-bar'
-import {VibrancyView} from 'react-native-blur'
+import {VibrancyView, BlurView} from 'react-native-blur'
 import {Icon} from '../../../utils/icon'
 import {formatTime} from '../../../utils/formatTime'
 export default class MusicPlayer extends Component {
@@ -19,6 +18,7 @@ export default class MusicPlayer extends Component {
     this.player = ''
     this.rotation = false
     this.state = {
+      viewRef: null,
       paused: false, // false: 表示播放，true: 表示暂停
       duration: 0.00,
       slideValue: 0.00,
@@ -27,7 +27,7 @@ export default class MusicPlayer extends Component {
       playMode: 0,
       spinValue: new Animated.Value(0),
       playIcon: 'music_paused_o',
-      playModeIcon: 'music_cycle_o'
+      playModeIcon: 'music_cycle_o',
     }
     this.spinAnimated = Animated.timing(this.state.spinValue, {
       toValue: 1,
@@ -78,11 +78,9 @@ export default class MusicPlayer extends Component {
 
   componentDidMount() {
     this.spin()
-    // 先获取到播放列表
     this.props.getMusicList(2017, 6, {}).then(response =>{
       console.log(response)
     })
-    // 获取xiami音乐信息
     this.props.getxiamiMusic(this.props.music_id).then(response =>{
       console.log(response)
     })
@@ -90,7 +88,6 @@ export default class MusicPlayer extends Component {
 
   setDuration(duration) {
     this.setState({duration: duration.duration})
-    // Actions.refresh({title: this.props.musicInfo.title, data: "Changed data"})
   }
 
   setTime(data) {
@@ -104,7 +101,6 @@ export default class MusicPlayer extends Component {
   // 下一首
   nextSong(currentIndex) {
     this.reset()
-    // 获取播放列表数组中数据
     currentIndex === this.props.musicList.length ? currentIndex = 0 : currentIndex
     let newSong = this.props.musicList[currentIndex]
     let music_id = newSong.music_id
@@ -171,7 +167,6 @@ export default class MusicPlayer extends Component {
     }
   }
 
-  // 播放结束
   onEnd(data) {
     this.showMessageBar('亲！')('已帮你切换到下一首')('fuccess')
     // 开始下一首
@@ -233,7 +228,6 @@ export default class MusicPlayer extends Component {
             width: 170,
             height: 170,
             borderRadius: 85,
-            backgroundColor: 'orange',
             alignSelf: 'center',
             position: 'absolute', top: 235,
             transform: [{rotate: this.state.spinValue.interpolate({
@@ -316,19 +310,35 @@ export default class MusicPlayer extends Component {
     )
   }
 
+  imageLoaded() {
+    this.setState({viewRef: findNodeHandle(this.backgroundImage)})
+  }
+
   render() {
     return (
       this.props.musicInfo.url ?
         <View style={styles.container}>
           <Image
+            ref={(img) => { this.backgroundImage = img}}
             style={styles.bgContainer}
             source={{uri: this.props.musicInfo.cover}}
-            resizeMode='cover'/>
+            resizeMode='cover'
+            onLoadEnd={() => this.imageLoaded()}
+          />
           <View style={styles.bgContainer}>
-            <VibrancyView
-              blurType={'light'}
-              blurAmount={20}
-              style={styles.container}/>
+            {
+              Platform.OS === 'ios' ?
+                <VibrancyView
+                  blurType={'light'}
+                  blurAmount={20}
+                  style={styles.container}/> :
+                <BlurView
+                  style={styles.absolute}
+                  viewRef={this.state.viewRef}
+                  blurType="light"
+                  blurAmount={10}
+                />
+            }
           </View>
           {this.renderPlayer()}
         </View> : <View/>
@@ -412,5 +422,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-around'
+  },
+  absolute: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    bottom: 0,
+    right: 0,
   }
 })
