@@ -40,7 +40,7 @@ export default class TrailerList extends BaseComponent {
 
   renderRow(rowData, sectionId, rowId) {
     return (
-      <TouchableOpacity style={styles.cellStyle} onPress={() => Actions.moviePlayer({url: rowData.url})}>
+      <TouchableOpacity style={styles.cellStyle} onPress={() => Actions.moviePlayer({url: rowData.url, title: rowData.title})}>
         <View style={{justifyContent: 'center', alignItems: 'center', backgroundColor: commonStyle.clear}}>
           <Image style={styles.img} source={{uri: rowData.image}}/>
           <View style={{position: commonStyle.absolute}}>

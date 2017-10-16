@@ -1,14 +1,13 @@
 import React, {Component} from "react"
 import store from '../store'
-import { Provider, connect } from 'react-redux'
+import {Provider, connect} from 'react-redux'
 import {Scene, Router, Actions, Reducer, ActionConst, Modal, Stack, Lightbox} from "react-native-router-flux"
-import { View } from "react-native"
+import {View} from "react-native"
 import Action from '../actions'
 import {dispatch} from '../utils/venilog/dispatchLog'
 import type from '../constants/actionType'
 import {commonStyle} from '../utils/commonStyle'
 
-// router-flux 测试page
 import Launch from '../components/Launch'
 import Register from "../components/Register"
 import Login from "../components/Login"
@@ -20,6 +19,7 @@ import PageTwo from '../components/PageTwo'
 import Error from '../components/Error'
 import ModalView from '../components/ModalView'
 import Mask from '../components/Mask'
+import Author from '../components/pages/me/author'
 
 import Loading from '../utils/progressHUD/progressHUD'
 import {EnhancedListViewTest} from '../components/EnhancedListViewDemo'
@@ -31,10 +31,10 @@ import TestOrientation from '../components/TestOrientation'
 import TestIcon from '../components/TestIcon'
 import TestScrollableTabView from '../components/TestScrollable-tab-view'
 import TestViewPager from '../components/TestViewPager'
-
-import TestRedux from "../components/TestRedux"
 import Blur from '../components/TestBlurComponent'
 import MessageBar from "../utils/messageBar/MessageBar"
+
+import TestRedux from "../components/TestRedux"
 import CustomComp from '../components/TestCustomUIComponent'
 import Network from '../components/TestNetwork'
 import TestLogDot from '../components/TestLogDot'
@@ -53,17 +53,18 @@ import PlusCommentList from '../components/pages/movie/comment/plusCommentList'
 import ActorList from '../components/pages/movie/actor/actorList'
 import PictureList from '../components/pages/movie/picture/pictureList'
 
-import WebView from '../components/common/webView'
 import MusicDetail from '../components/pages/music/musicDetail'
 import MusicPlayer from '../components/pages/music/musicPlayer'
 import MusicList from '../components/pages/music/musicList'
+
 import BannerDetail from '../components/pages/reading/bannerDetail'
 import ReadingTab from '../components/pages/reading/readingTabList'
 import EssayDetail from '../components/pages/reading/essay/essayDetail'
 import SerialDetail from '../components/pages/reading/serial/serialDetail'
 import QuestionDetail from '../components/pages/reading/question/questionDetail'
-import ReadingCommentList from '../components/pages/reading/commentList'
 import ArticleList from '../components/pages/reading/readingArticleList'
+
+import WebView from '../components/common/webView'
 
 const reducerCreate = params => {
   const defaultReducer = new Reducer(params)
@@ -192,7 +193,8 @@ const scenes = Actions.create(
 
           <Scene key="webView" hideNavBar component={WebView}/>
 
-          {/** 测试组件 **/}
+          {/** ############### 测试组件 ############### **/}
+
           <Scene key="register" title="Register" component={Register}/>
 
           <Scene key="register2" title="Register2" component={Register}/>
@@ -204,6 +206,8 @@ const scenes = Actions.create(
           {/* clone：使用clone标识的Scenes将被作为模版处理，并克隆到当前的scene的容器中 */}
           <Scene key="echo" clone component={EchoView}
                  getTitle={({navigation}) => navigation.state.key}/>
+
+          <Scene key="author" title="作者" component={Author}/>
 
           <Scene key="enhancedListView" title ='测试ListView' component={connect(
             (state) => state.movie.movieList,
@@ -228,7 +232,7 @@ const scenes = Actions.create(
 
           <Scene key='testViewPager' title='TestViewPager' component={TestViewPager}/>
 
-          {/* 这里使用了type这个属性，设置界面的跳转样式 */}
+          {/* 这里使用了REPLACE属性，设置界面的跳转样式 */}
           <Scene key="testRedux" component={TestRedux}
                  title="Replace"
                  type={ActionConst.REPLACE}/>
@@ -257,6 +261,7 @@ const scenes = Actions.create(
       <Stack key="modalRoot" back>
         <Scene key="modalView" component={ModalView}/>
       </Stack>
+
       <Stack key="login" titleStyle={{alignSelf: "center"}}>
         <Scene component={Login} title="Login"
                key="loginModal"
@@ -288,7 +293,7 @@ class App extends Component {
         <Router
           scenes={scenes}
           createReducer={reducerCreate}
-          tintColor="orange"
+          tintColor='white'
           getSceneStyle={getSceneStyle}
         />
         <MessageBar />

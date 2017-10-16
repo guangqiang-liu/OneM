@@ -122,7 +122,7 @@ export default class MoviePlayer extends Component {
 
   render() {
     const {orientation} = this.state
-    const {url} = this.props
+    const {url, title} = this.props
     return (
       <TouchableOpacity
         style={[styles.movieContainer, {height: orientation === 'PORTRAIT' ? 250 : deviceInfo.deviceWidth, marginTop: orientation === 'PORTRAIT' ? 20 : 0}]}
@@ -150,10 +150,19 @@ export default class MoviePlayer extends Component {
                style={styles.backgroundVideo}
         />
         <View style={styles.navContentStyle}>
-          <TouchableOpacity style={{backgroundColor: 'rgba(0, 0, 0, 0)'}}
-            onPress={orientation === 'PORTRAIT' ? () => Actions.pop() : Orientation.lockToPortrait}
+          <View style={{flexDirection: 'row', alignItems: commonStyle.center}}>
+            <TouchableOpacity style={{backgroundColor: commonStyle.clear}}
+                              onPress={orientation === 'PORTRAIT' ? () => Actions.pop() : Orientation.lockToPortrait}
+            >
+              <Icon name={'oneIcon|nav_back_o'} size={18} color={commonStyle.white}/>
+            </TouchableOpacity>
+            <Text style={{backgroundColor: commonStyle.clear, color: commonStyle.white, marginLeft: 10}}>{title}</Text>
+          </View>
+          <TouchableOpacity
+            style={{backgroundColor: commonStyle.clear}}
+            onPress={() => alert('切换电视！')}
           >
-            <Icon name={'oneIcon|nav_back_o'} size={18} color={commonStyle.white}/>
+            <Icon name={'oneIcon|tv_o'} size={20} color={commonStyle.white}/>
           </TouchableOpacity>
         </View>
         {
@@ -179,9 +188,13 @@ export default class MoviePlayer extends Component {
                 </View>
               </View>
               {
-                orientation === 'PORTRAIT' ? <TouchableOpacity onPress={Orientation.lockToLandscapeLeft}>
-                  <Icon name={'oneIcon|scale_o'} size={18} color={commonStyle.white}/>
-                </TouchableOpacity> : null
+                orientation === 'PORTRAIT' ?
+                  <TouchableOpacity onPress={Orientation.lockToLandscapeLeft}>
+                    <Icon name={'oneIcon|scale_o'} size={18} color={commonStyle.white}/>
+                  </TouchableOpacity> :
+                  <TouchableOpacity onPress={Orientation.lockToPortrait}>
+                    <Icon name={'oneIcon|shrink_o'} size={18} color={commonStyle.white}/>
+                  </TouchableOpacity>
               }
             </View> : null
         }

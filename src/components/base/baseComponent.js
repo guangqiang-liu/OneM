@@ -46,7 +46,9 @@ class BaseComponent extends Component {
   /**
    * 导航右按钮点击事件，需要子类overload
    */
-  onRightPress() {}
+  onRightPress() {
+    return null
+  }
 
   /**
    * 绘制导航栏

@@ -93,9 +93,14 @@ class Me extends BaseComponent {
 
   navigationBarProps() {
     return {
-      // title: '我的',
-      hiddenLeftItem: true
+      title: '我的',
+      hiddenLeftItem: true,
+      rightTitle: '个人'
     }
+  }
+
+  onRightPress() {
+    return Actions.author()
   }
 
   renderRow(rowData, sectionId, rowId) {

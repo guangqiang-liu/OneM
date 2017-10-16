@@ -38,7 +38,9 @@ const glyphMap = {
   video_o: 58980,
   star_o: 58892,
   play_cycle_o: 58907,
-  comment_dot_o: 58887
+  comment_dot_o: 58887,
+  tv_o: 58913,
+  shrink_o: 58896
 }
 
 const OIcon = createIconSet(glyphMap, 'iconfont', 'iconfont.ttf')

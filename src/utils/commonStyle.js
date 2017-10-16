@@ -119,5 +119,6 @@ export const commonStyle = {
   /** flex **/
   around: 'space-around',
   between: 'space-between',
-  center: 'center'
+  center: 'center',
+  row: 'row'
 }
