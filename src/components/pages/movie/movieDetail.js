@@ -2,9 +2,9 @@
  * Created by guangqiang on 2017/10/9.
  */
 import React, {Component} from 'react'
-import {View, Text, TouchableOpacity, StyleSheet, Image, ScrollView} from 'react-native'
+import {View, Text, TouchableOpacity, StyleSheet, Image, ScrollView, Platform, findNodeHandle} from 'react-native'
 import {commonStyle} from '../../../utils/commonStyle'
-import {VibrancyView} from 'react-native-blur'
+import {VibrancyView, BlurView} from 'react-native-blur'
 import deviceInfo from '../../../utils/deviceInfo'
 import {Icon} from '../../../utils/icon'
 import MiniComment from './comment/miniCommentCell'
@@ -15,7 +15,9 @@ export default class MovieDetail extends Component {
   constructor(props) {
     super(props)
     this.navBar = null
-    this.state = {}
+    this.state = {
+      viewRef: null
+    }
   }
 
   componentDidMount() {
@@ -94,6 +96,10 @@ export default class MovieDetail extends Component {
     }
   }
 
+  imageLoaded() {
+    this.setState({viewRef: findNodeHandle(this.backgroundImage)})
+  }
+
   renderContent() {
     let data = this.props.movieDetail
     let basic = data.basic
@@ -111,16 +117,27 @@ export default class MovieDetail extends Component {
           bounces={false}
         >
           <Image
+            ref={(img) => { this.backgroundImage = img}}
             style={styles.bgContainer}
             source={{uri: basic.img}}
             resizeMode='stretch'
+            onLoadEnd={this.imageLoaded.bind(this)}
           />
           <View style={styles.bgContainer}>
-            <VibrancyView
-              blurType={'light'}
-              blurAmount={10}
-              style={styles.container}
-            />
+            {
+              Platform.OS === 'ios' ?
+                <VibrancyView
+                  blurType={'light'}
+                  blurAmount={10}
+                  style={styles.container}
+                /> :
+                <BlurView
+                  style={styles.absolute}
+                  viewRef={this.state.viewRef}
+                  blurType="light"
+                  blurAmount={10}
+                />
+            }
           </View>
           <View style={styles.contentStyle}>
             <View style={styles.headerStyle}>
@@ -514,5 +531,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 10,
     justifyContent: 'space-between'
-  }
+  },
+  absolute: {
+    position: "absolute",
+    top: 0, left: 0, bottom: 0, right: 0,
+  },
 })

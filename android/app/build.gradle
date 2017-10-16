@@ -91,9 +91,11 @@ def enableProguardInReleaseBuilds = false
 
 android {
     compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    buildToolsVersion '23.0.3'
 
     defaultConfig {
+        renderscriptTargetApi 23
+        renderscriptSupportModeEnabled true
         applicationId "com.one"
         minSdkVersion 16
         targetSdkVersion 22
