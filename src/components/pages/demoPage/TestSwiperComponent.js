@@ -23,7 +23,7 @@ export default class extends Component {
       for (var i = 0; i < imgArr.length; i++) {
         tempArr.push(
           <TouchableOpacity key={i}>
-            <Image style={{height: 150}} source={require('../assets/images/img/1.jpg')} key={i}/>
+            <Image style={{height: 150}} source={require('../../../assets/images/img/1.jpg')} key={i}/>
           </TouchableOpacity>
         )
       }
@@ -50,16 +50,16 @@ export default class extends Component {
                   bottom: -23, left: null, right: 10
                 }}>
           <View style={styles.slide} title={<Text numberOfLines={1}>Aussie tourist dies at Bali hotel</Text>}>
-            <Image resizeMode='stretch' style={styles.image} source={require('../assets/images/img/1.jpg')} />
+            <Image resizeMode='stretch' style={styles.image} source={require('../../../assets/images/img/1.jpg')} />
           </View>
           <View style={styles.slide} title={<Text numberOfLines={1}>Big lie behind Nine’s new show</Text>}>
-            <Image resizeMode='stretch' style={styles.image} source={require('../assets/images/img/2.jpg')} />
+            <Image resizeMode='stretch' style={styles.image} source={require('../../../assets/images/img/2.jpg')} />
           </View>
           <View style={styles.slide} title={<Text numberOfLines={1}>Why Stone split from Garfield</Text>}>
-            <Image resizeMode='stretch' style={styles.image} source={require('../assets/images/img/3.jpg')} />
+            <Image resizeMode='stretch' style={styles.image} source={require('../../../assets/images/img/3.jpg')} />
           </View>
           <View style={styles.slide} title={<Text numberOfLines={1}>Learn from Kim K to land that job</Text>}>
-            <Image resizeMode='stretch' style={styles.image} source={require('../assets/images/img/4.jpg')} />
+            <Image resizeMode='stretch' style={styles.image} source={require('../../../assets/images/img/4.jpg')} />
           </View>
         </Swiper>
       </ScrollView>

@@ -3,8 +3,8 @@
  */
 import React, {Component} from 'react'
 import {View, Text} from 'react-native'
-import {Button} from './common'
-import HttpUtils from '../utils/network/request/HttpUtils'
+import {Button} from './../../common'
+import HttpUtils from '../../../utils/network/request/HttpUtils'
 
 const getUrl = "https://api-m.mtime.cn/Showtime/LocationMovies.api?locationId=290"
 const postUrl = "https://api-m.mtime.cn/Showtime/LocationMovies.api?locationId=290"

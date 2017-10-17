@@ -3,8 +3,8 @@
  */
 import React, {Component} from 'react'
 import {View} from 'react-native'
-import {Icon} from '../utils/icon'
-import {commonStyle} from '../utils'
+import {Icon} from '../../../utils/icon'
+import {commonStyle} from '../../../utils'
 export default class TestIcon extends Component {
   render() {
     return (

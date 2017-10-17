@@ -3,8 +3,8 @@
  */
 import React, { Component, PropTypes } from 'react'
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native'
-import {commonStyle} from '../../utils/commonStyle'
-import {Icon} from '../../utils/icon'
+import {commonStyle} from '../../../utils/commonStyle'
+import {Icon} from '../../../utils/icon'
 const barBtnWidth = 40
 const defaultNavigationBarProps = {
   hiddenNav: false,

@@ -1,11 +1,10 @@
 /**
  * Created by guangqiang on 2017/8/16.
  */
-
 import React, {Component} from 'react'
 import { View, Text } from 'react-native'
 import { Actions } from 'react-native-router-flux'
-import {BaseComponent} from './base/baseComponent'
+import {BaseComponent} from './../../base/baseComponent'
 
 /**
  * PageOne 组件继承自 BaseComponent 组件

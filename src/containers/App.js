@@ -8,36 +8,36 @@ import {dispatch} from '../utils/venilog/dispatchLog'
 import type from '../constants/actionType'
 import {commonStyle} from '../utils/commonStyle'
 
-import Launch from '../components/Launch'
-import Register from "../components/Register"
-import Login from "../components/Login"
-import Login2 from "../components/Login2"
-import Login3 from "../components/Login3"
-import EchoView from "../components/EchoView"
-import PageOne from '../components/PageOne'
-import PageTwo from '../components/PageTwo'
-import Error from '../components/Error'
-import ModalView from '../components/ModalView'
-import Mask from '../components/Mask'
+import Launch from '../components/pages/demoPage/Launch'
+import Register from "../components/pages/demoPage/Register"
+import Login from "../components/pages/demoPage/Login"
+import Login2 from "../components/pages/demoPage/Login2"
+import Login3 from "../components/pages/demoPage/Login3"
+import EchoView from "../components/pages/demoPage/EchoView"
+import PageOne from '../components/pages/demoPage/PageOne'
+import PageTwo from '../components/pages/demoPage/PageTwo'
+import Error from '../components/pages/demoPage/Error'
+import ModalView from '../components/pages/demoPage/ModalView'
+import Mask from '../components/pages/demoPage/Mask'
 import Author from '../components/pages/me/author'
 
 import Loading from '../utils/progressHUD/progressHUD'
-import {EnhancedListViewTest} from '../components/EnhancedListViewDemo'
-import SwiperComp from '../components/TestSwiperComponent'
-import {ImgZoom} from '../components/TestImgZoomComponent'
-import TestMessageBar from '../components/TestMessageBar'
-import TestAntdMobile from '../components/TestAntdMobile'
-import TestOrientation from '../components/TestOrientation'
-import TestIcon from '../components/TestIcon'
-import TestScrollableTabView from '../components/TestScrollable-tab-view'
-import TestViewPager from '../components/TestViewPager'
-import Blur from '../components/TestBlurComponent'
+import {EnhancedListViewTest} from '../components/pages/demoPage/EnhancedListViewDemo'
+import SwiperComp from '../components/pages/demoPage/TestSwiperComponent'
+import {ImgZoom} from '../components/pages/demoPage/TestImgZoomComponent'
+import TestMessageBar from '../components/pages/demoPage/TestMessageBar'
+import TestAntdMobile from '../components/pages/demoPage/TestAntdMobile'
+import TestOrientation from '../components/pages/demoPage/TestOrientation'
+import TestIcon from '../components/pages/demoPage/TestIcon'
+import TestScrollableTabView from '../components/pages/demoPage/TestScrollable-tab-view'
+import TestViewPager from '../components/pages/demoPage/TestViewPager'
+import Blur from '../components/pages/demoPage/TestBlurComponent'
 import MessageBar from "../utils/messageBar/MessageBar"
 
-import TestRedux from "../components/TestRedux"
-import CustomComp from '../components/TestCustomUIComponent'
-import Network from '../components/TestNetwork'
-import TestLogDot from '../components/TestLogDot'
+import TestRedux from "../components/pages/demoPage/TestRedux"
+import CustomComp from '../components/pages/demoPage/TestCustomUIComponent'
+import Network from '../components/pages/demoPage/TestNetwork'
+import TestLogDot from '../components/pages/demoPage/TestLogDot'
 
 // PAGES
 import TabBar from './TabBarContainer'
@@ -193,8 +193,8 @@ const scenes = Actions.create(
 
           <Scene key="webView" hideNavBar component={WebView}/>
 
-          {/** ############### 测试组件 ############### **/}
-
+          {/** ############### demo组件 ############### **/}
+          
           <Scene key="register" title="Register" component={Register}/>
 
           <Scene key="register2" title="Register2" component={Register}/>

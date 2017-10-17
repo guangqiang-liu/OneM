@@ -2,7 +2,7 @@
  * Created by guangqiang on 2017/9/14.
  */
 import React, {Component} from 'react'
-import {TouchableOpacity, StyleSheet, View, Button, Text} from './common'
+import {TouchableOpacity, StyleSheet, View, Button, Text} from './../../common'
 
 class CustomComp extends Component {
   render() {

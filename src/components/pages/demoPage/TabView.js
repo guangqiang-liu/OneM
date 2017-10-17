@@ -1,8 +1,3 @@
-
-/**
- * tabBarController 上每一个tab对应的view
- */
-
 import React from 'react';
 import {PropTypes} from "react";
 import {StyleSheet, Text, View, ViewPropTypes} from "react-native";

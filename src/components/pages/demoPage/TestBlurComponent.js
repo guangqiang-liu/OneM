@@ -1,10 +1,6 @@
 /**
  * Created by guangqiang on 2017/9/21.
  */
-/**
- * Basic [iOS] Example for react-native-blur
- * https://github.com/react-native-community/react-native-blur
- */
 import React, { Component } from 'react'
 import {
   AppRegistry,
@@ -108,7 +104,7 @@ class Basic extends Component {
       <View
         style={styles.container}>
         <Image
-          source={require('../assets/images/bgimage.jpeg')}
+          source={require('../../../assets/images/bgimage.jpeg')}
           resizeMode='cover'
           style={styles.img}/>
 

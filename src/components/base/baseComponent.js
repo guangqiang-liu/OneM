@@ -3,7 +3,7 @@
  */
 import React, {Component} from 'react'
 import {View, StyleSheet} from 'react-native'
-import NavigationBar from '../common/navigationBar'
+import NavigationBar from '../common/navigationBar/navigationBar'
 import {commonStyle} from '../../utils/commonStyle'
 import {Actions} from "react-native-router-flux"
 class BaseComponent extends Component {

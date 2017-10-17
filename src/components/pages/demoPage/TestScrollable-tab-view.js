@@ -1,12 +1,9 @@
 /**
  * Created by guangqiang on 2017/10/13.
  */
-/**
- * Created by guangqiang on 2017/10/13.
- */
 import React, {Component} from 'react'
 import {View} from 'react-native'
-import {commonStyle} from '../utils'
+import {commonStyle} from '../../../utils'
 import ScrollableTabView from 'react-native-scrollable-tab-view'
 export default class TestScrollableTabView extends Component {
 

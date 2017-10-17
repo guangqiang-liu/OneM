@@ -4,8 +4,8 @@
 
 import React, {Component} from 'react'
 import {View, Text} from 'react-native'
-import {commonStyle} from '../utils'
-import {TouchableOpacity} from '../components/common'
+import {commonStyle} from '../../../utils'
+import {TouchableOpacity} from '../../../components/common'
 export default class TestLogDot extends Component {
 
   log() {

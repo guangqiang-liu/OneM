@@ -24,7 +24,7 @@ import {
 import {Button} from './button'
 // import {Text} from './text'
 import {TouchableOpacity} from './touchable/touchableOpacity'
-import NavigationBar from './navigationBar'
+import NavigationBar from './navigationBar/navigationBar'
 import WebView from './webView'
 import BaseComponent from '../base/baseComponent'
 import {EnhancedListView} from './listView/EnhancedListView'

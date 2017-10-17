@@ -4,7 +4,7 @@
 import React, {Component} from 'react'
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native'
 import {MessageBar, MessageBarManager} from 'react-native-message-bar'
-import {commonStyle} from '../utils/commonStyle'
+import {commonStyle} from '../../../utils/commonStyle'
 export default class TestMessageBar extends Component {
 
   msgBar(type) {

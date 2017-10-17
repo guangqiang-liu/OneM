@@ -1,11 +1,10 @@
 /**
  * Created by guangqiang on 2017/8/17.
  */
-
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Actions } from 'react-native-router-flux'
-import {Button} from './common/button'
+import {Button} from './../../common/button'
 
 export default class PageTwo extends Component {
 

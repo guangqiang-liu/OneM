@@ -2,7 +2,7 @@
  * Created by guangqiang on 2017/9/15.
  */
 import React, {Component} from 'react'
-import {View, StyleSheet, Text, EnhancedListView, InteractionManager} from './common'
+import {View, StyleSheet, Text, EnhancedListView, InteractionManager} from './../../common'
 class EnhancedListViewTest extends Component {
 
   _renderRowView(rowData, sectionID, rowID) {
