@@ -94,7 +94,6 @@ export default class PicDetail extends BaseComponent {
             <TouchableOpacity>
               <Image style={styles.smallIcon} resizeMode="contain" source={require('../../../assets/images/share_image.png')}/>
             </TouchableOpacity>
-            <MyIcon name="rocket" size={30} color="#900" />
           </View>
         </ScrollView>
         {this._renderModal()}
@@ -147,7 +146,6 @@ const styles = StyleSheet.create({
   bottomText: {
     lineHeight: 40,
     color: commonStyle.textGrayColor,
-    marginTop: 10,
     _marginTop: -10
   }
 })
