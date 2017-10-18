@@ -130,7 +130,7 @@ export default class MoviePlayer extends Component {
     return (
       <TouchableOpacity
         style={[styles.movieContainer, {height: orientation === 'PORTRAIT' ? playerHeight : deviceInfo.deviceWidth,
-          marginTop: orientation === 'PORTRAIT' ? Platform.OS === 'ios' ? 20 : 0 : 0, }]}
+          marginTop: orientation === 'PORTRAIT' ? Platform.OS === 'ios' ? 20 : 0 : 0}]}
         onPress={() => this.setState({isTouchedScreen: !this.state.isTouchedScreen})}>
         <Video source={{uri: url}}
                ref={ref => this.player = ref}
@@ -214,7 +214,7 @@ export default class MoviePlayer extends Component {
         }
         {
           this.state.isTouchedScreen && !isLock ?
-            <View style={[styles.toolBarStyle]}>
+            <View style={[styles.toolBarStyle, {marginBottom: Platform.OS === 'ios' ? 0 : orientation !== 'PORTRAIT' ? 25 : 0}]}>
               <TouchableOpacity onPress={() => this.play()}>
                 <Icon name={`oneIcon|${this.state.playIcon}`} size={18} color={commonStyle.white}/>
               </TouchableOpacity>
@@ -277,7 +277,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     justifyContent: 'space-around',
     marginTop: 10,
-    height: 30,
+    height: 30
   },
   timeStyle: {
     width: 35,
