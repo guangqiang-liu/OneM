@@ -27,7 +27,7 @@ const glyphMap = {
   downLoad_o: 58906,
   menu_h_o: 58987,
   music_pre_o: 58883,
-  music_next_o:58890,
+  music_next_o: 58890,
   scale_o: 58903,
   reply_o: 58884,
   back_s_o: 58885,
@@ -40,7 +40,12 @@ const glyphMap = {
   play_cycle_o: 58907,
   comment_dot_o: 58887,
   tv_o: 58913,
-  shrink_o: 58896
+  shrink_o: 58896,
+  unlocked_o: 58898,
+  locked_o: 58921,
+  download_o: 58901,
+  share_dot_o: 58915,
+  ex_mark_o: 58897
 }
 
 const OIcon = createIconSet(glyphMap, 'iconfont', 'iconfont.ttf')

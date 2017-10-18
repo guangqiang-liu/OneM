@@ -26,7 +26,8 @@ export default class MoviePlayer extends Component {
       paused: false,
       playIcon: 'music_paused_o',
       isTouchedScreen: true,
-      modalVisible: true
+      modalVisible: true,
+      isLock: false
     }
   }
 
@@ -124,14 +125,13 @@ export default class MoviePlayer extends Component {
   }
 
   render() {
-    const {orientation} = this.state
+    const {orientation, isLock} = this.state
     const {url, title} = this.props
     return (
       <TouchableOpacity
-        style={[styles.movieContainer, {height: this.state.orientation === 'PORTRAIT' ? playerHeight : deviceInfo.deviceWidth,
-          marginTop: this.state.orientation === 'PORTRAIT' ? Platform.OS === 'ios' ? 20 : 0 : 0, }]}
-        onPress={() => this.setState({isTouchedScreen: !this.state.isTouchedScreen})}
-      >
+        style={[styles.movieContainer, {height: orientation === 'PORTRAIT' ? playerHeight : deviceInfo.deviceWidth,
+          marginTop: orientation === 'PORTRAIT' ? Platform.OS === 'ios' ? 20 : 0 : 0, }]}
+        onPress={() => this.setState({isTouchedScreen: !this.state.isTouchedScreen})}>
         <Video source={{uri: url}}
                ref={ref => this.player = ref}
                rate={this.state.rate}
@@ -151,27 +151,70 @@ export default class MoviePlayer extends Component {
                onError={(data) => this.videoError(data)}
                onBuffer={(data) => this.onBuffer(data)}
                onTimedMetadata={(data) => this.onTimedMetadata(data)}
-               style={styles.backgroundVideo}
+               style={[styles.videoPlayer]}
         />
-        <View style={styles.navContentStyle}>
-          <View style={{flexDirection: 'row', alignItems: commonStyle.center}}>
-            <TouchableOpacity style={{backgroundColor: commonStyle.clear}}
-                              onPress={orientation === 'PORTRAIT' ? () => Actions.pop() : Orientation.lockToPortrait}
-            >
-              <Icon name={'oneIcon|nav_back_o'} size={18} color={commonStyle.white}/>
-            </TouchableOpacity>
-            <Text style={{backgroundColor: commonStyle.clear, color: commonStyle.white, marginLeft: 10}}>{title}</Text>
-          </View>
-          <TouchableOpacity
-            style={{backgroundColor: commonStyle.clear}}
-            onPress={() => alert('切换电视！')}
-          >
-            <Icon name={'oneIcon|tv_o'} size={20} color={commonStyle.white}/>
-          </TouchableOpacity>
-        </View>
         {
-          this.state.isTouchedScreen ?
-            <View style={styles.toolBarStyle}>
+          !isLock ?
+            <View style={styles.navContentStyle}>
+              <View style={{flexDirection: 'row', alignItems: commonStyle.center, flex: 1}}>
+                <TouchableOpacity
+                  style={{backgroundColor: commonStyle.clear}}
+                  onPress={orientation === 'PORTRAIT' ? () => Actions.pop() : Orientation.lockToPortrait}>
+                  <Icon name={'oneIcon|nav_back_o'} size={18} color={commonStyle.white}/>
+                </TouchableOpacity>
+                <Text style={{backgroundColor: commonStyle.clear, color: commonStyle.white, marginLeft: 10}}>{title}</Text>
+              </View>
+              <View style={{flexDirection: 'row', alignItems: commonStyle.center, justifyContent: commonStyle.between}}>
+                <TouchableOpacity
+                  style={styles.navToolBar}
+                  onPress={() => alert('切换电视！')}>
+                  <Icon name={'oneIcon|tv_o'} size={20} color={commonStyle.white}/>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={styles.navToolBar}
+                  onPress={() => alert('开启VR！')}>
+                  <Icon name={'oneIcon|video_o'} size={20} color={commonStyle.white}/>
+                </TouchableOpacity>
+                {
+                  orientation !== 'PORTRAIT' ?
+                    <View style={{flexDirection: commonStyle.row, alignItems: commonStyle.center}}>
+                      <TouchableOpacity
+                        style={[styles.navToolBar, {borderColor: commonStyle.white, borderWidth: 0.5, padding: 3}]}
+                        onPress={() => alert('开启弹幕！')}>
+                        <Text style={{color: commonStyle.white, fontSize: 12}}>弹</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={styles.navToolBar}
+                        onPress={() => alert('分享！')}>
+                        <Icon name={'oneIcon|share_dot_o'} size={20} color={commonStyle.white}/>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={styles.navToolBar}
+                        onPress={() => alert('下载！')}>
+                        <Icon name={'oneIcon|download_o'} size={20} color={commonStyle.white}/>
+                      </TouchableOpacity>
+                      <TouchableOpacity
+                        style={styles.navToolBar}
+                        onPress={() => alert('设置画面！')}>
+                        <Icon name={'oneIcon|more_v_o'} size={20} color={commonStyle.white}/>
+                      </TouchableOpacity>
+                    </View> : null
+                }
+              </View>
+            </View> : <View style={{height: commonStyle.navContentHeight, backgroundColor: commonStyle.black}}/>
+        }
+        {
+          orientation !== 'PORTRAIT' ?
+            <TouchableOpacity
+              style={{marginHorizontal: 10, backgroundColor: commonStyle.clear, width: 30, height: 30, alignItems: commonStyle.center, justifyContent: commonStyle.center}}
+              onPress={() => this.setState({isLock: !this.state.isLock})}
+            >
+              <Icon name={`oneIcon|${this.state.isLock ? 'locked_o' : 'unlocked_o'}`} size={20} color={commonStyle.white} style={{backgroundColor: commonStyle.blue}}/>
+            </TouchableOpacity> : null
+        }
+        {
+          this.state.isTouchedScreen && !isLock ?
+            <View style={[styles.toolBarStyle]}>
               <TouchableOpacity onPress={() => this.play()}>
                 <Icon name={`oneIcon|${this.state.playIcon}`} size={18} color={commonStyle.white}/>
               </TouchableOpacity>
@@ -200,9 +243,8 @@ export default class MoviePlayer extends Component {
                     <Icon name={'oneIcon|shrink_o'} size={18} color={commonStyle.white}/>
                   </TouchableOpacity>
               }
-            </View> : null
+            </View> : <View style={{height: 40}}/>
         }
-
         {this.renderModal()}
       </TouchableOpacity>
     )
@@ -213,31 +255,29 @@ const styles = StyleSheet.create({
   movieContainer: {
     justifyContent: 'space-between'
   },
-  backgroundVideo: {
+  videoPlayer: {
     position: 'absolute',
-    top: 0,
+    top: 44,
     left: 0,
     bottom: 0,
     right: 0,
-  },
-  navBarStyle: {
-    height: 64,
   },
   navContentStyle: {
     height: 44,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
-    marginHorizontal: 10,
+    paddingHorizontal: 10,
+    backgroundColor: commonStyle.black
   },
   toolBarStyle: {
-    height: 30,
     backgroundColor: commonStyle.black,
-    opacity: 0.5,
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 10,
-    justifyContent: 'space-around'
+    justifyContent: 'space-around',
+    marginTop: 10,
+    height: 30,
   },
   timeStyle: {
     width: 35,
@@ -262,5 +302,9 @@ const styles = StyleSheet.create({
     marginTop: 20,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  navToolBar: {
+    backgroundColor: commonStyle.clear,
+    marginHorizontal: 5
   }
 })

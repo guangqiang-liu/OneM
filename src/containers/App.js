@@ -8,6 +8,7 @@ import {dispatch} from '../utils/venilog/dispatchLog'
 import type from '../constants/actionType'
 import {commonStyle} from '../utils/commonStyle'
 
+// DemoPages
 import Launch from '../components/pages/demoPage/Launch'
 import Register from "../components/pages/demoPage/Register"
 import Login from "../components/pages/demoPage/Login"
@@ -194,7 +195,7 @@ const scenes = Actions.create(
           <Scene key="webView" hideNavBar component={WebView}/>
 
           {/** ############### demo组件 ############### **/}
-          
+
           <Scene key="register" title="Register" component={Register}/>
 
           <Scene key="register2" title="Register2" component={Register}/>
