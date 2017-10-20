@@ -1,0 +1,2 @@
+# OneM
+OneM是一款纯ReactNative打造的集杂志浏览、音乐播放、视频播放于一体的App,并且支持iOS和Android双平台
