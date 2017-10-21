@@ -63,7 +63,7 @@ export default class NavigationBar extends Component {
       )
     } else if (this.navigationBarProps.leftTitle && this.navigationBarProps.leftTitle !== '') {
       tempComponent = (
-        <Text style={[styles.leftTitleStyle, this.navigationBarProps.leftTitleStyle]}>{this.navigationBarProps.leftTitle}</Text>
+        <Text numberOfLines={1} style={[styles.leftTitleStyle, this.navigationBarProps.leftTitleStyle]}>{this.navigationBarProps.leftTitle}</Text>
       )
     } else {
       tempComponent = (
@@ -104,7 +104,7 @@ export default class NavigationBar extends Component {
       )
     } else if (this.navigationBarProps.rightTitle && this.navigationBarProps.rightTitle !== '') {
       tempComponent = (
-        <Text style={[styles.rightTitleStyle, this.navigationBarProps.rightTitleStyle]}>{this.navigationBarProps.rightTitle}</Text>
+        <Text numberOfLines={1} style={[styles.rightTitleStyle, this.navigationBarProps.rightTitleStyle]}>{this.navigationBarProps.rightTitle}</Text>
       )
     } else {
       tempComponent = (

@@ -21,12 +21,11 @@ const middlewares = [
 const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore)
 const store = createStoreWithMiddleware(AppReducers)
 
+export default store
+
 /**
  * 创建store 需要注意点：
- * 1、这里的reducer 不能再使用 combineReducers() 函数处理
+ * 1、这里的reducer 不再需要使用 combineReducers() 函数处理
  * 2、promiseMiddleware 这个中间件必须是函数， promiseMiddleware()
+ * promiseMiddleware()函数内的中需要包含promiseTypeSuffixes属性
  */
-//  创建store需要注意，这里有坑，可能导致dispatch() 派发action失败,
-// 这里的分发失败是因为 promiseMiddleware 这个中间件必须是函数， promiseMiddleware()
-
-export default store

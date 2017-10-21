@@ -95,7 +95,7 @@ class Me extends BaseComponent {
     return {
       title: '我的',
       hiddenLeftItem: true,
-      rightTitle: '个人'
+      rightTitle: '作者'
     }
   }
 
@@ -118,7 +118,7 @@ class Me extends BaseComponent {
   renderHeader() {
     return (
       <View style={styles.headerStyle}>
-        <Text>项目中使用到的功能集合</Text>
+        <Text>项目中使用到的常用功能Demo集合</Text>
       </View>
     )
   }

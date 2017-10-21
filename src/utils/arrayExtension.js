@@ -2,9 +2,8 @@
  * Created by guangqiang on 2017/8/27.
  */
 
-/**
- * 数组拓展工具类
- */
+/** 数组拓展工具类 **/
+
 const ArrayTool = {
 
   /**

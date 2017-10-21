@@ -2,9 +2,7 @@
  * Created by guangqiang on 2017/8/27.
  */
 
-/**
- * 公共样式表
- */
+/** 公共样式表 **/
 
 import {Platform} from 'react-native'
 export const commonStyle = {

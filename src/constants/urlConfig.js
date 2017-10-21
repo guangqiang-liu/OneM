@@ -4,21 +4,33 @@
 const host = {
   dev: {
     API_URL: 'https://api.douban.com',
+    XIAMI_URL: 'http://xiamirun.avosapps.com',
+    TIME_MOVIE_URL: 'https://api-m.mtime.cn',
+    TIME_TICKET_URL: 'https://ticket-api-m.mtime.cn',
     MSITE_URL: 'https://api.douban.com',
     VENILOG_URL: 'https://api.douban.com'
   },
   alpha: {
     API_URL: 'http://api.xxx.com',
+    XIAMI_URL: 'http://xiamirun.avosapps.com',
+    TIME_MOVIE_URL: 'https://api-m.mtime.cn',
+    TIME_TICKET_URL: 'https://ticket-api-m.mtime.cn',
     MSITE_URL: 'http://m.xxx.com',
     VENILOG_URL: 'http://venilog.xxx.com'
   },
   qa: {
     API_URL: 'http://api.xxx.com',
+    XIAMI_URL: 'http://xiamirun.avosapps.com',
+    TIME_MOVIE_URL: 'https://api-m.mtime.cn',
+    TIME_TICKET_URL: 'https://ticket-api-m.mtime.cn',
     MSITE_URL: 'http://m.xxx.com',
     VENILOG_URL: 'http://venilog.xxx.com'
   },
   pre: {
     API_URL: 'http://api.xxx.com',
+    XIAMI_URL: 'http://xiamirun.avosapps.com',
+    TIME_MOVIE_URL: 'https://api-m.mtime.cn',
+    TIME_TICKET_URL: 'https://ticket-api-m.mtime.cn',
     MSITE_URL: 'http://m.xxx.com',
     VENILOG_URL: 'http://venilog.xxx.com'
   },

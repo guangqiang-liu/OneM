@@ -1,6 +1,7 @@
 /**
  * Created by guangqiang on 2017/9/18.
  */
+
 function ValidateUtil(validateArray) {
   let res = []
   for (let i = 0; i < validateArray.length; i++) {

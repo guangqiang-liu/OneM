@@ -2,9 +2,7 @@
  * Created by guangqiang on 2017/8/26.
  */
 
-/**
- * 网络请求工具类的拓展类，便于后期网络层修改维护
- */
+/** 网络请求工具类的拓展类，便于后期网络层修改维护 **/
 
 import HttpUtils from './HttpUtils'
 import {API_URL, MIAMI_URL, TIME_MOVIE_URL, TIME_TICKET_URL} from '../../../constants/urlConfig'

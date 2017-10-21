@@ -192,6 +192,8 @@ const scenes = Actions.create(
             Action.dispatch('reading')
           )(ArticleList)}/>
 
+          <Scene key="author" title="作者" hideNavBar component={Author}/>
+
           <Scene key="webView" hideNavBar component={WebView}/>
 
           {/** ############### demo组件 ############### **/}
@@ -207,8 +209,6 @@ const scenes = Actions.create(
           {/* clone：使用clone标识的Scenes将被作为模版处理，并克隆到当前的scene的容器中 */}
           <Scene key="echo" clone component={EchoView}
                  getTitle={({navigation}) => navigation.state.key}/>
-
-          <Scene key="author" title="作者" component={Author}/>
 
           <Scene key="enhancedListView" title ='测试ListView' component={connect(
             (state) => state.movie.movieList,

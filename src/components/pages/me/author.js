@@ -4,14 +4,26 @@
 import React, {Component} from 'react'
 import {View, Text, StyleSheet, TouchableOpacity} from 'react-native'
 import {commonStyle} from '../../../utils/commonStyle'
-export default class Author extends Component {
-  render() {
+import {BaseComponent} from '../../base/baseComponent'
+import {Actions} from 'react-native-router-flux'
+export default class Author extends BaseComponent {
+
+  navigationBarProps() {
+    return {
+      title: '作者技术博客',
+      subTitle: '欢迎同学们star'
+    }
+  }
+
+  _render() {
     return (
       <View style={{flex: 1, justifyContent: commonStyle.center, alignItems: commonStyle.center}}>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => Actions.webView({uri: 'https://github.com/guangqiang-liu/OneM', title: 'GitHub'})}>
           <Text>GitHub</Text>
         </TouchableOpacity>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => Actions.webView({uri: 'http://www.jianshu.com/u/023338566ca5', title: '简书'})}>
           <Text>简书</Text>
         </TouchableOpacity>
         <TouchableOpacity>
