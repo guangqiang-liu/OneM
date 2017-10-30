@@ -9,8 +9,9 @@
 * [数据API](#数据API)
 * [技术要点](#技术要点)
 * [使用到的常用三方库](#使用到的常用三方库)
-* [实战开发中遇到的坑](实战开发中遇到的坑)
+* [实战开发中遇到的坑](#实战开发中遇到的坑)
 * [后续待完成事项](#后续待完成事项)
+* [待优化bug](#待优化bug)
 * [总结](#总结)
 
 # 项目简介
@@ -53,7 +54,7 @@ OneM是一款纯ReactNative开发的APP，也是作者开发的第三个RN项目
 # 数据API
 **项目中使用到的数据来源于网络抓包，在此也感谢前人总结的API文档**
 
-[ONE](https://github.com/jokermonn/-Api/blob/master/ONEv3.5.0~.md)
+[ONEM](https://github.com/jokermonn/-Api/blob/master/ONEv3.5.0~.md)
 
 [时光网](https://github.com/jokermonn/-Api/blob/master/Time.md)
 
@@ -68,6 +69,7 @@ OneM是一款纯ReactNative开发的APP，也是作者开发的第三个RN项目
 * iOS支持自动管理键盘弹出遮挡问题
 * 仿网易音乐播放功能、仿爱奇艺视频播放功能
 * 自定义debug面板，App中便捷切换各种开发环境
+* 表单请求参数校验器Validate
 
 # 使用到的常用三方库
 * antd-mobile
@@ -106,7 +108,16 @@ OneM是一款纯ReactNative开发的APP，也是作者开发的第三个RN项目
 - [ ] 日志打点视图
 - [ ] form表单组件
 - [ ] iOS项目支持pod
+- [ ] 分享功能
+- [ ] 文件上传与下载
 - [ ] 优化代码，修改bug
+- [ ] 待补充
+
+# 待优化bug
+- [ ] 音乐播放器CD盘旋转问题
+- [ ] 音乐播放器自动切换不播放音乐问题
+- [ ] 自定义组件库适配问题
+- [ ] reading列表数据文章内容当返回html代码时，页面滑动问题
 - [ ] 待补充
 
 # 总结
