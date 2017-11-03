@@ -113,7 +113,7 @@ export default class MusicPlayer extends Component {
       this.nextSong(currentIndex + 1)
       this.showMessageBar('抱歉')('没有找到音乐信息，已帮你切换到下一首')('error')
     }
-    this.play()
+    // this.play()
   }
 
   // 上一首
@@ -129,7 +129,7 @@ export default class MusicPlayer extends Component {
       this.preSong(currentIndex - 1)
       this.showMessageBar('抱歉')('没有找到音乐信息，已帮你切换到下一首')('error')
     }
-    this.play()
+    // this.play()
   }
 
   reset() {

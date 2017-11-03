@@ -38,7 +38,9 @@ export default class MusicDetail extends Component {
     let author = data.story_author
     return (
       <View>
-        <Image style={{height: 200}} source={{uri: data.cover}}/>
+        <TouchableOpacity onPress={() => this.playing()}>
+          <Image style={{height: 200}} source={{uri: data.cover}}/>
+        </TouchableOpacity>
         <View style={{marginHorizontal: 10}}>
           <View style={styles.playPanel}>
             <View>
