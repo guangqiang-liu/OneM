@@ -7,7 +7,6 @@
  */
 const actionType = {
 
-  // 配置 promiseMiddleware 异步action的几种状态
   FETCH_LOADING_SUFFIX : '_LOADING',
   FETCH_SUCCESS_SUFFIX : '_SUCCESS',
   FETCH_ERROR_SUFFIX : '_ERROR',

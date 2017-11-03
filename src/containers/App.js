@@ -70,7 +70,6 @@ import WebView from '../components/common/webView'
 const reducerCreate = params => {
   const defaultReducer = new Reducer(params)
   return (state, action) => {
-    // TODO 这个地方处理Router系统事件, 触发dispatch
     action.type !== type.REACT_NATIVE_ROUTER_FLUX_SET_PARAMS ? dispatch(state)(action) : null
     return defaultReducer(state, action)
   }
@@ -85,7 +84,6 @@ const getSceneStyle = () => ({
 const scenes = Actions.create(
   <Scene key="root">
     <Modal key="modal" hideNavBar>
-      {/* 在Lightbox栈中的子scene都可以显示mask */}
       <Lightbox key="lightbox" hideNavBar={true}>
 
         {/* PAGES */}
@@ -93,7 +91,6 @@ const scenes = Actions.create(
           <Scene key="launch" component={Launch}
                  hideNavBar />
 
-          {/* tabBar 五个组件没有办法绑定，只能单独写 */}
           <Scene key="main" initial back={false} hideNavBar component={TabBar}/>
 
           <Scene key="picDetail" hideNavBar component={connect(
@@ -258,7 +255,6 @@ const scenes = Actions.create(
         <Scene key="mask" component={Mask}/>
       </Lightbox>
 
-      {/* 在Modal栈中的子scene都属于模态scene */}
       <Stack key="modalRoot" back>
         <Scene key="modalView" component={ModalView}/>
       </Stack>
