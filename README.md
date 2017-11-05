@@ -72,6 +72,7 @@ OneM是一款纯ReactNative开发的APP，也是作者开发的第三个RN项目
 * 封装视频播放器组件，UI效果完全按照爱奇艺视频播放器界面打造
 * 自定义debug面板，App中便捷切换各种开发环境和随时查看当前发送的网络请求列表和对应的请求数据
 * 表单请求参数校验器Validate
+* 待补充
 
 # 使用到的常用三方库
 * antd-mobile
@@ -100,6 +101,7 @@ OneM是一款纯ReactNative开发的APP，也是作者开发的第三个RN项目
 * redux-actions
 * redux-promise-middleware
 * redux-thunk
+* 待补充
 
 # 实战开发中遇到的坑
 * Android编译报错：Error:Could not add entry '-6081986774160961524' to cache fileSnapshots.bin (/Users/guangqiang/Desktop/ProjectRepo/ReactNative/OneM/android/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin)
@@ -107,7 +109,7 @@ OneM是一款纯ReactNative开发的APP，也是作者开发的第三个RN项目
 ![errorImg](http://ovyjkveav.bkt.clouddn.com/17-10-27/55829900.jpg)
 **解决方案：[http://www.jianshu.com/p/9f6db8e38852](http://www.jianshu.com/p/9f6db8e38852)**
 * `Actions.xxx({type: 'xxx'})`: router-flux路由跳转页面传递参数时，参数属性名不能为`type`，或者无法正常跳转页面
-* React Native报错: unddefined is not an object（evaluating ‘_react2.PropTypes.xxx’）
+* ReactNative报错: unddefined is not an object（evaluating ‘_react2.PropTypes.xxx’）
 ![errorImg](http://ovyjkveav.bkt.clouddn.com/17-10-27/96143070.jpg)
 **解决方案：[http://www.jianshu.com/p/16a8f2d63ab3](http://www.jianshu.com/p/16a8f2d63ab3)**
 * RN项目在iOS端导出ipa是报：Can't find 'node' binary to build React Native bundle
