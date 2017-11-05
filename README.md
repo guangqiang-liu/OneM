@@ -108,8 +108,8 @@ OneM是一款纯ReactNative开发的APP，也是作者开发的第三个RN项目
 **解决方案：[http://www.jianshu.com/p/9f6db8e38852](http://www.jianshu.com/p/9f6db8e38852)**
 * `Actions.xxx({type: 'xxx'})`: router-flux路由跳转页面传递参数时，参数属性名不能为`type`，或者无法正常跳转页面
 * React Native报错: unddefined is not an object（evaluating ‘_react2.PropTypes.xxx’）
-![errorImg](http://www.jianshu.com/p/16a8f2d63ab3)
-**解决方案：[http://www.jianshu.com/writer#/notebooks/13203559/notes/19284995](http://www.jianshu.com/writer#/notebooks/13203559/notes/19284995)**
+![errorImg](http://ovyjkveav.bkt.clouddn.com/17-10-27/96143070.jpg)
+**解决方案：[http://www.jianshu.com/p/16a8f2d63ab3](http://www.jianshu.com/p/16a8f2d63ab3)**
 * RN项目在iOS端导出ipa是报：Can't find 'node' binary to build React Native bundle
 ![errorImg](http://ovyjkveav.bkt.clouddn.com/17-11-5/27889340.jpg)
 **解决方案：[http://www.jianshu.com/p/4501ed597aba](http://www.jianshu.com/p/4501ed597aba)**
