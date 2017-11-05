@@ -7,15 +7,21 @@
 import HttpUtils from './HttpUtils'
 import {API_URL, MIAMI_URL, TIME_MOVIE_URL, TIME_TICKET_URL} from '../../../constants/urlConfig'
 import {ApiSource} from '../../../constants/commonType'
+import {dataCache} from '../cache'
+
 /**
- * GET 请求
- * @param url
- * @param params
- * @param source
- * @param callback
- * @returns {{promise: Promise}}
+ * GET \ POST
+ * 从缓存中读取数据
+ * @param isCache 是否缓存
+ * @param requestType 网络请求类型
+ * @param url 请求url
+ * @param params 请求参数
+ * @param source API资源
+ * @param callback 是否有回调函数
+ * @returns {value \ promise}
+ * 返回的值如果从缓存中取到数据就直接换行数据，或则返回promise对象
  */
-const getFetch = (url, params, source, callback) => {
+const fetchData = (isCache, requestType) => (url, params, source, callback) => {
 
   switch (source) {
     case ApiSource.MIAMIMUSIC:
@@ -32,14 +38,28 @@ const getFetch = (url, params, source, callback) => {
       break
   }
 
-  let promise = HttpUtils.getRequest(url, params)
-
-  if (callback && typeof callback === 'function') {
-    promise.then(response => callback(response))
+  const fetchFunc = () => {
+    let promise = requestType === 'GET' ? HttpUtils.getRequest(url, params) : HttpUtils.postRequrst(url, params)
+    if (callback && typeof callback === 'function') {
+      promise.then(response => {
+        return callback(response)
+      })
+    }
+    return promise
   }
 
-  return promise
+  return dataCache(url, fetchFunc, isCache)
 }
+
+/**
+ * GET 请求
+ * @param url
+ * @param params
+ * @param source
+ * @param callback
+ * @returns {{promise: Promise}}
+ */
+const getFetch = fetchData(false, 'GET')
 
 /**
  * POST 请求
@@ -48,16 +68,15 @@ const getFetch = (url, params, source, callback) => {
  * @param callback
  * @returns {{promise: Promise}}
  */
-const postFetch = (url, params, callback) => {
+const postFetch = fetchData(false, 'POST')
 
-  let promise = HttpUtils.postRequrst(url, params)
+/**
+ * GET 请求，带缓存策略
+ * @param url
+ * @param params
+ * @param callback
+ * @returns {{promise: Promise}}
+ */
+const getFetchFromCache = fetchData(true, 'GET')
 
-  if (callback && typeof callback === 'function') {
-    promise.then((response) => {
-      return callback(response)
-    })
-  }
-  return promise
-}
-
-export {getFetch, postFetch}
+export {getFetch, postFetch, getFetchFromCache}
