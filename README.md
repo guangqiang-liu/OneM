@@ -39,13 +39,11 @@ OneM是一款纯ReactNative开发的APP，也是作者开发的第三个RN项目
 	* 电影播放器，仿爱奇艺视频播放器页面，支持横竖屏切换
 * 组件使用示例
 
-# 效果图预览
-![music_player](http://ovyjkveav.bkt.clouddn.com/17-10-20/10179473.jpg)
-![movie_player](http://ovyjkveav.bkt.clouddn.com/17-10-20/36696887.jpg)
-![pic_list](http://ovyjkveav.bkt.clouddn.com/17-10-20/36205040.jpg)
-![demoPage](http://ovyjkveav.bkt.clouddn.com/17-11-5/83095344.jpg)
+# 预览效果图
+![gif](http://ovyjkveav.bkt.clouddn.com/17-11-7/92017297.jpg)
 
-[查看更多预览图请点击](https://github.com/guangqiang-liu/OneM-preview)
+# 查看更多效果图
+**[https://github.com/guangqiang-liu/OneM-preview](https://github.com/guangqiang-liu/OneM-preview)**
 
 # 安装调试
 1. `git clone https://github.com/guangqiang-liu/OneM`
