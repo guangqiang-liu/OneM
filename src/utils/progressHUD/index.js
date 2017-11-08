@@ -2,7 +2,6 @@
  * Created by guangqiang on 2017/9/10.
  */
 import React from 'react'
-import RootSiblings from 'react-native-root-siblings'
 import ProgressHUD from './progressHUD'
 import store from '../../store'
 import type from '../../constants/actionType'
