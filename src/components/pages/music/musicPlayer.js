@@ -2,7 +2,7 @@
  * Created by guangqiang on 2017/9/9.
  */
 import React, {Component} from 'react'
-import {View, Text, TouchableOpacity, StyleSheet, Image, Slider, Animated, Easing, Platform, findNodeHandle} from 'react-native'
+import {View, Text, TouchableOpacity, StyleSheet, Image, Slider, Animated, Easing, Platform, findNodeHandle, NativeModules} from 'react-native'
 import deviceInfo from '../../../utils/deviceInfo'
 import {commonStyle} from '../../../utils/commonStyle'
 import Video from 'react-native-video'
@@ -11,6 +11,10 @@ import {MessageBarManager} from 'react-native-message-bar'
 import {VibrancyView, BlurView} from 'react-native-blur'
 import {Icon} from '../../../utils/icon'
 import {formatTime} from '../../../utils/formatTime'
+import {sharePlatform} from '../../../constants/commonType'
+
+const ShareModule = NativeModules.sharemodule
+
 export default class MusicPlayer extends Component {
 
   constructor(props) {
@@ -192,6 +196,24 @@ export default class MusicPlayer extends Component {
     })
   }
 
+  share() {
+
+    /**
+     * 参数说明：
+     * 1. 标题
+     * 2. 内容
+     * 3. 跳转链接
+     * 4. 图片链接
+     * 5. 分享平台
+     * 6. 分享结果回调
+     */
+    ShareModule.share('标题', '内容', 'http://baidu.com','http://dev.umeng.com/images/tab2_1.png', sharePlatform.QQ,
+      (code, message) => {
+        // 分享成功：code=200
+        // ToastAndroid.show(message,ToastAndroid.SHORT);
+      })
+  }
+
   renderPlayer() {
     let musicInfo = this.props.musicInfo
     return (
@@ -210,7 +232,7 @@ export default class MusicPlayer extends Component {
             </View>
             <TouchableOpacity
               style={{marginTop: 5}}
-              onPress={() => alert('分享')}
+              onPress={() => this.share()}
             >
               <Icon name={'oneIcon|share_o'} size={20} color={commonStyle.white}/>
             </TouchableOpacity>
@@ -315,8 +337,9 @@ export default class MusicPlayer extends Component {
   }
 
   render() {
+    let musicInfo = this.props.musicInfo || {}
     return (
-      this.props.musicInfo.url ?
+      musicInfo.url ?
         <View style={styles.container}>
           <Image
             ref={(img) => { this.backgroundImage = img}}

@@ -64,4 +64,13 @@ const ApiSource = {
   TIMETICKET: 'TIMETICKET'
 }
 
-export {articleType, beginTime, monthList, logEventType, ApiSource}
+const sharePlatform = {
+  QQ: 0,
+  SINA: 1,
+  WECHAT: 2,
+  WECHATMOMENT: 3,
+  QQZONE: 4,
+  FACEBOOK: 5
+}
+
+export {articleType, beginTime, monthList, logEventType, ApiSource, sharePlatform}

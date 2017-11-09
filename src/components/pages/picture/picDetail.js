@@ -8,15 +8,15 @@ import {commonStyle} from '../../../utils/commonStyle'
 import {Icon} from '../../../utils/icon'
 import ImageViewer from 'react-native-image-zoom-viewer'
 import {BaseComponent} from '../../base/baseComponent'
-import MyIcon from 'react-native-vector-icons/FontAwesome'
-
+import {ShareModal} from '../../../components/common/shareModal'
 export default class PicDetail extends BaseComponent {
 
   constructor(props) {
     super(props)
     this.state = {
       data: {},
-      modalVisible: false
+      modalVisible: false,
+      shareModalVisible: false
     }
   }
 
@@ -62,6 +62,10 @@ export default class PicDetail extends BaseComponent {
     )
   }
 
+  share() {
+    this.setState({shareModalVisible: true})
+  }
+
   _render() {
     let data = this.state.data || {}
     return (
@@ -91,12 +95,18 @@ export default class PicDetail extends BaseComponent {
               <Image style={styles.smallIcon} resizeMode="contain" source={require('../../../assets/images/laud.png')}/>
               <Text style={styles.bottomText}>{data.praisenum}</Text>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => this.share()}>
               <Image style={styles.smallIcon} resizeMode="contain" source={require('../../../assets/images/share_image.png')}/>
             </TouchableOpacity>
           </View>
         </ScrollView>
         {this._renderModal()}
+        <ShareModal
+          visible={this.state.shareModalVisible}
+          onVisibleChange={(modalVisible) => this.setState({
+            shareModalVisible: modalVisible
+          })}
+        />
       </View>
     )
   }

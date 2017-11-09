@@ -45,7 +45,11 @@ const glyphMap = {
   locked_o: 58921,
   download_o: 58901,
   share_dot_o: 58915,
-  ex_mark_o: 58897
+  ex_mark_o: 58897,
+  weibo_s: 58900,
+  weixin_friend_s: 58988,
+  weixin_s: 58899,
+  qq_s: 59198
 }
 
 const OIcon = createIconSet(glyphMap, 'iconfont', 'iconfont.ttf')

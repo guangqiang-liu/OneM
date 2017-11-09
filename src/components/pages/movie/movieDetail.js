@@ -424,7 +424,7 @@ export default class MovieDetail extends Component {
     let data = this.props.movieDetail
     let commentData = this.props.commentData
     return (
-      data.basic && commentData ?
+      data.basic && commentData.mini ?
         this.renderContent() : <View/>
     )
   }
