@@ -14,6 +14,7 @@ class ShareModal extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      isHidden: false
     }
   }
 
@@ -34,8 +35,8 @@ class ShareModal extends Component {
         // 分享成功
         // 分享失败
         // 取消分享
-        alert(message)
         this.props.onVisibleChange && this.props.onVisibleChange(false)
+        this.setState({isHidden: true})
       })
   }
 
@@ -53,29 +54,28 @@ class ShareModal extends Component {
 
   render() {
     return (
-      <Modal
-        animationType={'fade'}
-        transparent={true}
-        visible={this.props.visible}
-        onRequestClose={() => this.props.onVisibleChange(false)}
-      >
-        <TouchableOpacity
-          style={styles.modalStyle}>
+      !this.state.isHidden || this.props.visible ?
+        <Modal
+          animationType={'fade'}
+          transparent={true}
+          visible={this.props.visible}
+          onRequestClose={() => this.props.onVisibleChange(false)}>
           <TouchableOpacity
-            activeOpacity={1}
-            style={styles.cancle}
-            onPress={() => this.props.onVisibleChange && this.props.onVisibleChange(false)}
-          >
-            <Text>取消</Text>
+            style={styles.modalStyle}>
+            <TouchableOpacity
+              activeOpacity={1}
+              style={styles.cancle}
+              onPress={() => this.props.onVisibleChange && this.props.onVisibleChange(false)}>
+              <Text>取消</Text>
+            </TouchableOpacity>
+            <View style={styles.content}>
+              {this.renderItem('weixin_s', '微信', '#49BF6E', 'WECHAT')}
+              {this.renderItem('weixin_friend_s', '朋友圈', '#49BF6E', 'WECHATMOMENT')}
+              {this.renderItem('qq_s', 'QQ', '#4CC3F0', 'QQ')}
+              {this.renderItem('weibo_s','微博', '#CE3238', 'SINA')}
+            </View>
           </TouchableOpacity>
-          <View style={styles.content}>
-            {this.renderItem('weixin_s', '微信', '#49BF6E', 'WECHAT')}
-            {this.renderItem('weixin_friend_s', '朋友圈', '#49BF6E', 'WECHATMOMENT')}
-            {this.renderItem('qq_s', 'QQ', '#4CC3F0', 'QQ')}
-            {this.renderItem('weibo_s','微博', '#CE3238', 'SINA')}
-          </View>
-        </TouchableOpacity>
-      </Modal>
+        </Modal> : null
     )
   }
 }

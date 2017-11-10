@@ -105,8 +105,7 @@ export default class PicDetail extends BaseComponent {
           visible={this.state.shareModalVisible}
           onVisibleChange={(modalVisible) => this.setState({
             shareModalVisible: modalVisible
-          })}
-        />
+          })}/>
       </View>
     )
   }
