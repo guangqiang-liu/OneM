@@ -1,7 +1,6 @@
 /**
  * Created by guangqiang on 2017/9/4.
  */
-
 import React from 'react'
 import {View, StyleSheet, Text, TouchableOpacity, Image, ScrollView} from 'react-native'
 import {BaseComponent} from '../../base/baseComponent'

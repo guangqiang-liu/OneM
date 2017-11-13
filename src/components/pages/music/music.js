@@ -8,7 +8,6 @@ import {BaseComponent} from '../../../components/base/baseComponent'
 import {connect} from 'react-redux'
 import MusicDetail from './musicDetail'
 import Action from '../../../actions'
-import action from '../../../actionCreators/music'
 import {Actions} from 'react-native-router-flux'
 import {articleType, beginTime} from '../../../constants/commonType'
 class Music extends BaseComponent {
@@ -31,18 +30,12 @@ class Music extends BaseComponent {
   }
 
   componentDidMount() {
-    action.musicIdList().then(response => {
+    this.props.getMusicId().then(response => {
       this.setState({
-        dataSource: this.state.dataSource.cloneWithPages(response.data),
-        pageNum: response.data.length -1
+        dataSource: this.state.dataSource.cloneWithPages(response.value.data),
+        pageNum: response.value.data.length -1
       })
     })
-    // 这种写法，renderPage函数函数拿到不到值，不解？？？
-    // this.props.getMusicId().then(response => {
-    //   this.setState({
-    //     dataSource: this.state.dataSource.cloneWithPages(response.value.data),
-    //   })
-    // })
   }
 
   renderPage(rowData, rowId) {

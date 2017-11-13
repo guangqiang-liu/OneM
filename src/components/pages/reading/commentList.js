@@ -124,9 +124,6 @@ class ReadingCommentList extends Component {
   }
 }
 
-const styles = StyleSheet.create({
-})
-
 const _ReadingCommentList = connect(
   (state) => state.reading.reading,
   Action.dispatch('reading')

@@ -11,6 +11,7 @@ const getSearilDetail = createAction(type.READING_SERIAL_DETAIL, action.readingS
 const getQuestionDetail = createAction(type.READING_QUESTION_DETAIL, action.readingQuestionDetail)
 const getReadingCommentList = createAction(type.READING_COMMENT_LIST, action.readingCommentList)
 const getArticleCateList = createAction(type.READING_ARTICLE_CATE_LIST, action.readingArticleCateList)
+const getReadingArticleList = createAction(type.READING_ARTICLE__LIST, action.readingArticleList)
 const actionCreators = {
   getReadingBannerList,
   getBannerDetail,
@@ -19,6 +20,7 @@ const actionCreators = {
   getQuestionDetail,
   getReadingCommentList,
   getArticleCateList,
+  getReadingArticleList
 }
 
 export default {actionCreators}

@@ -78,7 +78,3 @@ export default class SerialDetail extends BaseComponent {
     }
   }
 }
-
-const styles = StyleSheet.create({
-
-})
