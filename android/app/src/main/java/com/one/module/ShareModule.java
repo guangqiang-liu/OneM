@@ -39,12 +39,12 @@ public class ShareModule extends ReactContextBaseJavaModule implements ActivityE
 
     @Override
     public String getName() {
-        return "sharemodule";
+        return "shareModule";
     }
 
     @ReactMethod
     public void share(String title, String description,
-                          String contentUrl, String imgUrl,final int platform,
+                          String imgUrl, String contentUrl,final int platform,
                       final Callback resultCallback) {
 
         final UMWeb web = new UMWeb(contentUrl);

@@ -55,7 +55,7 @@
         <service android:name="com.sina.weibo.sdk.net.DownloadService"
             android:exported="false" />
 
-        <!-- 微信 -->
+        <!-- wechat callback-->
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -63,7 +63,7 @@
             android:screenOrientation="portrait"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-        <!-- 支付宝 -->
+        <!-- alipay callback-->
         <activity
             android:name=".apshare.ShareEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
@@ -80,7 +80,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="tencent1106207359" />
+                <data android:scheme="tencent100424468" />
             </intent-filter>
         </activity>
         <activity
