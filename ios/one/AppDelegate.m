@@ -13,6 +13,8 @@
 #import <React/RCTRootView.h>
 #import <UMSocialCore/UMSocialCore.h>
 
+#define USHARE_DEMO_APPKEY @"5a032285734be466cd0002b6"
+
 @implementation AppDelegate
 
 - (UIInterfaceOrientationMask)application:(UIApplication *)application supportedInterfaceOrientationsForWindow:(UIWindow *)window {
@@ -40,7 +42,7 @@
   [[UMSocialManager defaultManager] openLog:YES];
   
   /* 设置友盟appkey */
-  [[UMSocialManager defaultManager] setUmSocialAppkey:@"596447cbe88bad3b82000eec"];
+  [[UMSocialManager defaultManager] setUmSocialAppkey: USHARE_DEMO_APPKEY];
   
   [self configUSharePlatforms];
   
@@ -78,11 +80,6 @@
   
   [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_WechatTimeLine appKey:@"wx083bf496cbc48aec" appSecret:@"750e9075fa521c82274a9d548c399825" redirectURL:nil];
 
-  /*
-   * 移除相应平台的分享，如微信收藏
-   */
-  //[[UMSocialManager defaultManager] removePlatformProviderWithPlatformTypes:@[@(UMSocialPlatformType_WechatFavorite)]];
-  
   /* 设置分享到QQ互联的appID
    * U-Share SDK为了兼容大部分平台命名，统一用appKey和appSecret进行参数设置，而QQ平台仅需将appID作为U-Share的appKey参数传进即可。
    100424468.no permission of union id
@@ -96,13 +93,19 @@
    */
   [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Sina appKey:@"2733400964"  appSecret:@"fac50980a44e3e3afd4bc968ea572887" redirectURL:@"http://mobile.umeng.com/social"];
   
-  /* 设置Facebook的appKey和UrlString */
-  [[UMSocialManager defaultManager] setPlaform:UMSocialPlatformType_Facebook appKey:@"506027402887373"  appSecret:nil redirectURL:nil];
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
   //6.3的新的API调用，是为了兼容国外平台(例如:新版facebookSDK,VK等)的调用[如果用6.2的api调用会没有回调],对国内平台没有影响
   BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url sourceApplication:sourceApplication annotation:annotation];
+  if (!result) {
+    // 其他如支付等SDK的回调
+  }
+  return result;
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+  BOOL result = [[UMSocialManager defaultManager] handleOpenURL:url];
   if (!result) {
     // 其他如支付等SDK的回调
   }

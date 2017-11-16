@@ -1,5 +1,5 @@
 //
-//  shareModule.m
+//  loginModule.m
 //  RNShareDemo
 //
 //  Created by 刘光强 on 2017/11/14.
@@ -9,6 +9,6 @@
 #import <Foundation/Foundation.h>
 #import <React/RCTBridgeModule.h>
 
-@interface shareModule : NSObject<RCTBridgeModule>
+@interface loginModule : NSObject<RCTBridgeModule>
 
 @end

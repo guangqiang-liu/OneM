@@ -16,6 +16,7 @@ import com.umeng.socialize.UMShareAPI;
 
 import com.umeng.socialize.PlatformConfig;
 import com.one.module.SharePackage;
+import com.one.module.LoginPackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -36,7 +37,8 @@ public class MainApplication extends Application implements ReactApplication {
             new OrientationPackage(),
             new BlurViewPackage(),
             new ReactVideoPackage(),
-              new SharePackage()
+              new SharePackage(),
+              new LoginPackage()
 
       );
     }

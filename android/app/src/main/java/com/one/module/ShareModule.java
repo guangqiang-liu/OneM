@@ -11,7 +11,6 @@ import com.facebook.react.bridge.Callback;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.ReadableArray;
 import com.umeng.socialize.ShareAction;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.UMShareListener;
@@ -19,9 +18,6 @@ import com.umeng.socialize.bean.SHARE_MEDIA;
 import com.umeng.socialize.media.UMImage;
 import com.umeng.socialize.media.UMWeb;
 
-/**
- * Created by Song on 2017/7/10.
- */
 public class ShareModule extends ReactContextBaseJavaModule implements ActivityEventListener {
 
     private Context context;
@@ -46,34 +42,24 @@ public class ShareModule extends ReactContextBaseJavaModule implements ActivityE
         return "sharemodule";
     }
 
-    /**
-     * 分享链接
-     * @param title
-     * @param description
-     * @param contentUrl
-     * @param imgUrl
-     * @param platform
-     * @param resultCallback
-     */
     @ReactMethod
     public void share(String title, String description,
                           String contentUrl, String imgUrl,final int platform,
                       final Callback resultCallback) {
 
         final UMWeb web = new UMWeb(contentUrl);
-        web.setTitle(title); //标题
-        web.setThumb(new UMImage(context, imgUrl));  //缩略图
-        web.setDescription(description); //描述
+        web.setTitle(title);
+        web.setThumb(new UMImage(context, imgUrl));
+        web.setDescription(description);
         runOnMainThread(new Runnable() {
             @Override
             public void run() {
                 new ShareAction(mActivity)
                         .setPlatform(getSharePlatform(platform))
-                        .withMedia(web) // 分享链接
+                        .withMedia(web)
                         .setCallback(new UMShareListener() {
                             @Override
                             public void onStart(SHARE_MEDIA share_media) {
-                                //分享开始的回调
                             }
 
                             @Override
@@ -122,6 +108,5 @@ public class ShareModule extends ReactContextBaseJavaModule implements ActivityE
 
     @Override
     public void onNewIntent(Intent intent) {
-
     }
 }

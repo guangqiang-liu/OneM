@@ -10,18 +10,15 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class SharePackage implements ReactPackage {
+public class LoginPackage implements ReactPackage {
 
     @Override
     public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
         List<NativeModule> modules = new ArrayList<>();
-        modules.add(new ShareModule(reactContext));
+        modules.add(new LoginModule(reactContext));
         return modules;
     }
 
-    public List<Class<? extends JavaScriptModule>> createJSModules() {
-        return Collections.emptyList();
-    }
 
     @Override
     public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {

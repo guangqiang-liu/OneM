@@ -8,7 +8,7 @@ import {View, TouchableOpacity, Text, StyleSheet, Modal, NativeModules} from 're
 import {Icon} from '../../../utils/icon'
 import {sharePlatform} from '../../../constants/commonType'
 
-const ShareModule = NativeModules.sharemodule
+const ShareModule = NativeModules.shareModule
 
 class ShareModal extends Component {
 
