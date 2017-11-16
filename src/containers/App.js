@@ -8,7 +8,6 @@ import {dispatch} from '../utils/venilog/dispatchLog'
 import type from '../constants/actionType'
 import {commonStyle} from '../utils/commonStyle'
 
-// DemoPages
 import Launch from '../components/pages/demoPage/Launch'
 import Register from "../components/pages/demoPage/Register"
 import Login from "../components/pages/demoPage/Login"
@@ -40,7 +39,6 @@ import CustomComp from '../components/pages/demoPage/TestCustomUIComponent'
 import Network from '../components/pages/demoPage/TestNetwork'
 import TestLogDot from '../components/pages/demoPage/TestLogDot'
 
-// PAGES
 import TabBar from './TabBarContainer'
 import PicDetail from '../components/pages/picture/picDetail'
 import PastList from '../components/pages/picture/pastList'
@@ -65,6 +63,10 @@ import SerialDetail from '../components/pages/reading/serial/serialDetail'
 import QuestionDetail from '../components/pages/reading/question/questionDetail'
 import ArticleList from '../components/pages/reading/readingArticleList'
 
+import UserLogin from '../components/pages/me/login'
+import UserRegister from '../components/pages/me/register'
+import Setting from '../components/pages/me/setting'
+
 import WebView from '../components/common/webView'
 
 const reducerCreate = params => {
@@ -86,7 +88,6 @@ const scenes = Actions.create(
     <Modal key="modal" hideNavBar>
       <Lightbox key="lightbox" hideNavBar={true}>
 
-        {/* PAGES */}
         <Stack key="init" back>
           <Scene key="launch" component={Launch}
                  hideNavBar />
@@ -189,6 +190,21 @@ const scenes = Actions.create(
             Action.dispatch('reading')
           )(ArticleList)}/>
 
+          <Scene key='userLogin' hideNavBar component={connect(
+            (state) => state.me.login,
+            Action.dispatch('login')
+          )(UserLogin)}/>
+
+          <Scene key='userRegister' hideNavBar component={connect(
+            state => state.me.register,
+            Action.dispatch('register')
+          )(UserRegister)}/>
+
+          <Scene key='setting' hideNavBar component={connect(
+            state => state.me.register,
+            Action.dispatch('register')
+          )(Setting)}/>
+
           <Scene key="author" title="作者" hideNavBar component={Author}/>
 
           <Scene key="webView" hideNavBar component={WebView}/>
@@ -203,7 +219,6 @@ const scenes = Actions.create(
 
           <Scene key="pageTwo" component={PageTwo}/>
 
-          {/* clone：使用clone标识的Scenes将被作为模版处理，并克隆到当前的scene的容器中 */}
           <Scene key="echo" clone component={EchoView}
                  getTitle={({navigation}) => navigation.state.key}/>
 
@@ -230,7 +245,6 @@ const scenes = Actions.create(
 
           <Scene key='testViewPager' title='TestViewPager' component={TestViewPager}/>
 
-          {/* 这里使用了REPLACE属性，设置界面的跳转样式 */}
           <Scene key="testRedux" component={TestRedux}
                  title="Replace"
                  type={ActionConst.REPLACE}/>
@@ -247,7 +261,6 @@ const scenes = Actions.create(
 
         </Stack>
 
-        {/* MASK */}
         <Scene key='loading' component={connect(
           (state) => state.common.loading
         )(Loading)}/>

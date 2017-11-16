@@ -49,7 +49,22 @@ const glyphMap = {
   weibo_s: 58900,
   weixin_friend_s: 58988,
   weixin_s: 58899,
-  qq_s: 59198
+  qq_s: 59198,
+  badge_new_o: 59566,
+  avatar_o: 58922,
+  man_o: 59026,
+  woman_o: 58912,
+  bubble_message_o: 58916,
+  selected_s: 58919,
+  unselected_o: 59224,
+  pwd_o: 58941,
+  user_name_o: 58911,
+  coupon_o: 58955,
+  key_o: 59061,
+  rmb_s: 58909,
+  magic_star_o: 58908,
+  gift_o: 59077,
+  push_arror_o: 58895
 }
 
 const OIcon = createIconSet(glyphMap, 'iconfont', 'iconfont.ttf')

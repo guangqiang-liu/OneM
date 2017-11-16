@@ -9,7 +9,8 @@ import {createAction} from 'redux-actions'
 import {Actions} from 'react-native-router-flux'
 
 const loadingAction = createAction(type.FETCH_SHOW_HUD)
-let sibling = null
+
+let sibling = undefined
 
 /**
  * 借助三方库，在 app 最顶层添加视图，但是有bug

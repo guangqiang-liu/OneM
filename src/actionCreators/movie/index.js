@@ -5,6 +5,7 @@ import {getFetch, postFetch} from '../../utils/network/request/HttpExtension'
 import {PATH} from '../../constants/urls'
 import {Required, ValidateUtil} from '../../utils/validatorUtil'
 import {ApiSource} from '../../constants/commonType'
+
 const movieStory = params => getFetch(`/movie/${params}/story/1/0`, params)
 const movieList = params =>  getFetch(`${PATH.MOVIE_LIST}${params}`, {})
 const movieShowTimeList = params =>  getFetch(PATH.MOVIE_SHOWTIME, params, ApiSource.TIMEMOVIE)
@@ -39,9 +40,9 @@ const movieListForDemo = (pageId = 1, callback, options, params) =>  {
     `${PATH.MOVIE_LIST}${params}`,
     {},
     (response) => {
-      if (response.res === 0) { // 有更多
+      if (response.res === 0) {
         callback && callback(response.data)
-      } else { // 没有更多
+      } else {
         if (response.data && response.data.length === 0) {
           callback && callback([])
         } else {

@@ -9,6 +9,7 @@ import {Icon} from '../../../utils/icon'
 import ImageViewer from 'react-native-image-zoom-viewer'
 import {BaseComponent} from '../../base/baseComponent'
 import {ShareModal} from '../../../components/common/shareModal'
+
 export default class PicDetail extends BaseComponent {
 
   constructor(props) {

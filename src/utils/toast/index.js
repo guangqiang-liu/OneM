@@ -5,7 +5,9 @@ import React, {Component} from 'react'
 import RootToast from 'react-native-root-toast'
 import {View, Text, Platform, StyleSheet} from 'react-native'
 import {Icon} from '../icon'
+
 const Toast = {
+
   toast: null,
   show: (msg) => {
     this.toast = RootToast.show(msg, {

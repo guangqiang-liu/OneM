@@ -9,6 +9,9 @@ import movie from './movie'
 import music from './music'
 import reading from './reading'
 import me from './me'
+import login from './login'
+import register from './register'
+
 const action = {
   openChat,
   launch,
@@ -16,7 +19,9 @@ const action = {
   movie,
   music,
   reading,
-  me
+  me,
+  login,
+  register
 }
 
 const dispatch = name => dispatch => {

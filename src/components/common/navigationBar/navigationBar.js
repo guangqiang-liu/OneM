@@ -67,7 +67,6 @@ export default class NavigationBar extends Component {
       )
     } else {
       tempComponent = (
-        // 需要注意，字体库名字不能写错，写错程序就会报错
         <Icon name={'oneIcon|nav_back_o'} size={20} color={commonStyle.iconGray}/>
       )
     }
@@ -127,11 +126,8 @@ export default class NavigationBar extends Component {
     return (
       <View style={[styles.navBarStyle, this.navigationBarProps.navBarStyle]}>
         <View style={[styles.navContentStyle, this.navigationBarProps.navContentStyle]}>
-          {/* 导航左按钮 */}
           {this.renderLeftItem()}
-          {/* 导航title */}
           {this.renderTitle()}
-          {/* 导航右按钮*/}
           {this.renderRightItem()}
         </View>
       </View>

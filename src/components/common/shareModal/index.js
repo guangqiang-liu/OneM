@@ -11,6 +11,7 @@ import {sharePlatform} from '../../../constants/commonType'
 const ShareModule = NativeModules.sharemodule
 
 class ShareModal extends Component {
+
   constructor(props) {
     super(props)
     this.state = {

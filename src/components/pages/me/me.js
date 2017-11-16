@@ -2,137 +2,176 @@
  * Created by guangqiang on 2017/10/12.
  */
 import React, {Component} from 'react'
-import {View, Text, TouchableOpacity, StyleSheet, Image, ListView} from 'react-native'
+import {View, Text, TouchableOpacity, StyleSheet, Image, ScrollView} from 'react-native'
 import {connect} from 'react-redux'
 import Action from '../../../actions'
 import {BaseComponent} from '../../base/baseComponent'
 import {commonStyle} from '../../../utils/commonStyle'
 import {Actions} from 'react-native-router-flux'
-const data = [
-  {
-    key: 'testAntdMobile',
-    scene: 'antd-mobile'
-  },
-  {
-    key: 'blur',
-    scene: 'TestBlurComponent'
-  },
-  {
-    key: 'imgZoom',
-    scene: 'TestImageZoomComponent'
-  },
-  {
-    key: 'testMessageBar',
-    scene: 'TestMessageBar'
-  },
-  {
-    key: 'testOrientation',
-    scene: 'TestOrientation'
-  },
-  {
-    key: 'loading',
-    scene: 'Loading'
-  },
-  {
-    key: 'launch',
-    scene: 'ReactNativeRouterFluxDemo'
-  },
-  {
-    key: 'testScrollableTabView',
-    scene: 'scrollable-tab-view'
-  },
-  {
-    key: 'SwiperComp',
-    scene: 'TestSwiperComponent'
-  },
-  {
-    key: 'testIcon',
-    scene: 'TestIcon'
-  },
-  {
-    key: 'testViewPager',
-    scene: 'viewPager'
-  },
-  {
-    key: 'enhancedListView',
-    scene: 'EnhancedListViewDemo'
-  },
-  {
-    key: 'webView',
-    scene: 'WebView'
-  },
-
-  {
-    key: 'network',
-    scene: 'Network'
-  },
-  {
-    key: 'testLogDot',
-    scene: '日志埋点'
-  },
-  {
-    key: 'testRedux',
-    scene: 'TestRedux'
-  },
-  {
-    key: 'customComp',
-    scene: '包装原生组件'
-  }
-]
+import {Icon} from '../../../utils/icon'
+// import {storage} from '../../../utils'
+import storage from 'react-native-simple-store'
 
 class Me extends BaseComponent {
 
   constructor(props) {
     super(props)
-    this.renderRow = this.renderRow.bind(this)
-    this.renderHeader = this.renderHeader.bind(this)
+    this.scrollView = null
     this.state = {
-      dataSource: new ListView.DataSource({rowHasChanged:(r1, r2) => r1 !==r2 })
+      userInfo: undefined
     }
   }
 
   navigationBarProps() {
     return {
       title: '我的',
+      titleStyle: {
+        color: commonStyle.white
+      },
       hiddenLeftItem: true,
-      rightTitle: '作者'
+      navBarStyle: {
+        backgroundColor: '#161C28',
+        borderBottomWidth: 0
+      },
+      rightIcon: {
+        name: 'bubble_message_o',
+        size: 20,
+        color: commonStyle.white
+      }
     }
   }
 
-  onRightPress() {
-    return Actions.author()
+  componentDidMount() {
+    storage.get('register').then(response => {
+      this.setState({userInfo: response})
+    })
   }
 
-  renderRow(rowData, sectionId, rowId) {
+  callback() {
+    this.scrollView.scrollTo({x: 0, y: 0, animated: true})
+    storage.get('register').then(response => {
+      this.setState({userInfo: response})
+    })
+  }
+
+  renderHeaderContainer() {
     return (
-      <TouchableOpacity
-        style={styles.cellStyle}
-        onPress={() => Actions[rowData.key]()}
-      >
-        <Text style={{flex: 1, textAlign: commonStyle.center}}>{rowData.scene}</Text>
-        <Image style={{width: 20, height: 20}} source={require('../../../assets/images/forward.png')}/>
+      <View style={{flexDirection: 'row', padding: 10, alignItems: commonStyle.center, backgroundColor: '#161C28'}}>
+        <TouchableOpacity>
+          <Icon name={'oneIcon|avatar_o'} size={60} color={'#D5D5D5'}/>
+        </TouchableOpacity>
+        {
+          this.state.userInfo ?
+            <View style={{marginLeft: 10, justifyContent: commonStyle.center}}>
+              <Text style={{marginBottom: 10, fontSize: 16, color: commonStyle.white}}>姓名</Text>
+              <TouchableOpacity style={{flexDirection: commonStyle.row, alignItems: commonStyle.center, backgroundColor: '#F36B42', paddingHorizontal: 5, borderRadius: 10}}>
+                <Icon name={`oneIcon|bubble_message_o`} size={15} color={commonStyle.white}/>
+                <Text style={{color: commonStyle.white, marginLeft: 5, fontSize: 12}}>普通会员</Text>
+              </TouchableOpacity>
+            </View> :
+            <View style={{flexDirection: 'row', alignItems: commonStyle.center}}>
+              <TouchableOpacity style={[styles.loginBtn, {borderColor: '#F37207'}]} onPress={() => Actions.userLogin({callback: () => this.callback()})}>
+                <Text style={{color: '#F37207'}}>登录</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={[styles.loginBtn, {borderColor: '#878787'}]} onPress={() => Actions.userRegister({callback: () => this.callback()})}>
+                <Text style={{color: '#878787'}}>注册</Text>
+              </TouchableOpacity>
+            </View>
+        }
+      </View>
+    )
+  }
+
+  renderDataItem(title, count) {
+    return (
+      <TouchableOpacity style={{justifyContent: commonStyle.center, alignItems: commonStyle.center, padding: 20}}>
+        <Text>{count}</Text>
+        <Text style={{marginTop: 5}}>{title}</Text>
       </TouchableOpacity>
     )
   }
 
-  renderHeader() {
+  renderDataPanel() {
     return (
-      <View style={styles.headerStyle}>
-        <Text>项目中使用到的常用功能Demo集合</Text>
+      <View style={{flexDirection: commonStyle.row, alignItems: commonStyle.center, justifyContent: commonStyle.around, borderBottomWidth: 10, borderBottomColor: commonStyle.lineColor}}>
+        {this.renderDataItem('影评', 100)}
+        {this.renderDataItem('看过', 100)}
+        {this.renderDataItem('想看', 100)}
+        {this.renderDataItem('关注', 20)}
+        {this.renderDataItem('收藏', 60)}
+      </View>
+    )
+  }
+
+  renderPanelItem(title, icon, color) {
+    return (
+      <TouchableOpacity style={{justifyContent: commonStyle.center, alignItems: commonStyle.center, padding: 20}}>
+        <Icon name={`oneIcon|${icon}`} size={30} color={color}/>
+        <Text style={{marginTop: 5, color: commonStyle.textBlockColor}}>{title}</Text>
+      </TouchableOpacity>
+    )
+  }
+
+  renderActivityPanel() {
+    return (
+      <View style={{flexDirection: commonStyle.row, alignItems: commonStyle.center, justifyContent: commonStyle.around, borderBottomWidth: 10, borderBottomColor: commonStyle.lineColor}}>
+        {this.renderPanelItem('优惠券', 'coupon_o', '#F6A13C')}
+        {this.renderPanelItem('口令红包', 'key_o', '#E13C3E')}
+        {this.renderPanelItem('礼品卡', 'gift_o', '#7A5CE5')}
+        {this.renderPanelItem('时光比', 'magic_star_o', '#F8BD57')}
+        {this.renderPanelItem('余额', 'rmb_s', '#F36B42')}
+      </View>
+    )
+  }
+
+  renderItem(title, icon, color, key) {
+    return (
+      <TouchableOpacity
+        style={styles.item}
+        onPress={() => key ? Actions[key]({callback: () => this.callback()}) : null}
+      >
+        <View style={{flexDirection: commonStyle.row, alignItems: commonStyle.center}}>
+          <Text style={{marginRight: 5}}>{title}</Text>
+          {
+            icon ? <Icon name={`oneIcon|${icon}`} size={20} color={color}/> : null
+          }
+        </View>
+        <Icon name={`oneIcon|push_arror_o`} size={20} color={'#B1B1B1'}/>
+      </TouchableOpacity>
+    )
+  }
+
+  renderList() {
+    return (
+      <View>
+        {this.renderItem('电影票订单')}
+        {this.renderItem('商品订单')}
+        {this.renderItem('购物车')}
+        {this.renderItem('会员俱乐部', 'badge_new_o', '#EE393E')}
+        {this.renderItem('我的活动')}
+        {this.renderItem('直播')}
+        <View style={{borderTopWidth: 10, borderTopColor: commonStyle.lineColor}}>
+          {this.renderItem('客服/反馈')}
+          {this.renderItem('设置', '', '', 'setting')}
+          {this.renderItem('关于我们')}
+        </View>
       </View>
     )
   }
 
   _render() {
-    const dataSource = this.state.dataSource.cloneWithRows(data)
     return (
       <View style={styles.container}>
-        <ListView
-          style={{flex: 1}}
-          dataSource={dataSource}
-          renderRow={this.renderRow}
-          renderHeader={this.renderHeader}
-        />
+        <ScrollView
+          ref={(sc) => this.scrollView = sc}
+          style={styles.scStyle}
+          bounces={false}
+        >
+          {this.renderHeaderContainer()}
+          {this.renderDataPanel()}
+          {this.renderActivityPanel()}
+          {this.renderList()}
+        </ScrollView>
       </View>
     )
   }
@@ -141,22 +180,27 @@ class Me extends BaseComponent {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: commonStyle.bgColor,
-  },
-  cellStyle: {
-    justifyContent: commonStyle.center,
-    alignItems: commonStyle.center,
-    flexDirection: 'row',
     backgroundColor: commonStyle.white,
-    height: 40,
-    marginBottom: 10,
-    paddingHorizontal: 10
   },
-  headerStyle: {
-    height: 40,
-    alignItems: commonStyle.center,
+  scStyle: {
+  },
+  loginBtn: {
+    borderRadius: 15,
     justifyContent: commonStyle.center,
-    backgroundColor: commonStyle.bgColor,
+    alignItems: commonStyle.center,
+    paddingHorizontal: 20,
+    paddingVertical: 5,
+    borderWidth: 1,
+    borderColor: 'red',
+    marginLeft: 20
+  },
+  item: {
+    flexDirection: commonStyle.row,
+    alignItems: commonStyle.center,
+    padding: 10,
+    borderBottomWidth: commonStyle.lineWidth,
+    borderBottomColor: commonStyle.lineColor,
+    justifyContent: commonStyle.between
   }
 })
 

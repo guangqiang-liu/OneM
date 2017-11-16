@@ -15,6 +15,7 @@ var _lodashClonedeep = require('../../../node_modules/lodash._basecopy');
 var _lodashClonedeep2 = _interopRequireDefault(_lodashClonedeep);
 
 exports['default'] = function (options) {
+
   var validatorMiddleware = function validatorMiddleware(store) {
     return function (next) {
       return function (action) {

@@ -1,10 +1,8 @@
 /**
- * Created by guangqiang on 2017/10/12.
+ * Created by guangqiang on 2017/11/14.
  */
 import {createAction} from 'redux-actions'
 
-const actionCreators = {
-
-}
+const actionCreators = {}
 
 export default {actionCreators}
