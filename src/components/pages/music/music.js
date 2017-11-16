@@ -9,6 +9,7 @@ import {connect} from 'react-redux'
 import MusicDetail from './musicDetail'
 import Action from '../../../actions'
 import {Actions} from 'react-native-router-flux'
+import action from '../../../actionCreators/music'
 import {articleType, beginTime} from '../../../constants/commonType'
 class Music extends BaseComponent {
 
@@ -30,10 +31,10 @@ class Music extends BaseComponent {
   }
 
   componentDidMount() {
-    this.props.getMusicId().then(response => {
+    action.musicIdList().then(response => {
       this.setState({
-        dataSource: this.state.dataSource.cloneWithPages(response.value.data),
-        pageNum: response.value.data.length -1
+        dataSource: this.state.dataSource.cloneWithPages(response.data),
+        pageNum: response.data.length -1
       })
     })
   }

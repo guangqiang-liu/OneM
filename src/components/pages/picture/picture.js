@@ -9,6 +9,7 @@ import ViewPager from 'react-native-viewpager'
 import PicDetail from './picDetail'
 import {Actions} from 'react-native-router-flux'
 import {articleType, beginTime} from '../../../constants/commonType'
+import action from '../../../actionCreators/picture'
 class Home extends Component {
 
   constructor(props) {
@@ -21,8 +22,8 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    this.props.getPicList().then(response => {
-      let dataArr = response.value.data
+    action.picList().then(response => {
+      let dataArr = response.data
       let length = dataArr.length
       let newArr = dataArr.concat(dataArr[length-1])
       this.setState({

@@ -17,7 +17,7 @@ export default class MainPage extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedTab: 'Picture'
+      selectedTab: 'Movie'
     }
   }
 
@@ -25,6 +25,26 @@ export default class MainPage extends Component {
     return (
       <View style={styles.container}>
         <TabNavigator>
+          <TabNavigator.Item
+            selected={this.state.selectedTab === 'Movie'}
+            title="电影"
+            titleStyle={styles.tabText}
+            selectedTitleStyle={styles.selectedTabText}
+            renderIcon={() => <Icon name={'oneIcon|tb_Movie_o'} size={20} color={commonStyle.textGrayColor}/>}
+            renderSelectedIcon={() => <Icon name={'oneIcon|tb_Movie_o'} size={20} color={commonStyle.black}/>}
+            onPress={() => this.setState({ selectedTab: 'Movie' })}>
+            <Movie/>
+          </TabNavigator.Item>
+          <TabNavigator.Item
+            selected={this.state.selectedTab === 'Music'}
+            title="音乐"
+            titleStyle={styles.tabText}
+            selectedTitleStyle={styles.selectedTabText}
+            renderIcon={() => <Icon name={'oneIcon|tb_Music_o'} size={20} color={commonStyle.textGrayColor}/>}
+            renderSelectedIcon={() => <Icon name={'oneIcon|tb_Music_o'} size={20} color={commonStyle.black}/>}
+            onPress={() => this.setState({ selectedTab: 'Music' })}>
+            <Music/>
+          </TabNavigator.Item>
           <TabNavigator.Item
             selected={this.state.selectedTab === 'Picture'}
             title="图文"
@@ -44,26 +64,6 @@ export default class MainPage extends Component {
             renderSelectedIcon={() => <Icon name={'oneIcon|tb_article_o'} size={20} color={commonStyle.black}/>}
             onPress={() => this.setState({ selectedTab: 'Reading' })}>
             <Reading/>
-          </TabNavigator.Item>
-          <TabNavigator.Item
-            selected={this.state.selectedTab === 'Music'}
-            title="音乐"
-            titleStyle={styles.tabText}
-            selectedTitleStyle={styles.selectedTabText}
-            renderIcon={() => <Icon name={'oneIcon|tb_Music_o'} size={20} color={commonStyle.textGrayColor}/>}
-            renderSelectedIcon={() => <Icon name={'oneIcon|tb_Music_o'} size={20} color={commonStyle.black}/>}
-            onPress={() => this.setState({ selectedTab: 'Music' })}>
-            <Music/>
-          </TabNavigator.Item>
-          <TabNavigator.Item
-            selected={this.state.selectedTab === 'Movie'}
-            title="电影"
-            titleStyle={styles.tabText}
-            selectedTitleStyle={styles.selectedTabText}
-            renderIcon={() => <Icon name={'oneIcon|tb_Movie_o'} size={20} color={commonStyle.textGrayColor}/>}
-            renderSelectedIcon={() => <Icon name={'oneIcon|tb_Movie_o'} size={20} color={commonStyle.black}/>}
-            onPress={() => this.setState({ selectedTab: 'Movie' })}>
-            <Movie/>
           </TabNavigator.Item>
           <TabNavigator.Item
             selected={this.state.selectedTab === 'Me'}

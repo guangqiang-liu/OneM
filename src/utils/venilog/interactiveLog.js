@@ -18,7 +18,7 @@ const sendInteractiveLog = (id, eventId, params) => {
       if (response !== null) {
         if (response.success) {
           console.log('打点成功')
-          Toast.show('打点成功!')
+          // Toast.show('打点成功!')
         } else {
           console.log('打点失败')
         }
@@ -26,7 +26,7 @@ const sendInteractiveLog = (id, eventId, params) => {
         console.log('服务失败')
       }
     }).catch(err => {
-    Toast.show('打点成功!')
+    // Toast.show('打点成功!')
   })
 }
 
