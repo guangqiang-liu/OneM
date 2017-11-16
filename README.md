@@ -1,9 +1,14 @@
 # OneM
 **OneM是一款纯ReactNative打造的集杂志浏览、音乐播放、视频播放于一体的综合性App,并且支持iOS和Android双平台**
 
-# <mark>注意了<mark>：如果有同学发现运行项目报如下错误，请将react-native从之前的0.47.2 升级到 0.49.3: 执行命令：npm install react-native@0.49.3 --save
+# 注意了
+* 如果有同学发现运行项目报如下错误，请将react-native从之前的0.47.2 升级到 0.49.3: 执行命令：npm install react-native@0.49.3 --save
 
 ![error](http://ovyjkveav.bkt.clouddn.com/17-11-8/13256931.jpg)
+
+* 安卓运行项目报如下错误，请开启Android模拟器的调试模式试试。
+
+![error](http://ovyjkveav.bkt.clouddn.com/17-11-16/91256214.jpg)
 
 # 目录
 * [项目简介](#项目简介)
@@ -91,6 +96,7 @@ OneM是一款纯ReactNative开发的APP，也是作者开发的第三个RN项目
 * react-native-router-flux
 * react-native-scrollable-tab-view
 * react-native-simple-store
+* react-native-storage
 * react-native-swiper
 * react-native-tab-navigator
 * react-native-vector-icons  // 原生依赖库
@@ -125,8 +131,8 @@ OneM是一款纯ReactNative开发的APP，也是作者开发的第三个RN项目
 - [ ] 日志打点视图
 - [ ] form表单组件
 - [ ] iOS项目支持pod
-- [ ] 三方分享功能
-- [ ] 三方登录功能
+- [x] 三方分享功能
+- [x] 三方登录功能
 - [ ] 文件上传与下载
 - [ ] 优化代码，修改bug
 - [ ] 待补充
