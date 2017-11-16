@@ -11,9 +11,7 @@ import {MessageBarManager} from 'react-native-message-bar'
 import {VibrancyView, BlurView} from 'react-native-blur'
 import {Icon} from '../../../utils/icon'
 import {formatTime} from '../../../utils/formatTime'
-import {sharePlatform} from '../../../constants/commonType'
-
-const ShareModule = NativeModules.sharemodule
+import {ShareModal} from '../../../components/common/shareModal'
 
 export default class MusicPlayer extends Component {
 
@@ -32,6 +30,7 @@ export default class MusicPlayer extends Component {
       spinValue: new Animated.Value(0),
       playIcon: 'music_paused_o',
       playModeIcon: 'music_cycle_o',
+      shareModalVisible: false
     }
     this.spinAnimated = Animated.timing(this.state.spinValue, {
       toValue: 1,
@@ -188,24 +187,6 @@ export default class MusicPlayer extends Component {
     })
   }
 
-  share() {
-
-    /**
-     * 参数说明：
-     * 1. 标题
-     * 2. 内容
-     * 3. 跳转链接
-     * 4. 图片链接
-     * 5. 分享平台
-     * 6. 分享结果回调
-     */
-    ShareModule.share('标题', '内容', 'http://baidu.com','http://dev.umeng.com/images/tab2_1.png', sharePlatform.QQ,
-      (code, message) => {
-        // 分享成功：code=200
-        // ToastAndroid.show(message,ToastAndroid.SHORT);
-      })
-  }
-
   renderPlayer() {
     let musicInfo = this.props.musicInfo
     return (
@@ -224,7 +205,7 @@ export default class MusicPlayer extends Component {
             </View>
             <TouchableOpacity
               style={{marginTop: 5}}
-              onPress={() => this.share()}
+              onPress={() => this.setState({shareModalVisible: true})}
             >
               <Icon name={'oneIcon|share_o'} size={20} color={commonStyle.white}/>
             </TouchableOpacity>
@@ -320,6 +301,11 @@ export default class MusicPlayer extends Component {
           onBuffer={this.onBuffer}
           onTimedMetadata={this.onTimedMetadata}
         />
+        <ShareModal
+          visible={this.state.shareModalVisible}
+          onVisibleChange={(modalVisible) => this.setState({
+            shareModalVisible: modalVisible
+          })}/>
       </View>
     )
   }

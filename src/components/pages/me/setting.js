@@ -57,7 +57,7 @@ export default class Setting extends BaseComponent {
   }
 
   logoutClick() {
-    storage.delete('register')
+    storage.delete('userInfo')
     this.props.callback && this.props.callback()
     Actions.pop()
   }

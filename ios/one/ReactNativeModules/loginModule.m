@@ -69,26 +69,29 @@ RCT_EXPORT_METHOD(login:(NSInteger) platform callback:(RCTResponseSenderBlock) c
           response = @"没有用https的请求,@see UMSocialGlobal isUsingHttpsWhenShareContent";
         }
       } else {
-        
         UMSocialUserInfoResponse *resp = result;
-        
         // 第三方登录数据(为空表示平台未提供)
-        // 授权数据
-        NSLog(@" uid: %@", resp.uid);
-        NSLog(@" openid: %@", resp.openid);
-        NSLog(@" accessToken: %@", resp.accessToken);
-        NSLog(@" refreshToken: %@", resp.refreshToken);
-        NSLog(@" expiration: %@", resp.expiration);
-        
-        // 用户数据
-        NSLog(@" name: %@", resp.name);
-        NSLog(@" iconurl: %@", resp.iconurl);
-        NSLog(@" gender: %@", resp.unionGender);
-        
+      
         // 第三方平台SDK源数据
-        NSLog(@"Sina originalResponse: %@", resp.originalResponse);
+        NSDictionary *tempDic = resp.originalResponse;
+        NSLog(@"Sina originalResponse: %@", tempDic);
         
-        callback([[NSArray alloc] initWithObjects:resp.originalResponse, nil]);
+        NSMutableDictionary *dic = [NSMutableDictionary dictionary];
+        // 授权数据
+        [dic setObject:resp.uid forKey:@"uid"];
+        [dic setObject:resp.openid forKey:@"openid"];
+        [dic setObject:resp.accessToken forKey:@"accessToken"];
+        [dic setObject:resp.refreshToken ? resp.refreshToken : @"" forKey:@"refreshToken"];
+        [dic setObject:resp.expiration ? resp.expiration : @"" forKey:@"expiration"];
+
+        // 用户数据
+        [dic setObject:resp.name forKey:@"name"];
+        [dic setObject:resp.iconurl forKey:@"iconurl"];
+        [dic setObject:resp.unionGender forKey:@"gender"];
+        [dic setObject:tempDic[@"province"] forKey:@"province"];
+        [dic setObject:tempDic[@"city"] forKey:@"city"];
+
+        callback([[NSArray alloc] initWithObjects:dic, nil]);
       }
     }];
   });

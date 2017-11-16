@@ -20,22 +20,9 @@ class ShareModal extends Component {
   }
 
   share(platform) {
-    /**
-     * 参数说明：
-     * 1. 标题
-     * 2. 内容
-     * 3. 跳转链接
-     * 4. 图片链接
-     * 5. 分享平台
-     * 6. 分享结果回调
-     */
     ShareModule.share('OneM','OneM',
       'http://www.jianshu.com/u/023338566ca5','http://ovyjkveav.bkt.clouddn.com/17-11-9/48949929.jpg', sharePlatform[platform],
       (message) => {
-        // message:
-        // 分享成功
-        // 分享失败
-        // 取消分享
         this.props.onVisibleChange && this.props.onVisibleChange(false)
         this.setState({isHidden: true})
       })

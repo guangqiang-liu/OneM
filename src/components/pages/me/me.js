@@ -42,38 +42,48 @@ class Me extends BaseComponent {
   }
 
   componentDidMount() {
-    storage.get('register').then(response => {
+    storage.get('userInfo').then(response => {
       this.setState({userInfo: response})
     })
   }
 
-  callback() {
+  callback(type) {
     this.scrollView.scrollTo({x: 0, y: 0, animated: true})
-    storage.get('register').then(response => {
-      this.setState({userInfo: response})
-    })
+    if (type === 'login' || type === 'register') {
+      storage.get('userInfo').then(response => {
+        this.setState({userInfo: response})
+      })
+    } else {
+      this.setState({userInfo: undefined})
+    }
   }
 
   renderHeaderContainer() {
+    let data = this.state.userInfo || {}
     return (
       <View style={{flexDirection: 'row', padding: 10, alignItems: commonStyle.center, backgroundColor: '#161C28'}}>
         <TouchableOpacity>
-          <Icon name={'oneIcon|avatar_o'} size={60} color={'#D5D5D5'}/>
+          {
+            data.iconurl ? <Image style={{width: 60, height: 60, borderRadius: 30, backgroundColor: 'red'}} source={{uri: data.iconurl}}/> : <Icon name={'oneIcon|avatar_o'} size={60} color={'#D5D5D5'}/>
+          }
         </TouchableOpacity>
         {
           this.state.userInfo ?
             <View style={{marginLeft: 10, justifyContent: commonStyle.center}}>
-              <Text style={{marginBottom: 10, fontSize: 16, color: commonStyle.white}}>姓名</Text>
-              <TouchableOpacity style={{flexDirection: commonStyle.row, alignItems: commonStyle.center, backgroundColor: '#F36B42', paddingHorizontal: 5, borderRadius: 10}}>
-                <Icon name={`oneIcon|bubble_message_o`} size={15} color={commonStyle.white}/>
-                <Text style={{color: commonStyle.white, marginLeft: 5, fontSize: 12}}>普通会员</Text>
-              </TouchableOpacity>
+              <Text style={{marginBottom: 10, fontSize: 16, color: commonStyle.white}}>{data.name ? data.name : '用户名'}</Text>
+              <View style={{flexDirection: commonStyle.row, alignItems: commonStyle.center}}>
+                <Text style={{color: commonStyle.white, marginRight: 10}}>{`${data.province}-${data.city}`}</Text>
+                <TouchableOpacity style={{flexDirection: commonStyle.row, alignItems: commonStyle.center, backgroundColor: '#F36B42', paddingHorizontal: 5, borderRadius: 10, justifyContent: commonStyle.around}}>
+                  <Text style={{color: commonStyle.white, marginLeft: 5, fontSize: 12}}>{data.gender}</Text>
+                  <Icon name={`oneIcon|${data.gender === '男' ? 'man_o' : 'woman_o'}`} size={15} color={commonStyle.white}/>
+                </TouchableOpacity>
+              </View>
             </View> :
             <View style={{flexDirection: 'row', alignItems: commonStyle.center}}>
-              <TouchableOpacity style={[styles.loginBtn, {borderColor: '#F37207'}]} onPress={() => Actions.userLogin({callback: () => this.callback()})}>
+              <TouchableOpacity style={[styles.loginBtn, {borderColor: '#F37207'}]} onPress={() => Actions.userLogin({callback: (type) => this.callback(type)})}>
                 <Text style={{color: '#F37207'}}>登录</Text>
               </TouchableOpacity>
-              <TouchableOpacity style={[styles.loginBtn, {borderColor: '#878787'}]} onPress={() => Actions.userRegister({callback: () => this.callback()})}>
+              <TouchableOpacity style={[styles.loginBtn, {borderColor: '#878787'}]} onPress={() => Actions.userRegister({callback: (type) => this.callback(type)})}>
                 <Text style={{color: '#878787'}}>注册</Text>
               </TouchableOpacity>
             </View>

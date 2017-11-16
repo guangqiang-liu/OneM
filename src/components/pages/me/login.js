@@ -3,12 +3,11 @@
  */
 import React, {} from 'react'
 import {View, Text, TextInput, TouchableOpacity, Switch, StyleSheet, ScrollView, NativeModules} from 'react-native'
-import {commonStyle} from '../../../utils/commonStyle'
 import {BaseComponent} from '../../base/baseComponent'
-import {Icon} from '../../../utils/icon'
-import deviceInfo from '../../../utils/deviceInfo'
+import {Icon, deviceInfo, Toast, commonStyle} from '../../../utils'
 import {Actions} from 'react-native-router-flux'
 import {sharePlatform} from '../../../constants/commonType'
+import storage from 'react-native-simple-store'
 
 const LoginModule = NativeModules.loginModule
 
@@ -80,27 +79,27 @@ export default class Login extends BaseComponent {
 
   loginClick() {
     let params = {}
-    params.userName = this.state.userName
-    params.pwd = this.state.pwd
-    this.props.callback && this.props.callback()
-    Actions.pop()
+    params.name = this.state.userName
+    params.iconurl = 'http://ovyjkveav.bkt.clouddn.com/17-11-9/48949929.jpg'
+    params.gender = '男'
+    params.province = '上海'
+    params.city = '静安'
+    if (params.name && this.state.pwd) {
+      storage.save('userInfo', params)
+      this.props.callback && this.props.callback('login')
+      Toast.showSuccess('登录成功！')
+      Actions.pop()
+    } else {
+      Toast.showError('信息请填写完整！')
+    }
   }
 
   authLogin(platform) {
     LoginModule.login(sharePlatform[platform], (response) => {
-      /**
-       * response
-       * 授权数据
-       * uid
-       * openid
-       * accessToken
-       * expiration
-       * 用户数据
-       * name
-       * iconurl
-       * unionGender
-       */
-      console.log(response)
+      storage.save('userInfo', response)
+      this.props.callback && this.props.callback('login')
+      Toast.showSuccess('授权成功！')
+      Actions.pop()
     })
   }
 

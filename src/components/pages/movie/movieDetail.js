@@ -11,13 +11,16 @@ import MiniComment from './comment/miniCommentCell'
 import PlusComment from './comment/plusCommentCell'
 import {Actions} from 'react-native-router-flux'
 import {StyleSheet} from '../../common'
+import {ShareModal} from '../../../components/common/shareModal'
+
 export default class MovieDetail extends Component {
 
   constructor(props) {
     super(props)
     this.navBar = null
     this.state = {
-      viewRef: null
+      viewRef: null,
+      modalVisible: false,
     }
   }
 
@@ -26,11 +29,12 @@ export default class MovieDetail extends Component {
     this.props.getMovieComment({movieId: this.props.id})
   }
 
-  renderActorList(arr) {
+  renderActorList(arr, id) {
     return arr.map((item, index) => (
       <TouchableOpacity
         key={index}
         style={{marginLeft: 10, width: 80, alignItems: 'center'}}
+        onPress={() => Actions.actorList({id: id})}
       >
         <Image
           style={{width: 80, height: 80}}
@@ -208,7 +212,7 @@ export default class MovieDetail extends Component {
                 removeClippedSubviews={true}
                 showsHorizontalScrollIndicator={false}
               >
-                {this.renderActorList([basic.director])}
+                {this.renderActorList([basic.director], basic.movieId)}
               </ScrollView>
             </View>
             <View style={{borderBottomWidth: 10, borderBottomColor: commonStyle.lineColor}}>
@@ -228,7 +232,7 @@ export default class MovieDetail extends Component {
                 removeClippedSubviews={true}
                 showsHorizontalScrollIndicator={false}
               >
-                {this.renderActorList(basic.actors)}
+                {this.renderActorList(basic.actors, basic.movieId)}
               </ScrollView>
             </View>
             {
@@ -411,11 +415,16 @@ export default class MovieDetail extends Component {
               <Icon name={'oneIcon|nav_back_o'} size={20} color={commonStyle.white}/>
             </TouchableOpacity>
             <Text style={{color: commonStyle.white, fontSize: 17}}>{basic.name}</Text>
-            <TouchableOpacity style={{marginRight: 5}} onPress={() => alert('分享到')}>
+            <TouchableOpacity style={{marginRight: 5}} onPress={() => this.setState({modalVisible: true})}>
               <Icon name={'oneIcon|share_o'} size={20} color={commonStyle.white}/>
             </TouchableOpacity>
           </View>
         </View>
+        <ShareModal
+          visible={this.state.modalVisible}
+          onVisibleChange={(modalVisible) => this.setState({
+            modalVisible: modalVisible
+          })}/>
       </View>
     )
   }

@@ -7,13 +7,16 @@ import {commonStyle} from '../../../utils/commonStyle'
 import {Actions} from 'react-native-router-flux'
 import CommentList from '../reading/commentList'
 import {articleType} from '../../../constants/commonType'
+import {ShareModal} from '../../../components/common/shareModal'
+
 export default class MusicDetail extends Component {
 
   constructor(props) {
     super(props)
     this.player = null
     this.state = {
-      contentMode: 0
+      contentMode: 0,
+      shareModalVisible: false
     }
   }
 
@@ -106,7 +109,10 @@ export default class MusicDetail extends Component {
             <Image style={{width: 40, height: 40}} source={require('../../../assets/images/comment_image.png')}/>
             <Text style={styles.textStyle}>{data.read_num}</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center'}}>
+          <TouchableOpacity
+            style={{flexDirection: 'row', alignItems: 'center'}}
+            onPress={() => this.setState({shareModalVisible: true})}
+          >
             <Image style={{width: 40, height: 40}} source={require('../../../assets/images/share_image.png')}/>
             <Text style={styles.textStyle}>{data.sharenum}</Text>
           </TouchableOpacity>
@@ -130,6 +136,11 @@ export default class MusicDetail extends Component {
             </TouchableOpacity>
           </View>
         </View>
+        <ShareModal
+          visible={this.state.shareModalVisible}
+          onVisibleChange={(modalVisible) => this.setState({
+            shareModalVisible: modalVisible
+          })}/>
       </View>
     )
   }
@@ -139,8 +150,7 @@ export default class MusicDetail extends Component {
       <View style={{marginHorizontal: 10}}>
         <CommentList
           type={articleType.MUSIC}
-          id={this.props.id}
-        />
+          id={this.props.id}/>
       </View>
     )
   }

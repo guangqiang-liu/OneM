@@ -63,10 +63,6 @@ export default class PicDetail extends BaseComponent {
     )
   }
 
-  share() {
-    this.setState({shareModalVisible: true})
-  }
-
   _render() {
     let data = this.state.data || {}
     return (
@@ -96,7 +92,7 @@ export default class PicDetail extends BaseComponent {
               <Image style={styles.smallIcon} resizeMode="contain" source={require('../../../assets/images/laud.png')}/>
               <Text style={styles.bottomText}>{data.praisenum}</Text>
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => this.share()}>
+            <TouchableOpacity onPress={() => this.setState({shareModalVisible: true})}>
               <Image style={styles.smallIcon} resizeMode="contain" source={require('../../../assets/images/share_image.png')}/>
             </TouchableOpacity>
           </View>

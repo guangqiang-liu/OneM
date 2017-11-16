@@ -12,7 +12,7 @@ const sendInteractiveLog = (id, eventId, params) => {
   // let message = venilogJson[currentPage] && venilogJson[currentPage][id]
   // let pageId = venilogJson[currentPage] && venilogJson[currentPage].pageId
   // let { entry } = options
-  Toast.show('交互埋点!')
+  // Toast.show('交互埋点!')
   LogRequest.post(VENILOG_URL + PATH.VENILOG, {})
     .then((response) => {
       if (response !== null) {

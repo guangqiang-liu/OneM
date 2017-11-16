@@ -5,7 +5,16 @@ import React, {Component} from 'react'
 import {View, TouchableOpacity, Text, TextInput, StyleSheet} from 'react-native'
 import {Icon} from '../../../utils/icon'
 import {commonStyle} from '../../../utils'
+import {ShareModal} from '../../../components/common/shareModal'
+
 export default class ToolBar extends Component {
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      shareModalVisible: false
+    }
+  }
 
   render() {
     let data = this.props.data
@@ -25,11 +34,19 @@ export default class ToolBar extends Component {
             <Icon name={'oneIcon|comment_o'} size={17} color={commonStyle.textGrayColor}/>
             <Text style={{marginLeft: 5, fontSize: 12, color: commonStyle.textGrayColor}}>{data.commentnum}</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={{flexDirection: 'row', alignItems: 'center', marginHorizontal: 10}}>
+          <TouchableOpacity
+            style={{flexDirection: 'row', alignItems: 'center', marginHorizontal: 10}}
+            onPress={() => this.setState({shareModalVisible: true})}
+          >
             <Icon name={'oneIcon|reply_o'} size={20} color={commonStyle.textGrayColor}/>
             <Text style={{marginLeft: 5, fontSize: 12, color: commonStyle.textGrayColor}}>{data.sharenum}</Text>
           </TouchableOpacity>
         </View>
+        <ShareModal
+          visible={this.state.shareModalVisible}
+          onVisibleChange={(modalVisible) => this.setState({
+            shareModalVisible: modalVisible
+          })}/>
       </View>
     )
   }

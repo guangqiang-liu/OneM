@@ -3,10 +3,8 @@
  */
 import React, {Component} from 'react'
 import {View, Text, TouchableOpacity, StyleSheet, TextInput, Switch, ScrollView} from 'react-native'
-import {commonStyle} from '../../../utils/commonStyle'
 import {BaseComponent} from '../../base/baseComponent'
-import {Icon} from '../../../utils/icon'
-import deviceInfo from '../../../utils/deviceInfo'
+import {Icon, Toast, deviceInfo, commonStyle} from '../../../utils'
 // import {storage} from '../../../utils'
 import {Actions} from 'react-native-router-flux'
 import storage from 'react-native-simple-store'
@@ -21,7 +19,7 @@ export default class Register extends BaseComponent {
       verifyCode: '',
       pwd: '',
       agree: true,
-      sex: ''
+      sex: null
     }
   }
 
@@ -97,17 +95,17 @@ export default class Register extends BaseComponent {
           <View style={{flexDirection: commonStyle.row, alignItems: commonStyle.center, flex: 1, marginLeft: 20}}>
             <TouchableOpacity
               style={{flexDirection: commonStyle.row, alignItems: commonStyle.center}}
-              onPress={() => this.setState({sex: 'man'})}
+              onPress={() => this.setState({sex: '男'})}
             >
               <Text style={{color: '#2955B6', marginRight: 5}}>男</Text>
-              <Icon name={'oneIcon|man_o'} size={20} color={this.state.sex === 'man' ? '#2955B6' : '#D5D5D5'}/>
+              <Icon name={'oneIcon|man_o'} size={20} color={this.state.sex === '男' ? '#2955B6' : '#D5D5D5'}/>
             </TouchableOpacity>
             <TouchableOpacity
               style={{marginLeft: 20, flexDirection: commonStyle.row, alignItems: commonStyle.center}}
-              onPress={() => this.setState({sex: 'woman'})}
+              onPress={() => this.setState({sex: '女'})}
             >
               <Text style={{color: '#E25287', marginRight: 5}}>女</Text>
-              <Icon name={'oneIcon|woman_o'} size={25}color={this.state.sex === 'woman' ? '#E25287' : '#D5D5D5'}/>
+              <Icon name={'oneIcon|woman_o'} size={25}color={this.state.sex === '女' ? '#E25287' : '#D5D5D5'}/>
             </TouchableOpacity>
           </View>
           <Text style={{color: '#646464'}}>选填</Text>
@@ -118,14 +116,19 @@ export default class Register extends BaseComponent {
 
   submit() {
     let params = {}
-    params.mobile = this.state.mobileNum
-    params.verifyCode = this.state.verifyCode
-    params.pwd = this.state.pwd
-    params.sex = this.state.sex
-    storage.save('register', params)
-
-    this.props.callback && this.props.callback()
-    Actions.pop()
+    params.name = this.state.mobileNum
+    params.iconurl = 'http://ovyjkveav.bkt.clouddn.com/17-11-9/48949929.jpg'
+    params.gender = this.state.sex ? this.state.sex : '未知'
+    params.province = '上海'
+    params.city = '静安'
+    if (this.state.mobileNum && this.state.verifyCode && this.state.pwd) {
+      storage.save('userInfo', params)
+      this.props.callback && this.props.callback('register')
+      Toast.showSuccess('注册成功！')
+      Actions.pop()
+    } else {
+      Toast.showError('信息请填写完整！')
+    }
   }
 
   renderRegisterBtn() {

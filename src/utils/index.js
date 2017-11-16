@@ -8,5 +8,5 @@ import {RegExpr} from './regUtil'
 import {ArrayTool} from './arrayExtension'
 import {storage} from './storage'
 import {Icon} from './icon'
-
-export {deviceInfo, commonStyle, RegExpr, ArrayTool, storage, Icon}
+import {Toast} from './toast'
+export {deviceInfo, commonStyle, RegExpr, ArrayTool, storage, Icon, Toast}
