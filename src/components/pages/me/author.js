@@ -6,6 +6,7 @@ import {View, Text, StyleSheet, TouchableOpacity} from 'react-native'
 import {commonStyle} from '../../../utils/commonStyle'
 import {BaseComponent} from '../../base/baseComponent'
 import {Actions} from 'react-native-router-flux'
+
 export default class Author extends BaseComponent {
 
   navigationBarProps() {
@@ -50,4 +51,5 @@ export default class Author extends BaseComponent {
 }
 
 const styles = StyleSheet.create({
+
 })

@@ -6,6 +6,7 @@ import {View, Text, TouchableOpacity, StyleSheet, Image, ListView} from 'react-n
 import {BaseComponent} from '../../base/baseComponent'
 import {commonStyle} from '../../../utils/commonStyle'
 import {Actions} from 'react-native-router-flux'
+
 const data = [
   {
     key: 'testAntdMobile',
@@ -92,7 +93,6 @@ export default class Demo extends BaseComponent {
   navigationBarProps() {
     return {
       title: '我的',
-      hiddenLeftItem: true,
       rightTitle: '作者'
     }
   }

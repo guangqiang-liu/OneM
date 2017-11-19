@@ -1,6 +1,7 @@
 /**
  * Created by guangqiang on 2017/9/18.
  */
+
 'use strict'
 import {Toast} from '../../utils/toast'
 
@@ -17,8 +18,10 @@ var _lodashClonedeep2 = _interopRequireDefault(_lodashClonedeep);
 exports['default'] = function (options) {
 
   var validatorMiddleware = function validatorMiddleware(store) {
+
     return function (next) {
       return function (action) {
+
         if (!action[options.key] || !action[options.key].validator) {
           return next(action);
         }

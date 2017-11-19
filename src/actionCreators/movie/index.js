@@ -18,23 +18,27 @@ const movieTrailerList = params => getFetch(PATH.MOVIE_TRAILER_LIST, params, Api
 const movieActorList = params => getFetch(PATH.MOVIE_ACTOR_LIST, params, ApiSource.TIMEMOVIE)
 const moviePictureList = params => getFetch(PATH.MOVIE_PICTURE_LIST, params, ApiSource.TIMEMOVIE)
 
-// 参数校验器
-const testValidator = () => ({
-  validator: {
-    data: ValidateUtil([
-      {
-      func: (data, state, payload) => {
-        return Required(data.mobile)
-      }, msg: '请输入手机号'
-      },
-      {
-      func: (data, state, payload) => Required(data.code), msg: '请输入验证码',
-      },
-    ])
+const loginValidator = (params) => {
+  return {
+    validator: {
+      params: ValidateUtil([
+        {
+          func: (data, state, payload) => {
+            return Required(params.name)
+          },
+          msg: '请输入用户名'
+        },
+        {
+          func: (data, state, payload) => {
+            return Required(params.pwd)
+          },
+          msg: '请输入密码'
+        },
+      ])
+    }
   }
-})
+}
 
-// 加载List列表的Action写法
 const movieListForDemo = (pageId = 1, callback, options, params) =>  {
   return getFetch(
     `${PATH.MOVIE_LIST}${params}`,
@@ -59,7 +63,7 @@ export default {
   movieDetail,
   movieStory,
   movieListForDemo,
-  testValidator,
+  loginValidator,
   movieShowTimeList,
   movieComeingNewList,
   movieCommentList,

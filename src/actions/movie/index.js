@@ -18,9 +18,6 @@ const getTrailerList = createAction(type.MOVIE_TRAILER_LIST, actions.movieTraile
 const getActorList = createAction(type.MOVIE_ACTOR_LIST, actions.movieActorList)
 const getPictureList = createAction(type.MOVIE_PICTURE_LIST, actions.moviePictureList)
 
-// 表单校验器
-const testGetMovieList = createAction(type.MOVIE_LIST, actions.movieList, actions.testValidator)
-
 const actionCreators = {
   getMovieList: params => getMovieList(params),
   getMovieDetail,
@@ -34,7 +31,6 @@ const actionCreators = {
   getTrailerList,
   getActorList,
   getPictureList,
-  testGetMovieList
 }
 
 export default {actionCreators}

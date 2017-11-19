@@ -39,6 +39,9 @@ import CustomComp from '../components/pages/demoPage/TestCustomUIComponent'
 import Network from '../components/pages/demoPage/TestNetwork'
 import TestLogDot from '../components/pages/demoPage/TestLogDot'
 
+import DemoPage from '../components/pages/me/demo'
+
+
 import TabBar from './TabBarContainer'
 import PicDetail from '../components/pages/picture/picDetail'
 import PastList from '../components/pages/picture/pastList'
@@ -192,7 +195,7 @@ const scenes = Actions.create(
 
           <Scene key='userLogin' hideNavBar component={connect(
             (state) => state.me.login,
-            Action.dispatch('login')
+            Action.dispatch(['login', 'openChat'])
           )(UserLogin)}/>
 
           <Scene key='userRegister' hideNavBar component={connect(
@@ -210,6 +213,8 @@ const scenes = Actions.create(
           <Scene key="webView" hideNavBar component={WebView}/>
 
           {/** ############### demo组件 ############### **/}
+
+          <Scene key="demoPage" title="Demo集合" hideNavBar component={DemoPage}/>
 
           <Scene key="register" title="Register" component={Register}/>
 
@@ -266,6 +271,7 @@ const scenes = Actions.create(
         )(Loading)}/>
         <Scene key="error" component={Error}/>
         <Scene key="mask" component={Mask}/>
+
       </Lightbox>
 
       <Stack key="modalRoot" back>

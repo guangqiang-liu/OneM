@@ -9,7 +9,7 @@ import {BaseComponent} from '../../base/baseComponent'
 import {commonStyle} from '../../../utils/commonStyle'
 import {Actions} from 'react-native-router-flux'
 import {Icon} from '../../../utils/icon'
-// import {storage} from '../../../utils'
+import {ShareModal} from '../../../components/common/shareModal'
 import storage from 'react-native-simple-store'
 
 class Me extends BaseComponent {
@@ -18,7 +18,8 @@ class Me extends BaseComponent {
     super(props)
     this.scrollView = null
     this.state = {
-      userInfo: undefined
+      userInfo: undefined,
+      shareModalVisible: false
     }
   }
 
@@ -34,11 +35,15 @@ class Me extends BaseComponent {
         borderBottomWidth: 0
       },
       rightIcon: {
-        name: 'bubble_message_o',
+        name: 'share_dot_o',
         size: 20,
         color: commonStyle.white
       }
     }
+  }
+
+  onRightPress() {
+    this.setState({shareModalVisible: true})
   }
 
   componentDidMount() {
@@ -73,7 +78,7 @@ class Me extends BaseComponent {
               <Text style={{marginBottom: 10, fontSize: 16, color: commonStyle.white}}>{data.name ? data.name : '用户名'}</Text>
               <View style={{flexDirection: commonStyle.row, alignItems: commonStyle.center}}>
                 <Text style={{color: commonStyle.white, marginRight: 10}}>{`${data.province}-${data.city}`}</Text>
-                <TouchableOpacity style={{flexDirection: commonStyle.row, alignItems: commonStyle.center, backgroundColor: '#F36B42', paddingHorizontal: 5, borderRadius: 10, justifyContent: commonStyle.around}}>
+                <TouchableOpacity style={styles.userInfo}>
                   <Text style={{color: commonStyle.white, marginLeft: 5, fontSize: 12}}>{data.gender}</Text>
                   <Icon name={`oneIcon|${data.gender === '男' ? 'man_o' : 'woman_o'}`} size={15} color={commonStyle.white}/>
                 </TouchableOpacity>
@@ -163,6 +168,7 @@ class Me extends BaseComponent {
         <View style={{borderTopWidth: 10, borderTopColor: commonStyle.lineColor}}>
           {this.renderItem('客服/反馈')}
           {this.renderItem('设置', '', '', 'setting')}
+          {this.renderItem('Demo集合', '', '', 'demoPage')}
           {this.renderItem('关于我们')}
         </View>
       </View>
@@ -175,13 +181,17 @@ class Me extends BaseComponent {
         <ScrollView
           ref={(sc) => this.scrollView = sc}
           style={styles.scStyle}
-          bounces={false}
-        >
+          bounces={false}>
           {this.renderHeaderContainer()}
           {this.renderDataPanel()}
           {this.renderActivityPanel()}
           {this.renderList()}
         </ScrollView>
+        <ShareModal
+          visible={this.state.shareModalVisible}
+          onVisibleChange={(modalVisible) => this.setState({
+            shareModalVisible: modalVisible
+          })}/>
       </View>
     )
   }
@@ -191,8 +201,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: commonStyle.white,
-  },
-  scStyle: {
   },
   loginBtn: {
     borderRadius: 15,
@@ -211,12 +219,20 @@ const styles = StyleSheet.create({
     borderBottomWidth: commonStyle.lineWidth,
     borderBottomColor: commonStyle.lineColor,
     justifyContent: commonStyle.between
+  },
+  userInfo: {
+    flexDirection: commonStyle.row,
+    alignItems: commonStyle.center,
+    backgroundColor: '#F36B42',
+    paddingHorizontal: 5,
+    borderRadius: 10,
+    justifyContent: commonStyle.around
   }
 })
 
 const _Me = connect(
   state => state.me.me,
-  Action.dispatch('me')
+  Action.dispatch(['me', 'openChat'])
 )(Me)
 
 export default _Me

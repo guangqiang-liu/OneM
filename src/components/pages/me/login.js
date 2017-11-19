@@ -2,7 +2,7 @@
  * Created by guangqiang on 2017/11/14.
  */
 import React, {} from 'react'
-import {View, Text, TextInput, TouchableOpacity, Switch, StyleSheet, ScrollView, NativeModules} from 'react-native'
+import {View, Text, TextInput, TouchableOpacity, Switch, StyleSheet, ScrollView, NativeModules, Platform} from 'react-native'
 import {BaseComponent} from '../../base/baseComponent'
 import {Icon, deviceInfo, Toast, commonStyle} from '../../../utils'
 import {Actions} from 'react-native-router-flux'
@@ -80,10 +80,13 @@ export default class Login extends BaseComponent {
   loginClick() {
     let params = {}
     params.name = this.state.userName
+    params.pwd = this.state.pwd
+
     params.iconurl = 'http://ovyjkveav.bkt.clouddn.com/17-11-9/48949929.jpg'
     params.gender = '男'
     params.province = '上海'
     params.city = '静安'
+
     if (params.name && this.state.pwd) {
       storage.save('userInfo', params)
       this.props.callback && this.props.callback('login')

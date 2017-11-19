@@ -7,7 +7,6 @@ import type from '../../constants/actionType'
 
 import chatAction from '../../actionCreators/find/chat'
 
-// 聊天模块的系列的action
 const openChat = createAction(type.OPEN_CHAT, chatAction.chatList)
 
 const increase = createAction(type.CHAT_INCREASES)
