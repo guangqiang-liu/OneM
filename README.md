@@ -10,6 +10,9 @@
 
 ![error](http://ovyjkveav.bkt.clouddn.com/17-11-16/91256214.jpg)
 
+# 项目功能讲解详情请参照简书
+[http://www.jianshu.com/p/c8ce256db5cf](http://www.jianshu.com/p/c8ce256db5cf)
+
 # 目录
 * [项目简介](#项目简介)
 * [主要功能](#主要功能)
