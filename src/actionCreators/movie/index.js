@@ -21,7 +21,7 @@ const moviePictureList = params => getFetch(PATH.MOVIE_PICTURE_LIST, params, Api
 const loginValidator = (params) => {
   return {
     validator: {
-      params: ValidateUtil([
+      data: ValidateUtil([
         {
           func: (data, state, payload) => {
             return Required(params.name)
