@@ -87,14 +87,16 @@ export default class Login extends BaseComponent {
     params.province = '上海'
     params.city = '静安'
 
-    if (params.name && this.state.pwd) {
-      storage.save('userInfo', params)
-      this.props.callback && this.props.callback('login')
-      Toast.showSuccess('登录成功！')
-      Actions.pop()
-    } else {
-      Toast.showError('信息请填写完整！')
-    }
+    this.props.mockLogin(params)
+
+    // if (params.name && this.state.pwd) {
+    //   storage.save('userInfo', params)
+    //   this.props.callback && this.props.callback('login')
+    //   Toast.showSuccess('登录成功！')
+    //   Actions.pop()
+    // } else {
+    //   Toast.showError('信息请填写完整！')
+    // }
   }
 
   authLogin(platform) {

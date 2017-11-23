@@ -20,6 +20,7 @@ exports['default'] = function (options) {
   var validatorMiddleware = function validatorMiddleware(store) {
 
     return function (next) {
+
       return function (action) {
 
         if (!action[options.key] || !action[options.key].validator) {
@@ -28,44 +29,52 @@ exports['default'] = function (options) {
 
         // nextPayload
         var nextAction = undefined;
+
         var nextPayload = undefined;
+
         try {
           nextPayload = action.payload.nextPayload;
-        } catch (e) {}
+        } catch (e) {
+
+        }
+
         if (nextPayload !== undefined) {
           nextAction = (0, _lodashClonedeep2['default'])(action);
           nextAction.payload = nextPayload;
         }
+
         // -----------
 
         var flag = true;
-        var errorParam = undefined,
-          errorId = undefined,
-          errorMsg = undefined;
+
+        var errorParam = undefined, errorId = undefined, errorMsg = undefined;
 
         var validators = action[options.key].validator || {};
 
         var runValidator = function runValidator(param, func, msg, id, key) {
           var flag = undefined;
+
           if (func) {
             flag = func(param, store.getState(), action.payload);
           } else {
             throw new Error('validator func is needed');
           }
+
           if (typeof flag !== 'boolean') {
             throw new Error('validator func must return boolean type');
           }
+
           if (!flag) {
             errorParam = key;
             errorId = id;
             errorMsg = msg || '';
           }
-
           return flag;
         };
 
         var runValidatorContainer = function runValidatorContainer(validator, param, key) {
           var flag = undefined;
+
           if (Array.prototype.isPrototypeOf(validator)) {
             for (var j in validator) {
               var item = validator[j];
@@ -78,12 +87,13 @@ exports['default'] = function (options) {
           return flag;
         };
 
+
         if (typeof action.payload === 'object') {
           for (var i in validators) {
             var validator = validators[i];
             if (action.payload[i]) {
               flag = runValidatorContainer(validator, action.payload[i], i);
-              if (!flag) break;
+              if (!flag)break;
             }
           }
         }
@@ -93,6 +103,7 @@ exports['default'] = function (options) {
         if (payloadValidator) {
           flag = runValidatorContainer(payloadValidator, action.payload, 'payload');
         }
+
         // -------
 
         // default
@@ -100,6 +111,7 @@ exports['default'] = function (options) {
         if (defaultValidator) {
           flag = runValidatorContainer(defaultValidator, undefined, 'default');
         }
+
         // -------
 
         if (flag) {

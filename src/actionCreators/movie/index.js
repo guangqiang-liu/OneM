@@ -23,13 +23,13 @@ const loginValidator = (params) => {
     validator: {
       data: ValidateUtil([
         {
-          func: (data, state, payload) => {
+          func: (obj, state, payload) => {
             return Required(params.name)
           },
           msg: '请输入用户名'
         },
         {
-          func: (data, state, payload) => {
+          func: (obj, state, payload) => {
             return Required(params.pwd)
           },
           msg: '请输入密码'
