@@ -13,12 +13,10 @@ export default validatorMiddleware = extraArgument => {
     let metaObj = action.meta || {}
     let validatorObj = metaObj.validator || {}
 
-    // 非参数校验器，直接跳过
     if (!metaObj.validator) {
       return next(action)
     }
 
-    // nextPayload
     let nextAction = undefined
     let nextPayload = undefined
 
@@ -35,7 +33,6 @@ export default validatorMiddleware = extraArgument => {
 
     if (metaObj && (typeof nextPayload.promise === 'function') && validatorObj) {
 
-      // 参数校验
       if (Array.prototype.isPrototypeOf(validatorObj.data) && validatorObj.data.length > 0) {
 
         let paramsArr = validatorObj.data || []
@@ -53,7 +50,7 @@ export default validatorMiddleware = extraArgument => {
             if (typeof func(params, getState(), payloadObj) !== 'boolean') {
               throw new Error('validator func must return boolean type')
             } else {
-              if (!func(params, getState(), payloadObj)) { // false
+              if (!func(params, getState(), payloadObj)) {
                 Toast.showWarning(msg)
                 isPassed = false
                 return {
@@ -71,7 +68,6 @@ export default validatorMiddleware = extraArgument => {
           }
         }
 
-        // 是否可以执行下一个aciton
         if (isPassed) {
           action = nextAction || action
           if (typeof action.payload.promise === 'function') {
