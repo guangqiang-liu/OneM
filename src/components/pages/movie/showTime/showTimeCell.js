@@ -7,7 +7,14 @@ import {commonStyle} from '../../../../utils/commonStyle'
 import {Icon} from '../../../../utils/icon'
 import deviceInfo from '../../../../utils/deviceInfo'
 import {Actions} from 'react-native-router-flux'
+import {storage} from '../../../../utils'
 export default class ShowTimeCell extends Component {
+
+  testStorage() {
+    storage.load('userInfo', (data) => {
+      console.log(data)
+    })
+  }
 
   render() {
     let data = this.props.rowData
@@ -43,7 +50,10 @@ export default class ShowTimeCell extends Component {
                 <Text style={{fontSize: 12, color: '#539103'}}>分</Text>
               </Text> : null
             }
-            <TouchableOpacity style={{borderColor: '#F9783F', borderWidth: 1, borderRadius: 2}}>
+            <TouchableOpacity
+              style={{borderColor: '#F9783F', borderWidth: 1, borderRadius: 2}}
+              onPress={() => this.testStorage()}
+            >
              <Text style={{paddingVertical: 5, paddingHorizontal: 10, color: '#F9783F', fontSize: 13}}>购票</Text>
             </TouchableOpacity>
           </View>

@@ -1,13 +1,13 @@
 /**
  * Created by guangqiang on 2017/11/14.
  */
-import React, {} from 'react'
+import React from 'react'
 import {View, Text, TextInput, TouchableOpacity, Switch, StyleSheet, ScrollView, NativeModules, Platform} from 'react-native'
 import {BaseComponent} from '../../base/baseComponent'
 import {Icon, deviceInfo, Toast, commonStyle} from '../../../utils'
 import {Actions} from 'react-native-router-flux'
 import {sharePlatform} from '../../../constants/commonType'
-import storage from 'react-native-simple-store'
+import {storage} from '../../../utils/storage'
 
 const LoginModule = NativeModules.loginModule
 
@@ -87,8 +87,9 @@ export default class Login extends BaseComponent {
     params.city = '静安'
 
     let actions = this.props.mockLogin(params)
-    if (!actions.err) {
+    if (actions instanceof Promise) {
       actions.then(() => {
+        storage.save('userInfo', params)
         Toast.showSuccess('登录成功', {
           onHidden: () => {
             Actions.pop()

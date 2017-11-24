@@ -9,7 +9,7 @@ import {storage} from './index'
  * 这里可以使用promise。或是使用普通回调函数，但需要调用resolve或reject
  * @type {{user: ((params))}}
  */
-let sync = {
+const sync = {
 
   user(params) {
     let { id, resolve, reject, syncParams: { extraFetchOptions, someFlag } } = params
