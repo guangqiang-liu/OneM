@@ -79,4 +79,18 @@ const postFetch = fetchData(false, 'POST')
  */
 const getFetchFromCache = fetchData(true, 'GET')
 
-export {getFetch, postFetch, getFetchFromCache}
+const postFetchForValidator = (url, params) => {
+  let promise
+  promise = () => {
+    return fetchData(false, 'GET')(url, {})
+  }
+  return {
+    data: params,
+    params,
+    nextPayload: {
+      promise: promise
+    }
+  }
+}
+
+export {getFetch, postFetch, getFetchFromCache, postFetchForValidator}

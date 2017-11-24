@@ -8,15 +8,12 @@ import promiseMiddleware from 'redux-promise-middleware'
 import customThunk from '../middlewares/thunkMiddleware'
 import loggerMiddleware from '../middlewares/loggerMiddleware'
 import venilogMiddleware from '../middlewares/logMiddleware'
-// import Validator from '../middlewares/validator'
-
 import validator from '../middlewares/validatorMiddleware'
 
 const middlewares = [
   validator(),
   thunkMiddleware,
   customThunk(),
-  // Validator(),
   promiseMiddleware({promiseTypeSuffixes: ['LOADING', 'SUCCESS', 'ERROR']}),
   loggerMiddleware(),
   venilogMiddleware(),

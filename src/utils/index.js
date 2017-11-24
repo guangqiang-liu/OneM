@@ -9,4 +9,5 @@ import {ArrayTool} from './arrayExtension'
 import {storage} from './storage'
 import {Icon} from './icon'
 import {Toast} from './toast'
-export {deviceInfo, commonStyle, RegExpr, ArrayTool, storage, Icon, Toast}
+import {deepClone} from './deepClone'
+export {deviceInfo, commonStyle, RegExpr, ArrayTool, storage, Icon, Toast, deepClone}

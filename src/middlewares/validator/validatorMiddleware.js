@@ -11,7 +11,9 @@ Object.defineProperty(exports, '__esModule', {
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var _lodashClonedeep = require('../../../node_modules/lodash._basecopy');
+// var _lodashClonedeep = require('../../../node_modules/lodash._basecopy');
+
+var _lodashClonedeep = require('./deepClone');
 
 var _lodashClonedeep2 = _interopRequireDefault(_lodashClonedeep);
 

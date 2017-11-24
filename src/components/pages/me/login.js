@@ -81,22 +81,21 @@ export default class Login extends BaseComponent {
     let params = {}
     params.name = this.state.userName
     params.pwd = this.state.pwd
-
     params.iconurl = 'http://ovyjkveav.bkt.clouddn.com/17-11-9/48949929.jpg'
     params.gender = '男'
     params.province = '上海'
     params.city = '静安'
 
-    this.props.mockLogin(params)
-
-    // if (params.name && this.state.pwd) {
-    //   storage.save('userInfo', params)
-    //   this.props.callback && this.props.callback('login')
-    //   Toast.showSuccess('登录成功！')
-    //   Actions.pop()
-    // } else {
-    //   Toast.showError('信息请填写完整！')
-    // }
+    let actions = this.props.mockLogin(params)
+    if (!actions.err) {
+      actions.then(() => {
+        Toast.showSuccess('登录成功', {
+          onHidden: () => {
+            Actions.pop()
+          },
+        })
+      })
+    }
   }
 
   authLogin(platform) {

@@ -111,6 +111,7 @@ export default class HttpUtils extends Component {
    * @returns {Promise}
    */
   static postRequrst = (url, params = {}) => {
+    RootHUD.show()
     return timeoutFetch(fetch(url, {
       method: 'POST',
       headers: header,
@@ -120,20 +121,22 @@ export default class HttpUtils extends Component {
         if (response.ok) {
           return response.json()
         } else {
-          alert('服务器繁忙，请稍后再试；\r\nCode:' + response.status)
+          Toast.show('服务器繁忙，请稍后再试；\r\nCode:' + response.status)
         }
       })
       .then((response) => {
-        // response.code：是与服务器端约定code：200表示请求成功，非200表示请求失败，message：请求失败内容
-        if (response && response.code === responseType.RESPONSE_SUCCESS) {
+        RootHUD.hidden()
+        if (response && response.res === responseType.RESPONSE_SUCCESS) {
           return response
         } else {
+          // 非 200，错误处理
           // alert(response.message)
           return response
         }
       })
       .catch((error) => {
-        alert(error)
+        RootHUD.hidden()
+        Toast.show(error)
       })
   }
 }
