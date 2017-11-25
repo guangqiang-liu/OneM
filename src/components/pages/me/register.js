@@ -5,9 +5,8 @@ import React, {Component} from 'react'
 import {View, Text, TouchableOpacity, StyleSheet, TextInput, Switch, ScrollView} from 'react-native'
 import {BaseComponent} from '../../base/baseComponent'
 import {Icon, Toast, deviceInfo, commonStyle} from '../../../utils'
-// import {storage} from '../../../utils'
+import {storage} from '../../../utils'
 import {Actions} from 'react-native-router-flux'
-import storage from 'react-native-simple-store'
 
 export default class Register extends BaseComponent {
 
@@ -117,17 +116,19 @@ export default class Register extends BaseComponent {
   submit() {
     let params = {}
     params.name = this.state.mobileNum
+    params.code = this.state.verifyCode
+    params.pwd = this.state.pwd
+
     params.iconurl = 'http://ovyjkveav.bkt.clouddn.com/17-11-9/48949929.jpg'
     params.gender = this.state.sex ? this.state.sex : '未知'
     params.province = '上海'
     params.city = '静安'
-    if (this.state.mobileNum && this.state.verifyCode && this.state.pwd) {
+
+    let action = this.props.mockRegister(params)
+    if (action instanceof Promise) {
       storage.save('userInfo', params)
       this.props.callback && this.props.callback('register')
-      Toast.showSuccess('注册成功！')
-      Actions.pop()
-    } else {
-      Toast.showError('信息请填写完整！')
+      Toast.showSuccess('注册成功', () => Actions.pop())
     }
   }
 

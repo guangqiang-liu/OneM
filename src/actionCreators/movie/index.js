@@ -3,11 +3,10 @@
  */
 import {getFetch, postFetch, postFetchForValidator} from '../../utils/network/request/HttpExtension'
 import {PATH} from '../../constants/urls'
-import {Required, ValidateUtil} from '../../utils/validatorUtil'
 import {ApiSource} from '../../constants/commonType'
 
 const movieStory = params => getFetch(`/movie/${params}/story/1/0`, params)
-const movieList = params =>  postFetchForValidator(PATH.MUSIC_ID_LIST, params)
+const movieList = params =>  getFetch(PATH.MOVIE_LIST, params)
 const movieShowTimeList = params =>  getFetch(PATH.MOVIE_SHOWTIME, params, ApiSource.TIMEMOVIE)
 const movieComeingNewList = params =>  getFetch(PATH.MOVIE_COMEING_NEW, params, ApiSource.TIMEMOVIE)
 const movieDetail = params => getFetch(PATH.MOVIE_DETAIL, params, ApiSource.TIMETICKET)
@@ -17,19 +16,6 @@ const moviePlusCommentList = params => getFetch(PATH.MOVIE_PLUS_COMMENT_LIST, pa
 const movieTrailerList = params => getFetch(PATH.MOVIE_TRAILER_LIST, params, ApiSource.TIMEMOVIE)
 const movieActorList = params => getFetch(PATH.MOVIE_ACTOR_LIST, params, ApiSource.TIMEMOVIE)
 const moviePictureList = params => getFetch(PATH.MOVIE_PICTURE_LIST, params, ApiSource.TIMEMOVIE)
-
-const loginValidator = () => ({
-    validator: {
-      data: ValidateUtil([
-        {
-          func: (params, state, payload) => Required(params.name), msg: '请输入用户名'
-        },
-        {
-          func: (params, state, payload) => Required(params.pwd), msg: '请输入密码'
-        }
-      ])
-    }
-})
 
 const movieListForDemo = (pageId = 1, callback, options, params) =>  {
   return getFetch(
@@ -55,7 +41,6 @@ export default {
   movieDetail,
   movieStory,
   movieListForDemo,
-  loginValidator,
   movieShowTimeList,
   movieComeingNewList,
   movieCommentList,

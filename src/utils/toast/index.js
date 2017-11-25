@@ -9,6 +9,7 @@ import {Icon} from '../icon'
 const Toast = {
 
   toast: null,
+
   show: (msg) => {
     this.toast = RootToast.show(msg, {
       position: 0,
@@ -36,6 +37,7 @@ const Toast = {
       })
     setTimeout(function () {
       RootToast.hide(toast)
+      typeof options === 'function' ? options && options(): null
     }, 2000)
   },
 
@@ -52,6 +54,7 @@ const Toast = {
       })
     setTimeout(function () {
       RootToast.hide(toast)
+      typeof options === 'function' ? options && options(): null
     }, 2500)
   },
 

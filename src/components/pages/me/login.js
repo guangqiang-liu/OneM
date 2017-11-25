@@ -85,17 +85,11 @@ export default class Login extends BaseComponent {
     params.gender = '男'
     params.province = '上海'
     params.city = '静安'
-
     let actions = this.props.mockLogin(params)
     if (actions instanceof Promise) {
-      actions.then(() => {
-        storage.save('userInfo', params)
-        Toast.showSuccess('登录成功', {
-          onHidden: () => {
-            Actions.pop()
-          },
-        })
-      })
+      storage.save('userInfo', params)
+      this.props.callback && this.props.callback('login')
+      Toast.showSuccess('登录成功', () => Actions.pop())
     }
   }
 

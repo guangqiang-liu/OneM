@@ -23,7 +23,7 @@ export default validatorMiddleware = extraArgument => {
     try {
       nextPayload = action.payload.nextPayload
     } catch (e) {
-      throw new Error('validator nextPayload is needed')
+      return next(action)
     }
 
     if (nextPayload !== undefined) {
@@ -71,11 +71,12 @@ export default validatorMiddleware = extraArgument => {
         if (isPassed) {
           action = nextAction || action
           if (typeof action.payload.promise === 'function') {
+            let promise = action.payload.promise()
             action = {
               ...action,
               payload: {
                 ...action.payload,
-                promise: action.payload.promise(),
+                promise: promise,
               }
             }
           }

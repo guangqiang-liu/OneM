@@ -8,9 +8,8 @@ import Action from '../../../actions'
 import {BaseComponent} from '../../base/baseComponent'
 import {commonStyle} from '../../../utils/commonStyle'
 import {Actions} from 'react-native-router-flux'
-import {Icon} from '../../../utils/icon'
+import {Icon, storage} from '../../../utils'
 import {ShareModal} from '../../../components/common/shareModal'
-import storage from 'react-native-simple-store'
 
 class Me extends BaseComponent {
 
@@ -47,17 +46,13 @@ class Me extends BaseComponent {
   }
 
   componentDidMount() {
-    storage.get('userInfo').then(response => {
-      this.setState({userInfo: response})
-    })
+    storage.load('userInfo', (response) => this.setState({userInfo: response}))
   }
 
   callback(type) {
     this.scrollView.scrollTo({x: 0, y: 0, animated: true})
     if (type === 'login' || type === 'register') {
-      storage.get('userInfo').then(response => {
-        this.setState({userInfo: response})
-      })
+      storage.load('userInfo', (response) => this.setState({userInfo: response}))
     } else {
       this.setState({userInfo: undefined})
     }

@@ -3,9 +3,9 @@
  */
 import {createAction} from 'redux-actions'
 import type from '../../constants/actionType'
-import tempAction from '../../actionCreators/movie'
+import ActionCreator from '../../actionCreators/me'
 
-const mockLogin = createAction(type.MOVIE_LIST, tempAction.movieList, tempAction.loginValidator)
+const mockLogin = createAction(type.MOVIE_LIST, ActionCreator.login, ActionCreator.loginValidator)
 
 const actionCreators = {
   mockLogin
