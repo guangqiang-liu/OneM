@@ -3,11 +3,10 @@
  */
 import React from 'react'
 import {View, Text, TextInput, TouchableOpacity, Switch, StyleSheet, ScrollView, NativeModules, Platform} from 'react-native'
-import {BaseComponent} from '../../base/baseComponent'
-import {Icon, deviceInfo, Toast, commonStyle} from '../../../utils'
+import {BaseComponent} from '../../../base/baseComponent'
+import {Icon, deviceInfo, Toast, commonStyle, storage} from '../../../../utils'
 import {Actions} from 'react-native-router-flux'
-import {sharePlatform} from '../../../constants/commonType'
-import {storage} from '../../../utils/storage'
+import {sharePlatform} from '../../../../constants/commonType'
 
 const LoginModule = NativeModules.loginModule
 

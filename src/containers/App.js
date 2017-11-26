@@ -66,9 +66,10 @@ import SerialDetail from '../components/pages/reading/serial/serialDetail'
 import QuestionDetail from '../components/pages/reading/question/questionDetail'
 import ArticleList from '../components/pages/reading/readingArticleList'
 
-import UserLogin from '../components/pages/me/login'
-import UserRegister from '../components/pages/me/register'
+import UserLogin from '../components/pages/me/login/login'
+import UserRegister from '../components/pages/me/register/register'
 import Setting from '../components/pages/me/setting'
+import UserInfo from '../components/pages/me/userInfo'
 
 import WebView from '../components/common/webView'
 
@@ -207,6 +208,8 @@ const scenes = Actions.create(
             state => state.me.register,
             Action.dispatch('register')
           )(Setting)}/>
+
+          <Scene key='userInfo' hideNavBar component={UserInfo}/>
 
           <Scene key="author" title="作者" hideNavBar component={Author}/>
 

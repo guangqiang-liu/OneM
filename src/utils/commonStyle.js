@@ -36,7 +36,7 @@ export const commonStyle = {
   // 默认分割线颜色
   lineColor: '#E6E6E6',
   // 默认placeholder颜色
-  placeholderColor: '#eee',
+  placeholderTextColor: '#c8c8cd',
   // borderColor
   borderColor: '#808080',
   // 导航title 颜色

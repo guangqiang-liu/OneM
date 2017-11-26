@@ -4,9 +4,8 @@
 import React, {Component} from 'react'
 import {View, Text, TouchableOpacity, StyleSheet, ScrollView} from 'react-native'
 import {BaseComponent} from '../../base/baseComponent'
-import {commonStyle, Icon, deviceInfo} from '../../../utils'
+import {commonStyle, Icon, deviceInfo, storage} from '../../../utils'
 import {Actions} from 'react-native-router-flux'
-import storage from 'react-native-simple-store'
 
 export default class Setting extends BaseComponent {
 
@@ -57,7 +56,7 @@ export default class Setting extends BaseComponent {
   }
 
   logoutClick() {
-    storage.delete('userInfo')
+    storage.remove('userInfo')
     this.props.callback && this.props.callback()
     Actions.pop()
   }

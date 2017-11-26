@@ -30,7 +30,7 @@ import BaseComponent from '../base/baseComponent'
 import {EnhancedListView} from './listView/EnhancedListView'
 import {SimpleListView} from './listView'
 import {StyleSheet} from './styleSheet'
-
+import {Form} from './form'
 /**
  * 统一将 react-native库中的组件 + 自定义组件 统一收口管理
  */
@@ -45,6 +45,7 @@ export {
   Image,
   Text,
   TextInput,
+  Form,
   Button,
   TouchableOpacity,
   NavigationBar,

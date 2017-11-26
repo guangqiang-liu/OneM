@@ -3,9 +3,8 @@
  */
 import React, {Component} from 'react'
 import {View, Text, TouchableOpacity, StyleSheet, TextInput, Switch, ScrollView} from 'react-native'
-import {BaseComponent} from '../../base/baseComponent'
-import {Icon, Toast, deviceInfo, commonStyle} from '../../../utils'
-import {storage} from '../../../utils'
+import {BaseComponent} from '../../../base/baseComponent'
+import {Icon, Toast, deviceInfo, commonStyle, storage} from '../../../../utils'
 import {Actions} from 'react-native-router-flux'
 
 export default class Register extends BaseComponent {

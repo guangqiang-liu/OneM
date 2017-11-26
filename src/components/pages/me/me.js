@@ -115,7 +115,9 @@ class Me extends BaseComponent {
 
   renderPanelItem(title, icon, color) {
     return (
-      <TouchableOpacity style={{justifyContent: commonStyle.center, alignItems: commonStyle.center, padding: 20}}>
+      <TouchableOpacity
+        style={{justifyContent: commonStyle.center, alignItems: commonStyle.center, padding: 20}}
+      >
         <Icon name={`oneIcon|${icon}`} size={30} color={color}/>
         <Text style={{marginTop: 5, color: commonStyle.textBlockColor}}>{title}</Text>
       </TouchableOpacity>
@@ -163,6 +165,7 @@ class Me extends BaseComponent {
         <View style={{borderTopWidth: 10, borderTopColor: commonStyle.lineColor}}>
           {this.renderItem('客服/反馈')}
           {this.renderItem('设置', '', '', 'setting')}
+          {this.renderItem('用户信息', '', '', 'userInfo')}
           {this.renderItem('Demo集合', '', '', 'demoPage')}
           {this.renderItem('关于我们')}
         </View>
