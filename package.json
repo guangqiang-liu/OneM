@@ -30,6 +30,7 @@
     "react-native-zoom-image": "^0.1.1",
     "react-navigation": "^1.0.0-beta.11",
     "react-redux": "^5.0.6",
+    "react-timer-mixin": "^0.13.3",
     "redux": "^3.7.2",
     "redux-actions": "^2.2.1",
     "redux-promise-middleware": "^4.4.1",

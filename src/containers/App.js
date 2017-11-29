@@ -71,6 +71,7 @@ import UserRegister from '../components/pages/me/register/register'
 import Setting from '../components/pages/me/setting'
 import UserInfo from '../components/pages/me/userInfo'
 
+import SelectorList from '../components/common/selector'
 import WebView from '../components/common/webView'
 
 const reducerCreate = params => {
@@ -212,6 +213,8 @@ const scenes = Actions.create(
           <Scene key='userInfo' hideNavBar component={UserInfo}/>
 
           <Scene key="author" title="作者" hideNavBar component={Author}/>
+
+          <Scene key='selector' hideNavBar component={SelectorList}/>
 
           <Scene key="webView" hideNavBar component={WebView}/>
 

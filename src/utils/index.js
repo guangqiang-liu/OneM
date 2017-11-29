@@ -10,4 +10,7 @@ import {storage} from './storage'
 import {Icon} from './icon'
 import {Toast} from './toast'
 import {deepClone} from './deepClone'
-export {deviceInfo, commonStyle, RegExpr, ArrayTool, storage, Icon, Toast, deepClone}
+import {extraUtil} from './extraUtils'
+
+
+export {deviceInfo, commonStyle, RegExpr, ArrayTool, storage, Icon, Toast, deepClone, extraUtil}

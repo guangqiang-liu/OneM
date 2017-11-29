@@ -18,6 +18,7 @@ class Reading extends BaseComponent {
     super(props)
     this.renderPage = this.renderPage.bind(this)
     this.imgClick = this.imgClick.bind(this)
+    this.timer = null
     this.state = {
       dataSource: new ViewPager.DataSource({pageHasChanged: (p1, p2) => p1 !== p2}),
       bannerList: [],
@@ -29,7 +30,7 @@ class Reading extends BaseComponent {
 
   componentDidMount() {
     Promise.all([action.readingBannerList(), action.readingArticleList()]).then(response => {
-      setTimeout(() => {
+      this.timer = setTimeout(() => {
         this.setState({
           bannerList: response[0].data,
           dataSource: this.state.dataSource.cloneWithPages(this.packData(response[1].data)),
@@ -38,6 +39,10 @@ class Reading extends BaseComponent {
         })
       }, (10))
     })
+  }
+
+  componentWillUnmount() {
+    this.timer && clearTimeout(this.timer)
   }
 
   navigationBarProps() {

@@ -94,6 +94,7 @@ export const commonStyle = {
   textFont: 14,
   // 默认按钮文字字体
   btnFont: 15,
+  btnFontSmall: 13,
   // 导航title字体
   navTitleFont: 17,
   // tabBar文字字体
@@ -118,5 +119,6 @@ export const commonStyle = {
   around: 'space-around',
   between: 'space-between',
   center: 'center',
-  row: 'row'
+  row: 'row',
+
 }

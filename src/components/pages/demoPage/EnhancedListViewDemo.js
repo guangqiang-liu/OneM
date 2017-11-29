@@ -5,6 +5,11 @@ import React, {Component} from 'react'
 import {View, StyleSheet, Text, EnhancedListView, InteractionManager} from './../../common'
 class EnhancedListViewTest extends Component {
 
+  constructor(props) {
+    super(props)
+    this.timer = null
+  }
+
   _renderRowView(rowData, sectionID, rowID) {
     return (
       <View style={styles.cellStyle}>
@@ -13,7 +18,7 @@ class EnhancedListViewTest extends Component {
     )
   }
   _onFetch(page = 1, callback, options) {
-    setTimeout(() => {
+    this.timer = setTimeout(() => {
       var rows = ['row '+((page - 1) * 3 + 1), 'row '+((page - 1) * 3 + 2), 'row '+((page - 1) * 3 + 3)]
       if (page === 30) {
         callback(rows, {
@@ -23,6 +28,10 @@ class EnhancedListViewTest extends Component {
         callback(rows)
       }
     }, 1000)
+  }
+
+  componentWillUnmount() {
+    this.timer && clearTimeout(this.timer)
   }
 
   fetchRequirement(...args) {
