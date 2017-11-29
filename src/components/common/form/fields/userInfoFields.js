@@ -143,8 +143,7 @@ const fields = [
         label: '是否显示手机号',
         subLabel: '*',
         type: 'Switch'
-      }
-    ]
+      }]
   },
   {
     title: 'TextArea',

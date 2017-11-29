@@ -130,7 +130,7 @@ export default class Selector extends BaseComponent {
                               <Icon name={'oneIcon|unselected_o'} size={20} color={commonStyle.themeColor} style={styles.icon} />
                           ) :
                           (
-                            item.row.selected ? <Icon name={'oneIcon|selected_s'} size={20} color={commonStyle.themeColor} style={styles.icon} /> : null
+                            item.row.selected ? <Icon name={'oneIcon|check_success_o'} size={20} color={commonStyle.themeColor} style={styles.icon} /> : null
                           )
                       }
                     </TouchableOpacity>

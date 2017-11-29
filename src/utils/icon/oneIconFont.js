@@ -8,6 +8,7 @@ const glyphMap = {
   tb_article_o: 59576,
   tb_Movie_o: 58904,
   tb_Music_o: 58881,
+  tb_mine_o: 58917,
   toastError_s: 58954,
   toastSuccess_s: 58894,
   toastWarning_s: 58882,
@@ -64,7 +65,8 @@ const glyphMap = {
   rmb_s: 58909,
   magic_star_o: 58908,
   gift_o: 59077,
-  push_arror_o: 58895
+  push_arror_o: 58895,
+  check_success_o: 58926
 }
 
 const OIcon = createIconSet(glyphMap, 'iconfont', 'iconfont.ttf')

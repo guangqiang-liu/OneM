@@ -4,11 +4,7 @@
 import React, {Component} from 'react'
 import {View, StyleSheet, ScrollView, Text} from 'react-native'
 import {commonStyle} from '../../../utils'
-import {Form} from '../../common'
-import {fields} from '../../common/form/fields/userInfoFields'
 import {BaseComponent} from '../../base/baseComponent'
-
-const MForm = Form.form
 
 export default class UserInfo extends BaseComponent {
 
@@ -40,30 +36,13 @@ export default class UserInfo extends BaseComponent {
   }
 
   onRightPress() {
-    let value = this.refs.form.getValue()
-    console.log(value)
-  }
-
-  renderView1() {
-    return (
-      <View style={{height: 49, alignItems: 'flex-end', justifyContent: commonStyle.center, flex: 1, marginRight: 15}}>
-        <Text>这里是自定义View1</Text>
-      </View>
-    )
+    console.log('click')
   }
 
   _render() {
     return (
       <View style={styles.container}>
-        <ScrollView>
-          <MForm
-            ref={'form'}
-            value={this.testObj}
-            fields={fields}
-            renderView1={this.renderView1()}
-            loadFeeType={(callback) => callback([{ id: 0, name: '包邮' }, { id: 1, name: '到付'}])}
-          />
-        </ScrollView>
+        <Text>用户信息</Text>
       </View>
     )
   }
@@ -72,6 +51,6 @@ export default class UserInfo extends BaseComponent {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: commonStyle.bgColor
+    backgroundColor: commonStyle.white
   }
 })

@@ -70,8 +70,8 @@ export default class MainPage extends Component {
             title="我的"
             titleStyle={styles.tabText}
             selectedTitleStyle={styles.selectedTabText}
-            renderIcon={() => <Icon name={'oneIcon|tb_Movie_o'} size={20} color={commonStyle.textGrayColor}/>}
-            renderSelectedIcon={() => <Icon name={'oneIcon|tb_Movie_o'} size={20} color={commonStyle.black}/>}
+            renderIcon={() => <Icon name={'oneIcon|tb_mine_o'} size={20} color={commonStyle.textGrayColor}/>}
+            renderSelectedIcon={() => <Icon name={'oneIcon|tb_mine_o'} size={20} color={commonStyle.black}/>}
             onPress={() => this.setState({ selectedTab: 'Me' })}>
             <Me/>
           </TabNavigator.Item>

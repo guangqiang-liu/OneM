@@ -4,6 +4,7 @@
 import {getFetch, postFetch, postFetchForValidator} from '../../utils/network/request/HttpExtension'
 import {PATH} from '../../constants/urls'
 import {Required, ValidateUtil} from '../../utils/validatorUtil'
+import {RegExpr} from '../../utils'
 
 const login = params =>  postFetchForValidator(PATH.MUSIC_ID_LIST, params)
 
@@ -27,6 +28,9 @@ const registerValidator = () => ({
     data: ValidateUtil([
       {
         func: (params, state, payload) => Required(params.name), msg: '请输入手机号'
+      },
+      {
+        func: (params, state, payload) => RegExpr.checkMobile(params.name), msg: '手机号格式不正确'
       },
       {
         func: (params, state, payload) => Required(params.code), msg: '请输入验证码'
