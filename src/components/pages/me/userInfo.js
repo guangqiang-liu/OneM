@@ -20,7 +20,7 @@ export default class UserInfo extends BaseComponent {
 
   navigationBarProps() {
     return {
-      title: 'Form',
+      title: '用户信息',
       rightTitle: '提交',
       rightTitleStyle: {
         color: commonStyle.white
@@ -42,7 +42,7 @@ export default class UserInfo extends BaseComponent {
   _render() {
     return (
       <View style={styles.container}>
-        <Text>用户信息</Text>
+        <Text>用户信息待完成</Text>
       </View>
     )
   }
