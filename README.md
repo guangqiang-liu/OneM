@@ -1,6 +1,9 @@
 # OneM
 **OneM是一款纯ReactNative打造的集杂志浏览、音乐播放、视频播放于一体的综合性App,并且支持iOS和Android双平台**
 
+# 更多React Navite 学习资源请参照作者简书
+[http://www.jianshu.com/u/023338566ca5](http://www.jianshu.com/u/023338566ca5)
+
 # 请注意
 * 如果有同学发现运行项目报如下错误，请将OneM项目中的react-native版本从之前的0.47.2 升级到0.49.3 执行命令：npm install react-native@0.49.3 --save
 
