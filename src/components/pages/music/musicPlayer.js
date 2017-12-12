@@ -13,12 +13,16 @@ import {Icon} from '../../../utils/icon'
 import {formatTime} from '../../../utils/formatTime'
 import {ShareModal} from '../../../components/common/shareModal'
 
+// 音乐列表mock数据
+const mockList = require('../../../assets/data/musicList.json')
+
 export default class MusicPlayer extends Component {
 
   constructor(props) {
     super(props)
     this.player = ''
     this.rotation = false
+    this.musicList = mockList.list
     this.state = {
       viewRef: null,
       paused: false,
@@ -81,12 +85,15 @@ export default class MusicPlayer extends Component {
 
   componentDidMount() {
     this.spin()
-    this.props.getMusicList(2017, 6, {}).then(response =>{
-      console.log(response)
-    })
-    this.props.getxiamiMusic(this.props.music_id).then(response =>{
-      console.log(response)
-    })
+
+    /** 注意：由于虾米音乐接口更新，网络请求不到数据，暂时使用mock数据代替 **/
+
+    // this.props.getMusicList(2017, 6, {}).then(response =>{
+    //   console.log(response)
+    // })
+    // this.props.getxiamiMusic(this.props.music_id).then(response =>{
+    //   console.log(response)
+    // })
   }
 
   setDuration(duration) {
@@ -103,31 +110,33 @@ export default class MusicPlayer extends Component {
 
   nextSong(currentIndex) {
     this.reset()
-    currentIndex === this.props.musicList.length ? currentIndex = 0 : currentIndex
-    let newSong = this.props.musicList[currentIndex]
-    let music_id = newSong.music_id
-    if (!isNaN(parseInt(music_id))) {
-      this.props.getxiamiMusic(music_id)
-      // 此处音乐播放器有bug
-      this.setState({currentIndex})
-    } else {
-      this.nextSong(currentIndex + 1)
-      this.showMessageBar('抱歉')('没有找到音乐信息，已帮你切换到下一首')('error')
-    }
+    this.setState({currentIndex: currentIndex >= mockList.list.length ? 0 : currentIndex})
+    // currentIndex === this.props.musicList.length ? currentIndex = 0 : currentIndex
+    // let newSong = this.props.musicList[currentIndex]
+    // let music_id = newSong.music_id
+    // if (!isNaN(parseInt(music_id))) {
+    //   this.props.getxiamiMusic(music_id)
+    //   // 此处音乐播放器有bug
+    //   this.setState({currentIndex})
+    // } else {
+    //   this.nextSong(currentIndex + 1)
+    //   this.showMessageBar('抱歉')('没有找到音乐信息，已帮你切换到下一首')('error')
+    // }
   }
 
   preSong(currentIndex) {
     this.reset()
-    currentIndex === -1 ? currentIndex = this.props.musicList.length -1 : currentIndex
-    let newSong = this.props.musicList[currentIndex]
-    let music_id = newSong.music_id
-    if (!isNaN(parseInt(music_id))) {
-      this.props.getxiamiMusic(music_id)
-      this.setState({currentIndex})
-    } else {
-      this.preSong(currentIndex - 1)
-      this.showMessageBar('抱歉')('没有找到音乐信息，已帮你切换到下一首')('error')
-    }
+    this.setState({currentIndex: currentIndex < 0 ? mockList.list.length - 1 : currentIndex})
+    // currentIndex === -1 ? currentIndex = this.props.musicList.length -1 : currentIndex
+    // let newSong = this.props.musicList[currentIndex]
+    // let music_id = newSong.music_id
+    // if (!isNaN(parseInt(music_id))) {
+    //   this.props.getxiamiMusic(music_id)
+    //   this.setState({currentIndex})
+    // } else {
+    //   this.preSong(currentIndex - 1)
+    //   this.showMessageBar('抱歉')('没有找到音乐信息，已帮你切换到下一首')('error')
+    // }
   }
 
   reset() {
@@ -188,7 +197,8 @@ export default class MusicPlayer extends Component {
   }
 
   renderPlayer() {
-    let musicInfo = this.props.musicInfo
+    // let musicInfo = this.props.musicInfo
+    let musicInfo = mockList.list[this.state.currentIndex]
     return (
       <View style={styles.bgContainer}>
         <View style={styles.navBarStyle}>
@@ -201,7 +211,7 @@ export default class MusicPlayer extends Component {
             </TouchableOpacity>
             <View style={{alignItems: 'center'}}>
               <Text style={styles.title}>{musicInfo.title}</Text>
-              <Text style={styles.subTitle}>{musicInfo.artist}</Text>
+              <Text style={styles.subTitle}>子标题</Text>
             </View>
             <TouchableOpacity
               style={{marginTop: 5}}
@@ -230,7 +240,7 @@ export default class MusicPlayer extends Component {
               outputRange: ['0deg', '360deg']
             })}]
           }}
-          source={{uri: this.props.musicInfo.cover}}
+          source={{uri: musicInfo.cover}}
         />
         <View style={{flex: 1}}>
           <View style={{flexDirection: 'row', alignItems: 'center', marginHorizontal: 50, justifyContent: 'space-around', bottom: -60}}>
@@ -289,7 +299,7 @@ export default class MusicPlayer extends Component {
         </View>
         <Video
           ref={video => this.player = video}
-          source={{uri: this.props.musicInfo.url}}
+          source={{uri: musicInfo.url}}
           volume={1.0}
           paused={this.state.paused}
           playInBackground={true}
@@ -315,14 +325,15 @@ export default class MusicPlayer extends Component {
   }
 
   render() {
-    let musicInfo = this.props.musicInfo || {}
+    // let musicInfo = this.props.musicInfo || {}
+    let musicInfo = mockList.list[this.state.currentIndex] || {}
     return (
       musicInfo.url ?
         <View style={styles.container}>
           <Image
             ref={(img) => { this.backgroundImage = img}}
             style={styles.bgContainer}
-            source={{uri: this.props.musicInfo.cover}}
+            source={{uri: musicInfo.cover}}
             resizeMode='cover'
             onLoadEnd={() => this.imageLoaded()}
           />
