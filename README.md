@@ -64,7 +64,7 @@ OneM是一款纯ReactNative开发的APP，也是作者开发的第三个RN项目
 	* 项目中使用的常用技术的Demo集合页面
 
 # 预览效果图
-![gif](http://one-1255744109.file.myqcloud.com/zR7Md5Tuw3.gif)
+![gif](http://one-1255744109.cossh.myqcloud.com/zR7Md5Tuw3.gif)
 
 # 查看更多效果图
 **[https://github.com/guangqiang-liu/OneM-preview](https://github.com/guangqiang-liu/OneM-preview)**
