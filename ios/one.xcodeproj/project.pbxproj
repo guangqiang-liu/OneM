@@ -270,6 +270,20 @@
 			remoteGlobalIDString = 323A12871E5F266B004975B8;
 			remoteInfo = "ART-tvOS";
 		};
+		8D8BB5982016CC7200AD6C43 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3DBE0D001F3B181A0099AA32;
+			remoteInfo = fishhook;
+		};
+		8D8BB59A2016CC7200AD6C43 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3DBE0D0D1F3B181C0099AA32;
+			remoteInfo = "fishhook-tvOS";
+		};
 		8DC43C931F963460007E487B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 5DDB170407354172A5BE28ED /* RNVectorIcons.xcodeproj */;
@@ -489,6 +503,8 @@
 			children = (
 				139FDEF41B06529B00C62182 /* libRCTWebSocket.a */,
 				3DAD3E991DF850E9000B6D8A /* libRCTWebSocket-tvOS.a */,
+				8D8BB5992016CC7200AD6C43 /* libfishhook.a */,
+				8D8BB59B2016CC7200AD6C43 /* libfishhook-tvOS.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -585,6 +601,7 @@
 				00E356EF1AD99517003FC87E /* oneTests */,
 				83CBBA001A601CBA00E9B192 /* Products */,
 				DD58EBB69EEA4CF890DCA5DC /* Resources */,
+				8D8BB57F2016CC7100AD6C43 /* Recovered References */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -635,6 +652,17 @@
 			);
 			name = fonts;
 			path = one/fonts;
+			sourceTree = "<group>";
+		};
+		8D8BB57F2016CC7100AD6C43 /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				DBE8DC27268C4F8BAB1F72A1 /* libRCTVideo.a */,
+				B03977996B5C43708B4131E2 /* libRNBlur.a */,
+				51320D05928C419FA7DF5DD1 /* libRCTOrientation.a */,
+				8CA21D211DA249F8A9D43CC8 /* libRNVectorIcons.a */,
+			);
+			name = "Recovered References";
 			sourceTree = "<group>";
 		};
 		8DC43C6C1F963460007E487B /* Products */ = {
@@ -1059,6 +1087,20 @@
 			fileType = archive.ar;
 			path = "libART-tvOS.a";
 			remoteRef = 8D3FEF201F657CA800C236D2 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8D8BB5992016CC7200AD6C43 /* libfishhook.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libfishhook.a;
+			remoteRef = 8D8BB5982016CC7200AD6C43 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		8D8BB59B2016CC7200AD6C43 /* libfishhook-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libfishhook-tvOS.a";
+			remoteRef = 8D8BB59A2016CC7200AD6C43 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		8DC43C941F963460007E487B /* libRNVectorIcons.a */ = {
