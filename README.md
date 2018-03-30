@@ -1,7 +1,7 @@
 # OneM
-**OneM是一款纯ReactNative打造的集杂志浏览、音乐播放、视频播放于一体的综合性App,并且支持iOS和Android双平台**
+**OneM是一款纯ReactNative打造的集杂志浏览、音乐播放、视频播放于一体的综合性App(时光网+ONE),并且支持iOS和Android双平台,并且完美适配iPhoneX与Android机型**
 
-# 更多React Navite 学习资源请参照作者简书
+# 更多React Navite 学习资源请参照作者简书(60多篇RN实战文章详解)
 [http://www.jianshu.com/u/023338566ca5](http://www.jianshu.com/u/023338566ca5)
 
 # 请注意
@@ -151,19 +151,20 @@ OneM是一款纯ReactNative开发的APP，也是作者开发的第三个RN项目
 
 # 后续待完成事项
 - [x] 网络缓存
-- [ ] 自定义debug面板
-- [ ] 日志打点视图
+- [x] 自定义debug面板
+- [x] 日志打点视图
 - [x] Form表单组件
 - [x] Validator参数校验器组件
 - [ ] iOS项目支持pod
 - [x] 三方分享功能
 - [x] 三方登录功能
+- [x] 适配iPhoneX
 - [ ] 文件上传与下载
-- [ ] 优化代码，修改bug
+- [x] 优化代码，修改bug
 - [ ] 待补充
 
 # 待优化bug
-- [ ] 音乐播放器CD盘旋转问题
+- [x] 音乐播放器CD盘旋转问题
 - [x] 音乐播放器自动切换不播放音乐问题
 - [x] 自定义组件库适配问题
 - [x] reading列表数据文章内容当返回html代码时，页面滑动问题
