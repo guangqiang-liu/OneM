@@ -130,7 +130,7 @@ export default class MoviePlayer extends Component {
     return (
       <TouchableOpacity
         style={[styles.movieContainer, {height: orientation === 'PORTRAIT' ? playerHeight : deviceInfo.deviceWidth,
-          marginTop: orientation === 'PORTRAIT' ? Platform.OS === 'ios' ? 20 : 0 : 0}]}
+          marginTop: orientation === 'PORTRAIT' ? Platform.OS === 'ios' ? (deviceInfo.isIphoneX ? 40 : 20) : 0 : 0}]}
         onPress={() => this.setState({isTouchedScreen: !this.state.isTouchedScreen})}>
         <Video source={{uri: url}}
                ref={ref => this.player = ref}
