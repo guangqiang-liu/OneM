@@ -376,12 +376,12 @@ const styles = StyleSheet.create({
     position: 'absolute',
     backgroundColor: 'rgba(0, 0, 0, 0)',
     width: deviceInfo.deviceWidth,
-    height: 64,
+    height: deviceInfo.isIphoneX ? 88 : 64,
     borderWidth: 0.5,
     borderColor: commonStyle.lineColor
   },
   navBarContent: {
-    marginTop: 25,
+    marginTop: deviceInfo.isIphoneX ? 45 : 25 ,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',

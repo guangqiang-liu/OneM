@@ -11,7 +11,6 @@ import Movie from '../components/pages/movie/movie'
 import Me from '../components/pages/me/me'
 import {Icon} from '../utils/icon'
 import {commonStyle} from '../utils'
-
 export default class MainPage extends Component {
 
   constructor(props) {
@@ -24,7 +23,9 @@ export default class MainPage extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <TabNavigator>
+        <TabNavigator
+            tabBarStyle={{height: commonStyle.tabBarHeight, paddingBottom: 34}}
+        >
           <TabNavigator.Item
             selected={this.state.selectedTab === 'Movie'}
             title="电影"

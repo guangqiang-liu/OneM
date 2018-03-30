@@ -49,7 +49,9 @@ class ShareModal extends Component {
           visible={this.props.visible}
           onRequestClose={() => this.props.onVisibleChange(false)}>
           <TouchableOpacity
-            style={styles.modalStyle}>
+            style={styles.modalStyle}
+            onPress={() => this.setState({isHidden: true})}
+          >
             <TouchableOpacity
               activeOpacity={1}
               style={styles.cancle}
