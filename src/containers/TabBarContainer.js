@@ -11,6 +11,8 @@ import Movie from '../components/pages/movie/movie'
 import Me from '../components/pages/me/me'
 import {Icon} from '../utils/icon'
 import {commonStyle} from '../utils'
+import deviceInfo from '../utils/deviceInfo'
+
 export default class MainPage extends Component {
 
   constructor(props) {
@@ -24,7 +26,7 @@ export default class MainPage extends Component {
     return (
       <View style={styles.container}>
         <TabNavigator
-            tabBarStyle={{height: commonStyle.tabBarHeight, paddingBottom: 34}}
+            tabBarStyle={{height: commonStyle.tabBarHeight, paddingBottom: deviceInfo.isIphoneX ? 34 : 0}}
         >
           <TabNavigator.Item
             selected={this.state.selectedTab === 'Movie'}
