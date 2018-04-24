@@ -1,7 +1,7 @@
 # OneM
 **OneM是一款纯ReactNative打造的集杂志浏览、音乐播放、视频播放于一体的综合性App(时光网+ONE),并且支持iOS和Android双平台,并且完美适配iPhoneX与Android机型**
 
-# 更多React Navite 学习资源请参照作者简书(60多篇RN实战文章详解)
+# 更多React Navite 学习资源请参照作者简书(60篇+RN实战文章详解)
 [http://www.jianshu.com/u/023338566ca5](http://www.jianshu.com/u/023338566ca5)
 
 # 请注意
@@ -36,7 +36,7 @@
 OneM是一款纯ReactNative开发的APP，也是作者开发的第三个RN项目，前两个项目是公司企业线上项目，OneM是作者独立开发的第一个RN开源项目。此项目框架搭建完全按照企业级项目框架标准搭建而成，开发时长约1个多月，后期也会长期迭代更新维护。项目目前支持iOS和Android双平台。iOS支持最低版本为：8.0，Android支持最低版本为：4.1。
 
 # 主要功能
-**项目功能主要包括四大模块：**
+**项目功能主要包括五大模块：**
 
 * 电影
 	* 热映中、即将上映电影列表
@@ -155,7 +155,7 @@ OneM是一款纯ReactNative开发的APP，也是作者开发的第三个RN项目
 - [x] 日志打点视图
 - [x] Form表单组件
 - [x] Validator参数校验器组件
-- [ ] iOS项目支持pod
+- [ ] iOS项目支持pod(考虑到很多不懂原生同学，这个暂时就不考虑pod了)
 - [x] 三方分享功能
 - [x] 三方登录功能
 - [x] 适配iPhoneX
