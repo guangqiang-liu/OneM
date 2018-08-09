@@ -35,7 +35,7 @@
 # 项目简介
 OneM是一款纯ReactNative开发的APP，也是作者开发的第三个RN项目，前两个项目是公司企业线上项目，OneM是作者独立开发的第一个RN开源项目。此项目框架搭建完全按照企业级项目框架标准搭建而成，开发时长约1个多月，后期也会长期迭代更新维护。项目目前支持iOS和Android双平台。iOS支持最低版本为：8.0，Android支持最低版本为：4.1。
 
-# 主要功能
+# 主要功能(大约30+个页面)
 **项目功能主要包括五大模块：**
 
 * 电影
@@ -170,7 +170,369 @@ OneM是一款纯ReactNative开发的APP，也是作者开发的第三个RN项目
 - [x] reading列表数据文章内容当返回html代码时，页面滑动问题
 - [ ] 待补充
 
+# 工程结构
+
+```
+.
+├── actionCreators
+│   ├── find
+│   │   └── chat.js
+│   ├── me
+│   │   └── index.js
+│   ├── movie
+│   │   └── index.js
+│   ├── music
+│   │   └── index.js
+│   ├── picture
+│   │   └── index.js
+│   └── reading
+│       └── index.js
+├── actions
+│   ├── find
+│   │   └── chat.js
+│   ├── index.js
+│   ├── init
+│   │   └── launchAction.js
+│   ├── login
+│   │   └── index.js
+│   ├── me
+│   │   └── index.js
+│   ├── movie
+│   │   └── index.js
+│   ├── music
+│   │   └── index.js
+│   ├── picture
+│   │   └── index.js
+│   ├── reading
+│   │   └── index.js
+│   └── register
+│       └── index.js
+├── assets
+│   ├── data
+│   │   ├── fields
+│   │   │   └── userInfoFields.js
+│   │   ├── musicList.json
+│   │   └── venilog.json
+│   ├── fonts
+│   │   └── iconfont.ttf
+│   └── images
+│       ├── article_pause.png
+│       ├── article_play.png
+│       ├── bgimage.jpeg
+│       ├── close.png
+│       ├── comment_image.png
+│       ├── copylink.png
+│       ├── detail_content.png
+│       ├── diary.png
+│       ├── diary_pressed.png
+│       ├── disc_pause.png
+│       ├── essay_image.png
+│       ├── forward.png
+│       ├── gross_default.png
+│       ├── gross_selected.png
+│       ├── home.png
+│       ├── home_active.png
+│       ├── img
+│       │   ├── 1.jpg
+│       │   ├── 2.jpg
+│       │   ├── 3.jpg
+│       │   └── 4.jpg
+│       ├── individual_center.png
+│       ├── last.png
+│       ├── laud.png
+│       ├── laud_selected.png
+│       ├── loading_error_image.png
+│       ├── movie.png
+│       ├── movie_active.png
+│       ├── movie_review_next.png
+│       ├── movie_review_pause.png
+│       ├── movie_review_play.png
+│       ├── movie_review_previous.png
+│       ├── movie_ticket.png
+│       ├── music.png
+│       ├── musicPlayer
+│       │   ├── �\201\234止.png
+│       │   ├── 声�\237�.png
+│       │   ├── �\222��\224�.png
+│       │   ├── �\232\202�\201\234.png
+│       │   ├── �\232\217�\234�.png
+│       │   ├── �\235\231�\237�.png
+│       │   ├── �\212�\200�\226.png
+│       │   ├── �\213�\200�\226.png
+│       │   ├── �\203��\211\207�\233\230.png
+│       │   ├── �\210\227表循�\216�.png
+│       │   └── �\215\225�\233�循�\216�.png
+│       ├── music_about_default.png
+│       ├── music_about_selected.png
+│       ├── music_active.png
+│       ├── music_lyric_default.png
+│       ├── music_lyric_selected.png
+│       ├── music_pause.png
+│       ├── music_play.png
+│       ├── music_story_default.png
+│       ├── music_story_selected.png
+│       ├── next.png
+│       ├── plot_default.png
+│       ├── plot_selected.png
+│       ├── question_image.png
+│       ├── reading.png
+│       ├── reading_active.png
+│       ├── return.png
+│       ├── score_line.png
+│       ├── search_min.png
+│       ├── serial_image.png
+│       ├── share_image.png
+│       ├── still_default.png
+│       ├── still_selected.png
+│       ├── wechat_fri.png
+│       ├── wechat_moments.png
+│       ├── white.png
+│       └── xiami_right.png
+├── components
+│   ├── base
+│   │   └── baseComponent.js
+│   ├── common
+│   │   ├── button
+│   │   │   ├── enhancedBtn.js
+│   │   │   └── index.js
+│   │   ├── datePicker
+│   │   │   └── index.js
+│   │   ├── form
+│   │   │   ├── formItems
+│   │   │   │   ├── CheckBox.js
+│   │   │   │   ├── CustomAction.js
+│   │   │   │   ├── DatePicker.js
+│   │   │   │   ├── Radio.js
+│   │   │   │   ├── Selector.js
+│   │   │   │   ├── TextArea.js
+│   │   │   │   └── index.js
+│   │   │   └── index.js
+│   │   ├── index.js
+│   │   ├── listView
+│   │   │   ├── CrazyListView.js
+│   │   │   ├── EnhancedListView.js
+│   │   │   ├── index.js
+│   │   │   └── loadMoreFooter.js
+│   │   ├── navigationBar
+│   │   │   └── navigationBar.js
+│   │   ├── selector
+│   │   │   └── index.js
+│   │   ├── shareModal
+│   │   │   └── index.js
+│   │   ├── styleSheet
+│   │   │   └── index.js
+│   │   ├── text
+│   │   │   └── index.js
+│   │   ├── touchable
+│   │   │   └── touchableOpacity.js
+│   │   ├── venilog
+│   │   │   └── index.js
+│   │   └── webView
+│   │       └── index.js
+│   └── pages
+│       ├── demoPage
+│       │   ├── EchoView.js
+│       │   ├── EnhancedListViewDemo.js
+│       │   ├── Error.js
+│       │   ├── Launch.js
+│       │   ├── Login.js
+│       │   ├── Login2.js
+│       │   ├── Login3.js
+│       │   ├── Mask.js
+│       │   ├── ModalView.js
+│       │   ├── PageOne.js
+│       │   ├── PageTwo.js
+│       │   ├── Register.js
+│       │   ├── TabView.js
+│       │   ├── TestAntdMobile.js
+│       │   ├── TestBlurComponent.js
+│       │   ├── TestCustomUIComponent.js
+│       │   ├── TestIcon.js
+│       │   ├── TestImgZoomComponent.js
+│       │   ├── TestLogDot.js
+│       │   ├── TestMessageBar.js
+│       │   ├── TestNetwork.js
+│       │   ├── TestOrientation.js
+│       │   ├── TestRedux.js
+│       │   ├── TestScrollable-tab-view.js
+│       │   ├── TestSwiperComponent.js
+│       │   └── TestViewPager.js
+│       ├── me
+│       │   ├── author.js
+│       │   ├── demo.js
+│       │   ├── login
+│       │   │   └── login.js
+│       │   ├── me.js
+│       │   ├── register
+│       │   │   └── register.js
+│       │   ├── setting.js
+│       │   └── userInfo.js
+│       ├── movie
+│       │   ├── actor
+│       │   │   ├── actorCell.js
+│       │   │   └── actorList.js
+│       │   ├── comeingNew
+│       │   │   ├── comeingNewList.js
+│       │   │   └── comeingnewCell.js
+│       │   ├── comment
+│       │   │   ├── miniCommentCell.js
+│       │   │   ├── miniCommentList.js
+│       │   │   ├── plusCommentCell.js
+│       │   │   └── plusCommentList.js
+│       │   ├── movie.js
+│       │   ├── movieDetail.js
+│       │   ├── moviePlayer.js
+│       │   ├── movieTrailerList.js
+│       │   ├── picture
+│       │   │   ├── pictureGrid.js
+│       │   │   └── pictureList.js
+│       │   └── showTime
+│       │       ├── showTimeCell.js
+│       │       └── showTimeList.js
+│       ├── music
+│       │   ├── music.js
+│       │   ├── musicDetail.js
+│       │   ├── musicList.js
+│       │   └── musicPlayer.js
+│       ├── picture
+│       │   ├── pastList.js
+│       │   ├── picDetail.js
+│       │   ├── picGridList.js
+│       │   └── picture.js
+│       └── reading
+│           ├── articleList.js
+│           ├── articleListCell.js
+│           ├── bannerDetail.js
+│           ├── bottomToolBar.js
+│           ├── commentList.js
+│           ├── essay
+│           │   └── essayDetail.js
+│           ├── question
+│           │   └── questionDetail.js
+│           ├── reading.js
+│           ├── readingArticleList.js
+│           ├── readingTabList.js
+│           └── serial
+│               └── serialDetail.js
+├── constants
+│   ├── actionType.js
+│   ├── commonType.js
+│   ├── responseType.js
+│   ├── urlConfig.js
+│   └── urls.js
+├── containers
+│   ├── App.js
+│   └── TabBarContainer.js
+├── middlewares
+│   ├── logMiddleware.js
+│   ├── loggerMiddleware.js
+│   ├── thunkMiddleware.js
+│   ├── validator
+│   │   ├── deepClone
+│   │   │   └── index.js
+│   │   ├── index.js
+│   │   └── validatorMiddleware.js
+│   └── validatorMiddleware.js
+├── reducers
+│   ├── common
+│   │   ├── index.js
+│   │   ├── loading.js
+│   │   └── router.js
+│   ├── find
+│   │   ├── chat.js
+│   │   ├── index.js
+│   │   └── temp.js
+│   ├── home
+│   │   ├── custom.js
+│   │   └── index.js
+│   ├── index.js
+│   ├── init
+│   │   ├── index.js
+│   │   └── launch.js
+│   ├── login
+│   │   └── index.js
+│   ├── me
+│   │   ├── index.js
+│   │   └── me.js
+│   ├── message
+│   │   └── index.js
+│   ├── mine
+│   │   └── index.js
+│   ├── movie
+│   │   ├── actor
+│   │   │   └── index.js
+│   │   ├── comment
+│   │   │   └── commentList.js
+│   │   ├── index.js
+│   │   ├── movieDetail.js
+│   │   ├── movieList.js
+│   │   ├── picture
+│   │   │   └── index.js
+│   │   └── trailerList.js
+│   ├── music
+│   │   ├── index.js
+│   │   └── music.js
+│   ├── picture
+│   │   ├── homePic.js
+│   │   └── index.js
+│   ├── reading
+│   │   ├── essay.js
+│   │   ├── index.js
+│   │   ├── question.js
+│   │   ├── reading.js
+│   │   └── serial.js
+│   └── register
+│       └── index.js
+├── store
+│   └── index.js
+└── utils
+    ├── arrayExtension.js
+    ├── commonStyle.js
+    ├── dataUtil.js
+    ├── deepClone.js
+    ├── deviceInfo.js
+    ├── extraUtils.js
+    ├── formatTime.js
+    ├── icon
+    │   ├── index.js
+    │   └── oneIconFont.js
+    ├── index.js
+    ├── messageBar
+    │   └── MessageBar.js
+    ├── network
+    │   ├── cache
+    │   │   └── index.js
+    │   ├── request
+    │   │   ├── HttpExtension.js
+    │   │   └── HttpUtils.js
+    │   └── venilog
+    │       └── index.js
+    ├── progressHUD
+    │   ├── index.js
+    │   └── progressHUD.js
+    ├── regUtil.js
+    ├── storage
+    │   ├── index.js
+    │   └── sync.js
+    ├── toast
+    │   └── index.js
+    ├── userInfo.js
+    ├── validatorUtil.js
+    └── venilog
+        ├── dispatchLog.js
+        ├── interactiveLog.js
+        ├── logParams.js
+        └── systemLog.js
+
+91 directories, 258 files
+```
+
 # 总结
 **OneM项目是基本完全按照公司企业开发的要求和标准来搭建整体框架和开发的，非常适合RN初学者和有一定RN开发基础的同学们参考学习。希望OneM能给同学们带来不一样的收获。如果同学们在开发中遇到RN的问题，也可以加入作者的RN技术交流群，多多提问、交流(QQ交流群：620792950)。**
 
 **当然，如果同学们认为作者的开源项目还不错，也请给个 `star` 支持一下 🙏🙏🙏 。也衷心的欢迎同学们给作者提些宝贵的意见和建议！**
+
+
+## License
+
+**MIT**
