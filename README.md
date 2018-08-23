@@ -77,6 +77,12 @@ OneM是一款纯ReactNative开发的APP，也是作者开发的第三个RN项目
 5. `npm start`
 6. 使用Xcode 或者Android Studio 运行项目
 
+# 真机调试
+1.2.3.4步骤与【安装调试】相同
+5. 连接数据线，打开use调试，安卓: `react-native run-android`， ios: `react-native run-ios`
+6. 第一次调试，上述命令真机上安装app，后续电脑真机同一网络下调试，打开app摇一摇，【Dev Settings】-- 【Debuggering】-- 【Debug server host & port for device】，输入电脑ip地址+8081端口，类似‘192.168.11.134:8081’， 项目目录下运行`react-native start`,每次更改代码摇一摇即可进行调试
+注：出现8081端口监听失败的错误，可输入‘lsof -i:8081’查看，然后‘kill -9 ...’杀死进程即可解决。
+
 # 数据API
 **项目中使用到的数据来源于网络抓包，在此也感谢前人总结的API文档**
 
