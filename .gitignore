@@ -1,6 +1,7 @@
 # OSX
 #
 .DS_Store
+._*
 
 # Xcode
 #
@@ -51,3 +52,6 @@ buck-out/
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
+
+# other
+package-lock.json
