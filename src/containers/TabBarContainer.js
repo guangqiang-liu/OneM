@@ -30,7 +30,7 @@ export default class MainPage extends Component {
         >
           <TabNavigator.Item
             selected={this.state.selectedTab === 'Movie'}
-            title="电影1"
+            title="电影"
             titleStyle={styles.tabText}
             selectedTitleStyle={styles.selectedTabText}
             renderIcon={() => <Icon name={'oneIcon|tb_Movie_o'} size={20} color={commonStyle.textGrayColor}/>}

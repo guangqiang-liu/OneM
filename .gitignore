@@ -1,7 +1,7 @@
 # OSX
 #
 .DS_Store
-._*
+
 # Xcode
 #
 build/
@@ -27,7 +27,6 @@ project.xcworkspace
 build/
 .idea
 .gradle
-gradle-app.setting
 local.properties
 *.iml
 
@@ -52,20 +51,3 @@ buck-out/
 fastlane/report.xml
 fastlane/Preview.html
 fastlane/screenshots
-
-# other
-src/bower_components
-log/*
-log-yio/*
-public/
-instances/config.js
-instances/*.pem
-*.keystore
-/android/app/src/main/res/drawable/yw_1222.jpg
-index.android.bundle*
-drivers/yunio/log/*
-drivers/yioMServices/log/*
-package-lock.json
-test-mocha/app/output/
-*.sublime-*
-dump.rdb
