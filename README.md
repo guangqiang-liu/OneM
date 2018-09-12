@@ -533,6 +533,15 @@ OneM是一款纯ReactNative开发的APP，也是作者开发的第三个RN项目
 **当然，如果同学们认为作者的开源项目还不错，也请给个 `star` 支持一下 🙏🙏🙏 。也衷心的欢迎同学们给作者提些宝贵的意见和建议！**
 
 
+# 更多文章
+* 作者React Native开源项目OneM地址(按照企业开发标准搭建框架完成开发的)：**[https://github.com/guangqiang-liu/OneM](https://github.com/guangqiang-liu/OneM)**：欢迎小伙伴们 **star**
+* 作者简书主页：包含60多篇RN开发相关的技术文章[http://www.jianshu.com/u/023338566ca5](http://www.jianshu.com/u/023338566ca5) 欢迎小伙伴们：**多多关注**，**多多点赞**
+* 作者React Native QQ技术交流群：**620792950** 欢迎小伙伴进群交流学习
+* 友情提示：**在开发中有遇到RN相关的技术问题，欢迎小伙伴加入交流群（**620792950**），在群里提问、互相交流学习。交流群也定期更新最新的RN学习资料给大家，谢谢大家支持！**
+
+## 欢迎小伙伴们扫码下方二维码加入RN技术交流QQ群(500人 +)
+![QQ群二维码，500+ RN工程师在等你加入哦](http://upload-images.jianshu.io/upload_images/6342050-53baff819f7a76d4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+
 ## License
 
 **MIT**
