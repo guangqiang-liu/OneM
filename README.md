@@ -1,5 +1,5 @@
 # OneM
-**OneM是一款纯ReactNative打造的集杂志浏览、音乐播放、视频播放于一体的综合性App(时光网+ONE),并且支持iOS和Android双平台,并且完美适配iPhoneX与Android机型**
+> OneM是一款纯ReactNative打造的集杂志浏览、音乐播放、视频播放于一体的综合性App(时光网+ONE),并且支持iOS和Android双平台,并且完美适配iPhoneX与Android机型
 
 # 更多React Navite 学习资源请参照作者简书(60篇+RN实战文章详解)
 [http://www.jianshu.com/u/023338566ca5](http://www.jianshu.com/u/023338566ca5)
@@ -38,7 +38,7 @@ OneM是一款纯ReactNative开发的APP，也是作者开发的第三个RN项目
 # 主要功能(大约30+个页面)
 **项目功能主要包括五大模块：**
 
-* 电影
+* 电影模块
 	* 热映中、即将上映电影列表
 	* 电影详情
 	* 电影预告片、花絮、照片墙列表
@@ -56,7 +56,7 @@ OneM是一款纯ReactNative开发的APP，也是作者开发的第三个RN项目
 	* 阅读分类
 	* 阅读详情
 	* 阅读评论
-* 我的
+* 我的模块
 	* 个人中心页面
 	* 账号登录页面
 	* 三方平台授权登录
@@ -539,7 +539,7 @@ OneM是一款纯ReactNative开发的APP，也是作者开发的第三个RN项目
 * 作者React Native QQ技术交流群：**620792950** 欢迎小伙伴进群交流学习
 * 友情提示：**在开发中有遇到RN相关的技术问题，欢迎小伙伴加入交流群（**620792950**），在群里提问、互相交流学习。交流群也定期更新最新的RN学习资料给大家，谢谢大家支持！**
 
-## 欢迎小伙伴们扫码下方二维码加入RN技术交流QQ群(500人 +)
+## 欢迎小伙伴们扫码下方二维码加入RN技术交流QQ群(600人 +)
 ![QQ群二维码，500+ RN工程师在等你加入哦](http://upload-images.jianshu.io/upload_images/6342050-53baff819f7a76d4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ## License
