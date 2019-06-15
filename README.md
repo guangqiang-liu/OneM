@@ -5,13 +5,6 @@
 [http://www.jianshu.com/u/023338566ca5](http://www.jianshu.com/u/023338566ca5)
 
 # 请注意
-* 如果有同学发现运行项目报如下错误，请将OneM项目中的react-native版本从之前的0.47.2 升级到0.49.3 执行命令：npm install react-native@0.49.3 --save
-
-![error](http://ovyjkveav.bkt.clouddn.com/17-11-8/13256931.jpg)
-
-* 安卓运行项目报如下错误，请开启Android模拟器的调试模式试试。
-
-![error](http://ovyjkveav.bkt.clouddn.com/17-11-16/91256214.jpg)
 
 * 由于虾米音乐接口更新，音乐播放器页面暂时请求不到虾米数据，已将数据换为本地mock数据
 * 如果还是报错不能运行项目，请联系作者，加入作者RN交流群：620792950 告知作者即可
@@ -132,9 +125,11 @@ OneM是一款纯ReactNative开发的APP，也是作者开发的第三个RN项目
 
 # 实战开发中遇到的坑
 * Android编译报错：Error:Could not add entry '-6081986774160961524' to cache fileSnapshots.bin (/Users/guangqiang/Desktop/ProjectRepo/ReactNative/OneM/android/.gradle/2.14.1/taskArtifacts/fileSnapshots.bin)
+
 * 接入iconFont组件库，安卓工程报错
 ![errorImg](http://ovyjkveav.bkt.clouddn.com/17-10-27/55829900.jpg)
 **解决方案：[http://www.jianshu.com/p/9f6db8e38852](http://www.jianshu.com/p/9f6db8e38852)**
+
 * `Actions.xxx({type: 'xxx'})`: router-flux路由跳转页面传递参数时，参数属性名不能为`type`，否则无法正常跳转页面
 
 * ReactNative报错: unddefined is not an object（evaluating ‘_react2.PropTypes.xxx’）
@@ -530,7 +525,7 @@ OneM是一款纯ReactNative开发的APP，也是作者开发的第三个RN项目
 # 总结
 **OneM项目是基本完全按照公司企业开发的要求和标准来搭建整体框架和开发的，非常适合RN初学者和有一定RN开发基础的同学们参考学习。希望OneM能给同学们带来不一样的收获。如果同学们在开发中遇到RN的问题，也可以加入作者的RN技术交流群，多多提问、交流(QQ交流群：620792950)。**
 
-**当然，如果同学们认为作者的开源项目还不错，也请给个 `star` 支持一下 🙏🙏🙏 。也衷心的欢迎同学们给作者提些宝贵的意见和建议！**
+**当然，如果同学们认为作者的开源项目还不错，也请给个 `star` 支持一下 ❤️❤️❤️❤️ 。也衷心的欢迎同学们给作者提些宝贵的意见和建议！**
 
 
 # 更多文章
@@ -539,7 +534,7 @@ OneM是一款纯ReactNative开发的APP，也是作者开发的第三个RN项目
 * 作者React Native QQ技术交流群：**620792950** 欢迎小伙伴进群交流学习
 * 友情提示：**在开发中有遇到RN相关的技术问题，欢迎小伙伴加入交流群（**620792950**），在群里提问、互相交流学习。交流群也定期更新最新的RN学习资料给大家，谢谢大家支持！**
 
-## 欢迎小伙伴们扫码下方二维码加入RN技术交流QQ群(600人 +)
+## 欢迎小伙伴们扫码下方二维码加入RN技术交流QQ群(1000人 +)
 ![QQ群二维码，500+ RN工程师在等你加入哦](http://upload-images.jianshu.io/upload_images/6342050-53baff819f7a76d4.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 ## License
